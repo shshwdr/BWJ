@@ -4,7 +4,7 @@
 Temp/
 Obj/
 UnityGenerated/
-Library/
+/Library/
 Assets/AssetStoreTools*
 /builds/
 /windowsBuild/
@@ -12,6 +12,7 @@ Assets/AssetStoreTools*
 Editor/
 /buildWindows/
 pakcedBuild
+/Logs/
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
