@@ -1640,7 +1640,7 @@ public class SuperFPEditor : Editor{
             GUI.enabled = true;
 
             EditorGUILayout.Space();
-            t.walkingSpeed = EditorGUILayout.Slider(new GUIContent("Walking Speed", "How quickly can the player move while walking?"),t.walkingSpeed,1,400);
+            t.walkingSpeed = EditorGUILayout.Slider(new GUIContent("Walking Speed", "How quickly can the player move while walking?"),t.walkingSpeed,1,1000);
 
             EditorGUILayout.Space();
             EditorGUILayout.BeginVertical(BoxPanel);
@@ -1652,7 +1652,7 @@ public class SuperFPEditor : Editor{
             #else
             t.sprintKey_L = (KeyCode)EditorGUILayout.EnumPopup(new GUIContent("Sprint Key", "The Key used to enter a sprint."),t.sprintKey_L);
             #endif
-            t.sprintingSpeed = EditorGUILayout.Slider(new GUIContent("Sprinting Speed", "How quickly can the player move while sprinting?"),t.sprintingSpeed,t.walkingSpeed+1,650);
+            t.sprintingSpeed = EditorGUILayout.Slider(new GUIContent("Sprinting Speed", "How quickly can the player move while sprinting?"),t.sprintingSpeed,t.walkingSpeed+1,1650);
             t.decelerationSpeed = EditorGUILayout.Slider(new GUIContent("Deceleration Factor", "Behaves somewhat like a braking force"),t.decelerationSpeed,1,300);
             EditorGUILayout.EndVertical();
 
@@ -1746,8 +1746,8 @@ public class SuperFPEditor : Editor{
             if(GUI.changed){EditorUtility.SetDirty(t); Undo.RecordObject(t,"Undo Movement Setting changes"); tSO.ApplyModifiedProperties();}
         }else{
             t.enableMovementControl = EditorGUILayout.ToggleLeft(new GUIContent("Enable Movement","Should the player have control over the character's movement?"),t.enableMovementControl);
-            t.walkingSpeed = EditorGUILayout.Slider(new GUIContent("Walking Speed", "How quickly can the player move while walking?"),t.walkingSpeed,1,400);
-            t.sprintingSpeed = EditorGUILayout.Slider(new GUIContent("Sprinting Speed", "How quickly can the player move while sprinting?"),t.sprintingSpeed,t.walkingSpeed+1,650);
+            t.walkingSpeed = EditorGUILayout.Slider(new GUIContent("Walking Speed", "How quickly can the player move while walking?"),t.walkingSpeed,1,1000);
+            t.sprintingSpeed = EditorGUILayout.Slider(new GUIContent("Sprinting Speed", "How quickly can the player move while sprinting?"),t.sprintingSpeed,t.walkingSpeed+1,1650);
         }
         EditorGUILayout.Space();
         movementSettingFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(movementSettingFoldout,movementSettingFoldout ?  "<color=#B83C82>show less</color>" : "<color=#B83C82>show more</color>", ShowMoreStyle);

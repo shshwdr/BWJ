@@ -93,7 +93,7 @@ Material:
     - _BumpScale: 1
     - _CullMode: 0
     - _Cutoff: 0.5
-    - _Density: 0.73
+    - _Density: 0.779
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
