@@ -54,8 +54,9 @@ public class SUPERCharacterAIO : MonoBehaviour{
 
     //Third Person
     public bool rotateCharaterToCameraForward = false;
-    public float maxCameraDistance = 8;
-    public LayerMask cameraObstructionIgnore = -1;
+        public float maxCameraDistance = 8;
+        public float minCameraDistance = 8;
+        public LayerMask cameraObstructionIgnore = -1;
     public float cameraZoomSensitivity = 5; 
     public float bodyCatchupSpeed = 2.5f;
     public float inputResponseFiltering = 2.5f;
@@ -1605,8 +1606,8 @@ public class SuperFPEditor : Editor{
                 t.FOVSensitivityMultiplier = EditorGUILayout.Slider(new GUIContent("FOV Sensitivity Multiplier", "How much should the camera's FOV effect the mouse sensitivity? (Lower FOV = less sensitive)"),t.FOVSensitivityMultiplier,0,1);
             }else{
                 t.rotateCharaterToCameraForward = EditorGUILayout.ToggleLeft(new GUIContent("Rotate Ungrounded Character to Camera Forward", "Should the character get rotated towards the camera's forward facing direction when mid air?"),t.rotateCharaterToCameraForward);
-                t.eyeHeight = EditorGUILayout.Slider(new GUIContent("Head Height", "The Head height of the player measured from the center of the character's capsule and upwards."),t.eyeHeight,0,1);  
-                t.maxCameraDistance = EditorGUILayout.Slider(new GUIContent("Max Camera Distance", "The farthest distance the camera is allowed to hover from the character's head"),t.maxCameraDistance,0,15);
+                t.eyeHeight = EditorGUILayout.Slider(new GUIContent("Head Height", "The Head height of the player measured from the center of the character's capsule and upwards."),t.eyeHeight,0,3);  
+                t.maxCameraDistance = EditorGUILayout.Slider(new GUIContent("Max Camera Distance", "The farthest distance the camera is allowed to hover from the character's head"),t.maxCameraDistance,0,30);
                 t.cameraZoomSensitivity = EditorGUILayout.Slider(new GUIContent("Camera Zoom Sensitivity", "How sensitive should the mouse scroll wheel be when zooming the camera in and out?"),t.cameraZoomSensitivity, 1,5);
                 t.bodyCatchupSpeed = EditorGUILayout.Slider(new GUIContent("Body Mesh Alignment Speed","How quickly will the body align itself with the camera's relative direction"),t.bodyCatchupSpeed, 0, 5);
                 t.inputResponseFiltering = EditorGUILayout.Slider(new GUIContent("Input Response Filtering","How quickly will the internal input direction align itself the player's input"),t.inputResponseFiltering, 0, 5);
