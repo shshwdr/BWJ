@@ -6,7 +6,9 @@ public class PlayerCubeGridMove : MonoBehaviour
 {
     public float gridSize = 1;
     public float moveSpeed = 3;
+    public float rotateSpeed = 10;
     public LayerMask walkableLayer;
+    public LayerMask signLayer;
     bool startedMoving = false;
     public Transform frontDetection;
     float rotateCoolDown = 0.5f;
@@ -46,8 +48,23 @@ public class PlayerCubeGridMove : MonoBehaviour
         {
             if (nextPositions.Count == 0)
             {
+
+                //check if currently need to rotate
+
+                bool hitSign= Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, 1, signLayer);
+                if (hitSign)
+                {
+                    targetRotation *= Quaternion.Euler(Vector3.up * 90);
+                    nextRotations.Add(targetRotation);
+                }
+                else
+                {
+                    nextRotations.Add(targetRotation);
+
+                }
+
                 //check if next grid is moveable
-                var nextPosition = Utils.snapToGrid( transform.position + transform.forward * gridSize);
+                var nextPosition = Utils.snapToGrid( transform.position + targetRotation*Vector3.forward * gridSize);
 
                 bool hitAny = Physics.Raycast(nextPosition+transform.up*0.5f, -transform.up, 1);
                 if (hitAny)
@@ -58,7 +75,6 @@ public class PlayerCubeGridMove : MonoBehaviour
                     if (hitRoad)
                     {
                         nextPositions.Add(nextPosition);
-                        nextRotations.Add(targetRotation);
                         animator.SetBool("walk", true);
                     }
                     else
@@ -71,16 +87,15 @@ public class PlayerCubeGridMove : MonoBehaviour
                 {
                     //check rotate position
 
-                    nextPosition = Utils.snapToGrid(transform.position + transform.forward * gridSize * 0.5f);
+                    nextPosition = Utils.snapToGrid(transform.position + targetRotation * Vector3.forward * gridSize * 0.5f);
                     var nnPosition = Utils.snapToGrid(nextPosition - transform.up * gridSize * 0.5f);
                     //if next is hitted, check if hit on ground
                     bool hitRoad = Physics.Raycast(nnPosition + transform.forward * 0.5f, -transform.forward, 1, walkableLayer);
                     if (hitRoad)
                     {
                         nextPositions.Add(nextPosition);
-                        nextRotations.Add(targetRotation);
                         nextPositions.Add(nnPosition);
-                        targetRotation *= Quaternion.Euler(90, 0, 0);
+                        targetRotation *= Quaternion.Euler(Vector3.right * 90);
                         nextRotations.Add(targetRotation);
                         animator.SetBool("walk", true);
                     }
@@ -96,6 +111,8 @@ public class PlayerCubeGridMove : MonoBehaviour
             {
                 //move
                 transform.Translate((nextPositions[0] - transform.position).normalized * moveSpeed * Time.deltaTime, Space.World);
+                var deltaQuaternion = transform.rotation * Quaternion.Inverse(nextRotations[0]);
+                //transform.Rotate(deltaQuaternion.eulerAngles*Time.deltaTime*rotateSpeed,Space.World);
                 transform.rotation = Quaternion.Slerp(transform.rotation, nextRotations[0], Time.deltaTime * (1 / rotateCoolDown));
                 if ((nextPositions[0] - transform.position).sqrMagnitude <= stopDistance)
                 {
