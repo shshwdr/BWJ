@@ -44,11 +44,11 @@ public class PlayerCubeGridMove : MonoBehaviour
         
     }
 
-    bool canMove(Vector3 dir,Vector3 playerDir)
+    bool canMove(Vector3 dir)
     {
-
+        targetRotation *= Quaternion.Euler(dir);
         //check if next grid is moveable
-        var nextPosition = Utils.snapToGrid(transform.position + targetRotation * dir * gridSize);
+        var nextPosition = Utils.snapToGrid(transform.position + targetRotation * Vector3.forward * gridSize);
         bool hitAny = Physics.Raycast(nextPosition + transform.up * 0.5f, -transform.up, 1);
         if (hitAny)
         {
@@ -58,6 +58,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             if (hitRoad)
             {
                 nextPositions.Add(nextPosition);
+                nextRotations.Add(targetRotation);
                 animator.SetBool("walk", true);
                 return true;
             }
@@ -65,6 +66,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             {
 
                 animator.SetBool("walk", false);
+                targetRotation *= Quaternion.Euler(-dir);
                 return false;
             }
         }
@@ -72,13 +74,14 @@ public class PlayerCubeGridMove : MonoBehaviour
         {
             //check rotate position
 
-            nextPosition = Utils.snapToGrid(transform.position + targetRotation * dir * gridSize * 0.5f);
+            nextPosition = Utils.snapToGrid(transform.position + targetRotation * Vector3.forward * gridSize * 0.5f);
             var nnPosition = Utils.snapToGrid(nextPosition - transform.up * gridSize * 0.5f);
             //if next is hitted, check if hit on ground
-            bool hitRoad = Physics.Raycast(nnPosition + playerDir * 0.5f, -playerDir, 1, walkableLayer);
+            bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, - (targetRotation * Vector3.forward), 1, walkableLayer);
             if (hitRoad)
             {
                 nextPositions.Add(nextPosition);
+                nextRotations.Add(targetRotation);
                 nextPositions.Add(nnPosition);
                 targetRotation *= Quaternion.Euler(Vector3.right * 90);
                 nextRotations.Add(targetRotation);
@@ -89,8 +92,42 @@ public class PlayerCubeGridMove : MonoBehaviour
             {
 
                 animator.SetBool("walk", false);
+                targetRotation *= Quaternion.Euler(-dir);
                 return false;
             }
+        }
+    }
+
+    void decideNextMove()
+    {
+        //check if currently need to rotate
+
+        bool hitSign = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, 1, signLayer);
+        if (hitSign)
+        {
+
+            if (canMove(Vector3.up * 90))
+            {
+                return;
+            }
+        }
+
+        if (canMove(Vector3.zero))
+        {
+
+        }
+        else if(canMove(Vector3.up * 90)){
+
+        }else if(canMove(-Vector3.up * 90)){
+
+        }else
+        {
+            nextPositions.Add(transform.position);
+            targetRotation *= Quaternion.Euler(Vector3.up * 90);
+            nextRotations.Add(targetRotation);
+            nextPositions.Add(transform.position);
+            targetRotation *= Quaternion.Euler(Vector3.up * 90);
+            nextRotations.Add(targetRotation);
         }
     }
 
@@ -103,34 +140,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             if (nextPositions.Count == 0)
             {
 
-                //check if currently need to rotate
-
-                bool hitSign= Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, 1, signLayer);
-                if (hitSign)
-                {
-                    targetRotation *= Quaternion.Euler(Vector3.up * 90);
-                    nextRotations.Add(targetRotation);
-                }
-                else
-                {
-                    nextRotations.Add(targetRotation);
-
-                }
-
-                if(canMove(Vector3.forward,transform.forward))
-                {
-
-                }
-                else
-                {
-                    nextRotations.RemoveAt(0);
-                    nextPositions.Add(transform.position);
-                    targetRotation *= Quaternion.Euler(Vector3.up * 90);
-                    nextRotations.Add(targetRotation);
-                    nextPositions.Add(transform.position);
-                    targetRotation *= Quaternion.Euler(Vector3.up * 90);
-                    nextRotations.Add(targetRotation);
-                }
+                decideNextMove(); 
 
             }
             if (nextPositions.Count != nextRotations.Count)
