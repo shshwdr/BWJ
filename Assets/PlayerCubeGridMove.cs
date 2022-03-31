@@ -20,7 +20,8 @@ public class PlayerCubeGridMove : MonoBehaviour
     List<Quaternion> nextRotations = new List<Quaternion>();
     float stopDistance = 0.005f;
 
-
+    bool ignoreNextSign;
+    bool turnAroundNext;
 
     Animator animator;
     private void Awake()
@@ -100,18 +101,43 @@ public class PlayerCubeGridMove : MonoBehaviour
         }
     }
 
+    void moveBack()
+    {
+
+        nextPositions.Add(transform.position);
+        targetRotation *= Quaternion.Euler(Vector3.up * 90);
+        nextRotations.Add(targetRotation);
+        nextPositions.Add(transform.position);
+        targetRotation *= Quaternion.Euler(Vector3.up * 90);
+        nextRotations.Add(targetRotation);
+    }
     void decideNextMove()
     {
         //check if currently need to rotate
 
+        if (turnAroundNext)
+        {
+            moveBack();
+            turnAroundNext = false;
+            return;
+        }
+
         bool hitSign = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, 1, signLayer);
         if (hitSign)
         {
-
-            if (canMove(Vector3.up * 90))
+            if (ignoreNextSign)
             {
-                return;
+                ignoreNextSign = false;
             }
+            else
+            {
+
+                if (canMove(Vector3.up * 90))
+                {
+                    return;
+                }
+            }
+
         }
 
         if (canMove(Vector3.zero))
@@ -128,12 +154,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         }
         else
         {
-            nextPositions.Add(transform.position);
-            targetRotation *= Quaternion.Euler(Vector3.up * 90);
-            nextRotations.Add(targetRotation);
-            nextPositions.Add(transform.position);
-            targetRotation *= Quaternion.Euler(Vector3.up * 90);
-            nextRotations.Add(targetRotation);
+            moveBack();
         }
     }
 
@@ -150,6 +171,15 @@ public class PlayerCubeGridMove : MonoBehaviour
         }
         return false;
 
+    }
+
+    public void turnAround()
+    {
+        turnAroundNext = true;
+    }
+    public void ignoreSign()
+    {
+        ignoreNextSign = true;
     }
 
     // Update is called once per frame
