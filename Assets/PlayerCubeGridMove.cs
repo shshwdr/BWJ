@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCubeGridMove : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     public float rotateSpeed = 10;
     public LayerMask walkableLayer;
     public LayerMask signLayer;
+    public LayerMask endLayer;
     bool startedMoving = false;
     public Transform frontDetection;
     public float rotateCoolDown = 0.1f;
@@ -18,13 +20,13 @@ public class PlayerCubeGridMove : MonoBehaviour
     List<Quaternion> nextRotations = new List<Quaternion>();
     float stopDistance = 0.005f;
 
-    
+
 
     Animator animator;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-       // Time.timeScale = 2;
+        // Time.timeScale = 2;
     }
     public void startPosition(Vector3 position)
     {
@@ -41,7 +43,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     bool canMove(Vector3 dir)
@@ -77,7 +79,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             nextPosition = Utils.snapToGrid(transform.position + targetRotation * Vector3.forward * gridSize * 0.5f);
             var nnPosition = Utils.snapToGrid(nextPosition - transform.up * gridSize * 0.5f);
             //if next is hitted, check if hit on ground
-            bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, - (targetRotation * Vector3.forward), 1, walkableLayer);
+            bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), 1, walkableLayer);
             if (hitRoad)
             {
                 nextPositions.Add(nextPosition);
@@ -116,11 +118,15 @@ public class PlayerCubeGridMove : MonoBehaviour
         {
 
         }
-        else if(canMove(Vector3.up * 90)){
+        else if (canMove(Vector3.up * 90))
+        {
 
-        }else if(canMove(-Vector3.up * 90)){
+        }
+        else if (canMove(-Vector3.up * 90))
+        {
 
-        }else
+        }
+        else
         {
             nextPositions.Add(transform.position);
             targetRotation *= Quaternion.Euler(Vector3.up * 90);
@@ -131,17 +137,54 @@ public class PlayerCubeGridMove : MonoBehaviour
         }
     }
 
+    bool gameEnd()
+    {
+
+        bool hitSign = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, 1, endLayer);
+        if (hitSign)
+        {
+
+            startedMoving = false;
+            animator.SetTrigger("jump");
+            return true;
+        }
+        return false;
+
+    }
+
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Time.timeScale *= 2;
+            if (Time.timeScale > 4)
+            {
+                Time.timeScale = 1;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
         if (startedMoving)
         {
             rotateCoolDownTimer += Time.deltaTime;
             if (nextPositions.Count == 0)
             {
+                if (gameEnd())
+                {
 
-                decideNextMove(); 
+                    return;
+                }
+                else
+                {
 
+                    decideNextMove();
+                }
             }
             if (nextPositions.Count != nextRotations.Count)
             {
@@ -154,7 +197,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                 var deltaQuaternion = transform.rotation * Quaternion.Inverse(nextRotations[0]);
                 //transform.Rotate(deltaQuaternion.eulerAngles*Time.deltaTime*rotateSpeed,Space.World);
                 transform.rotation = Quaternion.Slerp(transform.rotation, nextRotations[0], Time.deltaTime * (1 / rotateCoolDown));
-                if ((nextPositions[0] - transform.position).sqrMagnitude <= stopDistance && rotateCoolDownTimer>=rotateCoolDown)
+                if ((nextPositions[0] - transform.position).sqrMagnitude <= stopDistance && rotateCoolDownTimer >= rotateCoolDown)
                 {
                     transform.position = nextPositions[0];
                     nextPositions.RemoveAt(0);
@@ -181,31 +224,32 @@ public class PlayerCubeGridMove : MonoBehaviour
             //{
             //    //transform.Rotate(90, 0, 0);
 
-                //    rotateCoolDownTimer = 0;
-                //}
-                //else
-                //{
+            //    rotateCoolDownTimer = 0;
+            //}
+            //else
+            //{
 
-                //    if (hit)
-                //    {
+            //    if (hit)
+            //    {
 
-                //        transform.Translate(transform.forward * moveSpeed * Time.deltaTime, Space.World);
-                //    }
-                //}
-                //else
-                //{
-                //    transform.Rotate(90, 0, 0);
-                //    //bool hitAny = Physics.Raycast(frontDetection.position, -transform.up, 1);
-                //    //if(hitAny)
-                //    //{
+            //        transform.Translate(transform.forward * moveSpeed * Time.deltaTime, Space.World);
+            //    }
+            //}
+            //else
+            //{
+            //    transform.Rotate(90, 0, 0);
+            //    //bool hitAny = Physics.Raycast(frontDetection.position, -transform.up, 1);
+            //    //if(hitAny)
+            //    //{
 
-                //    //    transform.Rotate(90, 0, 0);
-                //    //    rotateCoolDownTimer = 0;
-                //    //}
-                //    //var rotation = transform.rotation;
-                //    //rotation *= Quaternion.Euler(90, 0, 0); // this adds a 90 degrees Y rotation
-                //    //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 0.5f);
-                //}
+            //    //    transform.Rotate(90, 0, 0);
+            //    //    rotateCoolDownTimer = 0;
+            //    //}
+            //    //var rotation = transform.rotation;
+            //    //rotation *= Quaternion.Euler(90, 0, 0); // this adds a 90 degrees Y rotation
+            //    //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 0.5f);
+            //}
         }
     }
 }
+
