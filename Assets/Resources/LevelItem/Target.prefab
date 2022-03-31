@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23449160794124816}
   - component: {fileID: 64318896621619252}
   m_Layer: 0
-  m_Name: SM_PolygonPrototype_Prop_Target_03
+  m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

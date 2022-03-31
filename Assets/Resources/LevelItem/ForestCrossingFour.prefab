@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8578278592531387402}
   - component: {fileID: 8540470553036491642}
   m_Layer: 7
-  m_Name: ForestCrossing_01
+  m_Name: ForestCrossingFour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
