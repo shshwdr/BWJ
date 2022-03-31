@@ -43,27 +43,27 @@ public class ObejctSwapper : MonoBehaviour
     {
         Swap("ForestGrass");
     }
-    [MenuItem("LevelCreator/ForestCrossingFour")]
+    [MenuItem("LevelCreator/ForestCrossingFour &4")]
     static void ForestCrossingFour()
     {
         Swap("ForestCrossingFour");
     }
-    [MenuItem("LevelCreator/ForestCrossingThree")]
+    [MenuItem("LevelCreator/ForestCrossingThree &3")]
     static void ForestCrossingThree()
     {
         Swap("ForestCrossingThree");
     }
-    [MenuItem("LevelCreator/ForestCurve")]
+    [MenuItem("LevelCreator/ForestCurve &2")]
     static void ForestCurve()
     {
         Swap("ForestCurve");
     }
-    [MenuItem("LevelCreator/ForestEnd")]
+    [MenuItem("LevelCreator/ForestEnd &0")]
     static void ForestEnd()
     {
         Swap("ForestEnd");
     }
-    [MenuItem("LevelCreator/ForestStraight")]
+    [MenuItem("LevelCreator/ForestStraight &1")]
     static void ForestStraight()
     {
         Swap("ForestStraight");
@@ -72,38 +72,29 @@ public class ObejctSwapper : MonoBehaviour
 
 
 
-    [MenuItem("LevelCreator/TurnRight", false,100)]
+    [MenuItem("LevelCreator/TurnRight &P", false,100)]
     static void TurnRight()
     {
         Turn(90);
     }
 
-    [MenuItem("LevelCreator/TurnLeft", false, 100)]
+    [MenuItem("LevelCreator/TurnLeft &I", false, 100)]
     static void TurnLeft()
     {
         Turn(270);
     }
 
-    [MenuItem("LevelCreator/Flip", false, 100)]
+    [MenuItem("LevelCreator/Flip &O", false, 100)]
     static void Flip()
     {
         Turn(180);
     }
-
+    
     void Update()
     {
-        if (SwapNow)
+        if (Input.GetKeyDown(KeyCode.O))
         {
-            for (int i = 0; i < ObjectsToExchange.Length; i++)
-            {
-
-                GameObject newObject = (GameObject)PrefabUtility.InstantiatePrefab(Prefab);
-                newObject.transform.parent = ObjectsToExchange[i].transform.parent;
-                newObject.transform.position = ObjectsToExchange[i].transform.position;
-                newObject.transform.rotation = ObjectsToExchange[i].transform.rotation;
-                newObject.transform.localScale = ObjectsToExchange[i].transform.localScale;
-            }
-            SwapNow = false;
+            TurnRight();
         }
     }
 }
