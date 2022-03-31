@@ -1686,10 +1686,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1024, y: 768}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -5371,11 +5371,11 @@ Transform:
   - {fileID: 1057633071}
   - {fileID: 789265072845167445}
   - {fileID: 789265072465150900}
+  - {fileID: 1226174787}
   - {fileID: 1851794876}
   - {fileID: 654645645}
-  - {fileID: 1226174787}
-  - {fileID: 1622074153}
   - {fileID: 1478040093}
+  - {fileID: 1622074153}
   m_Father: {fileID: 789265071054710963}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6091,9 +6091,9 @@ Transform:
   - {fileID: 789265071327769684}
   - {fileID: 789265073077715963}
   - {fileID: 789265072359902088}
-  - {fileID: 165629294}
-  - {fileID: 789265072069040047}
   - {fileID: 700442732}
+  - {fileID: 789265072069040047}
+  - {fileID: 165629294}
   m_Father: {fileID: 789265071054710963}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

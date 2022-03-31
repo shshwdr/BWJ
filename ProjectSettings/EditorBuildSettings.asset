@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/game demo robot with instruction.unity
+    guid: 99620f19426904f419a5236a1c60a6c3
   m_configObjects: {}
