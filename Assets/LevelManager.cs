@@ -10,7 +10,8 @@ public class LevelManager : Singleton<LevelManager>
     {
         base.Awake();
         //set player position
-        GameObject.FindObjectOfType<PlayerCubeGridMove>().startPosition(GameObject.Find("StartPoint").transform.position);
+        Transform startTrans = GameObject.Find("StartPoint").transform;
+        GameObject.FindObjectOfType<PlayerCubeGridMove>().startPosition(startTrans.position, startTrans.rotation);
     }
 
     public void startGame()

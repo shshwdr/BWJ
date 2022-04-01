@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4504102566852979619}
   - component: {fileID: 7907546893603411802}
   - component: {fileID: 2699454486905840896}
+  - component: {fileID: 8464614265066848162}
   m_Layer: 7
   m_Name: ForestEnd
   m_TagString: Untagged
@@ -98,6 +99,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5498475233513070748, guid: d835a1ea96288824c89055f1a7785895, type: 3}
+--- !u!65 &8464614265066848162
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8467213753797813126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.10000007, z: 1}
+  m_Center: {x: 0, y: 0.050000012, z: -0.00000047683716}
 --- !u!1001 &6797194193270539990
 PrefabInstance:
   m_ObjectHideFlags: 0

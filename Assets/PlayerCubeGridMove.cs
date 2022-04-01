@@ -2,8 +2,8 @@ using Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
-
 public class PlayerCubeGridMove : MonoBehaviour
 {
     public float gridSize = 1;
@@ -33,13 +33,15 @@ public class PlayerCubeGridMove : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         // Time.timeScale = 2;
     }
-    public void startPosition(Vector3 position)
+    public void startPosition(Vector3 position, Quaternion rotation)
     {
         Utils.gridSize = gridSize / 4f;
-        transform.position = position; 
+        transform.position = position;
+        transform.rotation = rotation;
        targetTransform = new GameObject().transform;
         targetTransform.position = transform.position;
         targetTransform.rotation = transform.rotation;
+        targetRotation = rotation;
     }
 
     // Start is called before the first frame update
@@ -67,13 +69,18 @@ public class PlayerCubeGridMove : MonoBehaviour
             {
                 nextPositions.Add(nextPosition);
                 nextRotations.Add(targetRotation);
-                animator.SetBool("walk", true);
+                if (startedMoving)
+                {
+                    animator.SetBool("walk", true);
+                }
                 return true;
             }
             else
             {
-
-                animator.SetBool("walk", false);
+                if (startedMoving)
+                {
+                    animator.SetBool("walk", false);
+                }
                 targetRotation *= Quaternion.Euler(-dir);
                 return false;
             }
@@ -97,13 +104,19 @@ public class PlayerCubeGridMove : MonoBehaviour
                 nextPositions.Add(nnPosition);
                 targetRotation *= Quaternion.Euler(Vector3.right * 90);
                 nextRotations.Add(targetRotation);
-                animator.SetBool("walk", true);
+                if (startedMoving)
+                {
+
+                    animator.SetBool("walk", true);
+                }
                 return true;
             }
             else
             {
-
-                animator.SetBool("walk", false);
+                if (startedMoving)
+                {
+                    animator.SetBool("walk", false);
+                }
                 targetRotation *= Quaternion.Euler(-dir);
                 return false;
             }
@@ -120,16 +133,36 @@ public class PlayerCubeGridMove : MonoBehaviour
         targetRotation *= Quaternion.Euler(Vector3.up * 90);
         nextRotations.Add(targetRotation);
     }
-    void decideNextMove()
+
+    public void moveNextMove()
+    {
+        nextPositions.Clear();
+        nextRotations.Clear();
+        decideNextMove();
+        Assert.AreEqual(nextPositions.Count,nextRotations.Count);
+        for (int i = 0; i < nextPositions.Count; i++)
+        {
+
+            transform.position = nextPositions[i];
+            transform.rotation = nextRotations[i];
+        }
+        targetTransform.position = transform.position;
+        targetTransform.rotation = transform.rotation;
+    }
+    public void decideNextMove()
     {
         //if has npc
         RaycastHit hitedCollectable = new RaycastHit();
-        bool hitCollectable = Physics.Raycast(transform.position + transform.up * 0.5f,- transform.up, out hitedCollectable, 1, collectableLayer);
-        
-        if (hitCollectable)
+        if (startedMoving)
         {
-            Destroy(hitedCollectable.collider.gameObject);
-            GameObject.FindObjectOfType<AlwaysHud>().addCollectable();
+
+            bool hitCollectable = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, out hitedCollectable, 1, collectableLayer);
+
+            if (hitCollectable)
+            {
+                Destroy(hitedCollectable.collider.gameObject);
+                GameObject.FindObjectOfType<AlwaysHud>().addCollectable();
+            }
         }
 
         //if force turn around
@@ -177,7 +210,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         }
     }
 
-    bool gameEnd()
+    public bool gameEnd()
     {
 
         bool hitSign = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, 1, endLayer);
@@ -185,7 +218,11 @@ public class PlayerCubeGridMove : MonoBehaviour
         {
 
             startedMoving = false;
-            animator.SetTrigger("jump");
+            if (startedMoving)
+            {
+
+                animator.SetTrigger("jump");
+            }
             return true;
         }
         return false;

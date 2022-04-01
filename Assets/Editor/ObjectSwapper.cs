@@ -69,7 +69,7 @@ public class ObejctSwapper : MonoBehaviour
     }
 
 
-    [MenuItem("LevelCreator/ForestGrass")]
+    [MenuItem("LevelCreator/ForestGrass &9")]
     static void ForestGrass()
     {
         Swap("ForestGrass");
