@@ -19,6 +19,8 @@ public class GameMenu : MonoBehaviour
         });
         resetCamera.onClick.AddListener(delegate {
             EventPool.Trigger("ResetCamera");
+
+            resetCamera.gameObject.SetActive(false);
         });
         resetCamera.gameObject.SetActive(false);
         EventPool.OptIn("StartMoveCamera", showResetCameraButton);

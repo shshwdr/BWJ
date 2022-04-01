@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
 {
+    public bool isLevelGameStarted = false;
     protected override void Awake()
     {
         base.Awake();
@@ -14,6 +15,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void startGame()
     {
+        isLevelGameStarted = true;
         EventPool.Trigger("StartGame");
     }
     // Start is called before the first frame update
