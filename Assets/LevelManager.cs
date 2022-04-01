@@ -14,6 +14,8 @@ public class LevelManager : Singleton<LevelManager>
         GameObject.FindObjectOfType<PlayerCubeGridMove>().startPosition(startTrans.position, startTrans.rotation);
     }
 
+
+
     public void startGame()
     {
         isLevelGameStarted = true;
@@ -28,6 +30,9 @@ public class LevelManager : Singleton<LevelManager>
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            startGame();
+        }
     }
 }

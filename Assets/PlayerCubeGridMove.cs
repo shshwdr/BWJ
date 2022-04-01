@@ -13,6 +13,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     public LayerMask signLayer;
     public LayerMask collectableLayer;
     public LayerMask endLayer;
+    public LayerMask leverLayer;
     bool startedMoving = false;
     public Transform frontDetection;
     public float rotateCoolDown = 0.1f;
@@ -200,6 +201,16 @@ public class PlayerCubeGridMove : MonoBehaviour
 
         }
 
+
+        //check if has lever
+        RaycastHit levelHit;
+        bool hitLever = Physics.Raycast(transform.position + transform.up * 0.5f,- transform.up, out levelHit, 1, leverLayer);
+        if (hitLever)
+        {
+            levelHit.collider.GetComponent<Lever>().rotate();
+        }
+
+
         if (canMove(Vector3.zero))
         {
 
@@ -224,13 +235,12 @@ public class PlayerCubeGridMove : MonoBehaviour
         bool hitSign = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, 1, endLayer);
         if (hitSign)
         {
-
-            startedMoving = false;
             if (startedMoving)
             {
 
                 animator.SetTrigger("jump");
             }
+            startedMoving = false;
             return true;
         }
         return false;
@@ -268,6 +278,20 @@ public class PlayerCubeGridMove : MonoBehaviour
             {
                 Time.timeScale = 1;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Time.timeScale *= 2;
+            if (Time.timeScale > 4)
+            {
+                Time.timeScale = 1;
+            }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
