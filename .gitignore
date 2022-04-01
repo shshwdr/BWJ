@@ -2,17 +2,17 @@
 # Unity generated #
 # =============== #
 /.vs/
-Temp/
-Obj/
-UnityGenerated/
+/Temp/
+/Obj/
+/UnityGenerated/
 /Library/
-Assets/AssetStoreTools*
+/Assets/AssetStoreTools*
 /builds/
 /windowsBuild/
 /build/
-Editor/
+/Editor/
 /buildWindows/
-pakcedBuild
+/pakcedBuild
 /Logs/
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
