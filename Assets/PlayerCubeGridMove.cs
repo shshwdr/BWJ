@@ -21,6 +21,8 @@ public class PlayerCubeGridMove : MonoBehaviour
     List<Quaternion> nextRotations = new List<Quaternion>();
     public float stopDistance = 0.001f;
 
+    Transform targetTransform;
+
     bool ignoreNextSign;
     bool turnAroundNext;
 
@@ -34,7 +36,9 @@ public class PlayerCubeGridMove : MonoBehaviour
     {
         Utils.gridSize = gridSize / 4f;
         transform.position = position;
-
+        targetTransform = new GameObject().transform;
+        targetTransform.position = transform.position;
+        targetTransform.rotation = transform.rotation;
     }
 
     // Start is called before the first frame update
@@ -47,17 +51,17 @@ public class PlayerCubeGridMove : MonoBehaviour
     {
         targetRotation *= Quaternion.Euler(dir);
         //check if next grid is moveable
-        var nextPosition = Utils.snapToGrid(transform.position + targetRotation * Vector3.forward * gridSize);
-        var nextPosition1 = Utils.snapToGrid(transform.position + targetRotation * Vector3.forward * gridSize*0.33f);
-        var nextPosition2 = Utils.snapToGrid(transform.position + targetRotation * Vector3.forward * gridSize*0.66f);
-        bool hitAny = Physics.Raycast(nextPosition + transform.up * 0.5f, -transform.up, 1);
+        var nextPosition = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize);
+        var nextPosition1 = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize*0.33f);
+        var nextPosition2 = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize*0.66f);
+        bool hitAny = Physics.Raycast(nextPosition + targetTransform.up * 0.5f, -targetTransform.up, 1);
         if (hitAny)
         {
 
             //if next is hitted, check if hit on ground
-            bool hitRoad = Physics.Raycast(nextPosition + transform.up * 0.5f, -transform.up, 1, walkableLayer);
-            bool hitRoad1 = Physics.Raycast(nextPosition1 + transform.up * 0.5f, -transform.up, 1, walkableLayer);
-            bool hitRoad2 = Physics.Raycast(nextPosition2 + transform.up * 0.5f, -transform.up, 1, walkableLayer);
+            bool hitRoad = Physics.Raycast(nextPosition + targetTransform.up * 0.5f, -targetTransform.up, 1, walkableLayer);
+            bool hitRoad1 = Physics.Raycast(nextPosition1 + targetTransform.up * 0.5f, -targetTransform.up, 1, walkableLayer);
+            bool hitRoad2 = Physics.Raycast(nextPosition2 + targetTransform.up * 0.5f, -targetTransform.up, 1, walkableLayer);
             if (hitRoad && hitRoad1 && hitRoad2)
             {
                 nextPositions.Add(nextPosition);
@@ -77,10 +81,10 @@ public class PlayerCubeGridMove : MonoBehaviour
         {
             //check rotate position
 
-            nextPosition = Utils.snapToGrid(transform.position + targetRotation * Vector3.forward * gridSize * 0.5f);
-            nextPosition1 = Utils.snapToGrid(transform.position + targetRotation * Vector3.forward * gridSize * 0.33f);
-            var nnPosition = Utils.snapToGrid(nextPosition - transform.up * gridSize * 0.5f);
-            nextPosition2 = Utils.snapToGrid(nnPosition - transform.up * gridSize * 0.33f);
+            nextPosition = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.5f);
+            nextPosition1 = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.33f);
+            var nnPosition = Utils.snapToGrid(nextPosition - targetTransform.up * gridSize * 0.5f);
+            nextPosition2 = Utils.snapToGrid(nnPosition - targetTransform.up * gridSize * 0.33f);
             //if next is hitted, check if hit on ground
             bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), 1, walkableLayer);
             bool hitRoad1 = Physics.Raycast(nextPosition1 + targetRotation * Vector3.up * 0.5f, -(targetRotation * Vector3.up), 1, walkableLayer);
@@ -252,9 +256,9 @@ public class PlayerCubeGridMove : MonoBehaviour
                 // transform.rotation = Quaternion.Slerp(transform.rotation, nextRotations[0], Time.deltaTime * (1 / rotateCoolDown));
                 if ((nextPositions[0] - transform.position).sqrMagnitude <= stopDistance && rotateCoolDownTimer >= rotateCoolDown)
                 {
-                    transform.position = nextPositions[0];
+                    targetTransform.position = nextPositions[0];
                     nextPositions.RemoveAt(0);
-                    transform.rotation = nextRotations[0];
+                    targetTransform.rotation = nextRotations[0];
                     nextRotations.RemoveAt(0);
                     rotateCoolDownTimer = 0;
                 }

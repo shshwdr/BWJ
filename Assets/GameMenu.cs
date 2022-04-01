@@ -11,7 +11,9 @@ public class GameMenu : MonoBehaviour
     void Start()
     {
         player = GameObject.FindObjectOfType<PlayerCubeGridMove>();
-        startGame.onClick.AddListener(delegate { player.startMove(); });
+        startGame.onClick.AddListener(delegate { player.startMove();
+            startGame.gameObject.SetActive(false);
+        });
     }
 
     // Update is called once per frame
