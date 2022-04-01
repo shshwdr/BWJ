@@ -1,3 +1,4 @@
+using Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,8 +36,8 @@ public class PlayerCubeGridMove : MonoBehaviour
     public void startPosition(Vector3 position)
     {
         Utils.gridSize = gridSize / 4f;
-        transform.position = position;
-        targetTransform = new GameObject().transform;
+        transform.position = position; 
+       targetTransform = new GameObject().transform;
         targetTransform.position = transform.position;
         targetTransform.rotation = transform.rotation;
     }
@@ -44,7 +45,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        EventPool.OptIn("StartGame", startMove);
     }
 
     bool canMove(Vector3 dir)
@@ -202,7 +203,12 @@ public class PlayerCubeGridMove : MonoBehaviour
 
     public void startMove()
     {
+        StartCoroutine(waitStartMove(2));
 
+    }
+    IEnumerator waitStartMove(float time)
+    {
+        yield return new WaitForSeconds(time);
         startedMoving = true;
     }
 

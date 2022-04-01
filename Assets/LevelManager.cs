@@ -1,3 +1,4 @@
+using Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,11 @@ public class LevelManager : Singleton<LevelManager>
         base.Awake();
         //set player position
         GameObject.FindObjectOfType<PlayerCubeGridMove>().startPosition(GameObject.Find("StartPoint").transform.position);
+    }
+
+    public void startGame()
+    {
+        EventPool.Trigger("StartGame");
     }
     // Start is called before the first frame update
     void Start()
