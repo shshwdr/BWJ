@@ -90,14 +90,15 @@ public class ViewWorldCamera : MonoBehaviour
                 //_rotation = Quaternion.Euler(dir);
                 // rotate
                 Vector3 rotateDegree = new Vector3();
+                float distance = _mouseOffset.magnitude;
                 if (Mathf.Abs(_mouseOffset.y) > Mathf.Abs(_mouseOffset.x))
                 {
-                    rotateDegree = new Vector3(-_mouseOffset.y, 0, 0);
+                    rotateDegree = new Vector3(-distance * Mathf.Sign(_mouseOffset.y), 0, 0);
                 }
                 else
                 {
 
-                    rotateDegree = new Vector3(0, _mouseOffset.x, 0);
+                    rotateDegree = new Vector3(0, distance * Mathf.Sign(_mouseOffset.x), 0);
                 }
                 targetRotation *= Quaternion.Euler(rotateDegree * _sensitivity);
 
