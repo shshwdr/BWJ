@@ -10,6 +10,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     public float rotateSpeed = 10;
     public LayerMask walkableLayer;
     public LayerMask signLayer;
+    public LayerMask collectableLayer;
     public LayerMask endLayer;
     bool startedMoving = false;
     public Transform frontDetection;
@@ -52,13 +53,17 @@ public class PlayerCubeGridMove : MonoBehaviour
         targetRotation *= Quaternion.Euler(dir);
         //check if next grid is moveable
         var nextPosition = Utils.snapToGrid(transform.position + targetRotation * Vector3.forward * gridSize);
+        var nextPosition1 = Utils.snapToGrid(transform.position + targetRotation * Vector3.forward * gridSize*0.33f);
+        var nextPosition2 = Utils.snapToGrid(transform.position + targetRotation * Vector3.forward * gridSize*0.66f);
         bool hitAny = Physics.Raycast(nextPosition + transform.up * 0.5f, -transform.up, 1);
         if (hitAny)
         {
 
             //if next is hitted, check if hit on ground
             bool hitRoad = Physics.Raycast(nextPosition + transform.up * 0.5f, -transform.up, 1, walkableLayer);
-            if (hitRoad)
+            bool hitRoad1 = Physics.Raycast(nextPosition1 + transform.up * 0.5f, -transform.up, 1, walkableLayer);
+            bool hitRoad2 = Physics.Raycast(nextPosition2 + transform.up * 0.5f, -transform.up, 1, walkableLayer);
+            if (hitRoad && hitRoad1 && hitRoad2)
             {
                 nextPositions.Add(nextPosition);
                 nextRotations.Add(targetRotation);
@@ -78,9 +83,13 @@ public class PlayerCubeGridMove : MonoBehaviour
             //check rotate position
 
             nextPosition = Utils.snapToGrid(transform.position + targetRotation * Vector3.forward * gridSize * 0.5f);
+            nextPosition1 = Utils.snapToGrid(transform.position + targetRotation * Vector3.forward * gridSize * 0.33f);
             var nnPosition = Utils.snapToGrid(nextPosition - transform.up * gridSize * 0.5f);
+            nextPosition2 = Utils.snapToGrid(nnPosition - transform.up * gridSize * 0.33f);
             //if next is hitted, check if hit on ground
             bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), 1, walkableLayer);
+            bool hitRoad1 = Physics.Raycast(nextPosition1 + targetRotation * Vector3.up * 0.5f, -(targetRotation * Vector3.up), 1, walkableLayer);
+            bool hitRoad2 = Physics.Raycast(nextPosition2 + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), 1, walkableLayer);
             if (hitRoad)
             {
                 nextPositions.Add(nextPosition);
@@ -113,8 +122,17 @@ public class PlayerCubeGridMove : MonoBehaviour
     }
     void decideNextMove()
     {
-        //check if currently need to rotate
+        //if has npc
+        RaycastHit hitedCollectable = new RaycastHit();
+        bool hitCollectable = Physics.Raycast(transform.position + transform.up * 0.5f,- transform.up, out hitedCollectable, 1, collectableLayer);
+        
+        if (hitCollectable)
+        {
+            Destroy(hitedCollectable.collider.gameObject);
+            GameObject.FindObjectOfType<AlwaysHud>().addCollectable();
+        }
 
+        //if force turn around
         if (turnAroundNext)
         {
             moveBack();
@@ -122,6 +140,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             return;
         }
 
+        //check if currently need to rotate
         bool hitSign = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, 1, signLayer);
         if (hitSign)
         {
@@ -224,9 +243,12 @@ public class PlayerCubeGridMove : MonoBehaviour
             {
                 //move
                 transform.Translate((nextPositions[0] - transform.position).normalized * moveSpeed * Time.deltaTime, Space.World);
-                var deltaQuaternion = transform.rotation * Quaternion.Inverse(nextRotations[0]);
-                //transform.Rotate(deltaQuaternion.eulerAngles*Time.deltaTime*rotateSpeed,Space.World);
-                transform.rotation = Quaternion.Slerp(transform.rotation, nextRotations[0], Time.deltaTime * (1 / rotateCoolDown));
+                float donePercentage = Mathf.Min(1F, Time.deltaTime / (moveSpeed));
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, nextRotations[0], donePercentage);
+                //var deltaQuaternion = transform.rotation * Quaternion.Inverse(nextRotations[0]);
+                // transform.Rotate(deltaQuaternion.eulerAngles*Time.deltaTime* moveSpeed, Space.World);
+                // transform.rotation = Quaternion.Slerp(transform.rotation, nextRotations[0], Time.deltaTime * (1 / rotateCoolDown));
                 if ((nextPositions[0] - transform.position).sqrMagnitude <= stopDistance && rotateCoolDownTimer >= rotateCoolDown)
                 {
                     transform.position = nextPositions[0];
