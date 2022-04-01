@@ -149,6 +149,14 @@ public class PlayerCubeGridMove : MonoBehaviour
         targetTransform.position = transform.position;
         targetTransform.rotation = transform.rotation;
     }
+
+    public void updateOtherData()
+    {
+
+        targetTransform.position = transform.position;
+        targetTransform.rotation = transform.rotation;
+        targetRotation = transform.rotation;
+    }
     public void decideNextMove()
     {
         //if has npc

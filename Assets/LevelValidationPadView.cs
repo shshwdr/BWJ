@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelValidationPadView : MonoBehaviour
 {
@@ -18,13 +19,36 @@ public class LevelValidationPadView : MonoBehaviour
         
     }
 
-    public void setValidationInfo(int id, string data)
+    public void hide()
     {
-        if(cells == null || cells.Length == 0)
+        gameObject.SetActive(false);
+    }
+
+    public void clear()
+    {
+
+        gameObject.SetActive(true);
+        if (cells == null || cells.Length == 0)
         {
             cells = GetComponentsInChildren<LevelValidationPadCell>(true);
 
         }
-        cells[id].gameObject.SetActive(true);
+        foreach(var cell in cells)
+        {
+            cell.gameObject.SetActive(false);
+            cells[0].transform.parent.parent.GetComponentInParent<Image>().color = new Color(0, 0, 0, 0.5f);
+        }
+    }
+    public void setValidationInfo(int id, string data)
+    {
+        if(id == -1)
+        {
+            cells[0].transform.parent.parent.GetComponentInParent<Image>().color = new Color(1, 1, 1, 0.5f);
+        }
+        else
+        {
+
+            cells[id].gameObject.SetActive(true);
+        }
     }
 }
