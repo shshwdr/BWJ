@@ -19,7 +19,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     Quaternion targetRotation = Quaternion.identity;
     List<Vector3> nextPositions = new List<Vector3>();
     List<Quaternion> nextRotations = new List<Quaternion>();
-    float stopDistance = 0.005f;
+    public float stopDistance = 0.001f;
 
     bool ignoreNextSign;
     bool turnAroundNext;
@@ -35,13 +35,8 @@ public class PlayerCubeGridMove : MonoBehaviour
         Utils.gridSize = gridSize / 4f;
         transform.position = position;
 
-        startMoving();
     }
 
-    void startMoving()
-    {
-        startedMoving = true;
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -199,6 +194,12 @@ public class PlayerCubeGridMove : MonoBehaviour
     public void ignoreSign()
     {
         ignoreNextSign = true;
+    }
+
+    public void startMove()
+    {
+
+        startedMoving = true;
     }
 
     // Update is called once per frame
