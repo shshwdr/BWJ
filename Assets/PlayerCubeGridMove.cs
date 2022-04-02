@@ -127,10 +127,10 @@ public class PlayerCubeGridMove : MonoBehaviour
     void moveBack()
     {
 
-        nextPositions.Add(transform.position);
+        nextPositions.Add(targetTransform.position);
         targetRotation *= Quaternion.Euler(Vector3.up * 90);
         nextRotations.Add(targetRotation);
-        nextPositions.Add(transform.position);
+        nextPositions.Add(targetTransform.position);
         targetRotation *= Quaternion.Euler(Vector3.up * 90);
         nextRotations.Add(targetRotation);
     }
@@ -177,6 +177,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         //if force turn around
         if (turnAroundNext)
         {
+            LogManager.log("used skill to move back");
             moveBack();
             turnAroundNext = false;
             return;
@@ -220,18 +221,20 @@ public class PlayerCubeGridMove : MonoBehaviour
 
         if (canMove(Vector3.zero))
         {
-
+            LogManager.log("move forward next");
         }
         else if (canMove(Vector3.up * 90))
         {
 
+            LogManager.log("move right next");
         }
         else if (canMove(-Vector3.up * 90))
         {
-
+            LogManager.log("move left next");
         }
         else
         {
+            LogManager.log("move back next");
             moveBack();
         }
     }
