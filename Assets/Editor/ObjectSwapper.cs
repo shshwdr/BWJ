@@ -115,6 +115,11 @@ public class ObejctSwapper : MonoBehaviour
     {
         Add("Target");
     }
+    [MenuItem("LevelCreator/AddStart &M")]
+    static void AddStart()
+    {
+        Add("Start");
+    }
     [MenuItem("LevelCreator/AddTurnRight &J")]
     static void AddTurnRight()
     {

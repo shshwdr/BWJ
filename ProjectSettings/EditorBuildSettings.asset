@@ -5,13 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/game demo robot with instruction tutorial.unity
     guid: 9172851f28c008b48ae9828d95611b9b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/game demo robot with instruction2.unity
     guid: 6ec297eaa8f4bb34f8bf04b626f2a6bc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/game demo robot with instruction lever.unity
     guid: e4f5caaaf668a1e40942eb858631f468
+  - enabled: 1
+    path: Assets/Scenes/0.unity
+    guid: 54da0036025525b469f2b3fbc1475a5f
   m_configObjects: {}
