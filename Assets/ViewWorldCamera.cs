@@ -55,7 +55,7 @@ public class ViewWorldCamera : MonoBehaviour
 
             if (reflectionProbe)
             {
-                reflectionProbe.SetActive(false);
+                reflectionProbe.GetComponent<ReflectionManager>(). hide();
             }
             onlyResetCameraRotation();
     }
@@ -80,7 +80,7 @@ public class ViewWorldCamera : MonoBehaviour
         if (reflectionProbe)
         {
             reflectionProbe.GetComponent<ReflectionManager>().clearPosition();
-            reflectionProbe.SetActive(true);
+            reflectionProbe.GetComponent<ReflectionManager>().show();
         }
         playerCamera.gameObject.SetActive(true);
         //camera.enabled = false;

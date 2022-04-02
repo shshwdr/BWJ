@@ -8,6 +8,7 @@ public class ReflectionManager : MonoBehaviour
     Transform player;
     float currentX, currentY, currentZ;
     GameObject currentReflection;
+    bool isShow = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,11 +18,11 @@ public class ReflectionManager : MonoBehaviour
             reflec.gameObject.SetActive(false);
         }
         player = Camera.main.transform;
-        clearPosition();
-        updateOneProb(0);
-        updateOneProb(1);
-        updateOneProb(2);
-        updatePosition();
+        //clearPosition();
+        //updateOneProb(0);
+        //updateOneProb(1);
+        //updateOneProb(2);
+        //updatePosition();
 
     }
 
@@ -68,13 +69,38 @@ public class ReflectionManager : MonoBehaviour
         currentZ = player.transform.position.z;
     }
 
+    public void show()
+    {
+        if (currentReflection)
+        {
+            currentReflection.SetActive(false);
+        }
+        isShow = true;
+    }
+    public void hide()
+    {
+        if (currentReflection)
+        {
+            currentReflection.SetActive(false);
+        }
+        isShow = false;
+    }
     // Update is called once per frame
     void Update()
     {
+        if (isShow)
+        {
 
-        updateOneProb(0);
-        updateOneProb(1);
-        updateOneProb(2);
+            updateOneProb(0);
+            updateOneProb(1);
+            updateOneProb(2);
+        }
+        else
+        {
+
+            currentReflection = reflections[3].gameObject;
+            currentReflection.gameObject.SetActive(true);
+        }
         updatePosition();
     }
 }
