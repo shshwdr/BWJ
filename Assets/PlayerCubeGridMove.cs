@@ -98,7 +98,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), 1, walkableLayer);
             bool hitRoad1 = Physics.Raycast(nextPosition1 + targetRotation * Vector3.up * 0.5f, -(targetRotation * Vector3.up), 1, walkableLayer);
             bool hitRoad2 = Physics.Raycast(nextPosition2 + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), 1, walkableLayer);
-            if (hitRoad)
+            if (hitRoad && hitRoad1 && hitRoad2)
             {
                 nextPositions.Add(nextPosition);
                 nextRotations.Add(targetRotation);
