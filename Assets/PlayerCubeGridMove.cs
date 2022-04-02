@@ -248,7 +248,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             if (startedMoving)
             {
 
-                animator.SetTrigger("jump");
+                animator.SetTrigger("victory");
             }
             startedMoving = false;
             return true;
