@@ -54,7 +54,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1149615989757281436}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -168,6 +168,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f50412f5524846c489960246ff58f5bd, type: 3}
       propertyPath: m_Name
       value: crossroad3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f50412f5524846c489960246ff58f5bd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f50412f5524846c489960246ff58f5bd, type: 3}

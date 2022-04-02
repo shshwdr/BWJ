@@ -26,6 +26,7 @@ public class ObejctSwapper : MonoBehaviour
                 newObject.transform.localScale = select.transform.localScale;
                 DestroyImmediate(select); 
                 Selection.activeGameObject = newObject;
+                EditorUtility.SetDirty(newObject);
             }
         }
     }
@@ -35,6 +36,7 @@ public class ObejctSwapper : MonoBehaviour
         foreach (var select in selects)
         {
             select.transform.rotation *= Quaternion.Euler(Vector3.up * degree);
+            EditorUtility.SetDirty(select);
         }
     }
 
@@ -50,7 +52,8 @@ public class ObejctSwapper : MonoBehaviour
                 newObject.transform.parent = select.transform;
                 newObject.transform.position = select.transform.position;
                 newObject.transform.rotation = select.transform.rotation;
-               // newObject.transform.localScale = select.transform.localScale;
+                EditorUtility.SetDirty(select);
+                // newObject.transform.localScale = select.transform.localScale;
                 //DestroyImmediate(select);
             }
         }
