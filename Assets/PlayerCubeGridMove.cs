@@ -207,7 +207,14 @@ public class PlayerCubeGridMove : MonoBehaviour
         bool hitLever = Physics.Raycast(transform.position + transform.up * 0.5f,- transform.up, out levelHit, 1, leverLayer);
         if (hitLever)
         {
-            levelHit.collider.GetComponent<Lever>().rotate();
+            if (ignoreNextSign)
+            {
+                ignoreNextSign = false;
+            }
+            else
+            {
+                levelHit.collider.GetComponent<Lever>().rotate();
+            }
         }
 
 
