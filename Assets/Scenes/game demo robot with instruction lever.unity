@@ -6063,9 +6063,9 @@ Transform:
   - {fileID: 670687420}
   - {fileID: 827384048}
   - {fileID: 1502286068}
-  - {fileID: 1760470911}
-  - {fileID: 1961326061}
   - {fileID: 752465045}
+  - {fileID: 1961326061}
+  - {fileID: 1760470911}
   m_Father: {fileID: 789265071054710963}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
