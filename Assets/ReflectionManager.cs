@@ -17,12 +17,20 @@ public class ReflectionManager : MonoBehaviour
             reflec.gameObject.SetActive(false);
         }
         player = Camera.main.transform;
-
+        clearPosition();
         updateOneProb(0);
         updateOneProb(1);
         updateOneProb(2);
         updatePosition();
 
+    }
+
+    public void clearPosition()
+    {
+
+        currentX = 0;
+        currentY = 0;
+        currentZ = 0;
     }
 
     void updateOneProb(int index)

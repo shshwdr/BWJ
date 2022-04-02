@@ -22,12 +22,20 @@ public class ViewWorldCamera : MonoBehaviour
 
     public Transform playerCamera;
     bool cameraRotated;
+    bool isCameraFree = false;
+    GameObject reflectionProbe;
     // Start is called before the first frame update
     void Start()
     {
         camera = GetComponent<CinemachineVirtualCamera>();
+        if (GameObject.FindObjectOfType<ReflectionManager>(true))
+        {
+
+            reflectionProbe = GameObject.FindObjectOfType<ReflectionManager>(true).gameObject;
+        }
         resetCamera();
         EventPool.OptIn("StartGame", resetCamera);
+        EventPool.OptIn("FreeCamera", freeCamera);
         EventPool.OptIn("ResetCamera", resetCamera);
         targetRotation = transform.rotation;
     }
@@ -38,8 +46,23 @@ public class ViewWorldCamera : MonoBehaviour
         targetRotation = transform.rotation;
     }
 
+    void freeCamera()
+    {
+        isCameraFree = true; 
+
+            EventPool.Trigger("StartMoveCamera");
+            playerCamera.gameObject.SetActive(false);
+
+            if (reflectionProbe)
+            {
+                reflectionProbe.SetActive(false);
+            }
+            onlyResetCameraRotation();
+    }
+
     public void resetCamera()
     {
+        isCameraFree = false;
         if (LevelManager.Instance.isLevelGameStarted)
         {
             switchToPlayerCamera();
@@ -54,6 +77,11 @@ public class ViewWorldCamera : MonoBehaviour
 
     public void switchToPlayerCamera()
     {
+        if (reflectionProbe)
+        {
+            reflectionProbe.GetComponent<ReflectionManager>().clearPosition();
+            reflectionProbe.SetActive(true);
+        }
         playerCamera.gameObject.SetActive(true);
         //camera.enabled = false;
     }
@@ -61,6 +89,12 @@ public class ViewWorldCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(!isCameraFree && LevelManager.Instance.isLevelGameStarted)
+        {
+            return;
+        }
+
         float currentDistance = camera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance;
         currentDistance -= Input.mouseScrollDelta.y;
         currentDistance = Mathf.Clamp(currentDistance,minDistance, maxDistance);
@@ -78,8 +112,13 @@ public class ViewWorldCamera : MonoBehaviour
                 {
 
                     EventPool.Trigger("StartMoveCamera");
-                    playerCamera.gameObject.SetActive(false);
-                    onlyResetCameraRotation();
+                //    playerCamera.gameObject.SetActive(false);
+
+                //    if (reflectionProbe)
+                //    {
+                //        reflectionProbe.SetActive(false);
+                //    }
+                //    onlyResetCameraRotation();
                 }
                 cameraRotated = true;
                 // offset

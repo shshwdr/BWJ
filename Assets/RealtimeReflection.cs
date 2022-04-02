@@ -47,7 +47,7 @@ public class RealtimeReflection : MonoBehaviour
         if(type == 0)
         {
             probe.transform.position = new Vector3(
-                Mathf.Sign(cameraPosition.x) * (1.5f - (Mathf.Abs(cameraPosition.z) - 1.5f)),
+                Mathf.Sign(cameraPosition.x) * (1.5f - (Mathf.Abs(cameraPosition.x) - 1.5f)),
                 cameraPosition.y,
                cameraPosition.z
             );
@@ -56,7 +56,7 @@ public class RealtimeReflection : MonoBehaviour
         {
             probe.transform.position = new Vector3(
                 cameraPosition.x,
-                Mathf.Sign(cameraPosition.y) * (1.5f - (Mathf.Abs(cameraPosition.z) - 1.5f)),
+                Mathf.Sign(cameraPosition.y) * (1.5f - (Mathf.Abs(cameraPosition.y) - 1.5f)),
                cameraPosition.z
             );
         }
