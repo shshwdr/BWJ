@@ -30,6 +30,7 @@ ExportedObj/
 *.user
 *.unityproj
 *.booproj
+*.log
 
 # ============ #
 # OS generated #
