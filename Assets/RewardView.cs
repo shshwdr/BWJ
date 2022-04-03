@@ -9,7 +9,7 @@ public class RewardView : BaseView
 {
 
     public Button nextLevelButton;
-    public Button returnButton;
+    public Button restartButton;
     public Button levelSelectionButton;
     public Text levelText;
     public GameObject panel;
@@ -101,7 +101,10 @@ public class RewardView : BaseView
             //{
             //    StageLevelManager.Instance.addLevel();
             //}
-            
+
+            restartButton.onClick.AddListener(delegate {
+                StageLevelManager.Instance.startNextLevel();
+            });
             StageLevelManager.Instance.startNextLevel(); });
         //returnButton.onClick.AddListener(delegate { StageLevelManager.Instance.returnHome(); });
         levelSelectionButton.onClick.AddListener(delegate { StageLevelManager.Instance.selectLevel(); });

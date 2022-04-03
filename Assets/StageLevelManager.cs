@@ -123,8 +123,8 @@ public class StageLevelManager : Singleton<StageLevelManager>
     public void selectLevel()
     {
 
-        // LevelSelectionView view = GameObject.FindObjectOfType<LevelSelectionView>(true);
-        // view.showView();
+         LevelSelectionView view = GameObject.FindObjectOfType<LevelSelectionView>(true);
+         view.showView();
     }
     public void finishLevel()
     {
