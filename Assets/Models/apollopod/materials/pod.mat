@@ -74,7 +74,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Offset: 1.1
-    - _OtlWidth: 1
+    - _OtlWidth: 5
     - _Parallax: 0.02
     - _Segmented: 1
     - _ShnIntense: 1
@@ -91,6 +91,6 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 0.9669811, b: 0.9669811, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OtlColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OtlColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShnColor: {r: 1, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
