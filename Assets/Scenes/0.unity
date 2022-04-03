@@ -218,9 +218,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstSkillTutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 1051504188597698814, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5768891675335505843, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
       propertyPath: name
       value: useFirstSkill
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816348758089058231, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816348758089058231, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816348758089058231, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
@@ -6513,6 +6529,22 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1029844374227012742}
+    - target: {fileID: 1051504188597698814, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816348758089058231, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816348758089058231, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816348758089058231, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
 --- !u!1001 &7578027970059130055
