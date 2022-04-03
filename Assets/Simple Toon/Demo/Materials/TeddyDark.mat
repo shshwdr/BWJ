@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: body
-  m_Shader: {fileID: 4800000, guid: 128c5f1edaefa4c4fb3f9f7a4615edb2, type: 3}
-  m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP _SEGMENTED_ON
+  m_Name: TeddyDark
+  m_Shader: {fileID: 4800000, guid: 7cd5de0b884b14f88ab763ef465e1799, type: 3}
+  m_ShaderKeywords: _RIMOVERLAP_ON _SPCOVERLAP_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: a0b6efe3a1966a848b66939e81dca2bd, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -40,15 +40,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f0213a9d6ce40a847945056e09e643b4, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 95e8165c4151c2742a5c8cbdd911ff45, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 9331a3e53745cfc4899894aa82d02d5f, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -65,32 +65,46 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Lumin: 1
-    - _MaxLight: 1
+    - _Lumin: 0
+    - _MaxAtten: 1
+    - _MaxLight: 0
     - _Metallic: 0
     - _MinLight: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Offset: 1.1
-    - _OtlWidth: 0
+    - _Offset: 0
     - _Parallax: 0.02
-    - _Segmented: 1
+    - _PostAtten: 0
+    - _RimIntense: 0
+    - _RimLimit: 0
+    - _RimOverlap: 1
+    - _RimSmooth: 0
+    - _RimTolerc: 0.35
+    - _Segmented: 0
     - _ShnIntense: 0
     - _ShnOverlap: 0
-    - _ShnRange: 0.15
+    - _ShnRange: 0
     - _ShnSmooth: 0
     - _SmoothnessTextureChannel: 0
+    - _SpcIntence: 0
+    - _SpcLimit: 0
+    - _SpcOverlap: 1
+    - _SpcSmooth: 0
+    - _SpcTolerc: 0.05
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Steps: 2
+    - _Steps: 1
     - _StpSmooth: 0
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.9764151, b: 0.9764151, a: 1}
-    - _EmissionColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
-    - _OtlColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ShnColor: {r: 1, g: 1, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MaxColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MinColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 0, g: 0, b: 1, a: 1}
+    - _ShnColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpcColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
