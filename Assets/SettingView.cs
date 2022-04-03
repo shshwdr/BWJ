@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class SettingView : BaseView
 {
 
-    public Button nextLevelButton;
+    public Button restartButton;
     public Button returnButton;
     public Button levelSelectionButton;
     public Button resumeButton;
@@ -21,15 +21,8 @@ public class SettingView : BaseView
         GetComponent<UIView>().Show();
         panel.SetActive(true);
         //StageLevelManager.Instance.addLevel();
-        if (StageLevelManager.Instance.hasNextLevel())
-        {
-            nextLevelButton.gameObject.SetActive(true);
-        }
-        else
-        {
-            nextLevelButton.gameObject.SetActive(false);
-
-        }
+        restartButton.gameObject.SetActive(true);
+        
         levelText.text = $"LEVEL {StageLevelManager.Instance.currentLevel.displayName}";
         //GameManager.Instance.saveAnimalInLevel();
 
@@ -47,7 +40,7 @@ public class SettingView : BaseView
     protected override void Start()
     {
         base.Start();
-        nextLevelButton.onClick.AddListener(delegate {
+        restartButton.onClick.AddListener(delegate {
             StageLevelManager.Instance.startNextLevel();
         });
         resumeButton.onClick.AddListener(delegate {

@@ -194,8 +194,8 @@ public class StageLevelManager : Singleton<StageLevelManager>
     {
         isFinished = false;
         Time.timeScale = 1;
-        
-        
+
+
         //{
         //    if (currentLevel.id < 6)
         //    {
@@ -207,6 +207,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
         //        MusicManager.Instance.playLevelMusic2();
         //    }
         //}
+        LevelManager.Instance.reset();
         SceneManager.LoadScene(currentLevel.sceneName);
     }
 
