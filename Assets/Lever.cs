@@ -11,6 +11,7 @@ public class Lever : MonoBehaviour
 
     public void rotate()
     {
+        GetComponentInChildren<Animator>().SetTrigger("pull");
         
         var target = rotateObject.transform.rotation * Quaternion.Euler(Vector3.up * 90);
         rotateObject.transform.DORotateQuaternion(target, 0.5f);
