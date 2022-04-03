@@ -8294,17 +8294,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1502286068}
     m_Modifications:
-    - target: {fileID: 1805962496882727274, guid: 937ba362e90b4954ab899510c7df8431, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.11
+    - target: {fileID: 1572170249733473605, guid: 937ba362e90b4954ab899510c7df8431, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 1805962496882727274, guid: 937ba362e90b4954ab899510c7df8431, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1805962496882727274, guid: 937ba362e90b4954ab899510c7df8431, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.23
+    - target: {fileID: 1805962496882727275, guid: 937ba362e90b4954ab899510c7df8431, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1805962497269406926, guid: 937ba362e90b4954ab899510c7df8431, type: 3}
       propertyPath: m_RootOrder
@@ -8353,6 +8349,10 @@ PrefabInstance:
     - target: {fileID: 1805962497269406927, guid: 937ba362e90b4954ab899510c7df8431, type: 3}
       propertyPath: m_Name
       value: rover
+      objectReference: {fileID: 0}
+    - target: {fileID: 1805962497269406927, guid: 937ba362e90b4954ab899510c7df8431, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 937ba362e90b4954ab899510c7df8431, type: 3}
