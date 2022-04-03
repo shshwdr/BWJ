@@ -18,7 +18,7 @@ public class LevelSelectionCell : MonoBehaviour
 
 
             LevelSelectionView view = GameObject.FindObjectOfType<LevelSelectionView>(true);
-            view.hideReward();
+            view.hideView();
         });
 
         for (int i = 0; i < StageLevelManager.Instance.starCountInLevel(info.sceneName); i++)

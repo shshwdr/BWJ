@@ -6,11 +6,17 @@ using UnityEngine.UI;
 public class AlwaysHud : MonoBehaviour
 {
     public Text collectedText;
+    public Button pauseButton;
     int collect = 0;
     // Start is called before the first frame update
     void Start()
     {
         updateCollectedText();
+
+        pauseButton.onClick.AddListener(delegate
+        {
+            GameObject.FindObjectOfType<SettingView>(true).showView();
+        });
     }
     public void updateCollectedText()
     {

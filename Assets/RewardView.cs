@@ -18,9 +18,9 @@ public class RewardView : BaseView
     public Text description;
     public Text title;
 
-    public override void showReward()
+    public override void showView()
     {
-        base.showReward();
+        base.showView();
         GetComponent<UIView>().Show();
         panel.SetActive(true);
         levelText.text = $"Level {StageLevelManager.Instance.currentLevel.displayName}";
@@ -84,9 +84,9 @@ public class RewardView : BaseView
             // stars[i].transform
         }
     }
-    public override void hideReward()
+    public override void hideView()
     {
-        base.hideReward();
+        base.hideView();
         GetComponent<UIView>().Hide();
         panel.SetActive(false);
     }

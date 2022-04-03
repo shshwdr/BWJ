@@ -124,7 +124,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
     {
 
         // LevelSelectionView view = GameObject.FindObjectOfType<LevelSelectionView>(true);
-        // view.showReward();
+        // view.showView();
     }
     public void finishLevel()
     {
@@ -146,7 +146,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
 
         //Time.timeScale = 0;
         //RewardView view = GameObject.FindObjectOfType<RewardView>(true);
-        //view.showReward();
+        //view.showView();
     }
 
     //public void linkAnimal(string type)

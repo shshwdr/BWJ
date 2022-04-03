@@ -12,16 +12,16 @@ public class BaseView: MonoBehaviour
 
     protected virtual void Start()
     {
-        audioSource = GameObject.Find("sfx").GetComponent<AudioSource>();
+        //audioSource = GameObject.Find("sfx").GetComponent<AudioSource>();
     }
-    public virtual void showReward()
+    public virtual void showView()
     {
-        audioSource = GameObject.Find("sfx").GetComponent<AudioSource>();
-        audioSource.PlayOneShot(showAudio);
+        //audioSource = GameObject.Find("sfx").GetComponent<AudioSource>();
+        //audioSource.PlayOneShot(showAudio);
     }
-    public virtual void hideReward()
+    public virtual void hideView()
     {
-        audioSource = GameObject.Find("sfx").GetComponent<AudioSource>();
-        audioSource.PlayOneShot(hideAudio);
+        //audioSource = GameObject.Find("sfx").GetComponent<AudioSource>();
+        //audioSource.PlayOneShot(hideAudio);
     }
 }

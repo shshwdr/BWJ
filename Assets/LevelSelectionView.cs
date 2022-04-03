@@ -11,9 +11,9 @@ public class LevelSelectionView : BaseView
     public Button levelSelectionButton;
     public Text levelText;
     public GameObject panel;
-    public override void showReward()
+    public override void showView()
     {
-        base.showReward();
+        base.showView();
         panel.SetActive(true);
         GetComponent<UIView>().Show();
         var levelButtons = GetComponentsInChildren<LevelSelectionCell>(); 
@@ -28,9 +28,9 @@ public class LevelSelectionView : BaseView
             levelButtons[i].gameObject.SetActive(false);
         }
     }
-    public override void hideReward()
+    public override void hideView()
     {
-        base.hideReward();
+        base.hideView();
 
         GetComponent<UIView>().Hide();
         panel.SetActive(false);
@@ -41,6 +41,6 @@ public class LevelSelectionView : BaseView
     {
         base.Start();
         nextLevelButton.onClick.AddListener(delegate { StageLevelManager.Instance.startNextLevel(); });
-        returnButton.onClick.AddListener(delegate { hideReward(); });
+        returnButton.onClick.AddListener(delegate { hideView(); });
     }
 }

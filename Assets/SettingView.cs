@@ -14,9 +14,9 @@ public class SettingView : BaseView
     public Text levelText;
     public GameObject panel;
 
-    public override void showReward()
+    public override void showView()
     {
-        base.showReward();
+        base.showView();
         Time.timeScale = 0;
         GetComponent<UIView>().Show();
         panel.SetActive(true);
@@ -34,13 +34,13 @@ public class SettingView : BaseView
         //GameManager.Instance.saveAnimalInLevel();
 
     }
-    public override void hideReward()
+    public override void hideView()
     {
-        base.hideReward();
+        base.hideView();
         Time.timeScale = 1;
 
         GetComponent<UIView>().Hide();
-        panel.SetActive(false);
+        //panel.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -51,7 +51,7 @@ public class SettingView : BaseView
             StageLevelManager.Instance.startNextLevel();
         });
         resumeButton.onClick.AddListener(delegate {
-            hideReward();
+            hideView();
         });
         //returnButton.onClick.AddListener(delegate { StageLevelManager.Instance.returnHome(); });
         levelSelectionButton.onClick.AddListener(delegate { StageLevelManager.Instance.selectLevel(); });
