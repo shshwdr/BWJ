@@ -14,6 +14,10 @@ public class LevelManager : Singleton<LevelManager>
         GameObject.FindObjectOfType<PlayerCubeGridMove>().startPosition(startTrans.position, startTrans.rotation);
     }
 
+    public void reset()
+    {
+        isLevelGameStarted = false;
+    }
 
 
     public void startGame()
