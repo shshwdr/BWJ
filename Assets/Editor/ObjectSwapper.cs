@@ -82,10 +82,20 @@ public class ObejctSwapper : MonoBehaviour
     {
         Swap("ForestCrossingFour");
     }
+    [MenuItem("LevelCreator/waterCrossingFour &#4")]
+    static void waterCrossingFour()
+    {
+        Swap("waterCrossingFour");
+    }
     [MenuItem("LevelCreator/ForestCrossingThree &3")]
     static void ForestCrossingThree()
     {
         Swap("ForestCrossingThree");
+    }
+    [MenuItem("LevelCreator/waterCrossingThree &#3")]
+    static void waterCrossingThree()
+    {
+        Swap("waterCrossingThree");
     }
     [MenuItem("LevelCreator/ForestCurve &2")]
     static void ForestCurve()
@@ -102,10 +112,20 @@ public class ObejctSwapper : MonoBehaviour
     {
         Swap("ForestEnd");
     }
+    [MenuItem("LevelCreator/waterEnd &#0")]
+    static void waterEnd()
+    {
+        Swap("waterEnd");
+    }
     [MenuItem("LevelCreator/ForestStraight &1")]
     static void ForestStraight()
     {
         Swap("ForestStraight");
+    }
+    [MenuItem("LevelCreator/waterStraight &#1")]
+    static void waterStraight()
+    {
+        Swap("waterStraight");
     }
 
 
