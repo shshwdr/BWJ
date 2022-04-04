@@ -171,7 +171,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
             starCountInTotal += (currentCollected - currentLevel.collectedCount);
             totalCollected += (currentCollected - currentLevel.collectedCount);
             currentLevel.collectedCount = currentCollected;
-            //EventPool.Trigger("updateTotalStar");
+            EventPool.Trigger("updateTotalCollected");
         }
 
         StartCoroutine(finishLevelReal());

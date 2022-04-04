@@ -27,6 +27,7 @@ public class PlayerCubeGridMove : MonoBehaviour
 
     bool ignoreNextSign;
     bool turnAroundNext;
+    bool swimNext;
 
     Animator animator;
     private void Awake()
@@ -271,7 +272,10 @@ public class PlayerCubeGridMove : MonoBehaviour
     {
         ignoreNextSign = true;
     }
-
+    public void swim()
+    {
+        swimNext = true;
+    }
     public void startMove()
     {
         StartCoroutine(waitStartMove(2));

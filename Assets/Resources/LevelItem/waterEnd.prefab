@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2699454486905840896}
   - component: {fileID: 8464614265066848162}
   m_Layer: 7
-  m_Name: ForestEnd
+  m_Name: waterEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

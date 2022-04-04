@@ -48,7 +48,7 @@ MonoBehaviour:
   - {fileID: 5299926202270412263, guid: 362ffb324d6c36040b6358d342598b8f, type: 3}
   - {fileID: 2882366383189304980, guid: d926f1ef3547efa4990aaddc0aa697da, type: 3}
   - {fileID: 8166253862784525422, guid: be13fc022af84bb429399db1e97a6d07, type: 3}
-  loadItemCount: 30
-  loadItemCountFar: 10
+  loadItemCount: 20
+  loadItemCountFar: 30
   shortRadius: 200
   longRadius: 1000

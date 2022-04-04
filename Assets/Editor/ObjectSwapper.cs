@@ -92,6 +92,11 @@ public class ObejctSwapper : MonoBehaviour
     {
         Swap("ForestCurve");
     }
+    [MenuItem("LevelCreator/waterCurve &#2")]
+    static void waterCurve()
+    {
+        Swap("waterCurve");
+    }
     [MenuItem("LevelCreator/ForestEnd &0")]
     static void ForestEnd()
     {
