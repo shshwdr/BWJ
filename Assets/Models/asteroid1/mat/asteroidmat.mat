@@ -77,14 +77,14 @@ Material:
     - _OtlWidth: 0
     - _Parallax: 0.02
     - _Segmented: 1
-    - _ShnIntense: 0
+    - _ShnIntense: 1
     - _ShnOverlap: 0
-    - _ShnRange: 0.15
+    - _ShnRange: 0.01
     - _ShnSmooth: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Steps: 3
+    - _Steps: 2
     - _StpSmooth: 0
     - _UVSec: 0
     - _ZWrite: 1
