@@ -37,6 +37,7 @@ Transform:
   - {fileID: 2822125763766634360}
   - {fileID: 990399592336859426}
   - {fileID: 3348576071311400356}
+  - {fileID: 6787148008658492845}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -322,6 +323,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForestRiverCrossing_02
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e95657ce7a5a7b144a3fd9d8fd54f2b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e95657ce7a5a7b144a3fd9d8fd54f2b9, type: 3}
 --- !u!4 &3348576071311400356 stripped
@@ -410,6 +415,72 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1660974270464264083, guid: cee6327daadd2a6429ca64b678c21819, type: 3}
   m_PrefabInstance: {fileID: 3525478467215975596}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6465605946196081222
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4156567911437268623}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 62a7834a47e49a7438ef43aaceccd23c, type: 2}
+    - target: {fileID: 919132149155446097, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+      propertyPath: m_Name
+      value: ForestRiverCrossingthree
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+--- !u!4 &6787148008658492845 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ed19108b1e39b874e836f1d91e53e7d0, type: 3}
+  m_PrefabInstance: {fileID: 6465605946196081222}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6985160809111322295
 PrefabInstance:
