@@ -24,6 +24,10 @@ public class AlwaysHud : MonoBehaviour
     {
         collectedText.text = $"{StageLevelManager.Instance.currentCollected} / {StageLevelManager.Instance.currentLevel.itemCount}";
     }
+    private void OnDestroy()
+    {
+        pauseButton.onClick.RemoveAllListeners();
+    }
     //public void addCollectable()
     //{
     //    collect++;

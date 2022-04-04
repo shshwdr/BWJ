@@ -1,3 +1,4 @@
+using Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +13,41 @@ public class InstructionsMenu : MonoBehaviour
     void Start()
     {
         player = GameObject.FindObjectOfType<PlayerCubeGridMove>();
+
         instruction1.onClick.AddListener(delegate { turnAround(); });
+        if (StageLevelManager.Instance.hasEverCollected)
+        {
+
+            instruction1.gameObject.SetActive(true);
+        }
+        else
+        {
+            EventPool.OptIn("firstCollect", showInstruction1);
+            instruction1.gameObject.SetActive(false);
+        }
+
+        if(StageLevelManager.Instance.starCountInTotal > 2)
+        {
+
+            instruction2.gameObject.SetActive(true);
+        }
+        else
+        {
+
+            //EventPool.OptIn("firstCollect", showInstruction2);
+            instruction2.gameObject.SetActive(false);
+        }
+
         instruction2.onClick.AddListener(delegate { ignoreSign(); });
+    }
+
+    public void showInstruction1()
+    {
+        instruction1.gameObject.SetActive(true);
+    }
+    public void showInstruction2()
+    {
+        instruction2.gameObject.SetActive(true);
     }
 
     public void turnAround()

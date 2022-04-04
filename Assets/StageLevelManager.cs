@@ -22,7 +22,8 @@ public class StageLevelManager : Singleton<StageLevelManager>
     public int currentCollected = 0;
 
     bool isFinished;
-
+    public bool hasEverCollected = false;
+    public int starCountInTotal;
     // bool isHome;
 
 
@@ -87,7 +88,12 @@ public class StageLevelManager : Singleton<StageLevelManager>
     public void addCollectable()
     {
         currentCollected++;
-
+        EventPool.Trigger("updateCollected");
+        if (!hasEverCollected)
+        {
+            hasEverCollected = true;
+            EventPool.Trigger("firstCollect");
+        }
     }
 
     public int starCount()
@@ -154,6 +160,14 @@ public class StageLevelManager : Singleton<StageLevelManager>
         //}
         //when car finished moving start real level finish
         unlockNextLevel();
+
+        if (currentCollected > currentLevel.collectedCount)
+        {
+            starCountInTotal += (currentCollected - currentLevel.collectedCount);
+            currentLevel.collectedCount = currentCollected;
+            //EventPool.Trigger("updateTotalStar");
+        }
+
         StartCoroutine(finishLevelReal());
     }
 
@@ -255,16 +269,16 @@ public class StageLevelManager : Singleton<StageLevelManager>
             restart();
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            currentLevelId++;
-            restart();
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    currentLevelId++;
+        //    restart();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            currentLevelId--;
-            restart();
-        }
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    currentLevelId--;
+        //    restart();
+        //}
     }
 }
