@@ -12,6 +12,8 @@ public class RewardView : BaseView
     public Button restartButton;
     public Button levelSelectionButton;
     public Text levelText;
+    public Text collectedTotalText;
+    public Text collectedLevelText;
     public GameObject panel;
     public Transform[] stars;
     public AudioClip[] starClips;
@@ -24,6 +26,8 @@ public class RewardView : BaseView
         GetComponent<UIView>().Show();
         panel.SetActive(true);
         levelText.text = $"Level {StageLevelManager.Instance.currentLevel.displayName}";
+        collectedTotalText.text = $"Collected In Total: {StageLevelManager.Instance.totalCollected}/{StageLevelManager.Instance.totalCanCollect}";
+        collectedLevelText.text = $"Collected In Level: {StageLevelManager.Instance.currentLevel.collectedCount}/{StageLevelManager.Instance.currentLevel.itemCount}";
         //GameManager.Instance.saveAnimalInLevel();
 
         //if (StageLevelManager.Instance.getTargetFinish())

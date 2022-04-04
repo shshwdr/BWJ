@@ -14,6 +14,7 @@ public class LevelInfo
     public int itemCount;
     public int itemToUnlock;
     public int collectedCount = 0;
+    public bool hasBeenFinished = false;
 }
 public class StageLevelManager : Singleton<StageLevelManager>
 {
@@ -24,6 +25,10 @@ public class StageLevelManager : Singleton<StageLevelManager>
     bool isFinished;
     public bool hasEverCollected = false;
     public int starCountInTotal;
+
+    public int totalCollected = 0;
+    public int totalCanCollect = 0;
+
     // bool isHome;
 
 
@@ -164,6 +169,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
         if (currentCollected > currentLevel.collectedCount)
         {
             starCountInTotal += (currentCollected - currentLevel.collectedCount);
+            totalCollected += (currentCollected - currentLevel.collectedCount);
             currentLevel.collectedCount = currentCollected;
             //EventPool.Trigger("updateTotalStar");
         }
@@ -228,6 +234,16 @@ public class StageLevelManager : Singleton<StageLevelManager>
         currentCollected = 0;
         Time.timeScale = 1;
 
+        if(currentLevel.itemCount == 0)
+        {
+            currentLevel.itemCount = GameObject.FindGameObjectsWithTag("human").Length;
+        }
+
+        if (!currentLevel.hasBeenFinished)
+        {
+            currentLevel.hasBeenFinished = true;
+            totalCanCollect += currentLevel.itemCount;
+        }
 
         //{
         //    if (currentLevel.id < 6)

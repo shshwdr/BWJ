@@ -11,10 +11,13 @@ public class LevelSelectionView : BaseView
     public Button levelSelectionButton;
     public Text levelText;
     public GameObject panel;
+    public Text collectedTotalText;
     public override void showView()
     {
         base.showView();
         panel.SetActive(true);
+
+        collectedTotalText.text = $"Collected In Total: {StageLevelManager.Instance.totalCollected}/{StageLevelManager.Instance.totalCanCollect}";
         GetComponent<UIView>().Show();
         var levelButtons = GetComponentsInChildren<LevelSelectionCell>(); 
         int i = 0;
