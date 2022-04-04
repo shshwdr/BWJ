@@ -59,6 +59,8 @@ public class InstructionsMenu : MonoBehaviour
 
     }
 
+    
+
     public void showInstruction1()
     {
         instruction1.gameObject.SetActive(true);
@@ -95,6 +97,12 @@ public class InstructionsMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+
+            instruction1.gameObject.SetActive(true);
+            instruction2.gameObject.SetActive(true);
+            instruction3.gameObject.SetActive(true);
+        }
     }
 }
