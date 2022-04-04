@@ -170,7 +170,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             if (hitCollectable)
             {
                 Destroy(hitedCollectable.collider.gameObject);
-                GameObject.FindObjectOfType<AlwaysHud>().addCollectable();
+                StageLevelManager.Instance.addCollectable();
             }
         }
 
@@ -251,11 +251,17 @@ public class PlayerCubeGridMove : MonoBehaviour
                 animator.SetTrigger("victory");
             }
             startedMoving = false;
+
+            StageLevelManager.Instance.finishLevel();
             return true;
         }
         return false;
 
+
+
     }
+
+
 
     public void turnAround()
     {

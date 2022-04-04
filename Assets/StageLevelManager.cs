@@ -13,12 +13,13 @@ public class LevelInfo
     public int id;
     public int itemCount;
     public int itemToUnlock;
-    public bool[] collectedItem;
+    public int collectedCount = 0;
 }
 public class StageLevelManager : Singleton<StageLevelManager>
 {
     public int currentLevelId;
     public int maxUnlockedLevel = 0;
+    public int currentCollected = 0;
 
     bool isFinished;
 
@@ -71,42 +72,55 @@ public class StageLevelManager : Singleton<StageLevelManager>
     }
 
 
-    public int getCollectedCount()
+    //public int getCollectedCount()
+    //{
+    //    //int i = 0;
+    //    //foreach (var s in currentLevel.collectedItem)
+    //    //{
+    //    //    if (s)
+    //    //    {
+    //    //        i++;
+    //    //    }
+    //    //}
+    //    return co;
+    //}
+    public void addCollectable()
     {
-        int i = 0;
-        foreach (var s in currentLevel.collectedItem)
-        {
-            if (s)
-            {
-                i++;
-            }
-        }
-        return i;
-    }
+        currentCollected++;
 
+    }
 
     public int starCount()
     {
         int showStarCount = 0;
+
+
         //if (getTargetFinish())
         //{
         //    showStarCount = 3;
         //}
         //else if (getMainTargetFinish())
         //{
-        //    var diff = currentLevel.targetCount - currentLevel.mainTargetCount;
-        //    var expectDiff = (diff + 1) / 2;
+        if (currentCollected == currentLevel.itemCount)
+        {
+            showStarCount = 3;
+        }
+        else
+        {
+            var diff = currentLevel.itemCount;
+            var expectDiff = (diff + 1) / 2;
 
-        //    //Debug.Log($"stars diff {diff}, expect {expectDiff}, compare {currentLevel.targetCount - rescuedCount}");
-        //    if (currentLevel.targetCount - rescuedCount <= expectDiff)
-        //    {
-        //        showStarCount = 2;
+            //Debug.Log($"stars diff {diff}, expect {expectDiff}, compare {currentLevel.targetCount - rescuedCount}");
+            if (currentLevel.itemCount - currentCollected <= expectDiff)
+            {
+                showStarCount = 2;
 
-        //    }
-        //    else
-        //    {
-        //        showStarCount = 1;
-        //    }
+            }
+            else
+            {
+                showStarCount = 1;
+            }
+        }
 
         //}
         //if (!levelToStarCount.ContainsKey(currentLevel.sceneName))
@@ -139,14 +153,16 @@ public class StageLevelManager : Singleton<StageLevelManager>
         //    camera.Follow = null;
         //}
         //when car finished moving start real level finish
+        unlockNextLevel();
+        StartCoroutine(finishLevelReal());
     }
 
-    public void finishLevelReal()
+    public IEnumerator finishLevelReal()
     {
-
+        yield return new WaitForSeconds(2);
         //Time.timeScale = 0;
-        //RewardView view = GameObject.FindObjectOfType<RewardView>(true);
-        //view.showView();
+        RewardView view = GameObject.FindObjectOfType<RewardView>(true);
+        view.showView();
     }
 
     //public void linkAnimal(string type)
@@ -165,12 +181,14 @@ public class StageLevelManager : Singleton<StageLevelManager>
 
     public void collectItem(int id)
     {
-        if (id >= currentLevel.collectedItem.Length)
-        {
-            Debug.LogError(id + " id is too large " + currentLevel.collectedItem.Length);
-            return;
-        }
-        currentLevel.collectedItem[id] = true;
+        //if (id >= currentLevel.collectedItem.Length)
+        //{
+        //    Debug.LogError(id + " id is too large " + currentLevel.collectedItem.Length);
+        //    return;
+        //}
+        //currentLevel.collectedItem[id] = true;
+        currentCollected++;
+        EventPool.Trigger("updateCollected");
     }
 
     public void startLevel(int id)
@@ -193,6 +211,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
     public void startNextLevel()
     {
         isFinished = false;
+        currentCollected = 0;
         Time.timeScale = 1;
 
 

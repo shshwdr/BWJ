@@ -25,7 +25,7 @@ public class RewardView : BaseView
         panel.SetActive(true);
         levelText.text = $"Level {StageLevelManager.Instance.currentLevel.displayName}";
         //GameManager.Instance.saveAnimalInLevel();
-        
+
         //if (StageLevelManager.Instance.getTargetFinish())
         //{
 
@@ -59,12 +59,12 @@ public class RewardView : BaseView
 
         }
 
-        if (StageLevelManager.Instance.currentLevelId == 0)
-        {
-            nextLevelButton.gameObject.SetActive(false);
+        //if (StageLevelManager.Instance.currentLevelId == 0)
+        //{
+        //    nextLevelButton.gameObject.SetActive(false);
 
-            levelSelectionButton.gameObject.SetActive(false);
-        }
+        //    levelSelectionButton.gameObject.SetActive(false);
+        //}
         StartCoroutine(showStars());
     }
 
@@ -75,7 +75,7 @@ public class RewardView : BaseView
         for (int i = 0; i < starCount; i++)
         {
             //GameManager.popup(stars[i],true);
-            audioSource.PlayOneShot(starClips[i]);
+            // audioSource.PlayOneShot(starClips[i]);
             yield return new WaitForSecondsRealtime(0.7f);
             //Sequence mySequence = DOTween.Sequence();
             //mySequence.Append(stars[i].DOScale(Vector3.one*1.5f, 0.7f))
@@ -88,7 +88,7 @@ public class RewardView : BaseView
     {
         base.hideView();
         GetComponent<UIView>().Hide();
-        panel.SetActive(false);
+        //panel.SetActive(false);
     }
 
 
@@ -96,16 +96,17 @@ public class RewardView : BaseView
     protected override void Start()
     {
         base.Start();
-        nextLevelButton.onClick.AddListener(delegate {
-            //if (StageLevelManager.Instance.getMainTargetFinish())
-            //{
-            //    StageLevelManager.Instance.addLevel();
-            //}
+        nextLevelButton.onClick.AddListener(delegate
+        {
+            
+                StageLevelManager.Instance.addLevel();
+            StageLevelManager.Instance.startNextLevel();
 
-            restartButton.onClick.AddListener(delegate {
-                StageLevelManager.Instance.startNextLevel();
-            });
-            StageLevelManager.Instance.startNextLevel(); });
+        });
+        restartButton.onClick.AddListener(delegate
+        {
+            StageLevelManager.Instance.startNextLevel();
+        });
         //returnButton.onClick.AddListener(delegate { StageLevelManager.Instance.returnHome(); });
         levelSelectionButton.onClick.AddListener(delegate { StageLevelManager.Instance.selectLevel(); });
     }
@@ -113,6 +114,6 @@ public class RewardView : BaseView
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

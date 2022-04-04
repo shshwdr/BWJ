@@ -33,14 +33,14 @@ public class LevelSelectionView : BaseView
         base.hideView();
 
         GetComponent<UIView>().Hide();
-        panel.SetActive(false);
+        //panel.SetActive(false);
     }
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        nextLevelButton.onClick.AddListener(delegate { StageLevelManager.Instance.startNextLevel(); });
+        //nextLevelButton.onClick.AddListener(delegate { StageLevelManager.Instance.startNextLevel(); });
         returnButton.onClick.AddListener(delegate { hideView(); });
     }
 }

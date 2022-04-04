@@ -1,3 +1,4 @@
+using Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,16 +18,17 @@ public class AlwaysHud : MonoBehaviour
         {
             GameObject.FindObjectOfType<SettingView>(true).showView();
         });
+        EventPool.OptIn("updateCollected", updateCollectedText);
     }
     public void updateCollectedText()
     {
-        collectedText.text = $"{collect} / 3";
+        collectedText.text = $"{StageLevelManager.Instance.currentCollected} / {StageLevelManager.Instance.currentLevel.itemCount}";
     }
-    public void addCollectable()
-    {
-        collect++;
-        updateCollectedText();
-    }
+    //public void addCollectable()
+    //{
+    //    collect++;
+    //    updateCollectedText();
+    //}
     // Update is called once per frame
     void Update()
     {
