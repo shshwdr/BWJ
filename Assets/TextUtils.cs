@@ -8,6 +8,8 @@ public class TextUtils : MonoBehaviour
     {
         { "dragZoom","Drag to look around\nScroll to zoom" },
         { "useFirstSkill","Click Turn Back To Use Skill" },
+        { "swimTutorial","Use swim to.. swim" },
+        {"swimTurnOn","Use swim again when you need" },
     };
     static public string getText(string name)
     {

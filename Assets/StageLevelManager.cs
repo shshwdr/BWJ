@@ -280,9 +280,33 @@ public class StageLevelManager : Singleton<StageLevelManager>
     // Update is called once per frame
     void Update()
     {
+
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            currentLevelId++;
+            startNextLevel();
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            currentLevelId--;
+            startNextLevel();
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        }
         if (Input.GetKeyDown(KeyCode.R))
         {
             restart();
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Time.timeScale *= 2;
+            if (Time.timeScale > 4)
+            {
+                Time.timeScale = 1;
+            }
         }
 
         //if (Input.GetKeyDown(KeyCode.P))

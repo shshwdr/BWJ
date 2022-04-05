@@ -303,7 +303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1425911311635451160, guid: cee6327daadd2a6429ca64b678c21819, type: 3}
       propertyPath: m_Layer
-      value: 17
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1660974270464264083, guid: cee6327daadd2a6429ca64b678c21819, type: 3}
       propertyPath: m_RootOrder
@@ -435,6 +435,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 62a7834a47e49a7438ef43aaceccd23c, type: 2}
+    - target: {fileID: -1504981713932161579, guid: b3845e5714a233e4c81d928c247125f2, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: cf75bbe88de8a7e4db86bccf7258ec20, type: 2}
     - target: {fileID: -927199367670048503, guid: b3845e5714a233e4c81d928c247125f2, type: 3}
       propertyPath: m_Name
       value: ForestRiverStraight
@@ -467,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1425911311635451160, guid: cee6327daadd2a6429ca64b678c21819, type: 3}
       propertyPath: m_Layer
-      value: 17
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1660974270464264083, guid: cee6327daadd2a6429ca64b678c21819, type: 3}
       propertyPath: m_RootOrder
@@ -549,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1425911311635451160, guid: cee6327daadd2a6429ca64b678c21819, type: 3}
       propertyPath: m_Layer
-      value: 17
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1660974270464264083, guid: cee6327daadd2a6429ca64b678c21819, type: 3}
       propertyPath: m_RootOrder

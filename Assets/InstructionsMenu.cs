@@ -21,7 +21,7 @@ public class InstructionsMenu : MonoBehaviour
 
         instruction1.onClick.AddListener(delegate { turnAround(); });
         instruction2.onClick.AddListener(delegate { ignoreSign(); });
-        instruction2.onClick.AddListener(delegate { swim(); });
+        instruction3.onClick.AddListener(delegate { swim(); });
         if (StageLevelManager.Instance.hasEverCollected)
         {
 
@@ -59,7 +59,6 @@ public class InstructionsMenu : MonoBehaviour
 
     }
 
-    
 
     public void showInstruction1()
     {
@@ -83,15 +82,18 @@ public class InstructionsMenu : MonoBehaviour
     public void turnAround()
     {
         player.turnAround();
+        instruction1.GetComponent<InstructionButton>().turnInstruction(1,player.turnAroundNext);
     }
     public void ignoreSign()
     {
         player.ignoreSign();
+        instruction2.GetComponent<InstructionButton>().turnInstruction(2,player.ignoreNextSign);
     }
 
     public void swim()
     {
         player.swim();
+        instruction3.GetComponent<InstructionButton>().turnInstruction(3,player.swimNext);
     }
 
     // Update is called once per frame

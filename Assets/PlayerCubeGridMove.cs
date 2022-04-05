@@ -26,9 +26,9 @@ public class PlayerCubeGridMove : MonoBehaviour
 
     Transform targetTransform;
 
-    bool ignoreNextSign;
-    bool turnAroundNext;
-    bool swimNext;
+    public bool ignoreNextSign;
+    public bool turnAroundNext;
+    public bool swimNext;
 
     bool isSwiming;
 
@@ -75,14 +75,14 @@ public class PlayerCubeGridMove : MonoBehaviour
 
             //if next is hitted, check if hit on ground
             RaycastHit hit;
-            bool hitRoad = Physics.Raycast(nextPosition + targetTransform.up * 0.5f, -targetTransform.up, out hit,1, walkableLayer);
-            bool hitRoad1 = Physics.Raycast(nextPosition1 + targetTransform.up * 0.5f, -targetTransform.up, 1, walkableLayer);
-            bool hitRoad2 = Physics.Raycast(nextPosition2 + targetTransform.up * 0.5f, -targetTransform.up, 1, walkableLayer);
+            bool hitRoad = Physics.Raycast(nextPosition + targetTransform.up * 0.5f, -targetTransform.up, out hit,1, canWalkLayer);
+            bool hitRoad1 = Physics.Raycast(nextPosition1 + targetTransform.up * 0.5f, -targetTransform.up, 1, canWalkLayer);
+            bool hitRoad2 = Physics.Raycast(nextPosition2 + targetTransform.up * 0.5f, -targetTransform.up, 1, canWalkLayer);
             if (hitRoad && hitRoad1 && hitRoad2)
             {
                 nextPositions.Add(nextPosition);
                 nextRotations.Add(targetRotation);
-                if(hit.collider.gameObject.layer == swimLayer)
+                if(1<<hit.collider.gameObject.layer == swimLayer)
                 {
 
                     if (startedMoving)
@@ -96,7 +96,16 @@ public class PlayerCubeGridMove : MonoBehaviour
                 {
                     if (startedMoving)
                     {
+                        animator.SetBool("swim", false);
                         animator.SetBool("walk", true);
+                        if (isSwiming)
+                        {
+                            swimNext = false;
+                            isSwiming = false;
+
+
+                            EventPool.Trigger<int>("turnedInstructionOff", 3);
+                        }
                     }
                     return true;
                 }
@@ -119,11 +128,11 @@ public class PlayerCubeGridMove : MonoBehaviour
             nextPosition = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.5f);
             nextPosition1 = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.33f);
             var nnPosition = Utils.snapToGrid(nextPosition - targetTransform.up * gridSize * 0.5f);
-            nextPosition2 = Utils.snapToGrid(nnPosition - targetTransform.up * gridSize * 0.33f);
+            nextPosition2 = Utils.snapToGrid(nnPosition + targetTransform.up * gridSize * 0.33f);
             //if next is hitted, check if hit on ground
-            bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward),out hit, 1, walkableLayer);
-            bool hitRoad1 = Physics.Raycast(nextPosition1 + targetRotation * Vector3.up * 0.5f, -(targetRotation * Vector3.up), 1, walkableLayer);
-            bool hitRoad2 = Physics.Raycast(nextPosition2 + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), 1, walkableLayer);
+            bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward),out hit, 1, canWalkLayer);
+            bool hitRoad1 = Physics.Raycast(nextPosition1 + targetRotation * Vector3.up * 0.5f, -(targetRotation * Vector3.up), 1, canWalkLayer);
+            bool hitRoad2 = Physics.Raycast(nextPosition2 + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), 1, canWalkLayer);
             if (hitRoad && hitRoad1 && hitRoad2)
             {
                 nextPositions.Add(nextPosition);
@@ -131,7 +140,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                 nextPositions.Add(nnPosition);
                 targetRotation *= Quaternion.Euler(Vector3.right * 90);
                 nextRotations.Add(targetRotation);
-                if (hit.collider.gameObject.layer == swimLayer)
+                if (1<<hit.collider.gameObject.layer == swimLayer)
                 {
 
                     if (startedMoving)
@@ -145,7 +154,17 @@ public class PlayerCubeGridMove : MonoBehaviour
                     if (startedMoving)
                     {
 
-                        animator.SetBool("walk", true);
+                        animator.SetBool("swim", false);
+                        animator.SetBool("walk", true); 
+                        if (isSwiming)
+                        {
+                            swimNext = false;
+                            isSwiming = false;
+
+
+                            EventPool.Trigger<int>("turnedInstructionOff", 3);
+
+                        }
                     }
                 }
                 return true;
@@ -161,6 +180,8 @@ public class PlayerCubeGridMove : MonoBehaviour
             }
         }
     }
+
+
 
     void moveBack()
     {
@@ -218,6 +239,8 @@ public class PlayerCubeGridMove : MonoBehaviour
             LogManager.log("used skill to move back");
             moveBack();
             turnAroundNext = false;
+
+            EventPool.Trigger<int>("turnedInstructionOff", 1);
             return;
         }
 
@@ -228,6 +251,8 @@ public class PlayerCubeGridMove : MonoBehaviour
             if (ignoreNextSign)
             {
                 ignoreNextSign = false;
+
+                EventPool.Trigger<int>("turnedInstructionOff", 2);
             }
             else
             {
@@ -249,6 +274,8 @@ public class PlayerCubeGridMove : MonoBehaviour
             if (ignoreNextSign)
             {
                 ignoreNextSign = false;
+
+                EventPool.Trigger<int>("turnedInstructionOff", 2);
             }
             else
             {
@@ -318,15 +345,15 @@ public class PlayerCubeGridMove : MonoBehaviour
 
     public void turnAround()
     {
-        turnAroundNext = true;
+        turnAroundNext = !turnAroundNext;
     }
     public void ignoreSign()
     {
-        ignoreNextSign = true;
+        ignoreNextSign = !ignoreNextSign;
     }
     public void swim()
     {
-        swimNext = true;
+        swimNext = !swimNext;
     }
     public void startMove()
     {
@@ -350,25 +377,6 @@ public class PlayerCubeGridMove : MonoBehaviour
             {
                 Time.timeScale = 1;
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            Time.timeScale *= 2;
-            if (Time.timeScale > 4)
-            {
-                Time.timeScale = 1;
-            }
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         if (startedMoving)

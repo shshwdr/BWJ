@@ -16,6 +16,12 @@ public class ObejctSwapper : MonoBehaviour
         var selects = Selection.gameObjects;
         foreach (var select in selects)
         {
+            if(selects.Length == 1 && select.name == item)
+            {
+                TurnRight();
+            }
+
+
             var pref = Resources.Load("LevelItem/"+item);
             if (pref)
             {
