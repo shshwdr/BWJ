@@ -10,6 +10,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     public float moveSpeed = 3;
     public float rotateSpeed = 10;
     public LayerMask walkableLayer;
+    public LayerMask swimLayer;
     public LayerMask signLayer;
     public LayerMask collectableLayer;
     public LayerMask endLayer;
@@ -28,6 +29,8 @@ public class PlayerCubeGridMove : MonoBehaviour
     bool ignoreNextSign;
     bool turnAroundNext;
     bool swimNext;
+
+    bool isSwiming;
 
     Animator animator;
     private void Awake()
@@ -52,8 +55,15 @@ public class PlayerCubeGridMove : MonoBehaviour
         EventPool.OptIn("StartGame", startMove);
     }
 
-    bool canMove(Vector3 dir)
+    bool canMove(Vector3 dir, bool forceSwim = false)
     {
+
+        LayerMask canWalkLayer = walkableLayer;
+        if (swimNext || forceSwim)
+        {
+            canWalkLayer |= swimLayer;
+        }
+
         targetRotation *= Quaternion.Euler(dir);
         //check if next grid is moveable
         var nextPosition = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize);
@@ -64,25 +74,39 @@ public class PlayerCubeGridMove : MonoBehaviour
         {
 
             //if next is hitted, check if hit on ground
-            bool hitRoad = Physics.Raycast(nextPosition + targetTransform.up * 0.5f, -targetTransform.up, 1, walkableLayer);
+            RaycastHit hit;
+            bool hitRoad = Physics.Raycast(nextPosition + targetTransform.up * 0.5f, -targetTransform.up, out hit,1, walkableLayer);
             bool hitRoad1 = Physics.Raycast(nextPosition1 + targetTransform.up * 0.5f, -targetTransform.up, 1, walkableLayer);
             bool hitRoad2 = Physics.Raycast(nextPosition2 + targetTransform.up * 0.5f, -targetTransform.up, 1, walkableLayer);
             if (hitRoad && hitRoad1 && hitRoad2)
             {
                 nextPositions.Add(nextPosition);
                 nextRotations.Add(targetRotation);
-                if (startedMoving)
+                if(hit.collider.gameObject.layer == swimLayer)
                 {
-                    animator.SetBool("walk", true);
+
+                    if (startedMoving)
+                    {
+                        animator.SetBool("swim", true);
+                        isSwiming = true;
+                    }
+                    return true;
                 }
-                return true;
+                else
+                {
+                    if (startedMoving)
+                    {
+                        animator.SetBool("walk", true);
+                    }
+                    return true;
+                }
             }
             else
             {
-                if (startedMoving)
-                {
-                    animator.SetBool("walk", false);
-                }
+                //if (startedMoving)
+                //{
+                //    animator.SetBool("walk", false);
+                //}
                 targetRotation *= Quaternion.Euler(-dir);
                 return false;
             }
@@ -91,12 +115,13 @@ public class PlayerCubeGridMove : MonoBehaviour
         {
             //check rotate position
 
+            RaycastHit hit;
             nextPosition = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.5f);
             nextPosition1 = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.33f);
             var nnPosition = Utils.snapToGrid(nextPosition - targetTransform.up * gridSize * 0.5f);
             nextPosition2 = Utils.snapToGrid(nnPosition - targetTransform.up * gridSize * 0.33f);
             //if next is hitted, check if hit on ground
-            bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), 1, walkableLayer);
+            bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward),out hit, 1, walkableLayer);
             bool hitRoad1 = Physics.Raycast(nextPosition1 + targetRotation * Vector3.up * 0.5f, -(targetRotation * Vector3.up), 1, walkableLayer);
             bool hitRoad2 = Physics.Raycast(nextPosition2 + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), 1, walkableLayer);
             if (hitRoad && hitRoad1 && hitRoad2)
@@ -106,10 +131,22 @@ public class PlayerCubeGridMove : MonoBehaviour
                 nextPositions.Add(nnPosition);
                 targetRotation *= Quaternion.Euler(Vector3.right * 90);
                 nextRotations.Add(targetRotation);
-                if (startedMoving)
+                if (hit.collider.gameObject.layer == swimLayer)
                 {
 
-                    animator.SetBool("walk", true);
+                    if (startedMoving)
+                    {
+                        animator.SetBool("swim", true);
+                        isSwiming = true;
+                    }
+                }
+                else
+                {
+                    if (startedMoving)
+                    {
+
+                        animator.SetBool("walk", true);
+                    }
                 }
                 return true;
             }
@@ -195,7 +232,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             else
             {
 
-                if (canMove(Vector3.up * 90))
+                if (canMove(Vector3.up * 90, isSwiming))
                 {
                     return;
                 }
@@ -232,6 +269,21 @@ public class PlayerCubeGridMove : MonoBehaviour
         else if (canMove(-Vector3.up * 90))
         {
             LogManager.log("move left next");
+        }
+        else if (canMove(Vector3.zero, isSwiming))
+        {
+
+            LogManager.log("swim forward next");
+        }
+        else if (canMove(Vector3.up * 90, isSwiming))
+        {
+
+            LogManager.log("swim right next");
+        }
+        else if (canMove(-Vector3.up * 90, isSwiming))
+        {
+
+            LogManager.log("swim left next");
         }
         else
         {
