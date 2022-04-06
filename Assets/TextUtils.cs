@@ -10,6 +10,7 @@ public class TextUtils : MonoBehaviour
         { "useFirstSkill","Click Turn Back To Use Skill" },
         { "swimTutorial","Use swim to.. swim" },
         {"swimTurnOn","Use swim again when you need" },
+        {"dragInGame","You can look around by clicking Free Camera after start." },
     };
     static public string getText(string name)
     {
