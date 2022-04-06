@@ -1,6 +1,7 @@
 ﻿displayName,sceneName,itemToUnlock
 0,0,0
 1,practice turn back,0
-2,1,0
-2,2,0
-3,3,0
+2,learn trigger,0
+3,practice trigger,0
+4,learn water,0
+100,test,0

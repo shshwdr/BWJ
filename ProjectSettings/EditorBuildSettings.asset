@@ -18,12 +18,15 @@ EditorBuildSettings:
     path: Assets/Scenes/0.unity
     guid: 54da0036025525b469f2b3fbc1475a5f
   - enabled: 1
-    path: Assets/Scenes/1.unity
+    path: Assets/Scenes/practice turn back.unity
+    guid: 5a49b7a2a04edf6429595a693e7de22a
+  - enabled: 1
+    path: Assets/Scenes/learn trigger.unity
     guid: 9edcc5701a09878499e7c4b68ad06902
   - enabled: 1
-    path: Assets/Scenes/2.unity
+    path: Assets/Scenes/practice trigger.unity
     guid: 6006f98a186d40f47805a233ec804735
   - enabled: 1
-    path: Assets/Scenes/3.unity
+    path: Assets/Scenes/learn water.unity
     guid: 928c79d6b3067da4cadc01d98f475efb
   m_configObjects: {}

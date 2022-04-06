@@ -11,7 +11,9 @@ public class TextUtils : MonoBehaviour
         { "swimTutorial","Use swim to.. swim" },
         {"swimTurnOn","Use swim again when you need" },
         {"dragInGame","You can look around by clicking Free Camera after start." },
-        {"moveLogic","Move Priority: Forward Right Left" }
+        {"moveLogic","Move Priority: Forward Right Left" },
+        {"pullLeverTutorial","Pull the Lever" },
+        {"leverFirst","Pull lever would rotate the road" }
     };
     static public string getText(string name)
     {
