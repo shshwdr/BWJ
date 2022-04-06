@@ -36,6 +36,32 @@ public class ObejctSwapper : MonoBehaviour
             }
         }
     }
+
+    static void SwapAll(string item)
+    {
+        var selects = Selection.gameObjects;
+        foreach (var s in selects)
+        {
+            var parent = s.transform.parent;
+            for (int i = 0; i < parent.childCount; i++)
+            {
+                var select = parent.GetChild(0).gameObject;
+
+                var pref = Resources.Load("LevelItem/" + item);
+                if (pref)
+                {
+                    GameObject newObject = (GameObject)PrefabUtility.InstantiatePrefab(pref);
+                    newObject.transform.parent = select.transform.parent;
+                    newObject.transform.position = select.transform.position;
+                    newObject.transform.rotation = select.transform.rotation;
+                    newObject.transform.localScale = select.transform.localScale;
+                    DestroyImmediate(select);
+                    Selection.activeGameObject = newObject;
+                    EditorUtility.SetDirty(newObject);
+                }
+            }
+        }
+    }
     static void Turn(int degree)
     {
         var selects = Selection.gameObjects;
@@ -82,6 +108,12 @@ public class ObejctSwapper : MonoBehaviour
     static void ForestGrass()
     {
         Swap("ForestGrass");
+    }
+
+    [MenuItem("LevelCreator/ForestAllGrass &7")]
+    static void ForestAllGrass()
+    {
+        SwapAll("ForestGrass");
     }
     [MenuItem("LevelCreator/ForestCrossingFour &4")]
     static void ForestCrossingFour()

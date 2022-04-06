@@ -6,7 +6,7 @@ public class TextUtils : MonoBehaviour
 {
     static Dictionary<string, string> textMap = new Dictionary<string, string>()
     {
-        { "dragZoom","Drag to look around\nScroll to zoom" },
+        { "dragZoom","Drag to look around\nScroll to zoom\n" },
         { "useFirstSkill","Click Turn Back To Use Skill" },
         { "swimTutorial","Use swim to.. swim" },
         {"swimTurnOn","Use swim again when you need" },
