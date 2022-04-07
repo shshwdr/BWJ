@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/old/game demo robot with instruction lever.unity
     guid: e4f5caaaf668a1e40942eb858631f468
   - enabled: 1
-    path: Assets/Scenes/0.unity
+    path: Assets/Scenes/tutorial.unity
     guid: 54da0036025525b469f2b3fbc1475a5f
   - enabled: 1
     path: Assets/Scenes/practice turn back.unity

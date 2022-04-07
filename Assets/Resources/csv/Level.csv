@@ -1,7 +1,12 @@
 ﻿displayName,sceneName,itemToUnlock
-0,0,0
-1,practice turn back,0
-2,learn trigger,0
-3,practice trigger,0
-4,learn water,0
+1,tutorial,0
+2,practice turn back,0
+3,learn trigger,0
+4,practice trigger,0
+5,learn sign,0
+6,practice sign,0
+7,learn water,0
+8,practice water,0
+9,comb1,0
+10,comb2,0
 100,test,0

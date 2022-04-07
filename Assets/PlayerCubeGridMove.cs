@@ -257,7 +257,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             else
             {
 
-                if (canMove(Vector3.up * 90, isSwiming))
+                if (canMove(Vector3.up * -90, isSwiming))
                 {
                     return;
                 }
