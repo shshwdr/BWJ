@@ -15,9 +15,90 @@ MonoBehaviour:
   Path: Assets/fmod/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637841808074855878
+  lastModified: 637849622793576494
   FileSizes: []
   Exists: 1
+--- !u!114 &-3804540571780475088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/bgm
+  m_EditorClassIdentifier: 
+  Path: event:/bgm
+  Guid:
+    Data1: 471083376
+    Data2: 1234421110
+    Data3: -484371280
+    Data4: 1892635023
+  Banks:
+  - {fileID: -5492613768041950802}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1639206156018869331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/lever
+  m_EditorClassIdentifier: 
+  Path: event:/lever
+  Guid:
+    Data1: -618217686
+    Data2: 1286851079
+    Data3: -464239225
+    Data4: 1367777226
+  Banks:
+  - {fileID: -5492613768041950802}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1409
+--- !u!114 &-1005903623388704857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/collect 2
+  m_EditorClassIdentifier: 
+  Path: event:/collect 2
+  Guid:
+    Data1: -1942640979
+    Data2: 1310419856
+    Data3: 249039234
+    Data4: 2047886724
+  Banks:
+  - {fileID: -5492613768041950802}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34,15 +115,18 @@ MonoBehaviour:
   - {fileID: 7376349779255225968}
   - {fileID: -5492613768041950802}
   EditorEvents:
-  - {fileID: 5449056431789010665}
+  - {fileID: -3804540571780475088}
+  - {fileID: 3789557789042701946}
+  - {fileID: -1005903623388704857}
+  - {fileID: -1639206156018869331}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5492613768041950802}
   StringsBanks:
   - {fileID: 7376349779255225968}
-  cacheTime: 637841808074865882
+  cacheTime: 637849622793606514
   cacheVersion: 10
---- !u!114 &5449056431789010665
+--- !u!114 &3789557789042701946
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,17 +136,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/New Event
+  m_Name: event:/collect
   m_EditorClassIdentifier: 
-  Path: event:/New Event
+  Path: event:/collect
   Guid:
-    Data1: -687677856
-    Data2: 1112236125
-    Data3: -152211535
-    Data4: 337011950
+    Data1: -1517280824
+    Data2: 1218615120
+    Data3: 1346179998
+    Data4: 823195818
   Banks:
   - {fileID: -5492613768041950802}
-  IsStream: 1
+  IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
@@ -84,8 +168,8 @@ MonoBehaviour:
   Path: Assets/fmod/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637841808074865882
+  lastModified: 637849622793606514
   FileSizes:
   - Name: 
-    Value: 758
+    Value: 882
   Exists: 1
