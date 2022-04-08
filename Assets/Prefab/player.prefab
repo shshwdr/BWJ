@@ -83,6 +83,9 @@ MonoBehaviour:
   walkableLayer:
     serializedVersion: 2
     m_Bits: 128
+  swimLayer:
+    serializedVersion: 2
+    m_Bits: 256
   signLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -98,6 +101,9 @@ MonoBehaviour:
   frontDetection: {fileID: 7852817379291807682}
   rotateCoolDown: 0.5
   stopDistance: 0.005
+  ignoreNextSign: 0
+  turnAroundNext: 0
+  swimNext: 0
 --- !u!1 &7852817379291807683
 GameObject:
   m_ObjectHideFlags: 0

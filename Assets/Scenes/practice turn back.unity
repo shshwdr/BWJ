@@ -5055,19 +5055,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1029844374432770452, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3074675
+      value: -2.8113036
       objectReference: {fileID: 0}
     - target: {fileID: 1029844374432770452, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.1434174
+      value: -6.275177
       objectReference: {fileID: 0}
     - target: {fileID: 1029844374432770452, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9848078
+      value: 0.9396927
       objectReference: {fileID: 0}
     - target: {fileID: 1029844374432770452, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.17364825
+      value: -0.3420201
       objectReference: {fileID: 0}
     - target: {fileID: 1029844374432770452, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
       propertyPath: m_LocalRotation.y
@@ -5079,7 +5079,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1029844374432770452, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -20
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 1029844374432770452, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -5191,19 +5191,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1029844376246766298, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3074675
+      value: -2.8113036
       objectReference: {fileID: 0}
     - target: {fileID: 1029844376246766298, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.1434174
+      value: -6.275177
       objectReference: {fileID: 0}
     - target: {fileID: 1029844376246766298, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9848078
+      value: 0.9396927
       objectReference: {fileID: 0}
     - target: {fileID: 1029844376246766298, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.17364825
+      value: -0.3420201
       objectReference: {fileID: 0}
     - target: {fileID: 1029844376246766298, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
       propertyPath: m_LocalRotation.y
@@ -5212,14 +5212,6 @@ PrefabInstance:
     - target: {fileID: 1029844376246766298, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2594066424236834978, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
-      propertyPath: swimLayer.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 3966739980606263938, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
-      propertyPath: Banks.Array.size
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5761439454000373296, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5239,41 +5231,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
---- !u!1 &1029844374227012742 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1029844376246766297, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
-  m_PrefabInstance: {fileID: 1029844374227012741}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1029844374227012743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1029844374227012742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 471083376
-      Data2: 1234421110
-      Data3: -484371280
-      Data4: 1892635023
-    Path: event:/bgm
-  Event: 
-  PlayEvent: 1
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &2961321078860459229
 PrefabInstance:
   m_ObjectHideFlags: 0
