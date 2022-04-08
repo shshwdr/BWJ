@@ -333,9 +333,11 @@ public class PlayerCubeGridMove : MonoBehaviour
 
                 animator.SetTrigger("victory");
             }
+            if (StageLevelManager.Instance. showDialogue)
+            {
 
-
-            DialogueManager.StartConversation($"{StageLevelManager.Instance. currentLevel.id}_end");
+                DialogueManager.StartConversation($"{StageLevelManager.Instance.currentLevel.id}_end");
+            }
 
             startedMoving = false;
 
