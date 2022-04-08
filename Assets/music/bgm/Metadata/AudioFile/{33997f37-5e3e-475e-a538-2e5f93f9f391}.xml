@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{33997f37-5e3e-475e-a538-2e5f93f9f391}">
+		<property name="assetPath">
+			<value>bwj demo3.1.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>166.72800000000001</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2366bd66-9b06-425a-beb1-3e71ab6c551e}</destination>
+		</relationship>
+	</object>
+</objects>
