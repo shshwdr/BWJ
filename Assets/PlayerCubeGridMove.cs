@@ -230,6 +230,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             {
                 Destroy(hitedCollectable.collider.gameObject);
                 StageLevelManager.Instance.addCollectable();
+                FMODUnity.RuntimeManager.PlayOneShot("event:/collect");
             }
         }
 
@@ -280,6 +281,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             else
             {
                 levelHit.collider.GetComponent<Lever>().rotate();
+                FMODUnity.RuntimeManager.PlayOneShot("event:/lever");
             }
         }
 
@@ -417,7 +419,11 @@ public class PlayerCubeGridMove : MonoBehaviour
                     nextRotations.RemoveAt(0);
                     rotateCoolDownTimer = 0;
                 }
+
+
             }
+
+            
 
             //rotateCoolDownTimer += Time.deltaTime;
             //if (rotateCoolDownTimer < rotateCoolDown)
