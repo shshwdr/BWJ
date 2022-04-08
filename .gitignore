@@ -14,6 +14,7 @@
 /buildWindows/
 /pakcedBuild
 /Logs/
+/UserSettings/
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
@@ -43,3 +44,10 @@ ExportedObj/
 Icon?
 ehthumbs.db
 Thumbs.db
+
+# ============ #
+# FMOD #
+# ============ #
+/[Aa]ssets/Plugins/FMOD/Cache/*
+/Assets/FMODAssets/*
+/Assets/FMODStudioCache.meta
