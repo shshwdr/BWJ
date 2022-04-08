@@ -1,4 +1,5 @@
 using Cinemachine;
+using PixelCrushers.DialogueSystem;
 using Pool;
 using Sinbad;
 using System.Collections;
@@ -243,7 +244,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
 
         if (showDialogue)
         {
-
+            DialogueManager.StartConversation($"{currentLevel.id}_start");
         }
     }
 
