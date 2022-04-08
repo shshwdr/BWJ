@@ -20,7 +20,7 @@ public class InstructionsMenu : MonoBehaviour
         player = GameObject.FindObjectOfType<PlayerCubeGridMove>();
 
         instruction1.onClick.AddListener(delegate { turnAround(); });
-        instruction2.onClick.AddListener(delegate { ignoreSign(); });
+        //instruction2.onClick.AddListener(delegate { ignoreSign(); });
         instruction3.onClick.AddListener(delegate { swim(); });
         if (StageLevelManager.Instance.hasEverCollected)
         {
@@ -33,17 +33,17 @@ public class InstructionsMenu : MonoBehaviour
             instruction1.gameObject.SetActive(false);
         }
 
-        if (StageLevelManager.Instance.starCountInTotal > inst2RequireCount)
-        {
+        //if (StageLevelManager.Instance.starCountInTotal > inst2RequireCount)
+        //{
 
-            instruction2.gameObject.SetActive(true);
-        }
-        else
-        {
+        //    instruction2.gameObject.SetActive(true);
+        //}
+        //else
+        //{
 
-            EventPool.OptIn("updateTotalCollected", showInstruction2);
-            instruction2.gameObject.SetActive(false);
-        }
+        //    EventPool.OptIn("updateTotalCollected", showInstruction2);
+        //    instruction2.gameObject.SetActive(false);
+        //}
 
         if (StageLevelManager.Instance.starCountInTotal > inst3RequireCount)
         {
@@ -53,7 +53,8 @@ public class InstructionsMenu : MonoBehaviour
         else
         {
 
-            EventPool.OptIn("updateTotalCollected", showInstruction3);
+            EventPool.OptIn("startLevel", showInstruction3);
+            //EventPool.OptIn("updateTotalCollected", showInstruction3);
             instruction3.gameObject.SetActive(false);
         }
 
@@ -73,7 +74,7 @@ public class InstructionsMenu : MonoBehaviour
     }
     public void showInstruction3()
     {
-        if (StageLevelManager.Instance.totalCollected >= inst3RequireCount)
+        if (StageLevelManager.Instance.currentLevelId >= 6)
         {
             instruction3.gameObject.SetActive(true);
         }
