@@ -18,6 +18,8 @@ public class LevelInfo
 }
 public class StageLevelManager : Singleton<StageLevelManager>
 {
+
+    public bool showDialogue = true;
     public int currentLevelId;
     public int maxUnlockedLevel = 0;
     public int currentCollected = 0;
@@ -226,7 +228,24 @@ public class StageLevelManager : Singleton<StageLevelManager>
         //}
     }
 
+    public void startLevel()
+    {
 
+        if (currentLevel.itemCount == 0)
+        {
+            currentLevel.itemCount = GameObject.FindGameObjectsWithTag("human").Length;
+        }
+        if (!currentLevel.hasBeenFinished)
+        {
+            currentLevel.hasBeenFinished = true;
+            totalCanCollect += currentLevel.itemCount;
+        }
+
+        if (showDialogue)
+        {
+
+        }
+    }
 
     public void startNextLevel()
     {
@@ -234,16 +253,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
         currentCollected = 0;
         Time.timeScale = 1;
 
-        if(currentLevel.itemCount == 0)
-        {
-            currentLevel.itemCount = GameObject.FindGameObjectsWithTag("human").Length;
-        }
 
-        if (!currentLevel.hasBeenFinished)
-        {
-            currentLevel.hasBeenFinished = true;
-            totalCanCollect += currentLevel.itemCount;
-        }
 
         //{
         //    if (currentLevel.id < 6)
