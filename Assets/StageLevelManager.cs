@@ -41,7 +41,10 @@ public class StageLevelManager : Singleton<StageLevelManager>
 
     Dictionary<string, int> levelToStarCount = new Dictionary<string, int>();
 
-
+    public bool collectedAll()
+    {
+        return currentCollected == currentLevel.itemCount;
+    }
     public int starCountInLevel(string sceneName)
     {
         if (!levelToStarCount.ContainsKey(sceneName))

@@ -335,8 +335,16 @@ public class PlayerCubeGridMove : MonoBehaviour
             }
             if (StageLevelManager.Instance. showDialogue)
             {
+                if (StageLevelManager.Instance.collectedAll())
+                {
 
-                DialogueManager.StartConversation($"{StageLevelManager.Instance.currentLevel.id}_end");
+                    DialogueManager.StartConversation($"{StageLevelManager.Instance.currentLevel.id}_end");
+                }
+                else
+                {
+
+                    DialogueManager.StartConversation($"unfinished");
+                }
             }
 
             startedMoving = false;
