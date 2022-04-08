@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{70879438-6b64-4730-a482-3355faeec214}">
+		<property name="assetPath">
+			<value>shs_cyber_button_ui_spark_electric_1.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.5743990929705215</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2366bd66-9b06-425a-beb1-3e71ab6c551e}</destination>
+		</relationship>
+	</object>
+</objects>
