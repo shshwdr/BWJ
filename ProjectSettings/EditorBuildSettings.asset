@@ -29,4 +29,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/learn water.unity
     guid: 928c79d6b3067da4cadc01d98f475efb
+  - enabled: 1
+    path: Assets/Scenes/practice water.unity
+    guid: 70746bc6abe56674f84862b0daee2656
+  - enabled: 1
+    path: Assets/Scenes/practice sign.unity
+    guid: 13aa1fc881b7c4e4cb907915ef28e1ea
+  - enabled: 1
+    path: Assets/Scenes/learn sign.unity
+    guid: 26ebec318542aa147a6c7a3dcf08f7a5
   m_configObjects: {}
