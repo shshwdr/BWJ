@@ -7,7 +7,15 @@ public class DialogueUtil : MonoBehaviour
 
     public void endConversation()
     {
-        GameObject.FindObjectOfType<LevelStart>(true).hideDialogue();
+
+        Time.timeScale = 1;
+        GameObject.FindObjectOfType<LevelStart>(true).gameObject.SetActive(true);
+    }
+    public void startConversation()
+    {
+
+        Time.timeScale = 0;
+        GameObject.FindObjectOfType<LevelStart>(true).gameObject.SetActive(false);
     }
     // Start is called before the first frame update
     void Start()

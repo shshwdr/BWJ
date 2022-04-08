@@ -160,11 +160,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1051504188597698800, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 150
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1051504188597698800, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 200
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1051504188597698800, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -217,26 +217,6 @@ PrefabInstance:
     - target: {fileID: 1051504188597698801, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
       propertyPath: m_Name
       value: FirstSkillTutorial
-      objectReference: {fileID: 0}
-    - target: {fileID: 1051504188597698814, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5768891675335505843, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
-      propertyPath: name
-      value: useFirstSkill
-      objectReference: {fileID: 0}
-    - target: {fileID: 6816348758089058231, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6816348758089058231, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6816348758089058231, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
-      propertyPath: m_Color.r
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f63b07e62105ab489225179535ff5e1, type: 3}
@@ -5414,6 +5394,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 936189645406147225, guid: 1a578cfec3567cf41aefbcf15824c51a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936189646152059065, guid: 1a578cfec3567cf41aefbcf15824c51a, type: 3}
+      propertyPath: displaySettings.cameraSettings.defaultSequence
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 936189646152059065, guid: 1a578cfec3567cf41aefbcf15824c51a, type: 3}
+      propertyPath: displaySettings.subtitleSettings.minSubtitleSeconds
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936189646152059065, guid: 1a578cfec3567cf41aefbcf15824c51a, type: 3}
+      propertyPath: displaySettings.subtitleSettings.subtitleCharsPerSecond
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936189646152059065, guid: 1a578cfec3567cf41aefbcf15824c51a, type: 3}
+      propertyPath: displaySettings.subtitleSettings.showNPCSubtitlesWithResponses
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 936189646152059065, guid: 1a578cfec3567cf41aefbcf15824c51a, type: 3}
+      propertyPath: displaySettings.subtitleSettings.skipPCSubtitleAfterResponseMenu
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

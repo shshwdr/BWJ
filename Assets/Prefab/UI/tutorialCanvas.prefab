@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa91f0c87aee04c4699a90436a8902d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: dragZoom
+  name: useFirstSkill
 --- !u!1 &6816348758089058229
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using PixelCrushers.DialogueSystem;
 using Pool;
 using System.Collections;
 using System.Collections.Generic;
@@ -332,6 +333,10 @@ public class PlayerCubeGridMove : MonoBehaviour
 
                 animator.SetTrigger("victory");
             }
+
+
+            DialogueManager.StartConversation($"{StageLevelManager.Instance. currentLevel.id}_end");
+
             startedMoving = false;
 
             StageLevelManager.Instance.finishLevel();
