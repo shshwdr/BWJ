@@ -13,7 +13,9 @@ public class TextUtils : MonoBehaviour
         {"dragInGame","You can look around by clicking Free Camera after start." },
         {"moveLogic","Move Priority: Forward Right Left" },
         {"pullLeverTutorial","Pull the Lever" },
-        {"leverFirst","Pull lever would rotate the road" }
+        {"leverFirst","Pull lever would rotate the road" },
+        {"learnSign","Left Sign would force Turn Left" },
+        {"signLogic","Left is based on your orientation" },
     };
     static public string getText(string name)
     {
