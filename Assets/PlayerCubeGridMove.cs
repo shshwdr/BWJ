@@ -261,6 +261,7 @@ public class PlayerCubeGridMove : MonoBehaviour
 
                 if (canMove(Vector3.up * -90, isSwiming))
                 {
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/sign");
                     return;
                 }
             }

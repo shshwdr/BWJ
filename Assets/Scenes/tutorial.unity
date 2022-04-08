@@ -5529,6 +5529,22 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 2605495661015093840, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
+      propertyPath: StopEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3966739980606263938, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
+      propertyPath: PreloadSamples
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3966739980606263938, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
+      propertyPath: Banks.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3966739980606263938, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
+      propertyPath: Banks.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
 --- !u!20 &1029844374227012742 stripped
