@@ -17,6 +17,8 @@ public class TextUtils : MonoBehaviour
         {"learnSign","Left Sign would force Turn Left" },
         {"signLogic","Left is based on your orientation" },
     };
+
+
     static public string getText(string name)
     {
         if (!textMap.ContainsKey(name))
