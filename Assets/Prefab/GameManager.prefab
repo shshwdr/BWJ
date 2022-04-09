@@ -4420,7 +4420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showDialogue: 1
-  currentLevelId: 1
+  currentLevelId: 0
   maxUnlockedLevel: 0
   currentCollected: 0
   hasEverCollected: 0
@@ -4587,7 +4587,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &936189646162030365
 Transform:
   m_ObjectHideFlags: 0
