@@ -4644,7 +4644,7 @@ MonoBehaviour:
       Data4: 1892635023
     Path: event:/bgm
   Event: 
-  PlayEvent: 0
+  PlayEvent: 1
   StopEvent: 0
   AllowFadeout: 1
   TriggerOnce: 0
