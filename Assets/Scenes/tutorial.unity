@@ -5324,10 +5324,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1637252851, guid: 1a578cfec3567cf41aefbcf15824c51a, type: 3}
-      propertyPath: PlayEvent
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2098486395, guid: 1a578cfec3567cf41aefbcf15824c51a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

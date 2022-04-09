@@ -36,6 +36,9 @@ EditorBuildSettings:
     path: Assets/Scenes/practice sign.unity
     guid: 13aa1fc881b7c4e4cb907915ef28e1ea
   - enabled: 1
+    path: Assets/Scenes/comb1.unity
+    guid: b010b9a2a605b964ba70208f26e068f5
+  - enabled: 1
     path: Assets/Scenes/learn sign.unity
     guid: 26ebec318542aa147a6c7a3dcf08f7a5
   m_configObjects: {}
