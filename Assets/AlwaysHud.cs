@@ -20,6 +20,34 @@ public class AlwaysHud : MonoBehaviour
         });
         EventPool.OptIn("updateCollected", updateCollectedText);
     }
+    List<int> speedList = new List<int>()
+    {
+        1,2,4
+    };
+    public Text speedText;
+    int currentSpeedIndex = 0;
+    public void speedUp()
+    {
+        currentSpeedIndex++;
+        if(currentSpeedIndex>= speedList.Count)
+        {
+            currentSpeedIndex = 0;
+        }
+        Time.timeScale = speedList[currentSpeedIndex];
+        speedText.text = $"x{speedList[currentSpeedIndex] }";
+    }
+
+    public void speedDown()
+    {
+        currentSpeedIndex--;
+        if (currentSpeedIndex <0)
+        {
+            currentSpeedIndex = speedList.Count-1;
+        }
+        Time.timeScale = speedList[currentSpeedIndex];
+        speedText.text = $"x{speedList[currentSpeedIndex] }";
+
+    }
     public void updateCollectedText()
     {
         collectedText.text = $"{StageLevelManager.Instance.currentCollected} / {StageLevelManager.Instance.currentLevel.itemCount}";
