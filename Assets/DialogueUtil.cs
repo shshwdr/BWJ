@@ -10,6 +10,7 @@ public class DialogueUtil : MonoBehaviour
 
         Time.timeScale = 1;
         GameObject.FindObjectOfType<LevelStart>(true).gameObject.SetActive(true);
+        GameObject.Find("MC").GetComponent<Animator>().SetTrigger("getBack");
     }
     public void startConversation()
     {

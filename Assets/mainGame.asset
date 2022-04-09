@@ -527,7 +527,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 
+        value: AnimatorTrigger(bigGlitch,MC)
         type: 0
         typeString: CustomFieldType_Text
       - title: es
@@ -629,8 +629,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 6.6699023, y: 102.97087}
-    canvasZoom: 1.03
+    canvasScrollPosition: {x: 0, y: 0}
+    canvasZoom: 0.7900002
   - id: 2
     fields:
     - title: Title
@@ -2180,7 +2180,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 
+        value: AnimatorTrigger(smallGlitch,MC)
         type: 0
         typeString: CustomFieldType_Text
       - title: es
@@ -2525,7 +2525,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 
+        value: AnimatorTrigger(smallGlitch,MC)
         type: 0
         typeString: CustomFieldType_Text
       - title: es
@@ -2796,7 +2796,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 
+        value: AnimatorTrigger(smallGlitch,MC)
         type: 0
         typeString: CustomFieldType_Text
       - title: es
@@ -2824,7 +2824,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 30
+        x: 31.136353
         y: 70
         width: 160
         height: 30
@@ -3048,7 +3048,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 61.363632}
+    canvasScrollPosition: {x: 0, y: 0}
     canvasZoom: 0.8800001
   - id: 9
     fields:
@@ -3577,7 +3577,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 
+        value: AnimatorTrigger(smallGlitch,MC)
         type: 0
         typeString: CustomFieldType_Text
       - title: es
@@ -3847,7 +3847,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 
+        value: AnimatorTrigger(smallGlitch,MC)
         type: 0
         typeString: CustomFieldType_Text
       - title: es
@@ -3875,7 +3875,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 33
+        x: 34.063828
         y: 70
         width: 160
         height: 30
@@ -4101,7 +4101,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 57.446808}
+    canvasScrollPosition: {x: 0, y: 0}
     canvasZoom: 0.94000006
   - id: 14
     fields:
@@ -4269,7 +4269,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 
+        value: AnimatorTrigger(smallGlitch,MC)
         type: 0
         typeString: CustomFieldType_Text
       - title: es
@@ -4539,7 +4539,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 
+        value: AnimatorTrigger(smallGlitch,MC)
         type: 0
         typeString: CustomFieldType_Text
       - title: es
@@ -4885,7 +4885,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 
+        value: AnimatorTrigger(smallGlitch,MC)
         type: 0
         typeString: CustomFieldType_Text
       - title: es
@@ -4914,7 +4914,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 30
-        y: 70
+        y: 69
         width: 160
         height: 30
     - id: 2
@@ -5176,7 +5176,7 @@ MonoBehaviour:
         destinationDialogueID: 5
         isConnector: 0
         priority: 2
-      conditionsString: 
+      conditionsString: AnimatorTrigger(smallGlitch,MC)
       userScript: 
       onExecute:
         m_PersistentCalls:
@@ -5482,7 +5482,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 4.25531, y: 50}
+    canvasScrollPosition: {x: 0, y: 0}
     canvasZoom: 0.94000006
   syncInfo:
     syncActors: 0
