@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using System;
 
 namespace Pool
 {
@@ -272,6 +273,11 @@ namespace Pool
         private static ConcreteUnityEvent<T0, T1, T2> Cast<T0, T1, T2>(IConcreteUnityEvent value)
         {
             return ((ConcreteUnityEvent<T0, T1, T2>)value);
+        }
+
+        internal static void OptIn(string v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -172,6 +172,13 @@ public class ObejctSwapper : MonoBehaviour
     {
         Add("Human");
     }
+
+
+    [MenuItem("LevelCreator/AddTutorial &N")]
+    static void AddTutorial()
+    {
+        Add("TutorialGiver");
+    }
     [MenuItem("LevelCreator/AddLever")]
     static void AddLever()
     {

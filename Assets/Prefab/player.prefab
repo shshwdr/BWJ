@@ -98,6 +98,9 @@ MonoBehaviour:
   leverLayer:
     serializedVersion: 2
     m_Bits: 8192
+  tutorialLayer:
+    serializedVersion: 2
+    m_Bits: 131072
   frontDetection: {fileID: 7852817379291807682}
   rotateCoolDown: 0.5
   stopDistance: 0.005

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TextUtils : MonoBehaviour
 {
-    static Dictionary<string, string> textMap = new Dictionary<string, string>()
+    public static Dictionary<string, string> textMap = new Dictionary<string, string>()
     {
         { "dragZoom","Drag to look around\nScroll to zoom\n" },
         { "useFirstSkill","Click Turn Back To Use Skill" },

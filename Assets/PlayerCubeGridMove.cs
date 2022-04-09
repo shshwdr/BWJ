@@ -16,6 +16,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     public LayerMask collectableLayer;
     public LayerMask endLayer;
     public LayerMask leverLayer;
+    public LayerMask tutorialLayer;
     bool startedMoving = false;
     public Transform frontDetection;
     public float rotateCoolDown = 0.1f;
@@ -244,6 +245,15 @@ public class PlayerCubeGridMove : MonoBehaviour
 
             EventPool.Trigger<int>("turnedInstructionOff", 1);
             return;
+        }
+
+
+        RaycastHit tutorialHit;
+        bool hitTutorial = Physics.Raycast(targetTransform.position + targetTransform.up * 0.5f, -targetTransform.up, out tutorialHit, 1, tutorialLayer);
+        if (hitTutorial)
+        {
+
+            TutorialManager.Instance.unlockTutorial(tutorialHit.collider.GetComponent<TutorialGiver>().tutorialString);
         }
 
         //check if currently need to rotate
