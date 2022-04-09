@@ -1719,6 +1719,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9041555975639821248, guid: 4bf07163d96d9c642a72d7e2191db29b, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1490148286}
+    - target: {fileID: 9041555975639821248, guid: 4bf07163d96d9c642a72d7e2191db29b, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9041555975639821251, guid: 4bf07163d96d9c642a72d7e2191db29b, type: 3}
       propertyPath: m_Name
       value: generalCanvas
@@ -3269,6 +3277,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5890529065630888824, guid: bb57c1e01794ba34cb07e4798e196cf8, type: 3}
   m_PrefabInstance: {fileID: 1446939858}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1490148286 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1029844376246766299, guid: 3dded81bb42f02f4e8f9ae867e9f05cf, type: 3}
+  m_PrefabInstance: {fileID: 1029844374227012741}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1502286068 stripped
 Transform:
@@ -6165,6 +6178,14 @@ PrefabInstance:
     - target: {fileID: 7578027969253384009, guid: 53b2b08b739a91e4b982158cac6e049d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578027969253384010, guid: 53b2b08b739a91e4b982158cac6e049d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1490148286}
+    - target: {fileID: 7578027969253384010, guid: 53b2b08b739a91e4b982158cac6e049d, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7578027969253384013, guid: 53b2b08b739a91e4b982158cac6e049d, type: 3}
       propertyPath: m_Name
