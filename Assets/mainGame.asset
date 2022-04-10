@@ -505,7 +505,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 30
+        x: 31.265831
         y: 170
         width: 160
         height: 30
@@ -553,7 +553,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: AnimatorTrigger(bigGlitch,MC)
+        value: Glitch(0.4,0.1)
         type: 0
         typeString: CustomFieldType_Text
       - title: es
@@ -628,7 +628,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 
+        value: Glitch(0,0)
         type: 0
         typeString: CustomFieldType_Text
       - title: es
@@ -3190,7 +3190,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: AnimatorTrigger(smallGlitch,MC)
+        value: Glitch(0.3,0.05)
         type: 0
         typeString: CustomFieldType_Text
       - title: es

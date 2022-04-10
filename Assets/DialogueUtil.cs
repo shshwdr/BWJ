@@ -1,3 +1,4 @@
+using PixelCrushers.DialogueSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,8 @@ public class DialogueUtil : MonoBehaviour
 
         Time.timeScale = 1;
         GameObject.FindObjectOfType<LevelStart>(true).gameObject.SetActive(true);
-        GameObject.Find("MC").GetComponent<Animator>().SetTrigger("getBack");
+        DialogueManager.PlaySequence("Glitch(0,0)");
+        //GameObject.Find("MC").GetComponent<Animator>().SetTrigger("getBack");
     }
     public void startConversation()
     {

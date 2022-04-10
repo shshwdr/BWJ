@@ -61,10 +61,15 @@ namespace Kino
             set { _horizontalShake = value; }
         }
 
+
         // Color drift
 
         [SerializeField, Range(0, 1)]
         float _colorDrift = 0;
+
+
+        //[SerializeField]
+        //float _colorDriftSpeed = 10;
 
         public float colorDrift {
             get { return _colorDrift; }
@@ -104,7 +109,7 @@ namespace Kino
 
             _material.SetFloat("_HorizontalShake", _horizontalShake * 0.2f);
 
-            var cd = new Vector2(_colorDrift * 0.04f, Time.unscaledTime *100f /*606.11f*/);
+            var cd = new Vector2(_colorDrift * 0.04f, Time.unscaledTime * 10 /*606.11f*/);
             _material.SetVector("_ColorDrift", cd); 
             _material.SetFloat("_UnscaledTime", Time.unscaledTime);
             Graphics.Blit(source, destination, _material);
