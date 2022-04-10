@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TutorialManager : Singleton<TutorialManager>
 {
-    public Dictionary<string, bool> tutorialUnlocked = new Dictionary<string, bool>();
     public List<string> unlockedTutorialList = new List<string>();
     // Start is called before the first frame update
     void Start()
@@ -14,10 +13,9 @@ public class TutorialManager : Singleton<TutorialManager>
     }
     public void unlockTutorial(string str)
     {
-        if (!tutorialUnlocked.ContainsKey(str))
+        if (!unlockedTutorialList.Contains(str))
         {
             unlockedTutorialList.Add(str);
-            tutorialUnlocked[str] = true;
             Pool.EventPool.Trigger("updateTutorial");
         }
     }

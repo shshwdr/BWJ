@@ -32,6 +32,41 @@ public class StageLevelManager : Singleton<StageLevelManager>
     public int totalCollected = 0;
     public int totalCanCollect = 0;
 
+
+    public void Save(SerializedGame save)
+    {
+        save.maxTutorial = TutorialManager.Instance.unlockedTutorialList;
+        List<int> levelStar = new List<int>();
+        for(int i = 0;i< save.maxUnlockedLevel; i++)
+        {
+            levelStar.Add(levelInfoList[i].collectedCount);
+        }
+        save.levelStars = levelStar;
+        save.hasEverCollected = hasEverCollected;
+        save.maxUnlockedLevel = maxUnlockedLevel;
+        //base.Save(save);
+        //save.progress = progress;
+        //save.plantUnlocked = plantUnlocked;
+        //save.plantHinted = plantHinted;
+    }
+    public void Load(SerializedGame save)
+    {
+        TutorialManager.Instance.unlockedTutorialList = save.maxTutorial;
+        for (int i = 0; i < save.maxUnlockedLevel; i++)
+        {
+            levelInfoList[i].collectedCount =save.levelStars[i];
+        }
+        hasEverCollected = save.hasEverCollected;
+        maxUnlockedLevel = save.maxUnlockedLevel;
+
+        //base.Load(save);
+        //progress = save.progress;
+
+        //progressText.text = progress + " %";
+        //plantUnlocked = save.plantUnlocked;
+        //plantHinted = save.plantHinted;
+    }
+
     // bool isHome;
 
 
