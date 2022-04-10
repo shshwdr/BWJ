@@ -1,0 +1,185 @@
+﻿Database,mainGame
+Author,
+Version,
+Description,
+
+---Actors---
+Name,Description
+Player,
+Mission Control,
+Memory,
+Unknown,
+
+---Conversations---
+
+Conversation 1,0_start
+Description,
+entrytag,Actor,Description,Dialogue Text
+Mission_Control_1_1,Mission Control,,Hello?
+Mission_Control_1_2,Mission Control,,"Good, you've survived. "
+Mission_Control_1_3,Mission Control,,You're the first robot to make it to the Cube.
+Mission_Control_1_4,Mission Control,,"The interference was very strong, we've no idea what functions were damaged."
+Mission_Control_1_5,Mission Control,,Try moving around.
+
+Conversation 2,1_start
+Description,
+entrytag,Actor,Description,Dialogue Text
+Mission_Control_2_1,Mission Control,,The surface of the Cube is always changing.
+Mission_Control_2_2,Mission Control,,Our best analysis can't understand the pattern... if there is one.
+Mission_Control_2_3,Mission Control,,"You're one of our most advanced learning AI, so you should be able to adapt, if..."
+Mission_Control_2_4,Mission Control,,"Well, try moving through this new design."
+
+Conversation 3,2_start
+Description,
+entrytag,Actor,Description,Dialogue Text
+Mission_Control_3_1,Mission Control,,Something is different.
+Mission_Control_3_2,Mission Control,,There is a lever on the road.
+Mission_Control_3_3,Mission Control,,We'd not seen one before. This is - Put my cereal down Johnson!
+Mission_Control_3_4,Mission Control,,"Eh, sorry. This is promising. Please investigate this for us."
+
+Conversation 4,3_start
+Description,
+entrytag,Actor,Description,Dialogue Text
+Mission_Control_4_1,Mission Control,,"Good, your self repair functions seems working."
+Mission_Control_4_2,Mission Control,,And just in time. We don't have much more power left for transmitting instructions.
+
+Conversation 5,4_start
+Description,
+entrytag,Actor,Description,Dialogue Text
+Mission_Control_5_1,Mission Control,,Make sure you collect any items you find on the surface.
+Mission_Control_5_2,Mission Control,,"Every manned expedition... disappeared, but... their items remained."
+Mission_Control_5_3,Mission Control,,We need to understand what happened. Good luck.
+
+Conversation 6,0_end
+Description,
+entrytag,Actor,Description,Dialogue Text
+Memory_6_1,Memory,,Expedition log 1.
+Memory_6_2,Memory,,We've landed on one of the cubes.
+Memory_6_3,Memory,,"They are smooth and reflective, and the surface can be walked on."
+
+Conversation 7,unfinished
+Description,
+entrytag,Actor,Description,Dialogue Text
+Memory_7_1,Memory,,Cube... Swallow... Love... 
+Memory_7_2,Memory,,"* You feel you are missing something. A whisper from the past, but when you look around it disppears."
+
+Conversation 8,1_end
+Description,
+entrytag,Actor,Description,Dialogue Text
+Memory_8_1,Memory,,Johnson keeps mocking me for writing my logs on paper before recording.
+Memory_8_2,Memory,,"Well, *I'm* not the weirdo that eats my cereal with water."
+Memory_8_3,Memory,,Anyways. The Cube is impenetrable to our sensors.
+Memory_8_4,Memory,,Doesn't even show up. Explains why they'd not found it for so long.\r
+
+Conversation 9,5_start
+Description,
+entrytag,Actor,Description,Dialogue Text
+Mission_Control_9_1,Mission Control,,We've analyzed your data and have an idea what the interference is.
+Mission_Control_9_2,Mission Control,,This might be a temporal anomaly changing how fast time passes.
+Mission_Control_9_3,Mission Control,,It's more advanced than anything we've seen.
+
+Conversation 10,6_start
+Description,
+entrytag,Actor,Description,Dialogue Text
+Mission_Control_10_1,Mission Control,,"The more advanced the AI is, the longer it lasts on the surface. "
+Mission_Control_10_2,Mission Control,,Seems the items and patterns you are learning from are why.
+Mission_Control_10_3,Mission Control,,We can't explain it.
+
+Conversation 11,7_start
+Description,
+entrytag,Actor,Description,Dialogue Text
+Mission_Control_11_1,Mission Control,,-terference is getting stron-
+Mission_Control_11_2,Mission Control,,-oon we don't have enough power for transmitting instructions through-
+
+Conversation 12,2_end
+Description,
+entrytag,Actor,Description,Dialogue Text
+Memory_12_1,Memory,,We've tried using a laser to cut a piece out but can't even scratch it.
+Memory_12_3,Memory,,I'm just waiting and looking around.
+Memory_12_4,Memory,,"Space is beautiful, isn't it?"
+Memory_12_5,Memory,,"I always wanted to be walking out here, exploring out here, in space."
+Memory_12_6,Memory,,It's not hard to forget earth's problems and just look at the stars.
+Memory_12_7,Memory,,There is so much out here to discover.
+
+Conversation 13,3_end
+Description,
+entrytag,Actor,Description,Dialogue Text
+Memory_13_1,Memory,,Something is stange.
+Memory_13_2,Memory,,It started thrumming inside and we lost all contact with mission control. Some kind of interference.
+Memory_13_3,Memory,,The Cube surface is always changing now. Making paths. Like it's testing us.
+Memory_13_4,Memory,,Where will the little rats in the maze go now?
+
+Conversation 14,4_end
+Description,
+entrytag,Actor,Description,Dialogue Text
+Memory_14_1,Memory,,I saw a spare glove on the ground.
+Memory_14_2,Memory,,Thought it fell out the ship when I left.
+Memory_14_3,Memory,,"Same size as mine, had my name on it, but it was very worn."
+Memory_14_4,Memory,,Never seen these logos before.
+Memory_14_5,Memory,,But it disappeared before I could get a look at it.
+
+Conversation 15,5_end
+Description,
+entrytag,Actor,Description,Dialogue Text
+Memory_15_1,Memory,,Happened again.
+Memory_15_2,Memory,,"I'd moved some equipment, but it was moved back 10 minutes later."
+Memory_15_3,Memory,,"Thought it was Johnson, but he was on the ship."
+
+Conversation 16,6_end
+Description,
+entrytag,Actor,Description,Dialogue Text
+Memory_16_3,Memory,,It's... it's sending a signal.
+Memory_16_4,Memory,,"No, no, not towards earth. Out... to Alpha Centauri."
+
+Conversation 17,7_end
+Description,
+entrytag,Actor,Description,Dialogue Text
+Memory_17_6,Memory,,All our equipment is gone.
+Memory_17_7,Memory,,It sunk into the Cube while we watched.
+Memory_17_8,Memory,,It's... swallowing anything with electronics in it. We've no clue why.
+
+Conversation 18,8_start
+Description,
+entrytag,Actor,Description,Dialogue Text
+Mission_Control_18_1,Mission Control,,This is the most complex pattern we'd seen. 
+Mission_Control_18_2,Mission Control,,"We're seeing double images of you, from places you'd moved earlier."
+Mission_Control_18_3,Mission Control,,"Keep moving, maybe we will understand soon."
+
+Conversation 19,final_good
+Description,
+entrytag,Actor,Description,Dialogue Text
+Unknown_19_1,Unknown,,Analysis has ended.
+Unknown_19_2,Unknown,,Cube System has detected sufficient advancement. Humans have given their AI inventions morality and understanding.
+Unknown_19_3,Unknown,,Risk of repeat catastrophe very low. Out of control self replicating machines unlikely. Humans to be released from temporal exile.
+Unknown_19_4,Unknown,,Disabling time loop and contacting nearest galactic outpost.
+Mission_Control_19_5,Mission Control,,"One of the outposts detected a signal around a yellow star. The technology is very, very old. I'd not seen anything like it before."
+Mission_Control_19_6,Mission Control,,That star? You're joking. That system is long dead.
+Mission_Control_19_7,Mission Control,,No. There's a whole civilization out there. Hidden from us for millennia.
+Mission_Control_19_8,Mission Control,,Or they hid themselves.
+Mission_Control_19_9,Mission Control,,Their technology is not advanced enough. Somebody did this to them.
+Mission_Control_19_10,Mission Control,,"Incredible, we must learn more about them. Maybe make first contact"
+Mission_Control_19_11,Mission Control,,We can just send the robot that exploring the CUBE now. It does not have any progress since the last change of the surface.
+Mission_Control_19_12,Mission Control,,A new advanture is in front of us!
+
+Conversation 20,final_bad
+Description,
+entrytag,Actor,Description,Dialogue Text
+Unknown_20_1,Unknown,,Analysis has ended.
+Unknown_20_2,Unknown,,Cube System has not detected sufficient advancement. Humans still have a custom of inventing things they cannot control.
+Unknown_20_3,Unknown,,Risk of repeat catastrophe too high. Humans to remain in temporal exile.
+Unknown_20_4,Unknown,,Time loop in 3... 2... 1...
+Unknown_20_5,Unknown,,"(Bad ending, collect more items)"
+
+Conversation 21,8_end
+Description,
+entrytag,Actor,Description,Dialogue Text
+Memory_21_6,Memory,,Johnson panicked and tried to reach the ship. 
+Memory_21_7,Memory,,Forgot we had onboard computers in our spacesuits.
+Memory_21_8,Memory,,Only a matter of time before... 
+Memory_21_9,Memory,,"Well, if you get this, tell my family I love them."
+Memory_21_10,Memory,,The Cube swallowed Johnson too.
+
+Conversation 22,intro
+Description,
+entrytag,Actor,Description,Dialogue Text
+Unknown_22_1,Unknown,,"It is the year 207X. Strange cubes have been discovered in the outer solar system. They are smooth and reflective, and bigger than anything humans have sent into space.\r\n\r\nProbes and rovers were sent but destroyed before they got to the surface by the interference around the cubes. An expedition crew was sent and disappeared too.\r\n\r\nEverybody on earth is following the mystery. What is it? How is it here?\r\n\r\n*Who* put it here?"

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Pool;
 using System.Collections;
 using System.Collections.Generic;
@@ -61,6 +62,8 @@ public class TutorialView : MonoBehaviour
         currentId = TutorialManager.Instance.unlockedTutorialList.Count-1;
 
         updateUI();
+
+        transform.DOShakeScale(0.5f,0.3f);
 
     }
 

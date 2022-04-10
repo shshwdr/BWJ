@@ -1,0 +1,243 @@
+﻿Database
+Name,Version,Author,Description,Emphasis1,Emphasis2,Emphasis3,Emphasis4
+mainGame,,,,#ffffffff ---,#ff0000ff ---,#00ff00ff ---,#0000ffff ---
+Global User Script
+
+Actors
+ID,Portrait,AltPortraits,SpritePortrait,AltSpritePortraits,Name,Pictures,Description,IsPlayer,Name es,Display Name
+Number,Special,Special,Special,Special,Text,Files,Text,Boolean,Localization,Text
+1,,[],,[],Player,[],,True,,{{omit}}
+2,,[],,[],Mission Control,[],,False,,Mission Control
+3,,[],,[],Memory,[],,False,,{{omit}}
+4,,[],,[],Unknown,[],,False,,{{omit}}
+Items
+ID
+Number
+Locations
+ID
+Number
+Variables
+ID,Name,Initial Value,Description,InitialValueType
+Number,Text,Text,Text,Text
+1,Alert,,,Text
+Conversations
+ID,Title,Pictures,Description,Actor,Conversant,Overrides
+Number,Text,Files,Text,Actor,Actor,JSON
+1,0_start,[],,1,2,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+2,1_start,[],,2,2,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+3,2_start,[],,2,2,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+4,3_start,[],,2,2,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+5,4_start,[],,2,2,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+6,0_end,[],,3,3,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+7,unfinished,[],,3,3,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+8,1_end,[],,3,3,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+9,5_start,[],,2,2,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+10,6_start,[],,2,2,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+11,7_start,[],,2,2,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+12,2_end,[],,3,3,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+13,3_end,[],,3,3,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+14,4_end,[],,3,3,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+15,5_end,[],,3,3,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+16,6_end,[],,3,3,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+17,7_end,[],,3,3,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+18,8_start,[],,2,2,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+19,final_good,[],,4,4,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+20,final_bad,[],,4,4,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+21,8_end,[],,3,3,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+22,intro,[],,4,4,"{""useOverrides"":false,""overrideSubtitleSettings"":false,""showNPCSubtitlesDuringLine"":true,""showNPCSubtitlesWithResponses"":true,""showPCSubtitlesDuringLine"":false,""skipPCSubtitleAfterResponseMenu"":false,""subtitleCharsPerSecond"":30.0,""minSubtitleSeconds"":2.0,""continueButton"":0,""overrideSequenceSettings"":false,""defaultSequence"":"""",""defaultPlayerSequence"":"""",""defaultResponseMenuSequence"":"""",""overrideInputSettings"":false,""alwaysForceResponseMenu"":true,""includeInvalidEntries"":false,""responseTimeout"":0.0,""cancelSubtitle"":{""key"":27,""buttonName"":""""},""cancelConversation"":{""key"":27,""buttonName"":""""}}"
+DialogueEntries
+entrytag,ConvID,ID,Actor,Conversant,Title,MenuText,DialogueText,IsGroup,FalseConditionAction,ConditionPriority,Conditions,Script,Sequence,Pictures,Description,Parenthetical,Audio Files,Video File,es,canvasRect
+Text,Number,Number,Number,Number,Text,Text,Text,Boolean,Special,Special,Text,Text,Text,Files,Text,Text,Files,Text,Text,Text
+Player_1_0,1,0,1,2,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Mission_Control_1_1,1,1,2,1,,,Hello?,False,Block,Normal,,,,[],,,[],,,30;70
+Mission_Control_1_2,1,2,2,1,,,"Good, you've survived. ",False,Block,Normal,,,,[],,,[],,,30;120
+Mission_Control_1_3,1,3,2,1,,,You're the first robot to make it to the Cube.,False,Block,Normal,,,,[],,,[],,,30;170
+Mission_Control_1_4,1,4,2,1,,,"The interference was very strong, we've no idea what functions were damaged.",False,Block,Normal,,,"AnimatorTrigger(bigGlitch,MC)",[],,,[],,,30;220
+Mission_Control_1_5,1,5,2,1,,,Try moving around.,False,Block,Normal,,,,[],,,[],,,31;270
+Mission_Control_2_0,2,0,2,2,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Mission_Control_2_1,2,1,2,2,,,The surface of the Cube is always changing.,False,Block,Normal,,,,[],,,[],,,30;70
+Mission_Control_2_2,2,2,2,1,,,Our best analysis can't understand the pattern... if there is one.,False,Block,Normal,,,,[],,,[],,,30;120
+Mission_Control_2_3,2,3,2,1,,,"You're one of our most advanced learning AI, so you should be able to adapt, if...",False,Block,Normal,,,,[],,,[],,,30;170
+Mission_Control_2_4,2,4,2,1,,,"Well, try moving through this new design.",False,Block,Normal,,,,[],,,[],,,30;220
+Mission_Control_3_0,3,0,2,2,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Mission_Control_3_1,3,1,2,1,,,Something is different.,False,Block,Normal,,,,[],,,[],,,30;70
+Mission_Control_3_2,3,2,2,1,,,There is a lever on the road.,False,Block,Normal,,,,[],,,[],,,30;120
+Mission_Control_3_3,3,3,2,1,,,We'd not seen one before. This is - Put my cereal down Johnson!,False,Block,Normal,,,,[],,,[],,,28.86362;172.2727
+Mission_Control_3_4,3,4,2,1,,,"Eh, sorry. This is promising. Please investigate this for us.",False,Block,Normal,,,,[],,,[],,,30;220
+Mission_Control_4_0,4,0,2,2,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Mission_Control_4_1,4,1,2,1,,,"Good, your self repair functions seems working.",False,Block,Normal,,,,[],,,[],,,30;70
+Mission_Control_4_2,4,2,2,1,,,And just in time. We don't have much more power left for transmitting instructions.,False,Block,Normal,,,,[],,,[],,,30;120
+Mission_Control_5_0,5,0,2,2,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Mission_Control_5_1,5,1,2,1,,,Make sure you collect any items you find on the surface.,False,Block,Normal,,,,[],,,[],,,30;70
+Mission_Control_5_2,5,2,2,1,,,"Every manned expedition... disappeared, but... their items remained.",False,Block,Normal,,,,[],,,[],,,30;120
+Mission_Control_5_3,5,3,2,1,,,We need to understand what happened. Good luck.,False,Block,Normal,,,,[],,,[],,,30;170
+Memory_6_0,6,0,3,3,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Memory_6_1,6,1,3,1,,,Expedition log 1.,False,Block,Normal,,,"AnimatorTrigger(smallGlitch,MC)",[],,,[],,,30;70
+Memory_6_2,6,2,3,1,,,We've landed on one of the cubes.,False,Block,Normal,,,,[],,,[],,,30;120
+Memory_6_3,6,3,3,1,,,"They are smooth and reflective, and the surface can be walked on.",False,Block,Normal,,,,[],,,[],,,30;170
+Memory_7_0,7,0,3,3,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Memory_7_1,7,1,3,1,,,Cube... Swallow... Love... ,False,Block,Normal,,,"AnimatorTrigger(smallGlitch,MC)",[],,,[],,,30;70
+Memory_7_2,7,2,3,1,,,"* You feel you are missing something. A whisper from the past, but when you look around it disppears.",False,Block,Normal,,,,[],,,[],,,30;120
+Memory_8_0,8,0,3,3,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Memory_8_1,8,1,3,1,,,Johnson keeps mocking me for writing my logs on paper before recording.,False,Block,Normal,,,"AnimatorTrigger(smallGlitch,MC)",[],,,[],,,31.13635;70
+Memory_8_2,8,2,3,1,,,"Well, *I'm* not the weirdo that eats my cereal with water.",False,Block,Normal,,,,[],,,[],,,30;120
+Memory_8_3,8,3,3,1,,,Anyways. The Cube is impenetrable to our sensors.,False,Block,Normal,,,,[],,,[],,,30;170
+Memory_8_4,8,4,3,1,,,Doesn't even show up. Explains why they'd not found it for so long.\r,False,Block,Normal,,,,[],,,[],,,30;220
+Mission_Control_9_0,9,0,2,2,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Mission_Control_9_1,9,1,2,1,,,We've analyzed your data and have an idea what the interference is.,False,Block,Normal,,,,[],,,[],,,30;70
+Mission_Control_9_2,9,2,2,1,,,This might be a temporal anomaly changing how fast time passes.,False,Block,Normal,,,,[],,,[],,,31;119
+Mission_Control_9_3,9,3,2,1,,,It's more advanced than anything we've seen.,False,Block,Normal,,,,[],,,[],,,31;169
+Mission_Control_10_0,10,0,2,2,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Mission_Control_10_1,10,1,2,1,,,"The more advanced the AI is, the longer it lasts on the surface. ",False,Block,Normal,,,,[],,,[],,,30;70
+Mission_Control_10_2,10,2,2,1,,,Seems the items and patterns you are learning from are why.,False,Block,Normal,,,,[],,,[],,,30;120
+Mission_Control_10_3,10,3,2,1,,,We can't explain it.,False,Block,Normal,,,,[],,,[],,,30;170
+Mission_Control_11_0,11,0,2,2,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Mission_Control_11_1,11,1,2,1,,,-terference is getting stron-,False,Block,Normal,,,"AnimatorTrigger(bigGlitch,MC)",[],,,[],,,30;70
+Mission_Control_11_2,11,2,2,1,,,-oon we don't have enough power for transmitting instructions through-,False,Block,Normal,,,"AnimatorTrigger(bigGlitch,MC)",[],,,[],,,30;120
+Memory_12_0,12,0,3,3,START,,,False,Block,Normal,,,None(),[],,,[],,,31;20
+Memory_12_1,12,1,3,1,,,We've tried using a laser to cut a piece out but can't even scratch it.,False,Block,Normal,,,"AnimatorTrigger(smallGlitch,MC)",[],,,[],,,31;70
+Memory_12_3,12,3,3,1,,,I'm just waiting and looking around.,False,Block,Normal,,,,[],,,[],,,224;126
+Memory_12_4,12,4,3,1,,,"Space is beautiful, isn't it?",False,Block,Normal,,,,[],,,[],,,268;196
+Memory_12_5,12,5,3,1,,,"I always wanted to be walking out here, exploring out here, in space.",False,Block,Normal,,,,[],,,[],,,268;246
+Memory_12_6,12,6,3,1,,,It's not hard to forget earth's problems and just look at the stars.,False,Block,Normal,,,,[],,,[],,,268;296
+Memory_12_7,12,7,3,1,,,There is so much out here to discover.,False,Block,Normal,,,,[],,,[],,,268;346
+Memory_13_0,13,0,3,3,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Memory_13_1,13,1,3,1,,,Something is stange.,False,Block,Normal,,,"AnimatorTrigger(smallGlitch,MC)",[],,,[],,,34.06383;70
+Memory_13_2,13,2,3,1,,,It started thrumming inside and we lost all contact with mission control. Some kind of interference.,False,Block,Normal,,,,[],,,[],,,33;120
+Memory_13_3,13,3,3,1,,,The Cube surface is always changing now. Making paths. Like it's testing us.,False,Block,Normal,,,,[],,,[],,,33;170
+Memory_13_4,13,4,3,1,,,Where will the little rats in the maze go now?,False,Block,Normal,,,,[],,,[],,,33;220
+Memory_14_0,14,0,3,3,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Memory_14_1,14,1,3,1,,,I saw a spare glove on the ground.,False,Block,Normal,,,"AnimatorTrigger(smallGlitch,MC)",[],,,[],,,32;72
+Memory_14_2,14,2,3,1,,,Thought it fell out the ship when I left.,False,Block,Normal,,,,[],,,[],,,32;122
+Memory_14_3,14,3,3,1,,,"Same size as mine, had my name on it, but it was very worn.",False,Block,Normal,,,,[],,,[],,,32;172
+Memory_14_4,14,4,3,1,,,Never seen these logos before.,False,Block,Normal,,,,[],,,[],,,32;222
+Memory_14_5,14,5,3,1,,,But it disappeared before I could get a look at it.,False,Block,Normal,,,,[],,,[],,,32;272
+Memory_15_0,15,0,3,3,START,,,False,Block,Normal,,,None(),[],,,[],,,30;19
+Memory_15_1,15,1,3,1,,,Happened again.,False,Block,Normal,,,"AnimatorTrigger(smallGlitch,MC)",[],,,[],,,37;69
+Memory_15_2,15,2,3,1,,,"I'd moved some equipment, but it was moved back 10 minutes later.",False,Block,Normal,,,,[],,,[],,,30;119
+Memory_15_3,15,3,3,1,,,"Thought it was Johnson, but he was on the ship.",False,Block,Normal,,,,[],,,[],,,30;169
+Memory_16_0,16,0,3,3,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Memory_16_3,16,3,3,1,,,It's... it's sending a signal.,False,Block,Normal,,,"AnimatorTrigger(smallGlitch,MC)",[],,,[],,,58;85
+Memory_16_4,16,4,3,1,,,"No, no, not towards earth. Out... to Alpha Centauri.",False,Block,Normal,,,,[],,,[],,,58;135
+Memory_17_0,17,0,3,3,START,,,False,Block,Normal,,,None(),[],,,[],,,30;19
+Memory_17_6,17,6,3,1,,,All our equipment is gone.,False,Block,Normal,,,"AnimatorTrigger(smallGlitch,MC)",[],,,[],,,418.9361;64.8936
+Memory_17_7,17,7,3,1,,,It sunk into the Cube while we watched.,False,Block,Normal,,,,[],,,[],,,418.9361;114.8936
+Memory_17_8,17,8,3,1,,,It's... swallowing anything with electronics in it. We've no clue why.,False,Block,Normal,,,,[],,,[],,,418.9361;164.8936
+Mission_Control_18_0,18,0,2,2,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Mission_Control_18_1,18,1,2,1,,,This is the most complex pattern we'd seen. ,False,Block,Normal,,,,[],,,[],,,30;70
+Mission_Control_18_2,18,2,2,1,,,"We're seeing double images of you, from places you'd moved earlier.",False,Block,Normal,,,,[],,,[],,,30;120
+Mission_Control_18_3,18,3,2,1,,,"Keep moving, maybe we will understand soon.",False,Block,Normal,,,,[],,,[],,,30;170
+Unknown_19_0,19,0,4,4,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Unknown_19_1,19,1,4,1,,,Analysis has ended.,False,Block,Normal,,,,[],,,[],,,30;70
+Unknown_19_2,19,2,4,1,,,Cube System has detected sufficient advancement. Humans have given their AI inventions morality and understanding.,False,Block,Normal,,,,[],,,[],,,30;120
+Unknown_19_3,19,3,4,1,,,Risk of repeat catastrophe very low. Out of control self replicating machines unlikely. Humans to be released from temporal exile.,False,Block,Normal,,,,[],,,[],,,30;170
+Unknown_19_4,19,4,4,1,,,Disabling time loop and contacting nearest galactic outpost.,False,Block,Normal,,,,[],,,[],,,30;220
+Mission_Control_19_5,19,5,2,1,,,"One of the outposts detected a signal around a yellow star. The technology is very, very old. I'd not seen anything like it before.",False,Block,Normal,,,,[],,,[],,,30;270
+Mission_Control_19_6,19,6,2,1,,,That star? You're joking. That system is long dead.,False,Block,Normal,,,,[],,,[],,,30;320
+Mission_Control_19_7,19,7,2,1,,,No. There's a whole civilization out there. Hidden from us for millennia.,False,Block,Normal,,,,[],,,[],,,30;370
+Mission_Control_19_8,19,8,2,1,,,Or they hid themselves.,False,Block,Normal,,,,[],,,[],,,30;420
+Mission_Control_19_9,19,9,2,1,,,Their technology is not advanced enough. Somebody did this to them.,False,Block,Normal,,,,[],,,[],,,30;468.5074
+Mission_Control_19_10,19,10,2,1,,,"Incredible, we must learn more about them. Maybe make first contact",False,Block,Normal,,,,[],,,[],,,30;518.5074
+Mission_Control_19_11,19,11,2,1,,,We can just send the robot that exploring the CUBE now. It does not have any progress since the last change of the surface.,False,Block,Normal,,,,[],,,[],,,30;568.5074
+Mission_Control_19_12,19,12,2,1,,,A new advanture is in front of us!,False,Block,Normal,,,,[],,,[],,,30;618.5074
+Unknown_20_0,20,0,4,4,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Unknown_20_1,20,1,4,1,,,Analysis has ended.,False,Block,Normal,,,,[],,,[],,,30;70
+Unknown_20_2,20,2,4,1,,,Cube System has not detected sufficient advancement. Humans still have a custom of inventing things they cannot control.,False,Block,Normal,,,,[],,,[],,,30;120
+Unknown_20_3,20,3,4,1,,,Risk of repeat catastrophe too high. Humans to remain in temporal exile.,False,Block,Normal,,,,[],,,[],,,30;170
+Unknown_20_4,20,4,4,1,,,Time loop in 3... 2... 1...,False,Block,Normal,,,,[],,,[],,,30;220
+Unknown_20_5,20,5,4,1,,,"(Bad ending, collect more items)",False,Block,Normal,,,,[],,,[],,,30;270
+Memory_21_0,21,0,3,3,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Memory_21_6,21,6,3,1,,,Johnson panicked and tried to reach the ship. ,False,Block,Normal,,,"AnimatorTrigger(smallGlitch,MC)",[],,,[],,,70.1915;94
+Memory_21_7,21,7,3,1,,,Forgot we had onboard computers in our spacesuits.,False,Block,Normal,,,,[],,,[],,,70.1915;144
+Memory_21_8,21,8,3,1,,,Only a matter of time before... ,False,Block,Normal,,,,[],,,[],,,70.1915;194
+Memory_21_9,21,9,3,1,,,"Well, if you get this, tell my family I love them.",False,Block,Normal,,,,[],,,[],,,70.1915;244
+Memory_21_10,21,10,3,1,,,The Cube swallowed Johnson too.,False,Block,Normal,,,,[],,,[],,,263.8085;112.0851
+Unknown_22_0,22,0,4,4,START,,,False,Block,Normal,,,None(),[],,,[],,,30;20
+Unknown_22_1,22,1,4,1,,,"It is the year 207X. Strange cubes have been discovered in the outer solar system. They are smooth and reflective, and bigger than anything humans have sent into space.\r\n\r\nProbes and rovers were sent but destroyed before they got to the surface by the interference around the cubes. An expedition crew was sent and disappeared too.\r\n\r\nEverybody on earth is following the mystery. What is it? How is it here?\r\n\r\n*Who* put it here?",False,Block,Normal,,,,[],,,[],,,30;70
+OutgoingLinks
+OriginConvID,OriginID,DestConvID,DestID,ConditionPriority
+Number,Number,Number,Number,Special
+1,0,1,1,Normal
+1,1,1,2,Normal
+1,2,1,3,Normal
+1,3,1,4,Normal
+1,4,1,5,Normal
+2,0,2,1,Normal
+2,1,2,2,Normal
+2,2,2,3,Normal
+2,3,2,4,Normal
+3,0,3,1,Normal
+3,1,3,2,Normal
+3,2,3,3,Normal
+3,3,3,4,Normal
+4,0,4,1,Normal
+4,1,4,2,Normal
+5,0,5,1,Normal
+5,1,5,2,Normal
+5,2,5,3,Normal
+6,0,6,1,Normal
+6,1,6,2,Normal
+6,2,6,3,Normal
+7,0,7,1,Normal
+7,1,7,2,Normal
+8,0,8,1,Normal
+8,1,8,2,Normal
+8,2,8,3,Normal
+8,3,8,4,Normal
+9,0,9,1,Normal
+9,1,9,2,Normal
+9,2,9,3,Normal
+10,0,10,1,Normal
+10,1,10,2,Normal
+10,2,10,3,Normal
+11,0,11,1,Normal
+11,1,11,2,Normal
+12,0,12,1,Normal
+12,1,12,3,Normal
+12,3,12,4,Normal
+12,4,12,5,Normal
+12,5,12,6,Normal
+12,6,12,7,Normal
+13,0,13,1,Normal
+13,1,13,2,Normal
+13,2,13,3,Normal
+13,3,13,4,Normal
+14,0,14,1,Normal
+14,1,14,2,Normal
+14,2,14,3,Normal
+14,3,14,4,Normal
+14,4,14,5,Normal
+15,0,15,1,Normal
+15,1,15,2,Normal
+15,2,15,3,Normal
+16,0,16,3,Normal
+16,3,16,4,Normal
+17,0,17,6,Normal
+17,6,17,7,Normal
+17,7,17,8,Normal
+18,0,18,1,Normal
+18,1,18,2,Normal
+18,2,18,3,Normal
+19,0,19,1,Normal
+19,1,19,2,Normal
+19,2,19,3,Normal
+19,3,19,4,Normal
+19,4,19,5,Normal
+19,5,19,6,Normal
+19,6,19,7,Normal
+19,7,19,8,Normal
+19,8,19,9,Normal
+19,9,19,10,Normal
+19,10,19,11,Normal
+19,11,19,12,Normal
+20,0,20,1,Normal
+20,1,20,2,Normal
+20,2,20,3,Normal
+20,3,20,4,Normal
+20,4,20,5,Normal
+21,0,21,6,Normal
+21,6,21,10,Normal
+21,7,21,8,Normal
+21,8,21,9,Normal
+21,10,21,7,Normal
+22,0,22,1,Normal
