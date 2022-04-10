@@ -12,7 +12,7 @@ public class ViewWorldCamera : MonoBehaviour
     CinemachineVirtualCamera camera;
     float rotationSpeed = 1;
 
-
+    bool startDrag = false;
     
      public float _sensitivity;
     public float damping;
@@ -100,13 +100,19 @@ public class ViewWorldCamera : MonoBehaviour
         currentDistance = Mathf.Clamp(currentDistance,minDistance, maxDistance);
         camera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = currentDistance;
 
+        if (Input.GetMouseButtonUp(0))
+        {
+            startDrag = false;
+        }
+
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             if (Input.GetMouseButtonDown(0))
             {
                 _mouseReference = Input.mousePosition;
+                startDrag = true;
             }
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0)&& startDrag)
             {
                 if (!cameraRotated)
                 {
