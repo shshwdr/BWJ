@@ -93,7 +93,7 @@ namespace Kino
                 _material.hideFlags = HideFlags.DontSave;
             }
 
-            _verticalJumpTime += Time.deltaTime * _verticalJump * 11.3f;
+            _verticalJumpTime += Time.unscaledDeltaTime * _verticalJump * 11.3f;
 
             var sl_thresh = Mathf.Clamp01(1.0f - _scanLineJitter * 1.2f);
             var sl_disp = 0.002f + Mathf.Pow(_scanLineJitter, 3) * 0.05f;
@@ -104,9 +104,9 @@ namespace Kino
 
             _material.SetFloat("_HorizontalShake", _horizontalShake * 0.2f);
 
-            var cd = new Vector2(_colorDrift * 0.04f, Time.time * 606.11f);
-            _material.SetVector("_ColorDrift", cd);
-
+            var cd = new Vector2(_colorDrift * 0.04f, Time.unscaledTime *100f /*606.11f*/);
+            _material.SetVector("_ColorDrift", cd); 
+            _material.SetFloat("_UnscaledTime", Time.unscaledTime);
             Graphics.Blit(source, destination, _material);
         }
 

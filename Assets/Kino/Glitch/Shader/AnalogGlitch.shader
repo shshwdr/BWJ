@@ -37,6 +37,7 @@ Shader "Hidden/Kino/Glitch/Analog"
     float2 _VerticalJump;   // (amount, time)
     float _HorizontalShake;
     float2 _ColorDrift;     // (amount, time)
+    float _UnscaledTime;
 
     float nrand(float x, float y)
     {
@@ -49,14 +50,14 @@ Shader "Hidden/Kino/Glitch/Analog"
         float v = i.uv.y;
 
         // Scan line jitter
-        float jitter = nrand(v, _Time.x) * 2 - 1;
+        float jitter = nrand(v, _UnscaledTime) * 2 - 1;
         jitter *= step(_ScanLineJitter.y, abs(jitter)) * _ScanLineJitter.x;
 
         // Vertical jump
         float jump = lerp(v, frac(v + _VerticalJump.y), _VerticalJump.x);
 
         // Horizontal shake
-        float shake = (nrand(_Time.x, 2) - 0.5) * _HorizontalShake;
+        float shake = (nrand(_UnscaledTime, 2) - 0.5) * _HorizontalShake;
 
         // Color drift
         float drift = sin(jump + _ColorDrift.y) * _ColorDrift.x;
