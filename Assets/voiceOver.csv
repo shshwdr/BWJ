@@ -19,7 +19,8 @@ Mission_Control_1_1,Mission Control,,Hello?
 Mission_Control_1_2,Mission Control,,"Good, you've survived. "
 Mission_Control_1_3,Mission Control,,You're the first robot to make it to the Cube.
 Mission_Control_1_4,Mission Control,,"The interference was very strong, we've no idea what functions were damaged."
-Mission_Control_1_5,Mission Control,,Try moving around.
+Mission_Control_1_5,Mission Control,,Try to START moving.
+Mission_Control_1_6,Mission Control,,"If your movement algorithm gets stuck in a loop, try turning around."
 
 Conversation 2,1_start
 Description,
@@ -29,7 +30,7 @@ Mission_Control_2_2,Mission Control,,Our best analysis can't understand the patt
 Mission_Control_2_3,Mission Control,,"You're one of our most advanced learning AI, so you should be able to adapt, if..."
 Mission_Control_2_4,Mission Control,,"Well, try moving through this new design."
 
-Conversation 3,2_start
+Conversation 3,3_start
 Description,
 entrytag,Actor,Description,Dialogue Text
 Mission_Control_3_1,Mission Control,,Something is different.
@@ -37,13 +38,13 @@ Mission_Control_3_2,Mission Control,,There is a lever on the road.
 Mission_Control_3_3,Mission Control,,We'd not seen one before. This is - Put my cereal down Johnson!
 Mission_Control_3_4,Mission Control,,"Eh, sorry. This is promising. Please investigate this for us."
 
-Conversation 4,3_start
+Conversation 4,4_start
 Description,
 entrytag,Actor,Description,Dialogue Text
 Mission_Control_4_1,Mission Control,,"Good, your self repair functions seems working."
 Mission_Control_4_2,Mission Control,,And just in time. We don't have much more power left for transmitting instructions.
 
-Conversation 5,4_start
+Conversation 5,2_start
 Description,
 entrytag,Actor,Description,Dialogue Text
 Mission_Control_5_1,Mission Control,,Make sure you collect any items you find on the surface.
@@ -53,9 +54,14 @@ Mission_Control_5_3,Mission Control,,We need to understand what happened. Good l
 Conversation 6,0_end
 Description,
 entrytag,Actor,Description,Dialogue Text
-Memory_6_1,Memory,,Expedition log 1.
+Memory_6_1,Memory,,Expedition Log 1
 Memory_6_2,Memory,,We've landed on one of the cubes.
 Memory_6_3,Memory,,"They are smooth and reflective, and the surface can be walked on."
+Unknown_6_4,Unknown,,"All items collected, expedition log 1 decrypted"
+Mission_Control_6_5,Mission Control,,Anything OK? We noticed some strong interface happenning.
+Mission_Control_6_6,Mission Control,,There were reports you can hear voices on the cube.
+Mission_Control_6_7,Mission Control,,We are not sure if those are coming from the past or... 
+Mission_Control_6_8,Mission Control,,"Well keep exploring, we will figure it out."
 
 Conversation 7,unfinished
 Description,
@@ -70,6 +76,8 @@ Memory_8_1,Memory,,Johnson keeps mocking me for writing my logs on paper before 
 Memory_8_2,Memory,,"Well, *I'm* not the weirdo that eats my cereal with water."
 Memory_8_3,Memory,,Anyways. The Cube is impenetrable to our sensors.
 Memory_8_4,Memory,,Doesn't even show up. Explains why they'd not found it for so long.\r
+Memory_8_5,Memory,,Expedition Log 2
+Unknown_8_6,Unknown,,"All items collected, expedition log 2 decrypted"
 
 Conversation 9,5_start
 Description,
@@ -100,6 +108,8 @@ Memory_12_4,Memory,,"Space is beautiful, isn't it?"
 Memory_12_5,Memory,,"I always wanted to be walking out here, exploring out here, in space."
 Memory_12_6,Memory,,It's not hard to forget earth's problems and just look at the stars.
 Memory_12_7,Memory,,There is so much out here to discover.
+Memory_12_8,Memory,,Expedition Log 3
+Unknown_12_9,Unknown,,"All items collected, expedition log 1 decrypted"
 
 Conversation 13,3_end
 Description,
@@ -108,6 +118,8 @@ Memory_13_1,Memory,,Something is stange.
 Memory_13_2,Memory,,It started thrumming inside and we lost all contact with mission control. Some kind of interference.
 Memory_13_3,Memory,,The Cube surface is always changing now. Making paths. Like it's testing us.
 Memory_13_4,Memory,,Where will the little rats in the maze go now?
+Memory_13_5,Memory,,Expedition Log 4
+Unknown_13_6,Unknown,,"All items collected, expedition log 4 decrypted"
 
 Conversation 14,4_end
 Description,
@@ -117,6 +129,8 @@ Memory_14_2,Memory,,Thought it fell out the ship when I left.
 Memory_14_3,Memory,,"Same size as mine, had my name on it, but it was very worn."
 Memory_14_4,Memory,,Never seen these logos before.
 Memory_14_5,Memory,,But it disappeared before I could get a look at it.
+Memory_14_6,Memory,,Expedition Log 5
+Unknown_14_7,Unknown,,"All items collected, expedition log 1 decrypted"
 
 Conversation 15,5_end
 Description,
@@ -124,12 +138,16 @@ entrytag,Actor,Description,Dialogue Text
 Memory_15_1,Memory,,Happened again.
 Memory_15_2,Memory,,"I'd moved some equipment, but it was moved back 10 minutes later."
 Memory_15_3,Memory,,"Thought it was Johnson, but he was on the ship."
+Unknown_15_4,Unknown,,"All items collected, expedition log 6 decrypted"
+Memory_15_5,Memory,,Expedition Log 6
 
 Conversation 16,6_end
 Description,
 entrytag,Actor,Description,Dialogue Text
 Memory_16_3,Memory,,It's... it's sending a signal.
 Memory_16_4,Memory,,"No, no, not towards earth. Out... to Alpha Centauri."
+Memory_16_5,Memory,,Expedition Log 7
+Unknown_16_6,Unknown,,"All items collected, expedition log 7 decrypted"
 
 Conversation 17,7_end
 Description,
@@ -137,6 +155,8 @@ entrytag,Actor,Description,Dialogue Text
 Memory_17_6,Memory,,All our equipment is gone.
 Memory_17_7,Memory,,It sunk into the Cube while we watched.
 Memory_17_8,Memory,,It's... swallowing anything with electronics in it. We've no clue why.
+Memory_17_9,Memory,,Expedition Log 8
+Unknown_17_10,Unknown,,"All items collected, expedition log 8 decrypted"
 
 Conversation 18,8_start
 Description,
@@ -178,6 +198,8 @@ Memory_21_7,Memory,,Forgot we had onboard computers in our spacesuits.
 Memory_21_8,Memory,,Only a matter of time before... 
 Memory_21_9,Memory,,"Well, if you get this, tell my family I love them."
 Memory_21_10,Memory,,The Cube swallowed Johnson too.
+Memory_21_11,Memory,,Expedition Log 9
+Player_21_12,Player,,"All items collected, expedition log 9 decrypted"
 
 Conversation 22,intro
 Description,

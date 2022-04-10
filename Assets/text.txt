@@ -1,0 +1,398 @@
+﻿[1]	0_START
+
+				MISSION CONTROL
+		Hello?
+
+		Good, you've survived. 
+
+		You're the first robot to make it to the Cube.
+
+		The interference was very strong, we've no idea what functions were damaged.
+
+		Try to START moving.
+
+		If your movement algorithm gets stuck in a loop, try turning around.
+
+				[END]
+
+
+---page---
+
+[2]	1_START
+
+		The surface of the Cube is always changing.
+
+		Our best analysis can't understand the pattern... if there is one.
+
+		You're one of our most advanced learning AI, so you should be able to adapt, if...
+
+		Well, try moving through this new design.
+
+				[END]
+
+
+---page---
+
+[3]	3_START
+
+		Something is different.
+
+		There is a lever on the road.
+
+		We'd not seen one before. This is - Put my cereal down Johnson!
+
+		Eh, sorry. This is promising. Please investigate this for us.
+
+				[END]
+
+
+---page---
+
+[4]	4_START
+
+		Good, your self repair functions seems working.
+
+		And just in time. We don't have much more power left for transmitting instructions.
+
+				[END]
+
+
+---page---
+
+[5]	2_START
+
+		Make sure you collect any items you find on the surface.
+
+		Every manned expedition... disappeared, but... their items remained.
+
+		We need to understand what happened. Good luck.
+
+				[END]
+
+
+---page---
+
+[6]	0_END
+
+				MEMORY
+		Expedition Log 1
+
+		We've landed on one of the cubes.
+
+		They are smooth and reflective, and the surface can be walked on.
+
+				UNKNOWN
+		All items collected, expedition log 1 decrypted
+
+				MISSION CONTROL
+		Anything OK? We noticed some strong interface happenning.
+
+		There were reports you can hear voices on the cube.
+
+		We are not sure if those are coming from the past or... 
+
+		Well keep exploring, we will figure it out.
+
+				[END]
+
+
+---page---
+
+[7]	UNFINISHED
+
+				MEMORY
+		Cube... Swallow... Love... 
+
+		* You feel you are missing something. A whisper from the past, but when you look around it disppears.
+
+				[END]
+
+
+---page---
+
+[8]	1_END
+
+		Expedition Log 2
+
+		Johnson keeps mocking me for writing my logs on paper before recording.
+
+		Well, *I'm* not the weirdo that eats my cereal with water.
+
+		Anyways. The Cube is impenetrable to our sensors.
+
+		Doesn't even show up. Explains why they'd not found it for so long.
+
+				UNKNOWN
+		All items collected, expedition log 2 decrypted
+
+				[END]
+
+
+---page---
+
+[9]	5_START
+
+				MISSION CONTROL
+		We've analyzed your data and have an idea what the interference is.
+
+		This might be a temporal anomaly changing how fast time passes.
+
+		It's more advanced than anything we've seen.
+
+				[END]
+
+
+---page---
+
+[10]	6_START
+
+		The more advanced the AI is, the longer it lasts on the surface. 
+
+		Seems the items and patterns you are learning from are why.
+
+		We can't explain it.
+
+				[END]
+
+
+---page---
+
+[11]	7_START
+
+		-terference is getting stron-
+
+		-oon we don't have enough power for transmitting instructions through-
+
+				[END]
+
+
+---page---
+
+[12]	2_END
+
+				MEMORY
+		Expedition Log 3
+
+		We've tried using a laser to cut a piece out but can't even scratch it.
+
+		I'm just waiting and looking around.
+
+		Space is beautiful, isn't it?
+
+		I always wanted to be walking out here, exploring out here, in space.
+
+		It's not hard to forget earth's problems and just look at the stars.
+
+		There is so much out here to discover.
+
+				UNKNOWN
+		All items collected, expedition log 3 decrypted
+
+				[END]
+
+
+---page---
+
+[13]	3_END
+
+				MEMORY
+		Expedition Log 4
+
+		Something is stange.
+
+		It started thrumming inside and we lost all contact with mission control. Some kind of interference.
+
+		The Cube surface is always changing now. Making paths. Like it's testing us.
+
+		Where will the little rats in the maze go now?
+
+				UNKNOWN
+		All items collected, expedition log 4 decrypted
+
+				[END]
+
+
+---page---
+
+[14]	4_END
+
+				MEMORY
+		Expedition Log 5
+
+		I saw a spare glove on the ground.
+
+		Thought it fell out the ship when I left.
+
+		Same size as mine, had my name on it, but it was very worn.
+
+		Never seen these logos before.
+
+		But it disappeared before I could get a look at it.
+
+				UNKNOWN
+		All items collected, expedition log 5 decrypted
+
+				[END]
+
+
+---page---
+
+[15]	5_END
+
+				MEMORY
+		Expedition Log 6
+
+		Happened again.
+
+		I'd moved some equipment, but it was moved back 10 minutes later.
+
+		Thought it was Johnson, but he was on the ship.
+
+				UNKNOWN
+		All items collected, expedition log 6 decrypted
+
+				[END]
+
+
+---page---
+
+[16]	6_END
+
+				MEMORY
+		Expedition Log 7
+
+		It's... it's sending a signal.
+
+		No, no, not towards earth. Out... to Alpha Centauri.
+
+				UNKNOWN
+		All items collected, expedition log 7 decrypted
+
+				[END]
+
+
+---page---
+
+[17]	7_END
+
+				MEMORY
+		Expedition Log 8
+
+		All our equipment is gone.
+
+		It sunk into the Cube while we watched.
+
+		It's... swallowing anything with electronics in it. We've no clue why.
+
+				UNKNOWN
+		All items collected, expedition log 8 decrypted
+
+				[END]
+
+
+---page---
+
+[18]	8_START
+
+				MISSION CONTROL
+		This is the most complex pattern we'd seen. 
+
+		We're seeing double images of you, from places you'd moved earlier.
+
+		Keep moving, maybe we will understand soon.
+
+				[END]
+
+
+---page---
+
+[19]	FINAL_GOOD
+
+				UNKNOWN
+		Analysis has ended.
+
+		Cube System has detected sufficient advancement. Humans have given their AI inventions morality and understanding.
+
+		Risk of repeat catastrophe very low. Out of control self replicating machines unlikely. Humans to be released from temporal exile.
+
+		Disabling time loop and contacting nearest galactic outpost.
+
+				MISSION CONTROL
+		One of the outposts detected a signal around a yellow star. The technology is very, very old. I'd not seen anything like it before.
+
+		That star? You're joking. That system is long dead.
+
+		No. There's a whole civilization out there. Hidden from us for millennia.
+
+		Or they hid themselves.
+
+		Their technology is not advanced enough. Somebody did this to them.
+
+		Incredible, we must learn more about them. Maybe make first contact
+
+		We can just send the robot that exploring the CUBE now. It does not have any progress since the last change of the surface.
+
+		A new advanture is in front of us!
+
+				[END]
+
+
+---page---
+
+[20]	FINAL_BAD
+
+				UNKNOWN
+		Analysis has ended.
+
+		Cube System has not detected sufficient advancement. Humans still have a custom of inventing things they cannot control.
+
+		Risk of repeat catastrophe too high. Humans to remain in temporal exile.
+
+		Time loop in 3... 2... 1...
+
+		(Bad ending, collect more items)
+
+				[END]
+
+
+---page---
+
+[21]	8_END
+
+				MEMORY
+		Expedition Log 9
+
+		Johnson panicked and tried to reach the ship. 
+
+		The Cube swallowed Johnson too.
+
+		Forgot we had onboard computers in our spacesuits.
+
+		Only a matter of time before... 
+
+		Well, if you get this, tell my family I love them.
+
+				PLAYER
+		All items collected, expedition log 9 decrypted
+
+				[END]
+
+
+---page---
+
+[22]	INTRO
+
+				UNKNOWN
+		It is the year 207X. Strange cubes have been discovered in the outer solar system. They are smooth and reflective, and bigger than anything humans have sent into space.
+
+Probes and rovers were sent but destroyed before they got to the surface by the interference around the cubes. An expedition crew was sent and disappeared too.
+
+Everybody on earth is following the mystery. What is it? How is it here?
+
+*Who* put it here?
+
+				[END]
+
+
+---page---
+
