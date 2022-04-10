@@ -95,7 +95,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
     }
     public bool collectedAll()
     {
-        return currentCollected == currentLevel.itemCount;
+        return totalCollected == totalCanCollect;
     }
     public int starCountInLevel(string sceneName)
     {

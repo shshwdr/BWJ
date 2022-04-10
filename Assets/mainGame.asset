@@ -2714,7 +2714,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: There were reports you can hear voices on the cube.
+        value: There were reports that unknown voices can be heard on the cube.
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical

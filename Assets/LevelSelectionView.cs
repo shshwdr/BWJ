@@ -15,7 +15,7 @@ public class LevelSelectionView : BaseView
     public override void showView()
     {
         base.showView();
-        panel.SetActive(true);
+        //panel.SetActive(true);
 
         collectedTotalText.text = $"Collected In Total: {StageLevelManager.Instance.totalCollected}/{StageLevelManager.Instance.totalCanCollect}";
         GetComponent<UIView>().Show();

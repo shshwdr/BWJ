@@ -14,8 +14,16 @@ public class LevelSelectionCell : MonoBehaviour
         text.text = info.displayName;
         button.onClick.AddListener(delegate
         {
-            
-            StageLevelManager.Instance.startLevel(info.id);
+            if (StartMenu.Instance.hasStartedMainLevel)
+            {
+
+                StageLevelManager.Instance.startLevel(info.id);
+            }
+            else
+            {
+                StageLevelManager.Instance.currentLevelId = info.id;
+                StartMenu.Instance.moveToMainLevel();
+            }
 
 
             LevelSelectionView view = GameObject.FindObjectOfType<LevelSelectionView>(true);

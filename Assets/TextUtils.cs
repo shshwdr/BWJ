@@ -15,6 +15,10 @@ public class TextUtils : MonoBehaviour
         {"signLogic","Left is based on your orientation" },
         {"swimTutorial","Use swim to.. swim" },
         {"swimTurnOn","Swim will turn off automatically when you leave the water" },
+
+
+
+        {"restart","Do you want to clear your previous data and restart the game?" },
     };
 
 
