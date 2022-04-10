@@ -8,9 +8,15 @@ public class LevelStart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StageLevelManager.Instance.startLevel();
         EventPool.Trigger("startLevel");
-
+        if (!StartMenu.Instance.hasStartedMainLevel)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            StageLevelManager.Instance.startLevel();
+        }
     }
 
     // Update is called once per frame

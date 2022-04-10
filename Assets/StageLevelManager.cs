@@ -290,13 +290,13 @@ public class StageLevelManager : Singleton<StageLevelManager>
         }
     }
 
-    public void startNextLevel()
+    public void startNextLevel(bool reload = true)
     {
         isFinished = false;
         currentCollected = 0;
         Time.timeScale = 1;
 
-
+        GetComponent<AudioSource>().Play();
 
         //{
         //    if (currentLevel.id < 6)
@@ -310,7 +310,10 @@ public class StageLevelManager : Singleton<StageLevelManager>
         //    }
         //}
         LevelManager.Instance.reset();
-        SceneManager.LoadScene(currentLevel.sceneName);
+        if (reload)
+        {
+            SceneManager.LoadScene(currentLevel.sceneName);
+        }
     }
 
     // Start is called before the first frame update
@@ -327,7 +330,8 @@ public class StageLevelManager : Singleton<StageLevelManager>
             info.id = id++;
             levelInfoByName[info.displayName] = info;
         }
-        startNextLevel();
+        //startNextLevel();
+
     }
 
     // Update is called once per frame
