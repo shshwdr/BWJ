@@ -30,20 +30,21 @@ public class StageLevelManager : Singleton<StageLevelManager>
     public int starCountInTotal;
 
     public int totalCollected = 0;
-    public int totalCanCollect = 0;
+    public int totalCanCollect { get { return 25; } }
 
 
     public void Save(SerializedGame save)
     {
         save.maxTutorial = TutorialManager.Instance.unlockedTutorialList;
         List<int> levelStar = new List<int>();
-        for(int i = 0;i< save.maxUnlockedLevel; i++)
+        save.hasEverCollected = hasEverCollected;
+        save.maxUnlockedLevel = maxUnlockedLevel;
+        save.totalCollected = totalCollected;
+        for (int i = 0;i< save.maxUnlockedLevel; i++)
         {
             levelStar.Add(levelInfoList[i].collectedCount);
         }
         save.levelStars = levelStar;
-        save.hasEverCollected = hasEverCollected;
-        save.maxUnlockedLevel = maxUnlockedLevel;
         //base.Save(save);
         //save.progress = progress;
         //save.plantUnlocked = plantUnlocked;
@@ -51,7 +52,18 @@ public class StageLevelManager : Singleton<StageLevelManager>
     }
     public void Load(SerializedGame save)
     {
+        if (save.maxTutorial == null || save.maxTutorial.Count == 0)
+        {
+            Debug.LogError("tutorial not existed");
+            return;
+        }
+        if (save.levelStars.Count< save.maxUnlockedLevel)
+        {
+            Debug.LogError("level stars missing");
+            return;
+        }
         TutorialManager.Instance.unlockedTutorialList = save.maxTutorial;
+        
         for (int i = 0; i < save.maxUnlockedLevel; i++)
         {
             levelInfoList[i].collectedCount =save.levelStars[i];
@@ -59,6 +71,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
         hasEverCollected = save.hasEverCollected;
         maxUnlockedLevel = save.maxUnlockedLevel;
 
+        totalCollected = save.totalCollected;
         //base.Load(save);
         //progress = save.progress;
 
@@ -216,10 +229,12 @@ public class StageLevelManager : Singleton<StageLevelManager>
             starCountInTotal += (currentCollected - currentLevel.collectedCount);
             totalCollected += (currentCollected - currentLevel.collectedCount);
             currentLevel.collectedCount = currentCollected;
-            EventPool.Trigger("updateTotalCollected");
+            //EventPool.Trigger("updateTotalCollected");
         }
 
         StartCoroutine(finishLevelReal());
+
+        SaveLoadManager.saveGame();
     }
 
     public IEnumerator finishLevelReal()
@@ -276,12 +291,19 @@ public class StageLevelManager : Singleton<StageLevelManager>
 
         if (currentLevel.itemCount == 0)
         {
-            currentLevel.itemCount = GameObject.FindGameObjectsWithTag("human").Length;
+        }
+        else
+        {
+            if(currentLevel.itemCount != GameObject.FindGameObjectsWithTag("human").Length)
+            {
+                Debug.LogError("collectable item count wrong");
+            }
+
         }
         if (!currentLevel.hasBeenFinished)
         {
             currentLevel.hasBeenFinished = true;
-            totalCanCollect += currentLevel.itemCount;
+            //totalCanCollect += currentLevel.itemCount;
         }
 
         if (showDialogue)
@@ -289,7 +311,10 @@ public class StageLevelManager : Singleton<StageLevelManager>
             DialogueManager.StartConversation($"{currentLevel.id}_start");
         }
     }
-
+    public void setToLatestLevel()
+    {
+        currentLevelId = maxUnlockedLevel;
+    }
     public void startNextLevel(bool reload = true)
     {
         isFinished = false;

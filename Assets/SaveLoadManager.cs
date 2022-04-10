@@ -85,6 +85,7 @@ public class SerializedGame : CSSerializedObject
     public List<string> maxTutorial;
     public List<int> levelStars;
     public int maxUnlockedLevel;
+    public int totalCollected;
     public bool hasEverCollected;
 }
 public class SaveLoadManager : Singleton<SaveLoadManager>
@@ -99,6 +100,7 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
         // create save game
         SerializedGame save = new SerializedGame();
         save.version = currentVersion;
+        StageLevelManager.Instance.Save(save);
         //player.Save(save);
         //PlantManager.Instance.Save(save);
         //TriggersManager.Instance.Save(save);
@@ -185,6 +187,7 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
                 file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
                 SerializedGame save = (SerializedGame)bf.Deserialize(file);
 
+                StageLevelManager.Instance.Load(save);
                 //player.Load(save);
                 //PlantManager.Instance.Load(save);
                 //TriggersManager.Instance.Load(save);

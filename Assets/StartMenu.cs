@@ -1,3 +1,4 @@
+using Doozy.Engine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,11 +11,13 @@ public class StartMenu : Singleton<StartMenu>
     public Button continueButton;
     public Button levelButton;
     public GameObject camera;
-    
+    public UIView canvas;
+
     public bool hasStartedMainLevel = false;
     // Start is called before the first frame update
     void Start()
     {
+        
         SaveLoadManager.LoadGame();
         if (SaveLoadManager.hasSavedData())
         {
@@ -36,13 +39,23 @@ public class StartMenu : Singleton<StartMenu>
 
         });
 
-        levelButton.onClick.AddListener(delegate { StageLevelManager.Instance.selectLevel(); });
+        continueButton.onClick.AddListener(delegate
+        {
+            StageLevelManager.Instance.setToLatestLevel();
+            moveToMainLevel();
+        });
+
+        levelButton.onClick.AddListener(delegate { StageLevelManager.Instance.selectLevel();
+            moveToMainLevel();
+        });
+        Time.timeScale = 1;
     }
 
     async void moveToMainLevel()
     {
-        StageLevelManager.Instance.startNextLevel(false);
+        StageLevelManager.Instance.startNextLevel(StageLevelManager.Instance.currentLevelId!=0);
         camera.SetActive(false);
+        canvas.Hide();
         await Task.Delay(2000);
         GameObject.FindObjectOfType<LevelStart>(true).gameObject.SetActive(true);
 
