@@ -182,12 +182,12 @@ public class PlayerCubeGridMove : MonoBehaviour
             }
         }
     }
-
+    bool lastIsMoveBack = false;
 
 
     void moveBack()
     {
-
+        lastIsMoveBack = true;
         nextPositions.Add(targetTransform.position);
         targetRotation *= Quaternion.Euler(Vector3.up * 90);
         nextRotations.Add(targetRotation);
@@ -278,25 +278,29 @@ public class PlayerCubeGridMove : MonoBehaviour
 
         }
 
-
-        //check if has lever
-        RaycastHit levelHit;
-        bool hitLever = Physics.Raycast(transform.position + transform.up * 0.5f,- transform.up, out levelHit, 1, leverLayer);
-        if (hitLever)
+        if (!lastIsMoveBack)
         {
-            if (ignoreNextSign)
+            //check if has lever
+            RaycastHit levelHit;
+            bool hitLever = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, out levelHit, 1, leverLayer);
+            if (hitLever)
             {
-                ignoreNextSign = false;
+                if (ignoreNextSign)
+                {
+                    ignoreNextSign = false;
 
-                EventPool.Trigger<int>("turnedInstructionOff", 2);
+                    EventPool.Trigger<int>("turnedInstructionOff", 2);
+                }
+                else
+                {
+                    levelHit.collider.GetComponent<Lever>().rotate();
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/lever");
+                }
             }
-            else
-            {
-                levelHit.collider.GetComponent<Lever>().rotate();
-                FMODUnity.RuntimeManager.PlayOneShot("event:/lever");
-            }
+
         }
 
+        lastIsMoveBack = false;
 
         if (canMove(Vector3.zero))
         {

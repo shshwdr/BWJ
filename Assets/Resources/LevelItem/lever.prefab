@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4078751192645783797}
   - component: {fileID: 4047434357295035003}
   - component: {fileID: 1611406910127827}
+  - component: {fileID: 100170055394292634}
   m_Layer: 13
   m_Name: lever
   m_TagString: Untagged
@@ -93,7 +94,7 @@ MeshCollider:
   m_GameObject: {fileID: 4093042294218832051}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -111,6 +112,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateObject: {fileID: 0}
+--- !u!65 &100170055394292634
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4093042294218832051}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5486475893575029004
 GameObject:
   m_ObjectHideFlags: 0

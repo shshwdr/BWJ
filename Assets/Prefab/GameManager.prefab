@@ -4143,7 +4143,7 @@ MonoBehaviour:
   levelButton: {fileID: 468416478326654806}
   camera: {fileID: 772372505}
   canvas: {fileID: 1597123864}
-  hasStartedMainLevel: 0
+  hasStartedMainLevel: 1
 --- !u!1 &1590627987
 GameObject:
   m_ObjectHideFlags: 0
@@ -5982,7 +5982,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 1
+  m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0

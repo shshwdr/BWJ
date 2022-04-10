@@ -1,4 +1,5 @@
 using Doozy.Engine.UI;
+using Pool;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ public class StartMenu : Singleton<StartMenu>
     // Start is called before the first frame update
     void Start()
     {
-
+        hasStartedMainLevel = false;
         SaveLoadManager.LoadGame();
         if (SaveLoadManager.hasSavedData())
         {
@@ -70,6 +71,8 @@ public class StartMenu : Singleton<StartMenu>
         {
             testNextLevel();
         }
+
+        //EventPool.OptIn("startlevel", startlevel);
     }
 
     async void testNextLevel()
@@ -96,6 +99,12 @@ public class StartMenu : Singleton<StartMenu>
 
         StageLevelManager.Instance.startLevel();
     }
+
+    //void startlevel()
+    //{
+
+    //    StageLevelManager.Instance.startLevel();
+    //}
 
     // Update is called once per frame
     void Update()

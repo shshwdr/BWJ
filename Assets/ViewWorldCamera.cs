@@ -27,6 +27,12 @@ public class ViewWorldCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        foreach(var canvas in GameObject.FindObjectsOfType<Canvas>(true))
+        {
+            canvas.worldCamera = Camera.main;
+        }
+
         camera = GetComponent<CinemachineVirtualCamera>();
         if (GameObject.FindObjectOfType<ReflectionManager>(true))
         {
