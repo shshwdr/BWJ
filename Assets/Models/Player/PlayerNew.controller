@@ -23,7 +23,7 @@ AnimatorStateMachine:
     m_Position: {x: 308.03076, y: 231.91016, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5572777513195393988}
-    m_Position: {x: 598.6966, y: -75.91547, z: 0}
+    m_Position: {x: 600, y: -80, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -4792945532264894740}
@@ -95,7 +95,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: swim
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5062108840095885566}
@@ -134,7 +134,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.7
   m_TransitionOffset: 0
   m_ExitTime: 0.7
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -210,7 +210,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 1
   m_TransitionOffset: 0
   m_ExitTime: 1
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1

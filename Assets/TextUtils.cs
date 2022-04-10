@@ -15,7 +15,7 @@ public class TextUtils : MonoBehaviour
         {"signLogic","Left is based on your orientation" },
         //{"signLogic","Left Sign would only turn left if you can" },
         {"swimTutorial","Use swim to.. swim" },
-        {"swimTurnOn","Swim will turn off automatically when you leave the water" },
+        {"swimTurnOn","Sometimes you might want to turn off swim" },
 
 
 

@@ -102,11 +102,11 @@ public class PlayerCubeGridMove : MonoBehaviour
                         animator.SetBool("walk", true);
                         if (isSwiming)
                         {
-                            swimNext = false;
+                            //swimNext = false;
                             isSwiming = false;
 
 
-                            EventPool.Trigger<int>("turnedInstructionOff", 3);
+                            //EventPool.Trigger<int>("turnedInstructionOff", 3);
                         }
                     }
                     return true;
@@ -160,11 +160,11 @@ public class PlayerCubeGridMove : MonoBehaviour
                         animator.SetBool("walk", true); 
                         if (isSwiming)
                         {
-                            swimNext = false;
+                            //swimNext = false;
                             isSwiming = false;
 
 
-                            EventPool.Trigger<int>("turnedInstructionOff", 3);
+                            //EventPool.Trigger<int>("turnedInstructionOff", 3);
 
                         }
                     }

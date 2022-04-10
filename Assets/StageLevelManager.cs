@@ -69,7 +69,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
             levelInfoList[i].collectedCount =save.levelStars[i];
         }
         hasEverCollected = save.hasEverCollected;
-        maxUnlockedLevel = save.maxUnlockedLevel;
+        maxUnlockedLevel = Mathf.Min(levelInfoList.Count -1, save.maxUnlockedLevel);
 
         totalCollected = save.totalCollected;
         //base.Load(save);
@@ -108,7 +108,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
     }
 
 
-    public LevelInfo currentLevel { get { if (currentLevelId >= 0) return levelInfoList[currentLevelId]; return null; } }
+    public LevelInfo currentLevel { get { if (currentLevelId >= 0 && currentLevelId < levelInfoList.Count) return levelInfoList[currentLevelId]; return null; } }
     public Dictionary<string, LevelInfo> levelInfoByName = new Dictionary<string, LevelInfo>();
     public List<LevelInfo> levelInfoList = new List<LevelInfo>();
     public bool hasNextLevel()
@@ -127,12 +127,12 @@ public class StageLevelManager : Singleton<StageLevelManager>
     public void unlockNextLevel()
     {
 
-        maxUnlockedLevel = Mathf.Max(currentLevelId + 1, maxUnlockedLevel);
+        maxUnlockedLevel = Mathf.Min(levelInfoList.Count-1, Mathf.Max(currentLevelId + 1, maxUnlockedLevel));
     }
     public void addLevel()
     {
         currentLevelId++;
-        maxUnlockedLevel = Mathf.Max(currentLevelId, maxUnlockedLevel);
+        maxUnlockedLevel = Mathf.Min(levelInfoList.Count - 1, Mathf.Max(currentLevelId, maxUnlockedLevel));
     }
 
 
