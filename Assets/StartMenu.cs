@@ -54,8 +54,9 @@ public class StartMenu : Singleton<StartMenu>
     async void moveToMainLevel()
     {
         StageLevelManager.Instance.startNextLevel(StageLevelManager.Instance.currentLevelId!=0);
-        camera.SetActive(false);
         canvas.Hide();
+        await Task.Delay(500);
+        camera.SetActive(false);
         await Task.Delay(2000);
         GameObject.FindObjectOfType<LevelStart>(true).gameObject.SetActive(true);
 
