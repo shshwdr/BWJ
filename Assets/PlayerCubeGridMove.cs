@@ -346,7 +346,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             }
             if (StageLevelManager.Instance. showDialogue)
             {
-                if (StageLevelManager.Instance.collectedAll())
+                if (StageLevelManager.Instance.collectedAllInLevel())
                 {
 
                     DialogueManager.StartConversation($"{StageLevelManager.Instance.currentLevel.id}_end");

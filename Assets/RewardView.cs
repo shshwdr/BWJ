@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Doozy.Engine.UI;
+using PixelCrushers.DialogueSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,17 +51,40 @@ public class RewardView : BaseView
 
 
         //StageLevelManager.Instance.addLevel();
-        var test = StageLevelManager.Instance.hasNextLevel();
-        if (test)
+        var hasNextLevel = StageLevelManager.Instance.hasNextLevel();
+        nextLevelButton.onClick.RemoveAllListeners();
+        if (hasNextLevel)
         {
-            nextLevelButton.gameObject.SetActive(true);
+
+            nextLevelButton.onClick.AddListener(delegate
+            {
+
+                StageLevelManager.Instance.addLevel();
+                StageLevelManager.Instance.startNextLevel();
+
+            });
+            nextLevelButton.GetComponentInChildren<Text>().text = "Next";
         }
         else
         {
-            nextLevelButton.gameObject.SetActive(false);
+            nextLevelButton.GetComponentInChildren<Text>().text = "End";
 
-            description.text = "Thanks for Playing!";
 
+            nextLevelButton.onClick.AddListener(delegate
+            {
+
+                if (StageLevelManager.Instance.collectedAll())
+                {
+
+                    DialogueManager.StartConversation($"final_good");
+                }
+                else
+                {
+
+                    DialogueManager.StartConversation($"final_bad");
+                }
+
+            });
         }
 
         //if (StageLevelManager.Instance.currentLevelId == 0)
@@ -100,13 +124,6 @@ public class RewardView : BaseView
     protected override void Start()
     {
         base.Start();
-        nextLevelButton.onClick.AddListener(delegate
-        {
-            
-                StageLevelManager.Instance.addLevel();
-            StageLevelManager.Instance.startNextLevel();
-
-        });
         restartButton.onClick.AddListener(delegate
         {
             StageLevelManager.Instance.startNextLevel();

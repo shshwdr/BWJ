@@ -25,7 +25,7 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
             glitchObject = Camera.main.gameObject.GetComponent<AnalogGlitch>();//Sequencer.SequencerCamera.gameObject;
                                                                                // glitchObject.scanLineJitter = scanLineJitter;
                                                                                //  glitchObject.colorDrift = colorDrift;
-            DOTween.Clear();
+            //DOTween.Clear();
             DOTween.To(() => glitchObject.scanLineJitter, x => glitchObject.scanLineJitter = x, scanLineJitter, 0.5f).SetUpdate(true);
             DOTween.To(() => glitchObject.colorDrift, x => glitchObject.colorDrift = x, colorDrift, 0.5f).SetUpdate(true);
 
