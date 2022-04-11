@@ -19,9 +19,13 @@ public class InstructionsMenu : MonoBehaviour
     {
         player = GameObject.FindObjectOfType<PlayerCubeGridMove>();
 
-        instruction1.onClick.AddListener(delegate { turnAround(); });
+        instruction1.onClick.AddListener(delegate {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/instruction"); 
+            turnAround(); });
         //instruction2.onClick.AddListener(delegate { ignoreSign(); });
-        instruction3.onClick.AddListener(delegate { swim(); });
+        instruction3.onClick.AddListener(delegate {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/instruction"); 
+            swim(); });
         if (StageLevelManager.Instance.hasEverCollected)
         {
 
@@ -104,7 +108,7 @@ public class InstructionsMenu : MonoBehaviour
         {
 
             instruction1.gameObject.SetActive(true);
-            instruction2.gameObject.SetActive(true);
+           // instruction2.gameObject.SetActive(true);
             instruction3.gameObject.SetActive(true);
         }
     }

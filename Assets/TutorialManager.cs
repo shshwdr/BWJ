@@ -8,16 +8,20 @@ public class TutorialManager : Singleton<TutorialManager>
     // Start is called before the first frame update
     void Start()
     {
-        unlockTutorial("dragZoom");
+        unlockTutorial("dragZoom",false);
 
     }
-    public void unlockTutorial(string str)
+    public void unlockTutorial(string str, bool sound = true)
     {
         if (!unlockedTutorialList.Contains(str))
         {
+            if (sound)
+            {
 
-            FMODUnity.RuntimeManager.PlayOneShot("event:/collect");
+                FMODUnity.RuntimeManager.PlayOneShot("event:/collect");
+            }
             unlockedTutorialList.Add(str);
+
             Pool.EventPool.Trigger("updateTutorial");
         }
     }
