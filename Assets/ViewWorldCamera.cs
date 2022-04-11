@@ -92,8 +92,7 @@ public class ViewWorldCamera : MonoBehaviour
         //camera.enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
 
         if(!isCameraFree && LevelManager.Instance.isLevelGameStarted)
