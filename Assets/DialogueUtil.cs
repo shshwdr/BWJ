@@ -18,6 +18,7 @@ public class DialogueUtil : MonoBehaviour
     {
 
         Time.timeScale = 0;
+       // GetComponent<AudioSource>().Play();
         GameObject.FindObjectOfType<LevelStart>(true).gameObject.SetActive(false);
     }
     // Start is called before the first frame update

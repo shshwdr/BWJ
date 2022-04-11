@@ -45,7 +45,7 @@ public class InstructionsMenu : MonoBehaviour
         //    instruction2.gameObject.SetActive(false);
         //}
 
-        if (StageLevelManager.Instance.starCountInTotal > inst3RequireCount)
+        if (StageLevelManager.Instance.currentLevelId >= 6)
         {
 
             instruction3.gameObject.SetActive(true);

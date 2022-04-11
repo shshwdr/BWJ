@@ -22,10 +22,10 @@ public class AlwaysHud : MonoBehaviour
     }
     List<int> speedList = new List<int>()
     {
-        1,2,4
+        0,1,2,4
     };
     public Text speedText;
-    int currentSpeedIndex = 0;
+    int currentSpeedIndex = 1;
     public void speedUp()
     {
         currentSpeedIndex++;
