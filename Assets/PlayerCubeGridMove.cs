@@ -149,6 +149,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                     {
                         animator.SetBool("swim", true);
                         isSwiming = true;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/in water 2");
                     }
                 }
                 else
@@ -162,7 +163,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                         {
                             //swimNext = false;
                             isSwiming = false;
-
+                            FMODUnity.RuntimeManager.PlayOneShot("event:/iout water");
 
                             //EventPool.Trigger<int>("turnedInstructionOff", 3);
 
@@ -176,6 +177,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                 if (startedMoving)
                 {
                     animator.SetBool("walk", false);
+                    
                 }
                 targetRotation *= Quaternion.Euler(-dir);
                 return false;
