@@ -12702,6 +12702,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1005983958, guid: 11a43f200844dbd419f8b10f4d16c47f, type: 3}
+      propertyPath: loadItemCountFar
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2961321077953011294, guid: 11a43f200844dbd419f8b10f4d16c47f, type: 3}
       propertyPath: m_RootOrder
       value: 5
