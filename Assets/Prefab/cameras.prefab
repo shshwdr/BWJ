@@ -745,6 +745,7 @@ GameObject:
   - component: {fileID: 6713206687147148200}
   - component: {fileID: 1234060949151605101}
   - component: {fileID: 5586755875138864464}
+  - component: {fileID: 1229225858}
   m_Layer: 0
   m_Name: MC
   m_TagString: MainCamera
@@ -759,8 +760,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029844376246766297}
-  m_LocalRotation: {x: 0.42261827, y: -0, z: -0, w: 0.9063079}
-  m_LocalPosition: {x: -0.68914276, y: 4.2328568, z: -5.6588926}
+  m_LocalRotation: {x: -0.17686072, y: -0.905392, z: -0.11166898, w: -0.36948028}
+  m_LocalPosition: {x: 53.19176, y: 53.221474, z: 10.972773}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 774554224}
@@ -790,9 +791,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1018,6 +1019,14 @@ MonoBehaviour:
   _horizontalShake: 0
   _colorDrift: 0
   _shader: {fileID: 4800000, guid: da33272284ea24f208f36998880990be, type: 3}
+--- !u!81 &1229225858
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029844376246766297}
+  m_Enabled: 1
 --- !u!1 &5761439452602119668
 GameObject:
   m_ObjectHideFlags: 0

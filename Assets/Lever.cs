@@ -22,6 +22,10 @@ public class Lever : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!rotateObject)
+        {
+            Debug.LogError("rotate object is null");
+        }
         //targetRotation = transform.rotation;
        // DOTween.Init();
     }
