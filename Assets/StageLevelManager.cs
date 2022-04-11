@@ -40,7 +40,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
         save.hasEverCollected = hasEverCollected;
         save.maxUnlockedLevel = maxUnlockedLevel;
         save.totalCollected = totalCollected;
-        for (int i = 0;i< save.maxUnlockedLevel; i++)
+        for (int i = 0;i< levelInfoList.Count; i++)
         {
             levelStar.Add(levelInfoList[i].collectedCount);
         }
@@ -64,7 +64,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
         }
         TutorialManager.Instance.unlockedTutorialList = save.maxTutorial;
         
-        for (int i = 0; i < save.maxUnlockedLevel; i++)
+        for (int i = 0; i < save.levelStars.Count; i++)
         {
             levelInfoList[i].collectedCount =save.levelStars[i];
         }
@@ -91,11 +91,11 @@ public class StageLevelManager : Singleton<StageLevelManager>
 
     public bool collectedAllInLevel()
     {
-        return currentCollected == currentLevel.itemCount;
+        return currentCollected >= currentLevel.itemCount;
     }
     public bool collectedAll()
     {
-        return totalCollected == totalCanCollect;
+        return totalCollected >= totalCanCollect;
     }
     public int starCountInLevel(string sceneName)
     {
