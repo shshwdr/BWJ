@@ -6278,8 +6278,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightToLeft: 0
-  charactersPerSecond: 50
-  audioClip: {fileID: 0}
+  charactersPerSecond: 40
+  audioClip: {fileID: 8300000, guid: fbcb11bdfd261b847973f97b0e4b48c4, type: 3}
   alternateAudioClips: []
   audioSource: {fileID: 0}
   usePlayOneShot: 0
@@ -6293,8 +6293,8 @@ MonoBehaviour:
   quarterPauseDuration: 0.25
   removeDuplicateTypewriterEffects: 1
   playOnEnable: 0
-  waitOneFrameBeforeStarting: 0
-  stopOnConversationEnd: 0
+  waitOneFrameBeforeStarting: 1
+  stopOnConversationEnd: 1
   autoScrollSettings:
     autoScrollEnabled: 0
     scrollRect: {fileID: 0}
@@ -6398,7 +6398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showDialogue: 1
-  currentLevelId: 0
+  currentLevelId: 6
   maxUnlockedLevel: 0
   currentCollected: 0
   hasEverCollected: 0
