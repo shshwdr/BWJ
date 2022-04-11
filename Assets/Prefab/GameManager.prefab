@@ -6459,7 +6459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showDialogue: 1
-  currentLevelId: 6
+  currentLevelId: 0
   maxUnlockedLevel: 0
   currentCollected: 0
   hasEverCollected: 0

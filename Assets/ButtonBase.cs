@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LogManager : MonoBehaviour
+public class ButtonBase : MonoBehaviour
 {
-    static bool shouldLog = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,14 +13,16 @@ public class LogManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
 
-    static public void log(string text)
+    }
+    public void onclicked()
     {
-        if (shouldLog)
-        {
-            Debug.Log(text);
-        }
+
+        FMODUnity.RuntimeManager.PlayOneShot("event:/just button");
+    }
+    public void hover()
+    {
+
+        FMODUnity.RuntimeManager.PlayOneShot("event:/hover");
     }
 }

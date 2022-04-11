@@ -119,7 +119,20 @@ public class StageLevelManager : Singleton<StageLevelManager>
         }
         return true;
     }
+    public void clear()
+    {
 
+        TutorialManager.Instance.unlockedTutorialList = new List<string>();
+
+        for (int i = 0; i < levelInfoList.Count; i++)
+        {
+            levelInfoList[i].collectedCount = 0;
+        }
+        hasEverCollected = false;
+        maxUnlockedLevel = Mathf.Min(levelInfoList.Count - 1, 0);
+
+        totalCollected = 0;
+    }
     public void restart()
     {
         startNextLevel();
@@ -156,6 +169,12 @@ public class StageLevelManager : Singleton<StageLevelManager>
         {
             hasEverCollected = true;
             EventPool.Trigger("firstCollect");
+        }
+
+        if(currentCollected == currentLevel.collectedCount)
+        {
+
+            FMODUnity.RuntimeManager.PlayOneShot("event:/collect all maybe");
         }
     }
 

@@ -260,6 +260,9 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
         if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
         {
             File.Delete(Application.persistentDataPath + "/gamesave.save");
+
+
+
         }
     }
 

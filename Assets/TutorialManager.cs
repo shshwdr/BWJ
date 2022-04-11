@@ -15,6 +15,8 @@ public class TutorialManager : Singleton<TutorialManager>
     {
         if (!unlockedTutorialList.Contains(str))
         {
+
+            FMODUnity.RuntimeManager.PlayOneShot("event:/collect");
             unlockedTutorialList.Add(str);
             Pool.EventPool.Trigger("updateTutorial");
         }
