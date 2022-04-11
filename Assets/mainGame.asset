@@ -759,6 +759,7 @@ MonoBehaviour:
         typeString: CustomFieldType_Text
       - title: Dialogue Text
         value: We've sent some people to the cube before but they all disappeared.
+          We hope you can make a difference
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -807,7 +808,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 89.04108}
+    canvasScrollPosition: {x: 0, y: 36.986298}
     canvasZoom: 0.73000026
   - id: 2
     fields:
