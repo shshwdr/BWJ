@@ -340,10 +340,10 @@ public class StageLevelManager : Singleton<StageLevelManager>
         currentCollected = 0;
         Time.timeScale = 1;
 
-        if (!GetComponent<AudioSource>().isPlaying)
-        {
-            GetComponent<AudioSource>().Play();
-        }
+        //if (!GetComponent<AudioSource>().isPlaying)
+        //{
+        //    GetComponent<AudioSource>().Play();
+        //}
 
         //{
         //    if (currentLevel.id < 6)
