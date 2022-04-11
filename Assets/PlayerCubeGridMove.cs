@@ -235,7 +235,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             {
                 Destroy(hitedCollectable.collider.gameObject);
                 StageLevelManager.Instance.addCollectable();
-                FMODUnity.RuntimeManager.PlayOneShot("event:/collect");
+                FMODUnity.RuntimeManager.PlayOneShot("event:/collect 2");
             }
         }
 
