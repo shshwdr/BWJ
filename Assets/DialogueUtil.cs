@@ -12,6 +12,7 @@ public class DialogueUtil : MonoBehaviour
         Time.timeScale = 1;
         GameObject.FindObjectOfType<LevelStart>(true).gameObject.SetActive(true);
         DialogueManager.PlaySequence("Glitch(0,0)");
+        DialogueManager.PlaySequence("FMODEvent(event:/glitch 2,false)"); 
         //GameObject.Find("MC").GetComponent<Animator>().SetTrigger("getBack");
     }
     public void startConversation()

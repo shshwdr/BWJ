@@ -29,6 +29,16 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
             DOTween.To(() => glitchObject.scanLineJitter, x => glitchObject.scanLineJitter = x, scanLineJitter, 0.5f).SetUpdate(true);
             DOTween.To(() => glitchObject.colorDrift, x => glitchObject.colorDrift = x, colorDrift, 0.5f).SetUpdate(true);
 
+            if(colorDrift == 0)
+            {
+
+                DialogueManager.PlaySequence("FMODEvent(event:/glitch 2,false)");
+            }else
+            {
+
+                DialogueManager.PlaySequence("FMODEvent(event:/glitch 2,true)");
+            }
+
         }
 
         void Update()

@@ -5193,6 +5193,10 @@ PrefabInstance:
       propertyPath: hasStartedMainLevel
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1970455232, guid: 1a578cfec3567cf41aefbcf15824c51a, type: 3}
+      propertyPath: currentLevelId
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2036033111, guid: 1a578cfec3567cf41aefbcf15824c51a, type: 3}
       propertyPath: m_Camera
       value: 

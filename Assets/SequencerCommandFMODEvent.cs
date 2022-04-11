@@ -3,6 +3,7 @@ using System.Collections;
 using PixelCrushers.DialogueSystem;
 using Kino;
 using DG.Tweening;
+using FMODUnity;
 
 namespace PixelCrushers.DialogueSystem.SequencerCommands
 {
@@ -17,6 +18,18 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
 
         public void Start()
         {
+            turnon = GetParameterAsBool(1);
+            if (turnon)
+            {
+
+                GameObject.Find("glitchSound").GetComponent<StudioEventEmitter>().Play();
+            }
+            else
+            {
+
+                GameObject.Find("glitchSound").GetComponent<StudioEventEmitter>().Stop();
+            }
+            //FMODUnity.RuntimeManager.PlayOneShot("event:/"+eventName);
             //scanLineJitter = GetParameterAsFloat(0);
             //colorDrift = GetParameterAsFloat(1);
             //glitchObject = Camera.main.gameObject.GetComponent<AnalogGlitch>();//Sequencer.SequencerCamera.gameObject;

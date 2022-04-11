@@ -152,7 +152,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
     {
         currentCollected++;
         EventPool.Trigger("updateCollected");
-        if (!hasEverCollected)
+        //if (!hasEverCollected)
         {
             hasEverCollected = true;
             EventPool.Trigger("firstCollect");

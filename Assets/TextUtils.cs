@@ -8,12 +8,12 @@ public class TextUtils : MonoBehaviour
     {
         { "dragZoom","Drag to look around\nScroll to zoom\n" },
         { "useFirstSkill","Click Turn Back To Use Skill" },
+        
         {"dragInGame","You can look around by clicking Free Camera after start." },
         {"moveLogic","Move Priority: Forward Right Left" },
         {"leverFirst","You will pull lever and rotate the road when you walk by" },
         {"learnSign","Left Sign would force Turn Left..If you can" },
         {"signLogic","Left is based on your orientation" },
-        //{"signLogic","Left Sign would only turn left if you can" },
         {"swimTutorial","Use swim to.. swim" },
         {"swimTurnOn","Sometimes you might want to turn off swim" },
 
