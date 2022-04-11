@@ -495,7 +495,7 @@ MonoBehaviour:
       - originConversationID: 1
         originDialogueID: 3
         destinationConversationID: 1
-        destinationDialogueID: 4
+        destinationDialogueID: 7
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -731,8 +731,83 @@ MonoBehaviour:
         y: 320
         width: 160
         height: 30
+    - id: 7
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Pictures
+        value: '[]'
+        type: 3
+        typeString: CustomFieldType_Files
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 2
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: We've sent some people to the cube before but they all disappeared.
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Parenthetical
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Audio Files
+        value: '[]'
+        type: 3
+        typeString: CustomFieldType_Files
+      - title: Video File
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: es
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 1
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 1
+        originDialogueID: 7
+        destinationConversationID: 1
+        destinationDialogueID: 4
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 242.22467
+        y: 176.1644
+        width: 160
+        height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 31.506836}
+    canvasScrollPosition: {x: 0, y: 89.04108}
     canvasZoom: 0.73000026
   - id: 2
     fields:
@@ -1800,8 +1875,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: And just in time. We don't have much more power left for transmitting
-          instructions.
+        value: And just in time. We don't have much more power left for communication.
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -2566,7 +2640,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: Anything OK? We noticed some strong interface happenning.
+        value: Is everything OK? We noticed some strong interferences happenning.
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -3291,7 +3365,7 @@ MonoBehaviour:
       - originConversationID: 8
         originDialogueID: 0
         destinationConversationID: 8
-        destinationDialogueID: 5
+        destinationDialogueID: 6
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -3482,7 +3556,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: Anyways. The Cube is impenetrable to our sensors.
+        value: Anyway. The Cube is impenetrable to our sensors.
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -3557,7 +3631,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: "Doesn't even show up. Explains why they'd not found it for so long.\r"
+        value: "Doesn't even show up. Explains why they've not found it for so long.\r"
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -3587,13 +3661,7 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 8
-        originDialogueID: 4
-        destinationConversationID: 8
-        destinationDialogueID: 6
-        isConnector: 0
-        priority: 2
+      outgoingLinks: []
       conditionsString: 
       userScript: 
       onExecute:
@@ -3737,7 +3805,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 8
+        originDialogueID: 6
+        destinationConversationID: 8
+        destinationDialogueID: 5
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -3745,13 +3819,13 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 30
-        y: 270
+        x: 542.0686
+        y: 221.72418
         width: 160
         height: 30
     entryGroups: []
     canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.8200002
+    canvasZoom: 0.5800004
   - id: 9
     fields:
     - title: Title
@@ -4397,7 +4471,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: We can't explain it.
+        value: Not sure why
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -4821,7 +4895,7 @@ MonoBehaviour:
       - originConversationID: 12
         originDialogueID: 0
         destinationConversationID: 12
-        destinationDialogueID: 8
+        destinationDialogueID: 9
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -5088,7 +5162,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: I always wanted to be walking out here, exploring out here, in space.
+        value: I always wanted to be walking out here, wandering alone, in space.
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -5163,7 +5237,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: It's not hard to forget earth's problems and just look at the stars.
+        value: It's not hard to forget earth's problems when you look at the stars.
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -5268,13 +5342,7 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 12
-        originDialogueID: 7
-        destinationConversationID: 12
-        destinationDialogueID: 9
-        isConnector: 0
-        priority: 2
+      outgoingLinks: []
       conditionsString: 
       userScript: 
       onExecute:
@@ -5418,7 +5486,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 12
+        originDialogueID: 9
+        destinationConversationID: 12
+        destinationDialogueID: 8
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -5426,8 +5500,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 268
-        y: 396
+        x: 770.0403
+        y: 273.55115
         width: 160
         height: 30
     entryGroups: []
@@ -5542,7 +5616,7 @@ MonoBehaviour:
       - originConversationID: 13
         originDialogueID: 0
         destinationConversationID: 13
-        destinationDialogueID: 5
+        destinationDialogueID: 6
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -5583,7 +5657,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: Something is stange.
+        value: Something is strange.
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -5840,13 +5914,7 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 13
-        originDialogueID: 4
-        destinationConversationID: 13
-        destinationDialogueID: 6
-        isConnector: 0
-        priority: 2
+      outgoingLinks: []
       conditionsString: 
       userScript: 
       onExecute:
@@ -5990,7 +6058,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 13
+        originDialogueID: 6
+        destinationConversationID: 13
+        destinationDialogueID: 5
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -5998,13 +6072,13 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 33
-        y: 270
+        x: 565.8766
+        y: 233.0137
         width: 160
         height: 30
     entryGroups: []
     canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.7900002
+    canvasZoom: 0.73000026
   - id: 14
     fields:
     - title: Title
@@ -6114,7 +6188,7 @@ MonoBehaviour:
       - originConversationID: 14
         originDialogueID: 0
         destinationConversationID: 14
-        destinationDialogueID: 6
+        destinationDialogueID: 7
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -6200,7 +6274,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 32
-        y: 72
+        y: 70.68422
         width: 160
         height: 30
     - id: 2
@@ -6230,7 +6304,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: Thought it fell out the ship when I left.
+        value: Thought it fell off the ship when I left.
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -6339,81 +6413,6 @@ MonoBehaviour:
       - originConversationID: 14
         originDialogueID: 3
         destinationConversationID: 14
-        destinationDialogueID: 4
-        isConnector: 0
-        priority: 2
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 32
-        y: 172
-        width: 160
-        height: 30
-    - id: 4
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Pictures
-        value: '[]'
-        type: 3
-        typeString: CustomFieldType_Files
-      - title: Description
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Actor
-        value: 3
-        type: 0
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 1
-        type: 0
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Dialogue Text
-        value: Never seen these logos before.
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Parenthetical
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Audio Files
-        value: '[]'
-        type: 3
-        typeString: CustomFieldType_Files
-      - title: Video File
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: es
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      conversationID: 14
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 14
-        originDialogueID: 4
-        destinationConversationID: 14
         destinationDialogueID: 5
         isConnector: 0
         priority: 2
@@ -6425,7 +6424,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 32
-        y: 222
+        y: 172
         width: 160
         height: 30
     - id: 5
@@ -6489,7 +6488,7 @@ MonoBehaviour:
       - originConversationID: 14
         originDialogueID: 5
         destinationConversationID: 14
-        destinationDialogueID: 7
+        destinationDialogueID: 8
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -6499,8 +6498,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 32
-        y: 272
+        x: 34.631584
+        y: 232.52634
         width: 160
         height: 30
     - id: 6
@@ -6635,6 +6634,82 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 14
+        originDialogueID: 7
+        destinationConversationID: 14
+        destinationDialogueID: 6
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 455.6841
+        y: 214.10529
+        width: 160
+        height: 30
+    - id: 8
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Pictures
+        value: '[]'
+        type: 3
+        typeString: CustomFieldType_Files
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 3
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: I might be crazy but... Has this happened before? Did we come here
+          already?
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Parenthetical
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Audio Files
+        value: '[]'
+        type: 3
+        typeString: CustomFieldType_Files
+      - title: Video File
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: es
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 14
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
       userScript: 
@@ -6643,13 +6718,13 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 32
-        y: 322
+        x: 34.631584
+        y: 282.52634
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 25.27132}
-    canvasZoom: 0.7600002
+    canvasScrollPosition: {x: 0, y: 131.77504}
+    canvasZoom: 0.7000003
   - id: 15
     fields:
     - title: Title
@@ -6759,7 +6834,7 @@ MonoBehaviour:
       - originConversationID: 15
         originDialogueID: 0
         destinationConversationID: 15
-        destinationDialogueID: 5
+        destinationDialogueID: 4
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -6950,7 +7025,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: Thought it was Johnson, but he was on the ship.
+        value: I asked Johnson if it's his joke, but he said I'm crazy.
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -6980,13 +7055,7 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 15
-        originDialogueID: 3
-        destinationConversationID: 15
-        destinationDialogueID: 4
-        isConnector: 0
-        priority: 2
+      outgoingLinks: []
       conditionsString: 
       userScript: 
       onExecute:
@@ -7055,7 +7124,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 15
+        originDialogueID: 4
+        destinationConversationID: 15
+        destinationDialogueID: 5
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -7063,8 +7138,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 30
-        y: 219
+        x: 435.96997
+        y: 216.01492
         width: 160
         height: 30
     - id: 5
@@ -7144,7 +7219,7 @@ MonoBehaviour:
         height: 30
     entryGroups: []
     canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 1
+    canvasZoom: 0.6700003
   - id: 16
     fields:
     - title: Title
@@ -7254,7 +7329,7 @@ MonoBehaviour:
       - originConversationID: 16
         originDialogueID: 0
         destinationConversationID: 16
-        destinationDialogueID: 5
+        destinationDialogueID: 6
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -7264,8 +7339,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 30
-        y: 20
+        x: 34
+        y: 19
         width: 160
         height: 30
     - id: 3
@@ -7400,13 +7475,7 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 16
-        originDialogueID: 4
-        destinationConversationID: 16
-        destinationDialogueID: 6
-        isConnector: 0
-        priority: 2
+      outgoingLinks: []
       conditionsString: 
       userScript: 
       onExecute:
@@ -7550,7 +7619,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 16
+        originDialogueID: 6
+        destinationConversationID: 16
+        destinationDialogueID: 5
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -7558,8 +7633,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 58
-        y: 188
+        x: 292
+        y: 154
         width: 160
         height: 30
     entryGroups: []
@@ -7674,7 +7749,7 @@ MonoBehaviour:
       - originConversationID: 17
         originDialogueID: 0
         destinationConversationID: 17
-        destinationDialogueID: 9
+        destinationDialogueID: 10
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -7900,7 +7975,7 @@ MonoBehaviour:
       - originConversationID: 17
         originDialogueID: 8
         destinationConversationID: 17
-        destinationDialogueID: 10
+        destinationDialogueID: 11
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -7985,8 +8060,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 30
-        y: 69
+        x: 18.157898
+        y: 97.94736
         width: 160
         height: 30
     - id: 10
@@ -8046,6 +8121,81 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 17
+        originDialogueID: 10
+        destinationConversationID: 17
+        destinationDialogueID: 9
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 107.09412
+        y: 228.05148
+        width: 160
+        height: 30
+    - id: 11
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Pictures
+        value: '[]'
+        type: 3
+        typeString: CustomFieldType_Files
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 3
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: If there is a price to understand this cube, we're paying it now.
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Parenthetical
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Audio Files
+        value: '[]'
+        type: 3
+        typeString: CustomFieldType_Files
+      - title: Video File
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: es
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 17
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
       userScript: 
@@ -8060,7 +8210,7 @@ MonoBehaviour:
         height: 30
     entryGroups: []
     canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.94000006
+    canvasZoom: 0.7600002
   - id: 18
     fields:
     - title: Title
@@ -8211,7 +8361,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: 'This is the most complex pattern we''d seen. '
+        value: 'This is the most complex pattern we''ve seen. '
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -9234,7 +9384,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: Incredible, we must learn more about them. Maybe make first contact
+        value: Incredible, we must learn more about them. Maybe make first contact.
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -9309,8 +9459,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: We can just send the robot that exploring the CUBE now. It does not
-          have any progress since the last change of the surface.
+        value: We can just send the robot that exploring the CUBE now. After evolving
+          on the CUBE, our AI is ready for anything, now. We hope.
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -9385,7 +9535,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: A new advanture is in front of us!
+        value: A new adventure is in front of us!
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -9428,8 +9578,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.52000046
+    canvasScrollPosition: {x: 0, y: 373.30756}
+    canvasZoom: 0.6700003
   - id: 20
     fields:
     - title: Title
@@ -9655,8 +9805,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: Cube System has not detected sufficient advancement. Humans still
-          have a custom of inventing things they cannot control.
+        value: 'Cube System has not detected sufficient advancement. '
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
@@ -9690,7 +9839,7 @@ MonoBehaviour:
       - originConversationID: 20
         originDialogueID: 2
         destinationConversationID: 20
-        destinationDialogueID: 3
+        destinationDialogueID: 6
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -9731,7 +9880,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: Risk of repeat catastrophe too high. Humans to remain in temporal
+        value: Risk of repeat catastrophe too high. Humans are to remain in temporal
           exile.
         type: 0
         typeString: CustomFieldType_Text
@@ -9924,6 +10073,81 @@ MonoBehaviour:
         y: 270
         width: 160
         height: 30
+    - id: 6
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Pictures
+        value: '[]'
+        type: 3
+        typeString: CustomFieldType_Files
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: Humans still have the habit of inventing things they cannot control.
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Parenthetical
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Audio Files
+        value: '[]'
+        type: 3
+        typeString: CustomFieldType_Files
+      - title: Video File
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: es
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 20
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 20
+        originDialogueID: 6
+        destinationConversationID: 20
+        destinationDialogueID: 3
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 233.9473
+        y: 134.47368
+        width: 160
+        height: 30
     entryGroups: []
     canvasScrollPosition: {x: 0, y: 0}
     canvasZoom: 0.7600002
@@ -10036,7 +10260,7 @@ MonoBehaviour:
       - originConversationID: 21
         originDialogueID: 0
         destinationConversationID: 21
-        destinationDialogueID: 11
+        destinationDialogueID: 12
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -10332,13 +10556,7 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 21
-        originDialogueID: 9
-        destinationConversationID: 21
-        destinationDialogueID: 12
-        isConnector: 0
-        priority: 2
+      outgoingLinks: []
       conditionsString: 
       userScript: 
       onExecute:
@@ -10557,7 +10775,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 21
+        originDialogueID: 12
+        destinationConversationID: 21
+        destinationDialogueID: 11
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -10565,13 +10789,13 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 70.1915
-        y: 294
+        x: 322.09015
+        y: 242.10129
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 16.455688, y: 97.46834}
-    canvasZoom: 0.7900002
+    canvasScrollPosition: {x: 0, y: 13.182686}
+    canvasZoom: 0.7000003
   - id: 22
     fields:
     - title: Title
