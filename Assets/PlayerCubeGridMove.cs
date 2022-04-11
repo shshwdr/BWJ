@@ -91,6 +91,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                     {
                         animator.SetBool("swim", true);
                         isSwiming = true;
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/in water 2");
                     }
                     return true;
                 }
@@ -104,7 +105,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                         {
                             //swimNext = false;
                             isSwiming = false;
-
+                            FMODUnity.RuntimeManager.PlayOneShot("event:/iout water");
 
                             //EventPool.Trigger<int>("turnedInstructionOff", 3);
                         }
