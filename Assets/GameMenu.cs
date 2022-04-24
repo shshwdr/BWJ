@@ -21,38 +21,54 @@ public class GameMenu : MonoBehaviour
             startGame.gameObject.SetActive(false);
         });
         resetCamera.onClick.AddListener(delegate {
-            if (!LevelManager.Instance.isLevelGameStarted)
-            {
-                resetCamera.gameObject.SetActive(false);
-                EventPool.Trigger("ResetCamera");
-            }
-            else
-            {
-                if (toResetCamera)
-                {
-                    if (LevelManager.Instance.isLevelGameStarted)
-                    {
-                        text.text = "Reset Camera";
-                    }
-                    EventPool.Trigger("FreeCamera");
-
-                }
-                else //to reset camera
-                {
-
-                        text.text = "Free Camera";
-                    
-                    EventPool.Trigger("ResetCamera");
-                }
-            }
-
-
-                
-            toResetCamera = !toResetCamera;
+            resetCameraFunc();
         });
         resetCamera.gameObject.SetActive(false);
         EventPool.OptIn("StartGame", setCamera);
         EventPool.OptIn("StartMoveCamera", showResetCameraButton);
+    }
+
+    public void StartFreeCamera()
+    {
+        if (toResetCamera)
+        {
+
+            if (LevelManager.Instance.isLevelGameStarted)
+            {
+                text.text = "Reset Camera";
+            }
+            EventPool.Trigger("FreeCamera");
+
+            resetCamera.gameObject.SetActive(true);
+            toResetCamera = !toResetCamera;
+        }
+    }
+
+    public void resetCameraFunc()
+    {
+        if (!LevelManager.Instance.isLevelGameStarted)
+        {
+            resetCamera.gameObject.SetActive(false);
+            EventPool.Trigger("ResetCamera");
+        }
+        else
+        {
+            if (toResetCamera)
+            {
+
+            }
+            else //to reset camera
+            {
+                resetCamera.gameObject.SetActive(false);
+                text.text = "Free Camera";
+
+                EventPool.Trigger("ResetCamera");
+            }
+        }
+
+
+
+        toResetCamera = !toResetCamera;
     }
     void setCamera()
     {
@@ -62,7 +78,7 @@ public class GameMenu : MonoBehaviour
     }
     void showResetCameraButton()
     {
-        resetCamera.gameObject.SetActive(true);
+        StartFreeCamera();
     }
 
     // Update is called once per frame

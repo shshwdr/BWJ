@@ -4,30 +4,34 @@ using CW.Common;
 namespace Lean.Touch
 {
 	/// <summary>This component allows you to scale the current GameObject relative to the specified camera using the pinch gesture.</summary>
-	[HelpURL(LeanTouch.HelpUrlPrefix + "LeanPinchScale")]
+	[HelpURL(LeanTouch.HelpUrlPrefix + "PinchCamera")]
 	[AddComponentMenu(LeanTouch.ComponentPathPrefix + "Pinch Scale")]
-	public class LeanPinchScale : MonoBehaviour
+	public class PinchCamera : MonoBehaviour
 	{
 		/// <summary>The method used to find fingers to use with this component. See LeanFingerFilter documentation for more information.</summary>
 		public LeanFingerFilter Use = new LeanFingerFilter(true);
 
 		/// <summary>The camera that will be used to calculate the zoom.
 		/// None/null = MainCamera.</summary>
-		public Camera Camera { set { _camera = value; } get { return _camera; } } [SerializeField] private Camera _camera;
+		public Camera Camera { set { _camera = value; } get { return _camera; } }
+		[SerializeField] private Camera _camera;
 
 		/// <summary>Should the scaling be performed relative to the finger center?</summary>
-		public bool Relative { set { relative = value; } get { return relative; } } [SerializeField] private bool relative;
-		
+		public bool Relative { set { relative = value; } get { return relative; } }
+		[SerializeField] private bool relative;
+
 		/// <summary>The sensitivity of the scaling.
 		/// 1 = Default.
 		/// 2 = Double.</summary>
-		public float Sensitivity { set { sensitivity = value; } get { return sensitivity; } } [SerializeField] private float sensitivity = 1.0f;
+		public float Sensitivity { set { sensitivity = value; } get { return sensitivity; } }
+		[SerializeField] private float sensitivity = 1.0f;
 
 		/// <summary>If you want this component to change smoothly over time, then this allows you to control how quick the changes reach their target value.
 		/// -1 = Instantly change.
 		/// 1 = Slowly change.
 		/// 10 = Quickly change.</summary>
-		public float Damping { set { damping = value; } get { return damping; } } [SerializeField] private float damping = -1.0f;
+		public float Damping { set { damping = value; } get { return damping; } }
+		[SerializeField] private float damping = -1.0f;
 
 		[SerializeField]
 		private Vector3 remainingScale;
@@ -75,7 +79,7 @@ namespace Lean.Touch
 
 			if (pinchScale != 1.0f)
 			{
-				Debug.Log("try pinch to "+pinchScale);
+				Debug.Log("try pinch camera to " + pinchScale);
 				pinchScale = Mathf.Pow(pinchScale, sensitivity);
 
 				// Perform the translation if this is a relative scale
@@ -93,8 +97,8 @@ namespace Lean.Touch
 					}
 				}
 
-				transform.localScale *= pinchScale;
-
+				//transform.localScale *= pinchScale;
+				GetComponent<ViewWorldCamera>().scaleCamrea(1 - pinchScale);
 				remainingScale += transform.localPosition - oldScale;
 			}
 
@@ -170,11 +174,11 @@ namespace Lean.Touch
 namespace Lean.Touch.Editor
 {
 	using UnityEditor;
-	using TARGET = LeanPinchScale;
+	using TARGET = PinchCamera;
 
 	[CanEditMultipleObjects]
 	[CustomEditor(typeof(TARGET), true)]
-	public class LeanPinchScale_Editor : CwEditor
+	public class PinchCamera_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{

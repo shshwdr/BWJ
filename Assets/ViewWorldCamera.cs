@@ -10,11 +10,10 @@ public class ViewWorldCamera : MonoBehaviour
     public float maxDistance = 10;
     public float minDistance = 4;
     CinemachineVirtualCamera camera;
-    float rotationSpeed = 1;
 
     bool startDrag = false;
-    
-     public float _sensitivity;
+    bool startPinch = false;
+
     public float damping;
     Quaternion targetRotation;
     private Vector3 _mouseReference;
@@ -28,7 +27,7 @@ public class ViewWorldCamera : MonoBehaviour
     void Start()
     {
 
-        foreach(var canvas in GameObject.FindObjectsOfType<Canvas>(true))
+        foreach (var canvas in GameObject.FindObjectsOfType<Canvas>(true))
         {
             canvas.worldCamera = Camera.main;
         }
@@ -54,16 +53,16 @@ public class ViewWorldCamera : MonoBehaviour
 
     void freeCamera()
     {
-        isCameraFree = true; 
+        isCameraFree = true;
 
-            EventPool.Trigger("StartMoveCamera");
-            playerCamera.gameObject.SetActive(false);
+        //EventPool.Trigger("StartMoveCamera");
+        playerCamera.gameObject.SetActive(false);
 
-            if (reflectionProbe)
-            {
-                reflectionProbe.GetComponent<ReflectionManager>(). hide();
-            }
-            onlyResetCameraRotation();
+        if (reflectionProbe)
+        {
+            reflectionProbe.GetComponent<ReflectionManager>().hide();
+        }
+        onlyResetCameraRotation();
     }
 
     public void resetCamera()
@@ -91,38 +90,51 @@ public class ViewWorldCamera : MonoBehaviour
         playerCamera.gameObject.SetActive(true);
         //camera.enabled = false;
     }
+#if UNITY_ANDROID && !UNITY_EDITOR
+    int oneFinger = 1;
+    float _sensitivity = 0.4f;
+#else
+    int oneFinger = 2;
+    float _sensitivity = 0.6f;
+#endif
+    public void fingerDown()
+    {
+        var fingers = Lean.Touch.LeanTouch.Fingers;
+        if (fingers.Count > oneFinger)
+        {
+            Debug.Log("finger count "+fingers.Count);
+            startDrag = false;
+        }
+        _mouseReference = Input.mousePosition;
+        startDrag = true;
+        Debug.Log("finger down");
 
-    private void Update()
+    }
+
+    public void fingerUp()
     {
 
-        if(!isCameraFree && LevelManager.Instance.isLevelGameStarted)
-        {
-            return;
-        }
+        startDrag = false;
+        Debug.Log("finger up");
+    }
 
-        float currentDistance = camera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance;
-        currentDistance -= Input.mouseScrollDelta.y;
-        currentDistance = Mathf.Clamp(currentDistance,minDistance, maxDistance);
-        camera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = currentDistance;
-
-        if (Input.GetMouseButtonUp(0))
+    public void fingerMoveFinger(Lean.Touch.LeanFinger finger)
+    {
+        var fingers = Lean.Touch.LeanTouch.Fingers;
+        if (fingers.Count > oneFinger)
         {
             startDrag = false;
         }
-
-        if (!EventSystem.current.IsPointerOverGameObject())
+        var pos = finger.ScreenPosition;
+        Debug.Log("finger Move " + finger.ScreenPosition);
+        Debug.Log("mouse Move " + (Input.mousePosition ));
+        if (startDrag)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (!cameraRotated)
             {
-                _mouseReference = Input.mousePosition;
-                startDrag = true;
-            }
-            if (Input.GetMouseButton(0)&& startDrag)
-            {
-                if (!cameraRotated)
-                {
 
-                    EventPool.Trigger("StartMoveCamera");
+                cameraRotated = true;
+                EventPool.Trigger("StartMoveCamera");
                 //    playerCamera.gameObject.SetActive(false);
 
                 //    if (reflectionProbe)
@@ -130,35 +142,62 @@ public class ViewWorldCamera : MonoBehaviour
                 //        reflectionProbe.SetActive(false);
                 //    }
                 //    onlyResetCameraRotation();
-                }
-                cameraRotated = true;
-                // offset
-                _mouseOffset = (Input.mousePosition - _mouseReference);
-
-                // apply rotation
-                //_rotation.y = -(_mouseOffset.x + _mouseOffset.y) * _sensitivity;
-                //_rotation = Quaternion.Euler(dir);
-                // rotate
-                Vector3 rotateDegree = new Vector3();
-                float distance = _mouseOffset.magnitude;
-                if (Mathf.Abs(_mouseOffset.y) > Mathf.Abs(_mouseOffset.x))
-                {
-                    rotateDegree = new Vector3(-distance * Mathf.Sign(_mouseOffset.y), 0, 0);
-                }
-                else
-                {
-
-                    rotateDegree = new Vector3(0, distance * Mathf.Sign(_mouseOffset.x), 0);
-                }
-                targetRotation *= Quaternion.Euler(rotateDegree * _sensitivity);
-
-                // store mouse
-                _mouseReference = Input.mousePosition;
             }
+            // offset
+            _mouseOffset = (Vector3)pos - _mouseReference;
+
+            // apply rotation
+            //_rotation.y = -(_mouseOffset.x + _mouseOffset.y) * _sensitivity;
+            //_rotation = Quaternion.Euler(dir);
+            // rotate
+            Vector3 rotateDegree = new Vector3();
+            float distance = _mouseOffset.magnitude;
+            if (Mathf.Abs(_mouseOffset.y) > Mathf.Abs(_mouseOffset.x))
+            {
+                rotateDegree = new Vector3(-distance * Mathf.Sign(_mouseOffset.y), 0, 0);
+            }
+            else
+            {
+
+                rotateDegree = new Vector3(0, distance * Mathf.Sign(_mouseOffset.x), 0);
+            }
+            targetRotation *= Quaternion.Euler(rotateDegree * _sensitivity);
+
+            // store mouse
+            _mouseReference = pos;
+        }
+    }
+
+    public void scaleCamrea(float delta)
+    {
+
+
+        float currentDistance = camera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance;
+        currentDistance += delta;
+        currentDistance = Mathf.Clamp(currentDistance, minDistance, maxDistance);
+        camera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = currentDistance;
+    }
+
+    private void Update()
+    {
+
+        if (!isCameraFree && LevelManager.Instance.isLevelGameStarted)
+        {
+            return;
         }
 
-        
+        var fingers = Lean.Touch.LeanTouch.Fingers;
+        if (fingers.Count > oneFinger)
+        {
+            startDrag = false;
+        }
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,damping);
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+        }
+
+
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, damping);
     }
 }
