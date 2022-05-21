@@ -57,7 +57,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         EventPool.OptIn("StartGame", startMove);
     }
 
-    bool canMove(Vector3 dir, bool forceSwim = false)
+    bool canMove(ref Transform targetTransform, ref Quaternion targetRotation, Vector3 dir, bool forceSwim = false)
     {
 
         LayerMask canWalkLayer = walkableLayer;
@@ -272,7 +272,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             else
             {
 
-                if (canMove(Vector3.up * -90, isSwiming))
+                if (canMove(ref targetTransform,ref targetRotation, Vector3.up * -90, isSwiming))
                 {
                     FMODUnity.RuntimeManager.PlayOneShot("event:/sign");
                     return;
@@ -305,30 +305,30 @@ public class PlayerCubeGridMove : MonoBehaviour
 
         lastIsMoveBack = false;
 
-        if (canMove(Vector3.zero))
+        if (canMove(ref targetTransform, ref targetRotation, Vector3.zero))
         {
             LogManager.log("move forward next");
         }
-        else if (canMove(Vector3.up * 90))
+        else if (canMove(ref targetTransform, ref targetRotation, Vector3.up * 90))
         {
 
             LogManager.log("move right next");
         }
-        else if (canMove(-Vector3.up * 90))
+        else if (canMove(ref targetTransform, ref targetRotation, -Vector3.up * 90))
         {
             LogManager.log("move left next");
         }
-        else if (canMove(Vector3.zero, isSwiming))
+        else if (canMove(ref targetTransform, ref targetRotation, Vector3.zero, isSwiming))
         {
 
             LogManager.log("swim forward next");
         }
-        else if (canMove(Vector3.up * 90, isSwiming))
+        else if (canMove(ref targetTransform, ref targetRotation, Vector3.up * 90, isSwiming))
         {
 
             LogManager.log("swim right next");
         }
-        else if (canMove(-Vector3.up * 90, isSwiming))
+        else if (canMove(ref targetTransform, ref targetRotation, -Vector3.up * 90, isSwiming))
         {
 
             LogManager.log("swim left next");
@@ -455,52 +455,26 @@ public class PlayerCubeGridMove : MonoBehaviour
 
 
             }
-
             
-
-            //rotateCoolDownTimer += Time.deltaTime;
-            //if (rotateCoolDownTimer < rotateCoolDown)
-            //{
-            //    var rotation = transform.rotation;
-            //    rotation *= Quaternion.Euler(90, 0, 0); // this adds a 90 degrees Y rotation
-            //    transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * (1/rotateCoolDown));
-            //    return;
-            //}
-            ////force rotation
-            //transform.rotation.SetEulerAngles(Utils.roundTo90(transform.rotation.eulerAngles));
-            ////if(rotate)
-            //bool hit = Physics.Raycast(frontDetection.position, -transform.up, 1, walkableLayer);
-            //bool hitAny = Physics.Raycast(frontDetection.position, -transform.up, 1);
-            //if (!hitAny)
-            //{
-            //    //transform.Rotate(90, 0, 0);
-
-            //    rotateCoolDownTimer = 0;
-            //}
-            //else
-            //{
-
-            //    if (hit)
-            //    {
-
-            //        transform.Translate(transform.forward * moveSpeed * Time.deltaTime, Space.World);
-            //    }
-            //}
-            //else
-            //{
-            //    transform.Rotate(90, 0, 0);
-            //    //bool hitAny = Physics.Raycast(frontDetection.position, -transform.up, 1);
-            //    //if(hitAny)
-            //    //{
-
-            //    //    transform.Rotate(90, 0, 0);
-            //    //    rotateCoolDownTimer = 0;
-            //    //}
-            //    //var rotation = transform.rotation;
-            //    //rotation *= Quaternion.Euler(90, 0, 0); // this adds a 90 degrees Y rotation
-            //    //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 0.5f);
-            //}
         }
+    }
+
+
+    void calculateMoreSteps()
+    {
+        //  moreNextPositions
+    }
+    public List<Vector3> nextPoints()
+    {
+        var res = new List<Vector3>();
+        res.Add(transform.position + transform.up * 0.1f);
+
+        foreach (var p in nextPositions)
+        {
+            res.Add(p + transform.up*0.1f);
+        }
+
+        return res;
     }
 }
 
