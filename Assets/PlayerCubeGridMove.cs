@@ -23,6 +23,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     float rotateCoolDownTimer = 100;
     Quaternion targetRotation = Quaternion.identity;
     List<Vector3> nextPositions = new List<Vector3>();
+    List<Vector3> visuallyNextPositions = new List<Vector3>();
     List<Quaternion> nextRotations = new List<Quaternion>();
     public float stopDistance = 0.001f;
 
@@ -83,6 +84,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             if (hitRoad && hitRoad1 && hitRoad2)
             {
                 nextPositions.Add(nextPosition);
+                visuallyNextPositions.Add(nextPosition + targetTransform.up * 0.1f);
                 nextRotations.Add(targetRotation);
                 if(1<<hit.collider.gameObject.layer == swimLayer)
                 {
@@ -139,8 +141,12 @@ public class PlayerCubeGridMove : MonoBehaviour
             if (hitRoad && hitRoad1 && hitRoad2)
             {
                 nextPositions.Add(nextPosition);
+
+                visuallyNextPositions.Add(nextPosition + targetTransform.forward * 0.1f);
                 nextRotations.Add(targetRotation);
                 nextPositions.Add(nnPosition);
+
+                visuallyNextPositions.Add(nextPosition + targetTransform.up * 0.1f + targetTransform.forward * 0.1f);
                 targetRotation *= Quaternion.Euler(Vector3.right * 90);
                 nextRotations.Add(targetRotation);
                 if (1<<hit.collider.gameObject.layer == swimLayer)
@@ -192,9 +198,13 @@ public class PlayerCubeGridMove : MonoBehaviour
     {
         lastIsMoveBack = true;
         nextPositions.Add(targetTransform.position);
+
+        visuallyNextPositions.Add(targetTransform.position + targetTransform.up * 0.1f);
         targetRotation *= Quaternion.Euler(Vector3.up * 90);
         nextRotations.Add(targetRotation);
         nextPositions.Add(targetTransform.position);
+
+        visuallyNextPositions.Add(targetTransform.position + targetTransform.forward * 0.1f);
         targetRotation *= Quaternion.Euler(Vector3.up * 90);
         nextRotations.Add(targetRotation);
     }
@@ -202,6 +212,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     public void moveNextMove()
     {
         nextPositions.Clear();
+        visuallyNextPositions.Clear();
         nextRotations.Clear();
         decideNextMove();
         Assert.AreEqual(nextPositions.Count,nextRotations.Count);
@@ -222,6 +233,12 @@ public class PlayerCubeGridMove : MonoBehaviour
         targetTransform.rotation = transform.rotation;
         targetRotation = transform.rotation;
     }
+
+    void simulateNextMove()
+    {
+        //
+    }
+
     public void decideNextMove()
     {
         //if has npc
@@ -448,6 +465,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                 {
                     targetTransform.position = nextPositions[0];
                     nextPositions.RemoveAt(0);
+                    visuallyNextPositions.RemoveAt(0);
                     targetTransform.rotation = nextRotations[0];
                     nextRotations.RemoveAt(0);
                     rotateCoolDownTimer = 0;
@@ -469,9 +487,10 @@ public class PlayerCubeGridMove : MonoBehaviour
         var res = new List<Vector3>();
         res.Add(transform.position + transform.up * 0.1f);
 
-        foreach (var p in nextPositions)
+        foreach (var p in visuallyNextPositions)
         {
-            res.Add(p + transform.up*0.1f);
+            //this need to add based on 
+            res.Add(p);
         }
 
         return res;
