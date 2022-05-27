@@ -21,7 +21,6 @@ public class PlayerCubeGridMove : MonoBehaviour
     public Transform frontDetection;
     public float rotateCoolDown = 0.1f;
     float rotateCoolDownTimer = 100;
-    Quaternion targetRotation = Quaternion.identity;
     List<Vector3> nextPositions = new List<Vector3>();
     List<Vector3> visuallyNextPositions = new List<Vector3>();
     List<Quaternion> nextRotations = new List<Quaternion>();
@@ -49,7 +48,6 @@ public class PlayerCubeGridMove : MonoBehaviour
        targetTransform = new GameObject().transform;
         targetTransform.position = transform.position;
         targetTransform.rotation = transform.rotation;
-        targetRotation = rotation;
     }
 
     // Start is called before the first frame update
@@ -58,7 +56,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         EventPool.OptIn("StartGame", startMove);
     }
 
-    bool canMove(ref Transform targetTransform, ref Quaternion targetRotation, Vector3 dir, bool forceSwim = false)
+    bool canMove(ref Transform targetTransform, Vector3 dir, bool forceSwim = false)
     {
 
         LayerMask canWalkLayer = walkableLayer;
@@ -67,7 +65,8 @@ public class PlayerCubeGridMove : MonoBehaviour
             canWalkLayer |= swimLayer;
         }
 
-        targetRotation *= Quaternion.Euler(dir);
+        targetTransform.rotation *= Quaternion.Euler(dir);
+        Quaternion targetRotation = targetTransform.rotation;
         //check if next grid is moveable
         var nextPosition = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize);
         var nextPosition1 = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize*0.33f);
@@ -121,7 +120,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                 //{
                 //    animator.SetBool("walk", false);
                 //}
-                targetRotation *= Quaternion.Euler(-dir);
+                targetTransform.rotation *= Quaternion.Euler(-dir);
                 return false;
             }
         }
@@ -147,8 +146,8 @@ public class PlayerCubeGridMove : MonoBehaviour
                 nextPositions.Add(nnPosition);
 
                 visuallyNextPositions.Add(nextPosition + targetTransform.up * 0.1f + targetTransform.forward * 0.1f);
-                targetRotation *= Quaternion.Euler(Vector3.right * 90);
-                nextRotations.Add(targetRotation);
+                targetTransform.rotation *= Quaternion.Euler(Vector3.right * 90);
+                nextRotations.Add(targetTransform.rotation);
                 if (1<<hit.collider.gameObject.layer == swimLayer)
                 {
 
@@ -186,7 +185,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                     animator.SetBool("walk", false);
                     
                 }
-                targetRotation *= Quaternion.Euler(-dir);
+                targetTransform.rotation *= Quaternion.Euler(-dir);
                 return false;
             }
         }
@@ -200,13 +199,13 @@ public class PlayerCubeGridMove : MonoBehaviour
         nextPositions.Add(targetTransform.position);
 
         visuallyNextPositions.Add(targetTransform.position + targetTransform.up * 0.1f);
-        targetRotation *= Quaternion.Euler(Vector3.up * 90);
-        nextRotations.Add(targetRotation);
+        targetTransform.rotation *= Quaternion.Euler(Vector3.up * 90);
+        nextRotations.Add(targetTransform.rotation);
         nextPositions.Add(targetTransform.position);
 
         visuallyNextPositions.Add(targetTransform.position + targetTransform.forward * 0.1f);
-        targetRotation *= Quaternion.Euler(Vector3.up * 90);
-        nextRotations.Add(targetRotation);
+        targetTransform.rotation *= Quaternion.Euler(Vector3.up * 90);
+        nextRotations.Add(targetTransform.rotation);
     }
 
     public void moveNextMove()
@@ -231,7 +230,6 @@ public class PlayerCubeGridMove : MonoBehaviour
 
         targetTransform.position = transform.position;
         targetTransform.rotation = transform.rotation;
-        targetRotation = transform.rotation;
     }
 
     void simulateNextMove()
@@ -289,7 +287,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             else
             {
 
-                if (canMove(ref targetTransform,ref targetRotation, Vector3.up * -90, isSwiming))
+                if (canMove(ref targetTransform,Vector3.up * -90, isSwiming))
                 {
                     FMODUnity.RuntimeManager.PlayOneShot("event:/sign");
                     return;
@@ -322,30 +320,30 @@ public class PlayerCubeGridMove : MonoBehaviour
 
         lastIsMoveBack = false;
 
-        if (canMove(ref targetTransform, ref targetRotation, Vector3.zero))
+        if (canMove(ref targetTransform,  Vector3.zero))
         {
             LogManager.log("move forward next");
         }
-        else if (canMove(ref targetTransform, ref targetRotation, Vector3.up * 90))
+        else if (canMove(ref targetTransform, Vector3.up * 90))
         {
 
             LogManager.log("move right next");
         }
-        else if (canMove(ref targetTransform, ref targetRotation, -Vector3.up * 90))
+        else if (canMove(ref targetTransform, -Vector3.up * 90))
         {
             LogManager.log("move left next");
         }
-        else if (canMove(ref targetTransform, ref targetRotation, Vector3.zero, isSwiming))
+        else if (canMove(ref targetTransform, Vector3.zero, isSwiming))
         {
 
             LogManager.log("swim forward next");
         }
-        else if (canMove(ref targetTransform, ref targetRotation, Vector3.up * 90, isSwiming))
+        else if (canMove(ref targetTransform,  Vector3.up * 90, isSwiming))
         {
 
             LogManager.log("swim right next");
         }
-        else if (canMove(ref targetTransform, ref targetRotation, -Vector3.up * 90, isSwiming))
+        else if (canMove(ref targetTransform, -Vector3.up * 90, isSwiming))
         {
 
             LogManager.log("swim left next");
