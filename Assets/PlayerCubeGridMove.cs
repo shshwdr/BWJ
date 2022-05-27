@@ -193,7 +193,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     bool lastIsMoveBack = false;
 
 
-    void moveBack()
+    void moveBack(ref Transform targetTransform)
     {
         lastIsMoveBack = true;
         nextPositions.Add(targetTransform.position);
@@ -232,18 +232,17 @@ public class PlayerCubeGridMove : MonoBehaviour
         targetTransform.rotation = transform.rotation;
     }
 
-    void simulateNextMove()
+    void calculateNextMove(Transform currentTransform, ref Transform targetTransform)
     {
         //
     }
 
     public void decideNextMove()
     {
-        //if has npc
-        RaycastHit hitedCollectable = new RaycastHit();
+        //if has collectable, collect
         if (startedMoving)
         {
-
+            RaycastHit hitedCollectable = new RaycastHit();
             bool hitCollectable = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, out hitedCollectable, 1, collectableLayer);
 
             if (hitCollectable)
@@ -254,11 +253,23 @@ public class PlayerCubeGridMove : MonoBehaviour
             }
         }
 
+        // if has tutorial, unlock tutorial
+        if (startedMoving)
+        {
+            RaycastHit tutorialHit;
+            bool hitTutorial = Physics.Raycast(targetTransform.position + targetTransform.up * 0.5f, -targetTransform.up, out tutorialHit, 1, tutorialLayer);
+            if (hitTutorial)
+            {
+
+                TutorialManager.Instance.unlockTutorial(tutorialHit.collider.GetComponent<TutorialGiver>().tutorialString);
+            }
+        }
+
         //if force turn around
         if (turnAroundNext)
         {
             LogManager.log("used skill to move back");
-            moveBack();
+            moveBack(ref targetTransform);
             turnAroundNext = false;
 
             EventPool.Trigger<int>("turnedInstructionOff", 1);
@@ -266,15 +277,8 @@ public class PlayerCubeGridMove : MonoBehaviour
         }
 
 
-        RaycastHit tutorialHit;
-        bool hitTutorial = Physics.Raycast(targetTransform.position + targetTransform.up * 0.5f, -targetTransform.up, out tutorialHit, 1, tutorialLayer);
-        if (hitTutorial)
-        {
 
-            TutorialManager.Instance.unlockTutorial(tutorialHit.collider.GetComponent<TutorialGiver>().tutorialString);
-        }
-
-        //check if currently need to rotate
+        //if on a turning sign, force turn, unless has ignore next sign
         bool hitSign = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, 1, signLayer);
         if (hitSign)
         {
@@ -351,7 +355,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         else
         {
             LogManager.log("move back next");
-            moveBack();
+            moveBack(ref targetTransform);
         }
     }
 
