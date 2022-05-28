@@ -7,6 +7,38 @@ using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 public class PlayerCubeGridMove : MonoBehaviour
 {
+
+
+    public class PlayerMoveState
+    {
+        //public Transform transform = new GameObject().transform;
+
+        public bool ignoreNextSign;
+        public bool turnAroundNext;
+        public bool swimNext;
+
+        public bool isSwiming;
+        public bool lastIsMoveBack;
+
+        public Transform targetTransform = new GameObject().transform;
+
+        public void copy(PlayerMoveState state)
+        {
+            //transform.position = state.transform.position;
+            //transform.rotation = state.transform.rotation;
+            targetTransform.position = state.targetTransform.position;
+            targetTransform.rotation = state.targetTransform.rotation;
+
+            ignoreNextSign = state.ignoreNextSign;
+            turnAroundNext = state.turnAroundNext;
+            swimNext = state.swimNext;
+            isSwiming = state.isSwiming;
+            lastIsMoveBack = state.lastIsMoveBack;
+        }
+    }
+
+    public PlayerMoveState moveState;
+
     public float gridSize = 1;
     public float moveSpeed = 3;
     public float rotateSpeed = 10;
@@ -26,13 +58,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     List<Quaternion> nextRotations = new List<Quaternion>();
     public float stopDistance = 0.001f;
 
-    Transform targetTransform;
 
-    public bool ignoreNextSign;
-    public bool turnAroundNext;
-    public bool swimNext;
-
-    bool isSwiming;
 
     Animator animator;
     private void Awake()
@@ -45,9 +71,10 @@ public class PlayerCubeGridMove : MonoBehaviour
         Utils.gridSize = gridSize / 4f;
         transform.position = position;
         transform.rotation = rotation;
-       targetTransform = new GameObject().transform;
-        targetTransform.position = transform.position;
-        targetTransform.rotation = transform.rotation;
+        moveState = new PlayerMoveState();
+
+        moveState.targetTransform.position = transform.position;
+        moveState.targetTransform.rotation = transform.rotation;
     }
 
     // Start is called before the first frame update
@@ -56,43 +83,47 @@ public class PlayerCubeGridMove : MonoBehaviour
         EventPool.OptIn("StartGame", startMove);
     }
 
-    bool canMove(ref Transform targetTransform, Vector3 dir, bool forceSwim = false)
+    bool canMove(ref PlayerMoveState state, Vector3 dir, bool isSimulating, bool forceSwim = false)
     {
 
         LayerMask canWalkLayer = walkableLayer;
-        if (swimNext || forceSwim)
+        if (state.swimNext || forceSwim)
         {
             canWalkLayer |= swimLayer;
         }
 
-        targetTransform.rotation *= Quaternion.Euler(dir);
-        Quaternion targetRotation = targetTransform.rotation;
+        state.targetTransform.rotation *= Quaternion.Euler(dir);
+        Quaternion targetRotation = state.targetTransform.rotation;
         //check if next grid is moveable
-        var nextPosition = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize);
-        var nextPosition1 = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize*0.33f);
-        var nextPosition2 = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize*0.66f);
-        bool hitAny = Physics.Raycast(nextPosition + targetTransform.up * 0.5f, -targetTransform.up, 1);
+        var nextPosition = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize);
+        var nextPosition1 = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize*0.33f);
+        var nextPosition2 = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize*0.66f);
+        bool hitAny = Physics.Raycast(nextPosition + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1);
         if (hitAny)
         {
 
             //if next is hitted, check if hit on ground
             RaycastHit hit;
-            bool hitRoad = Physics.Raycast(nextPosition + targetTransform.up * 0.5f, -targetTransform.up, out hit,1, canWalkLayer);
-            bool hitRoad1 = Physics.Raycast(nextPosition1 + targetTransform.up * 0.5f, -targetTransform.up, 1, canWalkLayer);
-            bool hitRoad2 = Physics.Raycast(nextPosition2 + targetTransform.up * 0.5f, -targetTransform.up, 1, canWalkLayer);
+            bool hitRoad = Physics.Raycast(nextPosition + state.targetTransform.up * 0.5f, -state.targetTransform.up, out hit,1, canWalkLayer);
+            bool hitRoad1 = Physics.Raycast(nextPosition1 + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1, canWalkLayer);
+            bool hitRoad2 = Physics.Raycast(nextPosition2 + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1, canWalkLayer);
             if (hitRoad && hitRoad1 && hitRoad2)
             {
                 nextPositions.Add(nextPosition);
-                visuallyNextPositions.Add(nextPosition + targetTransform.up * 0.1f);
+                visuallyNextPositions.Add(nextPosition + state.targetTransform.up * 0.1f);
                 nextRotations.Add(targetRotation);
                 if(1<<hit.collider.gameObject.layer == swimLayer)
                 {
 
                     if (startedMoving)
                     {
-                        animator.SetBool("swim", true);
-                        isSwiming = true;
+                        state.isSwiming = true;
+                        if (!isSimulating)
+                        {
+                            animator.SetBool("swim", true);
+
                         FMODUnity.RuntimeManager.PlayOneShot("event:/in water 2");
+                        }
                     }
                     return true;
                 }
@@ -100,13 +131,19 @@ public class PlayerCubeGridMove : MonoBehaviour
                 {
                     if (startedMoving)
                     {
-                        animator.SetBool("swim", false);
-                        animator.SetBool("walk", true);
-                        if (isSwiming)
+                        if (!isSimulating)
+                        {
+                            animator.SetBool("swim", false);
+                            animator.SetBool("walk", true);
+                        }
+                        if (state.isSwiming)
                         {
                             //swimNext = false;
-                            isSwiming = false;
-                            FMODUnity.RuntimeManager.PlayOneShot("event:/iout water");
+                            state.isSwiming = false;
+                            if (!isSimulating)
+                            {
+                                FMODUnity.RuntimeManager.PlayOneShot("event:/iout water");
+                            }
 
                             //EventPool.Trigger<int>("turnedInstructionOff", 3);
                         }
@@ -120,7 +157,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                 //{
                 //    animator.SetBool("walk", false);
                 //}
-                targetTransform.rotation *= Quaternion.Euler(-dir);
+                state.targetTransform.rotation *= Quaternion.Euler(-dir);
                 return false;
             }
         }
@@ -129,10 +166,10 @@ public class PlayerCubeGridMove : MonoBehaviour
             //check rotate position
 
             RaycastHit hit;
-            nextPosition = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.5f);
-            nextPosition1 = Utils.snapToGrid(targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.33f);
-            var nnPosition = Utils.snapToGrid(nextPosition - targetTransform.up * gridSize * 0.5f);
-            nextPosition2 = Utils.snapToGrid(nnPosition + targetTransform.up * gridSize * 0.33f);
+            nextPosition = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.5f);
+            nextPosition1 = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.33f);
+            var nnPosition = Utils.snapToGrid(nextPosition - state.targetTransform.up * gridSize * 0.5f);
+            nextPosition2 = Utils.snapToGrid(nnPosition + state.targetTransform.up * gridSize * 0.33f);
             //if next is hitted, check if hit on ground
             bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward),out hit, 1, canWalkLayer);
             bool hitRoad1 = Physics.Raycast(nextPosition1 + targetRotation * Vector3.up * 0.5f, -(targetRotation * Vector3.up), 1, canWalkLayer);
@@ -141,21 +178,24 @@ public class PlayerCubeGridMove : MonoBehaviour
             {
                 nextPositions.Add(nextPosition);
 
-                visuallyNextPositions.Add(nextPosition + targetTransform.forward * 0.1f);
+                visuallyNextPositions.Add(nextPosition + state.targetTransform.forward * 0.1f);
                 nextRotations.Add(targetRotation);
                 nextPositions.Add(nnPosition);
 
-                visuallyNextPositions.Add(nextPosition + targetTransform.up * 0.1f + targetTransform.forward * 0.1f);
-                targetTransform.rotation *= Quaternion.Euler(Vector3.right * 90);
-                nextRotations.Add(targetTransform.rotation);
+                visuallyNextPositions.Add(nextPosition + state.targetTransform.up * 0.1f + state.targetTransform.forward * 0.1f);
+                state.targetTransform.rotation *= Quaternion.Euler(Vector3.right * 90);
+                nextRotations.Add(state.targetTransform.rotation);
                 if (1<<hit.collider.gameObject.layer == swimLayer)
                 {
 
                     if (startedMoving)
                     {
-                        animator.SetBool("swim", true);
-                        isSwiming = true;
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/in water 2");
+                        state.isSwiming = true;
+                        if (!isSimulating)
+                        {
+                            animator.SetBool("swim", true);
+                            FMODUnity.RuntimeManager.PlayOneShot("event:/in water 2");
+                        }
                     }
                 }
                 else
@@ -163,13 +203,19 @@ public class PlayerCubeGridMove : MonoBehaviour
                     if (startedMoving)
                     {
 
-                        animator.SetBool("swim", false);
-                        animator.SetBool("walk", true); 
-                        if (isSwiming)
+                        if (!isSimulating)
+                        {
+                            animator.SetBool("swim", false);
+                            animator.SetBool("walk", true);
+                        }
+                        if (state.isSwiming)
                         {
                             //swimNext = false;
-                            isSwiming = false;
-                            FMODUnity.RuntimeManager.PlayOneShot("event:/iout water");
+                            state.isSwiming = false;
+                            if (!isSimulating)
+                            {
+                                FMODUnity.RuntimeManager.PlayOneShot("event:/iout water");
+                            }
 
                             //EventPool.Trigger<int>("turnedInstructionOff", 3);
 
@@ -182,20 +228,23 @@ public class PlayerCubeGridMove : MonoBehaviour
             {
                 if (startedMoving)
                 {
-                    animator.SetBool("walk", false);
+                    if (!isSimulating)
+                    {
+                        animator.SetBool("walk", false);
+                    }
                     
                 }
-                targetTransform.rotation *= Quaternion.Euler(-dir);
+                state.targetTransform.rotation *= Quaternion.Euler(-dir);
                 return false;
             }
         }
     }
-    bool lastIsMoveBack = false;
 
 
-    void moveBack(ref Transform targetTransform)
+    void moveBack(ref PlayerMoveState state)
     {
-        lastIsMoveBack = true;
+        state.lastIsMoveBack = true;
+        var targetTransform = state.targetTransform;
         nextPositions.Add(targetTransform.position);
 
         visuallyNextPositions.Add(targetTransform.position + targetTransform.up * 0.1f);
@@ -221,20 +270,118 @@ public class PlayerCubeGridMove : MonoBehaviour
             transform.position = nextPositions[i];
             transform.rotation = nextRotations[i];
         }
-        targetTransform.position = transform.position;
-        targetTransform.rotation = transform.rotation;
+        moveState.targetTransform.position = transform.position;
+        moveState.targetTransform.rotation = transform.rotation;
     }
 
     public void updateOtherData()
     {
 
-        targetTransform.position = transform.position;
-        targetTransform.rotation = transform.rotation;
+        moveState.targetTransform.position = transform.position;
+        moveState.targetTransform.rotation = transform.rotation;
     }
 
-    void calculateNextMove(Transform currentTransform, ref Transform targetTransform)
+
+    static void calculateNextMove(PlayerCubeGridMove playerMove, ref PlayerMoveState moveState, bool isInSimulating)
     {
-        //
+        var transform = moveState.targetTransform;
+        var signLayer = playerMove.signLayer;
+        var leverLayer = playerMove.leverLayer;
+        var ignoreNextSign = moveState.ignoreNextSign;
+        var isSwiming = moveState.isSwiming;
+        var lastIsMoveBack = moveState.lastIsMoveBack;
+
+        //if on a turning sign, force turn, unless has ignore next sign
+        bool hitSign = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, 1, signLayer);
+        if (hitSign)
+        {
+            if (ignoreNextSign)
+            {
+                ignoreNextSign = false;
+
+                EventPool.Trigger<int>("turnedInstructionOff", 2);
+            }
+            else
+            {
+
+                if (playerMove.canMove(ref moveState, Vector3.up * -90, isInSimulating, isSwiming))
+                {
+                    if (!isInSimulating)
+                    {
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/sign");
+                    }
+                    return;
+                }
+            }
+
+        }
+
+
+        //todo improve this
+        // pull a level if needed
+        // if rotating, wont pull the level twice
+        if (!lastIsMoveBack)
+        {
+            //check if has lever
+            RaycastHit levelHit;
+            bool hitLever = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, out levelHit, 1, leverLayer);
+            if (hitLever)
+            {
+                if (ignoreNextSign)
+                {
+                    ignoreNextSign = false;
+
+                    EventPool.Trigger<int>("turnedInstructionOff", 2);
+                }
+                else
+                {
+                    levelHit.collider.GetComponent<Lever>().rotate();
+                    if (!isInSimulating)
+                    {
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/lever");
+                    }
+                }
+            }
+        }
+
+        moveState. lastIsMoveBack = false;
+
+
+
+
+        if (playerMove.canMove(ref moveState, Vector3.zero,isInSimulating))
+        {
+            LogManager.log("move forward next");
+        }
+        else if (playerMove.canMove(ref moveState, Vector3.up * 90, isInSimulating))
+        {
+
+            LogManager.log("move right next");
+        }
+        else if (playerMove.canMove(ref moveState, -Vector3.up * 90, isInSimulating))
+        {
+            LogManager.log("move left next");
+        }
+        else if (playerMove.canMove(ref moveState, Vector3.zero, isInSimulating, isSwiming))
+        {
+
+            LogManager.log("swim forward next");
+        }
+        else if (playerMove.canMove(ref moveState, Vector3.up * 90, isInSimulating, isSwiming))
+        {
+
+            LogManager.log("swim right next");
+        }
+        else if (playerMove.canMove(ref moveState, -Vector3.up * 90, isInSimulating, isSwiming))
+        {
+
+            LogManager.log("swim left next");
+        }
+        else
+        {
+            LogManager.log("move back next");
+            playerMove.moveBack(ref moveState);
+        }
     }
 
     public void decideNextMove()
@@ -257,7 +404,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         if (startedMoving)
         {
             RaycastHit tutorialHit;
-            bool hitTutorial = Physics.Raycast(targetTransform.position + targetTransform.up * 0.5f, -targetTransform.up, out tutorialHit, 1, tutorialLayer);
+            bool hitTutorial = Physics.Raycast(moveState.targetTransform.position + moveState.targetTransform.up * 0.5f, -moveState.targetTransform.up, out tutorialHit, 1, tutorialLayer);
             if (hitTutorial)
             {
 
@@ -266,97 +413,20 @@ public class PlayerCubeGridMove : MonoBehaviour
         }
 
         //if force turn around
-        if (turnAroundNext)
+        if (moveState.turnAroundNext)
         {
             LogManager.log("used skill to move back");
-            moveBack(ref targetTransform);
-            turnAroundNext = false;
+            moveBack(ref moveState);
+            moveState.turnAroundNext = false;
 
             EventPool.Trigger<int>("turnedInstructionOff", 1);
             return;
         }
 
+        calculateNextMove(this, ref moveState, false);
 
 
-        //if on a turning sign, force turn, unless has ignore next sign
-        bool hitSign = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, 1, signLayer);
-        if (hitSign)
-        {
-            if (ignoreNextSign)
-            {
-                ignoreNextSign = false;
 
-                EventPool.Trigger<int>("turnedInstructionOff", 2);
-            }
-            else
-            {
-
-                if (canMove(ref targetTransform,Vector3.up * -90, isSwiming))
-                {
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/sign");
-                    return;
-                }
-            }
-
-        }
-
-        if (!lastIsMoveBack)
-        {
-            //check if has lever
-            RaycastHit levelHit;
-            bool hitLever = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, out levelHit, 1, leverLayer);
-            if (hitLever)
-            {
-                if (ignoreNextSign)
-                {
-                    ignoreNextSign = false;
-
-                    EventPool.Trigger<int>("turnedInstructionOff", 2);
-                }
-                else
-                {
-                    levelHit.collider.GetComponent<Lever>().rotate();
-                    FMODUnity.RuntimeManager.PlayOneShot("event:/lever");
-                }
-            }
-
-        }
-
-        lastIsMoveBack = false;
-
-        if (canMove(ref targetTransform,  Vector3.zero))
-        {
-            LogManager.log("move forward next");
-        }
-        else if (canMove(ref targetTransform, Vector3.up * 90))
-        {
-
-            LogManager.log("move right next");
-        }
-        else if (canMove(ref targetTransform, -Vector3.up * 90))
-        {
-            LogManager.log("move left next");
-        }
-        else if (canMove(ref targetTransform, Vector3.zero, isSwiming))
-        {
-
-            LogManager.log("swim forward next");
-        }
-        else if (canMove(ref targetTransform,  Vector3.up * 90, isSwiming))
-        {
-
-            LogManager.log("swim right next");
-        }
-        else if (canMove(ref targetTransform, -Vector3.up * 90, isSwiming))
-        {
-
-            LogManager.log("swim left next");
-        }
-        else
-        {
-            LogManager.log("move back next");
-            moveBack(ref targetTransform);
-        }
     }
 
     public bool gameEnd()
@@ -399,15 +469,15 @@ public class PlayerCubeGridMove : MonoBehaviour
 
     public void turnAround()
     {
-        turnAroundNext = !turnAroundNext;
+        moveState.turnAroundNext = !moveState.turnAroundNext;
     }
     public void ignoreSign()
     {
-        ignoreNextSign = !ignoreNextSign;
+        moveState.ignoreNextSign = !moveState.ignoreNextSign;
     }
     public void swim()
     {
-        swimNext = !swimNext;
+        moveState.swimNext = !moveState.swimNext;
     }
     public void startMove()
     {
@@ -465,10 +535,10 @@ public class PlayerCubeGridMove : MonoBehaviour
                 // transform.rotation = Quaternion.Slerp(transform.rotation, nextRotations[0], Time.deltaTime * (1 / rotateCoolDown));
                 if ((nextPositions[0] - transform.position).sqrMagnitude <= stopDistance && rotateCoolDownTimer >= rotateCoolDown)
                 {
-                    targetTransform.position = nextPositions[0];
+                    moveState.targetTransform.position = nextPositions[0];
                     nextPositions.RemoveAt(0);
                     visuallyNextPositions.RemoveAt(0);
-                    targetTransform.rotation = nextRotations[0];
+                    moveState.targetTransform.rotation = nextRotations[0];
                     nextRotations.RemoveAt(0);
                     rotateCoolDownTimer = 0;
                 }

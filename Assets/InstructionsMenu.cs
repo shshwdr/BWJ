@@ -87,18 +87,18 @@ public class InstructionsMenu : MonoBehaviour
     public void turnAround()
     {
         player.turnAround();
-        instruction1.GetComponent<InstructionButton>().turnInstruction(1,player.turnAroundNext);
+        instruction1.GetComponent<InstructionButton>().turnInstruction(1,player.moveState.turnAroundNext);
     }
     public void ignoreSign()
     {
         player.ignoreSign();
-        instruction2.GetComponent<InstructionButton>().turnInstruction(2,player.ignoreNextSign);
+        instruction2.GetComponent<InstructionButton>().turnInstruction(2,player.moveState.ignoreNextSign);
     }
 
     public void swim()
     {
         player.swim();
-        instruction3.GetComponent<InstructionButton>().turnInstruction(3,player.swimNext);
+        instruction3.GetComponent<InstructionButton>().turnInstruction(3,player.moveState.swimNext);
     }
 
     // Update is called once per frame
