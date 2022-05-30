@@ -655,7 +655,6 @@ public class PlayerCubeGridMove : MonoBehaviour
         {
             //this need to add based on 
             res.Add(p);
-            res.Add(p);
         }
 
         return res;
