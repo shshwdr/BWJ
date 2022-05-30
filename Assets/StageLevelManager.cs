@@ -319,6 +319,13 @@ public class StageLevelManager : Singleton<StageLevelManager>
             }
 
         }
+
+        if (GameObject.FindGameObjectsWithTag("target").Length != 1)
+        {
+            Debug.LogError("target item count wrong");
+
+        }
+
         if (!currentLevel.hasBeenFinished)
         {
             currentLevel.hasBeenFinished = true;
