@@ -20,7 +20,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         public bool isSwiming;
         public bool lastIsMoveBack;
 
-        public Transform targetTransform = new GameObject().transform;
+        public Transform targetTransform;
 
         public void copy(PlayerMoveState state)
         {
@@ -34,6 +34,11 @@ public class PlayerCubeGridMove : MonoBehaviour
             swimNext = state.swimNext;
             isSwiming = state.isSwiming;
             lastIsMoveBack = state.lastIsMoveBack;
+        }
+
+        public PlayerMoveState()
+        {
+            targetTransform = new GameObject().transform;
         }
     }
 
@@ -59,6 +64,9 @@ public class PlayerCubeGridMove : MonoBehaviour
     public float stopDistance = 0.001f;
 
 
+    PlayerMoveState tempMoveState;
+
+    int simulateCount = 3;
 
     Animator animator;
     private void Awake()
@@ -83,7 +91,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         EventPool.OptIn("StartGame", startMove);
     }
 
-    bool canMove(ref PlayerMoveState state, Vector3 dir, bool isSimulating, bool forceSwim = false)
+    bool canMove(ref PlayerMoveState state, Vector3 dir, ref List<Vector3> visuallyNextPositions, bool isSimulating, bool forceSwim = false)
     {
 
         LayerMask canWalkLayer = walkableLayer;
@@ -109,9 +117,17 @@ public class PlayerCubeGridMove : MonoBehaviour
             bool hitRoad2 = Physics.Raycast(nextPosition2 + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1, canWalkLayer);
             if (hitRoad && hitRoad1 && hitRoad2)
             {
-                nextPositions.Add(nextPosition);
+                if (!isSimulating)
+                {
+                    nextPositions.Add(nextPosition);
+                }
+                state.targetTransform.position = nextPosition;
                 visuallyNextPositions.Add(nextPosition + state.targetTransform.up * 0.1f);
-                nextRotations.Add(targetRotation);
+
+                if (!isSimulating)
+                {
+                    nextRotations.Add(targetRotation);
+                }
                 if(1<<hit.collider.gameObject.layer == swimLayer)
                 {
 
@@ -176,15 +192,31 @@ public class PlayerCubeGridMove : MonoBehaviour
             bool hitRoad2 = Physics.Raycast(nextPosition2 + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), 1, canWalkLayer);
             if (hitRoad && hitRoad1 && hitRoad2)
             {
-                nextPositions.Add(nextPosition);
+                if (!isSimulating)
+                {
+                    nextPositions.Add(nextPosition);
+                }
 
-                visuallyNextPositions.Add(nextPosition + state.targetTransform.forward * 0.1f);
-                nextRotations.Add(targetRotation);
-                nextPositions.Add(nnPosition);
-
+                state.targetTransform.position = nextPosition;
                 visuallyNextPositions.Add(nextPosition + state.targetTransform.up * 0.1f + state.targetTransform.forward * 0.1f);
+
+                if (!isSimulating)
+                {
+                    nextRotations.Add(targetRotation);
+                }
+                if (!isSimulating)
+                {
+                    nextPositions.Add(nnPosition);
+                }
+
+                state.targetTransform.position = nnPosition;
+                visuallyNextPositions.Add(nnPosition + state.targetTransform.forward * 0.1f);
                 state.targetTransform.rotation *= Quaternion.Euler(Vector3.right * 90);
-                nextRotations.Add(state.targetTransform.rotation);
+
+                if (!isSimulating)
+                {
+                    nextRotations.Add(state.targetTransform.rotation);
+                }
                 if (1<<hit.collider.gameObject.layer == swimLayer)
                 {
 
@@ -241,20 +273,27 @@ public class PlayerCubeGridMove : MonoBehaviour
     }
 
 
-    void moveBack(ref PlayerMoveState state)
+    void moveBack(ref PlayerMoveState state, ref List<Vector3> visuallyNextPositions, bool isSimulating)
     {
         state.lastIsMoveBack = true;
-        var targetTransform = state.targetTransform;
-        nextPositions.Add(targetTransform.position);
-
+        var targetTransform = state.targetTransform; 
+        if (!isSimulating)
+        {
+            nextPositions.Add(targetTransform.position);
+        }
         visuallyNextPositions.Add(targetTransform.position + targetTransform.up * 0.1f);
         targetTransform.rotation *= Quaternion.Euler(Vector3.up * 90);
-        nextRotations.Add(targetTransform.rotation);
-        nextPositions.Add(targetTransform.position);
+        if (!isSimulating)
+        {
+            nextRotations.Add(targetTransform.rotation);
+            nextPositions.Add(targetTransform.position);
+        }
 
-        visuallyNextPositions.Add(targetTransform.position + targetTransform.forward * 0.1f);
         targetTransform.rotation *= Quaternion.Euler(Vector3.up * 90);
-        nextRotations.Add(targetTransform.rotation);
+        if (!isSimulating)
+        {
+            nextRotations.Add(targetTransform.rotation);
+        }
     }
 
     public void moveNextMove()
@@ -282,7 +321,23 @@ public class PlayerCubeGridMove : MonoBehaviour
     }
 
 
-    static void calculateNextMove(PlayerCubeGridMove playerMove, ref PlayerMoveState moveState, bool isInSimulating)
+
+    static void simulate(ref List<Vector3> visuallyNextPositions, PlayerCubeGridMove playerMove, PlayerMoveState moveState, int simulateStepCount)
+    {
+        Debug.Log("simulate");
+        if (playerMove.tempMoveState == null)
+        {
+            playerMove.tempMoveState = new PlayerMoveState();
+        }
+        playerMove.tempMoveState.copy(moveState);
+        while (simulateStepCount>0)
+        {
+            simulateStepCount--;
+            calculateNextMove(playerMove, ref playerMove.tempMoveState, ref visuallyNextPositions, true);
+        }
+    }
+
+    static void calculateNextMove(PlayerCubeGridMove playerMove, ref PlayerMoveState moveState, ref List<Vector3> visuallyNextPositions, bool isInSimulating)
     {
         var transform = moveState.targetTransform;
         var signLayer = playerMove.signLayer;
@@ -290,6 +345,24 @@ public class PlayerCubeGridMove : MonoBehaviour
         var ignoreNextSign = moveState.ignoreNextSign;
         var isSwiming = moveState.isSwiming;
         var lastIsMoveBack = moveState.lastIsMoveBack;
+
+
+        //if force turn around
+        if (moveState.turnAroundNext)
+        {
+            LogManager.log("used skill to move back");
+            playerMove.moveBack(ref moveState, ref visuallyNextPositions, isInSimulating);
+            moveState.turnAroundNext = false;
+
+            //simulate(ref visuallyNextPositions, this, ref moveState, 3);
+            if (!isInSimulating)
+            {
+
+                EventPool.Trigger<int>("turnedInstructionOff", 1);
+            }
+            return;
+        }
+
 
         //if on a turning sign, force turn, unless has ignore next sign
         bool hitSign = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, 1, signLayer);
@@ -304,7 +377,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             else
             {
 
-                if (playerMove.canMove(ref moveState, Vector3.up * -90, isInSimulating, isSwiming))
+                if (playerMove.canMove(ref moveState, Vector3.up * -90, ref playerMove.visuallyNextPositions, isInSimulating, isSwiming))
                 {
                     if (!isInSimulating)
                     {
@@ -349,30 +422,30 @@ public class PlayerCubeGridMove : MonoBehaviour
 
 
 
-        if (playerMove.canMove(ref moveState, Vector3.zero,isInSimulating))
+        if (playerMove.canMove(ref moveState, Vector3.zero, ref playerMove.visuallyNextPositions, isInSimulating))
         {
             LogManager.log("move forward next");
         }
-        else if (playerMove.canMove(ref moveState, Vector3.up * 90, isInSimulating))
+        else if (playerMove.canMove(ref moveState, Vector3.up * 90, ref playerMove.visuallyNextPositions, isInSimulating))
         {
 
             LogManager.log("move right next");
         }
-        else if (playerMove.canMove(ref moveState, -Vector3.up * 90, isInSimulating))
+        else if (playerMove.canMove(ref moveState, -Vector3.up * 90, ref playerMove.visuallyNextPositions, isInSimulating))
         {
             LogManager.log("move left next");
         }
-        else if (playerMove.canMove(ref moveState, Vector3.zero, isInSimulating, isSwiming))
+        else if (playerMove.canMove(ref moveState, Vector3.zero, ref playerMove.visuallyNextPositions, isInSimulating, isSwiming))
         {
 
             LogManager.log("swim forward next");
         }
-        else if (playerMove.canMove(ref moveState, Vector3.up * 90, isInSimulating, isSwiming))
+        else if (playerMove.canMove(ref moveState, Vector3.up * 90, ref playerMove.visuallyNextPositions, isInSimulating, isSwiming))
         {
 
             LogManager.log("swim right next");
         }
-        else if (playerMove.canMove(ref moveState, -Vector3.up * 90, isInSimulating, isSwiming))
+        else if (playerMove.canMove(ref moveState, -Vector3.up * 90, ref playerMove.visuallyNextPositions, isInSimulating, isSwiming))
         {
 
             LogManager.log("swim left next");
@@ -380,12 +453,14 @@ public class PlayerCubeGridMove : MonoBehaviour
         else
         {
             LogManager.log("move back next");
-            playerMove.moveBack(ref moveState);
+            playerMove.moveBack(ref moveState, ref playerMove.visuallyNextPositions,isInSimulating);
         }
     }
 
     public void decideNextMove()
     {
+        visuallyNextPositions.Clear();
+        visuallyNextPositions.Add(moveState.targetTransform.position + moveState.targetTransform.up * 0.1f);
         //if has collectable, collect
         if (startedMoving)
         {
@@ -412,21 +487,30 @@ public class PlayerCubeGridMove : MonoBehaviour
             }
         }
 
-        //if force turn around
-        if (moveState.turnAroundNext)
+        calculateNextMove(this, ref moveState,ref visuallyNextPositions, false);
+        simulate(ref visuallyNextPositions, this, moveState, simulateCount);
+
+
+    }
+
+    public void simulateByAction()
+    {
+        //don't change position until the one the same to next position, then simulate
+        int i = 0;
+        for (; i < visuallyNextPositions.Count; i++)
         {
-            LogManager.log("used skill to move back");
-            moveBack(ref moveState);
-            moveState.turnAroundNext = false;
-
-            EventPool.Trigger<int>("turnedInstructionOff", 1);
-            return;
+            if((visuallyNextPositions[i] - moveState.targetTransform.position).magnitude<0.3f)
+            {
+                i++;
+                break;
+            }
         }
-
-        calculateNextMove(this, ref moveState, false);
-
-
-
+        while (visuallyNextPositions.Count > i)
+        {
+            visuallyNextPositions.RemoveAt(i);
+        }
+        //tempMoveState.copy(moveState);
+        simulate(ref visuallyNextPositions, this,moveState, simulateCount);
     }
 
     public bool gameEnd()
@@ -470,14 +554,17 @@ public class PlayerCubeGridMove : MonoBehaviour
     public void turnAround()
     {
         moveState.turnAroundNext = !moveState.turnAroundNext;
+        simulateByAction();
     }
     public void ignoreSign()
     {
         moveState.ignoreNextSign = !moveState.ignoreNextSign;
+        simulateByAction();
     }
     public void swim()
     {
         moveState.swimNext = !moveState.swimNext;
+        simulateByAction();
     }
     public void startMove()
     {
@@ -521,13 +608,18 @@ public class PlayerCubeGridMove : MonoBehaviour
             }
             if (nextPositions.Count != nextRotations.Count)
             {
-                Debug.LogWarning("positions not the same count");
+                Debug.LogError("positions not the same count");
             }
             if (nextPositions.Count > 0)
             {
                 //move
                 transform.Translate((nextPositions[0] - transform.position).normalized * moveSpeed * Time.deltaTime, Space.World);
                 float donePercentage = Mathf.Min(1F, Time.deltaTime / (moveSpeed));
+
+                if (nextRotations.Count == 0)
+                {
+                    Debug.LogError("hmmm?");
+                }
 
                 transform.rotation = Quaternion.Slerp(transform.rotation, nextRotations[0], donePercentage);
                 //var deltaQuaternion = transform.rotation * Quaternion.Inverse(nextRotations[0]);
@@ -557,11 +649,12 @@ public class PlayerCubeGridMove : MonoBehaviour
     public List<Vector3> nextPoints()
     {
         var res = new List<Vector3>();
-        res.Add(transform.position + transform.up * 0.1f);
+        //res.Add(transform.position + transform.up * 0.1f);
 
         foreach (var p in visuallyNextPositions)
         {
             //this need to add based on 
+            res.Add(p);
             res.Add(p);
         }
 

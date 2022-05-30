@@ -10,7 +10,7 @@ public class LineArrow : MonoBehaviour
     void Start()
     {
         _renderer = GetComponent<LineRenderer>();
-        _renderer.alignment = LineAlignment.TransformZ;
+        //_renderer.alignment = LineAlignment.TransformZ;
     }
 
     // Update is called once per frame
