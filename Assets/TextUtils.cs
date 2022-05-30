@@ -20,7 +20,7 @@ public class TextUtils : MonoBehaviour
 
 
 
-        { "dragZoom","Drag to look around\nScroll to zoom\n" },
+        { "dragZoom","Drag to look around\nScroll to zoom\nPress Start to move" },
         { "useFirstSkill","Click 'Turn Back' to use this skill." },
 
         {"dragInGame","You can look around by toggling Free Camera" },

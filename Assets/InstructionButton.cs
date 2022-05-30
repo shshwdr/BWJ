@@ -19,6 +19,7 @@ public class InstructionButton : MonoBehaviour
         if (i == index)
         {
             offText.SetActive(true);
+            
             onText.SetActive(false);
         }
     }
