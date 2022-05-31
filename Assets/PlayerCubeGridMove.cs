@@ -324,7 +324,6 @@ public class PlayerCubeGridMove : MonoBehaviour
 
     static void simulate(ref List<Vector3> visuallyNextPositions, PlayerCubeGridMove playerMove, PlayerMoveState moveState, int simulateStepCount)
     {
-        Debug.Log("simulate");
         if (playerMove.tempMoveState == null)
         {
             playerMove.tempMoveState = new PlayerMoveState();
