@@ -48,6 +48,11 @@ public class AlwaysHud : MonoBehaviour
         speedText.text = $"x{speedList[currentSpeedIndex] }";
 
     }
+
+    public void resumeSpeed()
+    {
+        Time.timeScale = speedList[currentSpeedIndex];
+    }
     public void updateCollectedText()
     {
         collectedText.text = $"{StageLevelManager.Instance.currentCollected} / {StageLevelManager.Instance.currentLevel.itemCount}";

@@ -19,11 +19,13 @@ public class TutorialPopup : MonoBehaviour
         videoPlayer = GameObject.FindObjectOfType<VideoPlayer>();
         view.Show();
         label.text = text;
-        videoPlayer.clip = Resources.Load<VideoClip>("video/" + videoName);  
+        videoPlayer.clip = Resources.Load<VideoClip>("video/" + videoName);
+        Time.timeScale = 0;
     }
     public void hide()
     {
         view.Hide();
+        GameObject.FindObjectOfType<AlwaysHud>().resumeSpeed();
     }
     // Start is called before the first frame update
     void Start()
