@@ -21,7 +21,8 @@ public class TextUtils : MonoBehaviour
 
 
         { "dragZoom","Drag to look around\nScroll to zoom\nPress Start to move" },
-        { "useFirstSkill","Click 'Turn Back' to use this skill." },
+        { "useFirstSkill","Click 'Turn Back' to use the skill and turn back." },
+        { "useFirstSkill_video","Click 'Turn Back' to use the skill and turn back." },
 
         {"dragInGame","You can look around by toggling Free Camera" },
         {"moveLogic","Move priority at intersection: Forward, Right, Left. If one direction is blocked, you will try the next in order" },
@@ -33,6 +34,14 @@ public class TextUtils : MonoBehaviour
         {"restart","Do you want to clear your previous data and restart the game?" },
     };
 
+    static public string getVideo(string name)
+    {
+        if (!textMap.ContainsKey(name+ "_video"))
+        {
+            return "";
+        }
+        return textMap[name + "_video"];
+    }
 
     static public string getText(string name)
     {

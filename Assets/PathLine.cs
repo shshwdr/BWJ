@@ -35,7 +35,7 @@ public class PathLine : MonoBehaviour
     void Start()
     {
         pathLine = GetComponent<BGCurve>();
-        playerMove = GetComponentInParent<PlayerCubeGridMove>();
+        playerMove = GameObject.FindObjectOfType <PlayerCubeGridMove>();
         pathLine.Clear();
         //pathLine.Clear();
         updatePathLine();

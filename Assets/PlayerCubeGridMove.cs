@@ -60,6 +60,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     float rotateCoolDownTimer = 100;
     List<Vector3> nextPositions = new List<Vector3>();
     List<Vector3> visuallyNextPositions = new List<Vector3>();
+    List<Vector3> visuallyNextUps = new List<Vector3>();
     List<Quaternion> nextRotations = new List<Quaternion>();
     public float stopDistance = 0.001f;
 
@@ -104,15 +105,15 @@ public class PlayerCubeGridMove : MonoBehaviour
         Quaternion targetRotation = state.targetTransform.rotation;
         //check if next grid is moveable
         var nextPosition = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize);
-        var nextPosition1 = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize*0.33f);
-        var nextPosition2 = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize*0.66f);
+        var nextPosition1 = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.33f);
+        var nextPosition2 = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.66f);
         bool hitAny = Physics.Raycast(nextPosition + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1);
         if (hitAny)
         {
 
             //if next is hitted, check if hit on ground
             RaycastHit hit;
-            bool hitRoad = Physics.Raycast(nextPosition + state.targetTransform.up * 0.5f, -state.targetTransform.up, out hit,1, canWalkLayer);
+            bool hitRoad = Physics.Raycast(nextPosition + state.targetTransform.up * 0.5f, -state.targetTransform.up, out hit, 1, canWalkLayer);
             bool hitRoad1 = Physics.Raycast(nextPosition1 + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1, canWalkLayer);
             bool hitRoad2 = Physics.Raycast(nextPosition2 + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1, canWalkLayer);
             if (hitRoad && hitRoad1 && hitRoad2)
@@ -128,7 +129,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                 {
                     nextRotations.Add(targetRotation);
                 }
-                if(1<<hit.collider.gameObject.layer == swimLayer)
+                if (1 << hit.collider.gameObject.layer == swimLayer)
                 {
 
                     if (startedMoving)
@@ -138,7 +139,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                         {
                             animator.SetBool("swim", true);
 
-                        FMODUnity.RuntimeManager.PlayOneShot("event:/in water 2");
+                            FMODUnity.RuntimeManager.PlayOneShot("event:/in water 2");
                         }
                     }
                     return true;
@@ -187,7 +188,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             var nnPosition = Utils.snapToGrid(nextPosition - state.targetTransform.up * gridSize * 0.5f);
             nextPosition2 = Utils.snapToGrid(nnPosition + state.targetTransform.up * gridSize * 0.33f);
             //if next is hitted, check if hit on ground
-            bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward),out hit, 1, canWalkLayer);
+            bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), out hit, 1, canWalkLayer);
             bool hitRoad1 = Physics.Raycast(nextPosition1 + targetRotation * Vector3.up * 0.5f, -(targetRotation * Vector3.up), 1, canWalkLayer);
             bool hitRoad2 = Physics.Raycast(nextPosition2 + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), 1, canWalkLayer);
             if (hitRoad && hitRoad1 && hitRoad2)
@@ -217,7 +218,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                 {
                     nextRotations.Add(state.targetTransform.rotation);
                 }
-                if (1<<hit.collider.gameObject.layer == swimLayer)
+                if (1 << hit.collider.gameObject.layer == swimLayer)
                 {
 
                     if (startedMoving)
@@ -264,7 +265,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                     {
                         animator.SetBool("walk", false);
                     }
-                    
+
                 }
                 state.targetTransform.rotation *= Quaternion.Euler(-dir);
                 return false;
@@ -276,7 +277,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     void moveBack(ref PlayerMoveState state, ref List<Vector3> visuallyNextPositions, bool isSimulating)
     {
         state.lastIsMoveBack = true;
-        var targetTransform = state.targetTransform; 
+        var targetTransform = state.targetTransform;
         if (!isSimulating)
         {
             nextPositions.Add(targetTransform.position);
@@ -302,7 +303,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         visuallyNextPositions.Clear();
         nextRotations.Clear();
         decideNextMove();
-        Assert.AreEqual(nextPositions.Count,nextRotations.Count);
+        Assert.AreEqual(nextPositions.Count, nextRotations.Count);
         for (int i = 0; i < nextPositions.Count; i++)
         {
 
@@ -329,7 +330,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             playerMove.tempMoveState = new PlayerMoveState();
         }
         playerMove.tempMoveState.copy(moveState);
-        while (simulateStepCount>0)
+        while (simulateStepCount > 0)
         {
             simulateStepCount--;
             calculateNextMove(playerMove, ref playerMove.tempMoveState, ref visuallyNextPositions, true);
@@ -416,7 +417,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             }
         }
 
-        moveState. lastIsMoveBack = false;
+        moveState.lastIsMoveBack = false;
 
 
 
@@ -452,7 +453,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         else
         {
             LogManager.log("move back next");
-            playerMove.moveBack(ref moveState, ref playerMove.visuallyNextPositions,isInSimulating);
+            playerMove.moveBack(ref moveState, ref playerMove.visuallyNextPositions, isInSimulating);
         }
     }
 
@@ -486,7 +487,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             }
         }
 
-        calculateNextMove(this, ref moveState,ref visuallyNextPositions, false);
+        calculateNextMove(this, ref moveState, ref visuallyNextPositions, false);
         simulate(ref visuallyNextPositions, this, moveState, simulateCount);
 
 
@@ -498,7 +499,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         int i = 0;
         for (; i < visuallyNextPositions.Count; i++)
         {
-            if((visuallyNextPositions[i] - moveState.targetTransform.position).magnitude<0.3f)
+            if ((visuallyNextPositions[i] - moveState.targetTransform.position).magnitude < 0.3f)
             {
                 i++;
                 break;
@@ -509,7 +510,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             visuallyNextPositions.RemoveAt(i);
         }
         //tempMoveState.copy(moveState);
-        simulate(ref visuallyNextPositions, this,moveState, simulateCount);
+        simulate(ref visuallyNextPositions, this, moveState, simulateCount);
     }
 
     public bool gameEnd()
@@ -523,7 +524,7 @@ public class PlayerCubeGridMove : MonoBehaviour
 
                 animator.SetTrigger("victory");
             }
-            if (StageLevelManager.Instance. showDialogue)
+            if (StageLevelManager.Instance.showDialogue)
             {
                 if (StageLevelManager.Instance.collectedAllInLevel())
                 {
@@ -636,7 +637,7 @@ public class PlayerCubeGridMove : MonoBehaviour
 
 
             }
-            
+
         }
     }
 
