@@ -24,7 +24,7 @@ public class TextUtils : MonoBehaviour
         { "useFirstSkill","Click 'Turn Back' to use the skill and turn back." },
         { "useFirstSkill_video","Click 'Turn Back' to use the skill and turn back." },
 
-        {"dragInGame","You can look around by toggling Free Camera" },
+        {"dragInGame","You can press Reset Camera to follow player" },
         {"moveLogic","Move priority at intersection: Forward, Right, Left. If one direction is blocked, you will try the next in order" },
         {"leverFirst","You will pull levers to rotate the road when you walk by." },
         {"learnSign","Signs will force turning in that direction... If you can" },
