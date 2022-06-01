@@ -92,6 +92,46 @@ public class PlayerCubeGridMove : MonoBehaviour
         EventPool.OptIn("StartGame", startMove);
     }
 
+    void swimInMove(RaycastHit hit, ref PlayerMoveState state, bool isSimulating)
+    {
+        if (1 << hit.collider.gameObject.layer == swimLayer)
+        {
+
+            if (startedMoving)
+            {
+                state.isSwiming = true;
+                if (!isSimulating)
+                {
+                    animator.SetBool("swim", true);
+
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/in water 2");
+                }
+            }
+        }
+        else
+        {
+            if (startedMoving)
+            {
+                if (!isSimulating)
+                {
+                    animator.SetBool("swim", false);
+                    animator.SetBool("walk", true);
+                }
+                if (state.isSwiming)
+                {
+                    //swimNext = false;
+                    state.isSwiming = false;
+                    if (!isSimulating)
+                    {
+                        FMODUnity.RuntimeManager.PlayOneShot("event:/iout water");
+                    }
+
+                    //EventPool.Trigger<int>("turnedInstructionOff", 3);
+                }
+            }
+        }
+    }
+
     bool canMove(ref PlayerMoveState state, Vector3 dir, ref List<Vector3> visuallyNextPositions, bool isSimulating, bool forceSwim = false)
     {
 
@@ -129,44 +169,8 @@ public class PlayerCubeGridMove : MonoBehaviour
                 {
                     nextRotations.Add(targetRotation);
                 }
-                if (1 << hit.collider.gameObject.layer == swimLayer)
-                {
-
-                    if (startedMoving)
-                    {
-                        state.isSwiming = true;
-                        if (!isSimulating)
-                        {
-                            animator.SetBool("swim", true);
-
-                            FMODUnity.RuntimeManager.PlayOneShot("event:/in water 2");
-                        }
-                    }
-                    return true;
-                }
-                else
-                {
-                    if (startedMoving)
-                    {
-                        if (!isSimulating)
-                        {
-                            animator.SetBool("swim", false);
-                            animator.SetBool("walk", true);
-                        }
-                        if (state.isSwiming)
-                        {
-                            //swimNext = false;
-                            state.isSwiming = false;
-                            if (!isSimulating)
-                            {
-                                FMODUnity.RuntimeManager.PlayOneShot("event:/iout water");
-                            }
-
-                            //EventPool.Trigger<int>("turnedInstructionOff", 3);
-                        }
-                    }
-                    return true;
-                }
+                swimInMove(hit, ref state, isSimulating);
+                return true;
             }
             else
             {
@@ -174,6 +178,15 @@ public class PlayerCubeGridMove : MonoBehaviour
                 //{
                 //    animator.SetBool("walk", false);
                 //}
+
+                if (startedMoving)
+                {
+                    if (!isSimulating)
+                    {
+                        animator.SetBool("walk", false);
+                    }
+
+                }
                 state.targetTransform.rotation *= Quaternion.Euler(-dir);
                 return false;
             }
@@ -218,43 +231,7 @@ public class PlayerCubeGridMove : MonoBehaviour
                 {
                     nextRotations.Add(state.targetTransform.rotation);
                 }
-                if (1 << hit.collider.gameObject.layer == swimLayer)
-                {
-
-                    if (startedMoving)
-                    {
-                        state.isSwiming = true;
-                        if (!isSimulating)
-                        {
-                            animator.SetBool("swim", true);
-                            FMODUnity.RuntimeManager.PlayOneShot("event:/in water 2");
-                        }
-                    }
-                }
-                else
-                {
-                    if (startedMoving)
-                    {
-
-                        if (!isSimulating)
-                        {
-                            animator.SetBool("swim", false);
-                            animator.SetBool("walk", true);
-                        }
-                        if (state.isSwiming)
-                        {
-                            //swimNext = false;
-                            state.isSwiming = false;
-                            if (!isSimulating)
-                            {
-                                FMODUnity.RuntimeManager.PlayOneShot("event:/iout water");
-                            }
-
-                            //EventPool.Trigger<int>("turnedInstructionOff", 3);
-
-                        }
-                    }
-                }
+                swimInMove(hit, ref state, isSimulating);
                 return true;
             }
             else
