@@ -65,7 +65,7 @@ Shader "Hidden/Kino/Glitch/Analog"
         half4 src1 = tex2D(_MainTex, frac(float2(u + jitter + shake, jump)));
         half4 src2 = tex2D(_MainTex, frac(float2(u + jitter + shake + drift, jump)));
 
-        return half4((src1.r+src2.r)/2, (src1.g + src2.g)/2,( src2.b + src1.b)/2, 1);
+        return half4((src1.r+src2.g)/2, (src1.g + src2.b)/2,( src2.b + src1.r)/2, 1);
     }
 
     ENDCG

@@ -11,6 +11,21 @@ public class ObejctSwapper : MonoBehaviour
 
     public bool SwapNow;
 
+
+    static void duplicate()
+    {
+        var selects = Selection.gameObjects;
+        foreach (var select in selects)
+        {
+            GameObject newObject = GameObject.Instantiate(select);
+            select.transform.position = select.transform.position + select.transform.up;
+
+
+            Selection.activeGameObject = newObject;
+            EditorUtility.SetDirty(newObject);
+
+        }
+    }
     static void Swap(string item)
     {
         var selects = Selection.gameObjects;
@@ -103,6 +118,13 @@ public class ObejctSwapper : MonoBehaviour
         //}
     }
 
+
+
+    [MenuItem("LevelCreator/DuplicateUp &8")]
+    static void DuplicateAndMoveUp()
+    {
+        duplicate();
+    }
 
     [MenuItem("LevelCreator/ForestGrass &9")]
     static void ForestGrass()
