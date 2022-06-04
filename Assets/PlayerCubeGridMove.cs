@@ -51,6 +51,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     public LayerMask swimLayer;
     public LayerMask signLayer;
     public LayerMask collectableLayer;
+    public LayerMask ladderLayer;
     public LayerMask endLayer;
     public LayerMask leverLayer;
     public LayerMask tutorialLayer;
@@ -59,7 +60,18 @@ public class PlayerCubeGridMove : MonoBehaviour
     public float rotateCoolDown = 0.1f;
     float rotateCoolDownTimer = 100;
     List<Vector3> nextPositions = new List<Vector3>();
-    List<Vector3> visuallyNextPositions = new List<Vector3>();
+
+    struct VisuallyPosition
+    {
+        public Vector3 position;
+        public Vector3 right;
+        public VisuallyPosition(Vector3 p,Vector3 u)
+        {
+            position = p;
+            right = u;
+        }
+    }
+    List<VisuallyPosition> visuallyNextPositions = new List<VisuallyPosition>();
     List<Vector3> visuallyNextUps = new List<Vector3>();
     List<Quaternion> nextRotations = new List<Quaternion>();
     public float stopDistance = 0.001f;
@@ -132,7 +144,48 @@ public class PlayerCubeGridMove : MonoBehaviour
         }
     }
 
-    bool canMove(ref PlayerMoveState state, Vector3 dir, ref List<Vector3> visuallyNextPositions, bool isSimulating, bool forceSwim = false)
+    void addMovePosition(ref PlayerMoveState state, ref List<VisuallyPosition> visuallyNextPositions, Vector3 nextPosition, Quaternion targetRotation, bool isSimulating, Vector3 up, Vector3 right)
+    {
+        addMovePosition(ref state, ref visuallyNextPositions, nextPosition, targetRotation, isSimulating, up, right, Quaternion.identity);
+    }
+
+    void addMovePosition(ref PlayerMoveState state, ref List<VisuallyPosition> visuallyNextPositions, Vector3 nextPosition, Quaternion targetRotation, bool isSimulating, Vector3 up, Vector3 right, Quaternion realRight)
+    {
+        if (!isSimulating)
+        {
+            nextPositions.Add(nextPosition);
+        }
+        state.targetTransform.position = nextPosition;
+        visuallyNextPositions.Add(new VisuallyPosition(nextPosition + up * 0.1f, right));
+
+        targetRotation *= realRight;
+        state.targetTransform.rotation = targetRotation;
+
+        if (!isSimulating)
+        {
+            nextRotations.Add(targetRotation);
+        }
+    }
+
+    bool canMove(ref PlayerMoveState state, Vector3 dir, ref List<VisuallyPosition> visuallyNextPositions, bool isSimulating, bool forceSwim = false)
+    {
+        var visual = new List<VisuallyPosition>();
+        bool res = canMove_internal(ref state, dir, ref visual, isSimulating,forceSwim);
+        if (res)
+        {
+            foreach(var v in visual)
+            {
+                visuallyNextPositions.Add(v);
+            }
+        }
+        else
+        {
+            res = res;
+        }
+        return res;
+    }
+
+    bool canMove_internal(ref PlayerMoveState state, Vector3 dir, ref List<VisuallyPosition> visuallyNextPositions, bool isSimulating, bool forceSwim = false)
     {
 
         LayerMask canWalkLayer = walkableLayer;
@@ -140,9 +193,45 @@ public class PlayerCubeGridMove : MonoBehaviour
         {
             canWalkLayer |= swimLayer;
         }
-
+        //var originRight = state.targetTransform.right;
         state.targetTransform.rotation *= Quaternion.Euler(dir);
+
+        var right = state.targetTransform.right;
+        //if(right != originRight)
+        //{
+        //    right += originRight;
+        //}
         Quaternion targetRotation = state.targetTransform.rotation;
+
+        //check if there is a wall in front
+        //check if there is a ladder in front
+
+        bool hitInfront = Physics.Raycast(state.targetTransform.position+state.targetTransform.up*0.5f, state.targetTransform.forward, 1);
+        RaycastHit hitTest;
+        bool test = Physics.Raycast(state.targetTransform.position + state.targetTransform.up * 0.5f, state.targetTransform.forward, out hitTest, 1);
+        if (hitInfront)
+        {
+
+            bool hitLadderInfront = Physics.Raycast(state.targetTransform.position + state.targetTransform.up * 0.5f, state.targetTransform.forward, 1,ladderLayer);
+            if (hitLadderInfront)
+            {
+                addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward*0.5f , targetRotation, isSimulating, state.targetTransform.up, right);
+                addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.up, targetRotation, isSimulating, Vector3.zero, right);
+                addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward * 0.5f, targetRotation, isSimulating, state.targetTransform.up, right);
+
+                return true;
+            }
+            else
+            {
+                //hit wall, give up
+                return false;
+            }
+        }
+
+
+
+
+
         //check if next grid is moveable
         var nextPosition = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize);
         var nextPosition1 = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.33f);
@@ -150,25 +239,16 @@ public class PlayerCubeGridMove : MonoBehaviour
         bool hitAny = Physics.Raycast(nextPosition + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1);
         if (hitAny)
         {
-
-            //if next is hitted, check if hit on ground
+           
+            //if next is hitted, check if hit on road
             RaycastHit hit;
             bool hitRoad = Physics.Raycast(nextPosition + state.targetTransform.up * 0.5f, -state.targetTransform.up, out hit, 1, canWalkLayer);
             bool hitRoad1 = Physics.Raycast(nextPosition1 + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1, canWalkLayer);
             bool hitRoad2 = Physics.Raycast(nextPosition2 + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1, canWalkLayer);
             if (hitRoad && hitRoad1 && hitRoad2)
             {
-                if (!isSimulating)
-                {
-                    nextPositions.Add(nextPosition);
-                }
-                state.targetTransform.position = nextPosition;
-                visuallyNextPositions.Add(nextPosition + state.targetTransform.up * 0.1f);
 
-                if (!isSimulating)
-                {
-                    nextRotations.Add(targetRotation);
-                }
+                addMovePosition(ref state, ref visuallyNextPositions, nextPosition, targetRotation, isSimulating, state.targetTransform.up, right);
                 swimInMove(hit, ref state, isSimulating);
                 return true;
             }
@@ -193,7 +273,19 @@ public class PlayerCubeGridMove : MonoBehaviour
         }
         else
         {
-            //check rotate position
+            //if not hit
+            //check if there is a ladder to get down
+            bool hitDownStair = Physics.Raycast(state.targetTransform.position + state.targetTransform.forward - state.targetTransform.up * 0.5f, -state.targetTransform.forward, 1, ladderLayer);
+                if (hitDownStair)
+                {
+                    addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward * 0.5f, targetRotation, isSimulating, state.targetTransform.up, right);
+                    addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position - state.targetTransform.up, targetRotation, isSimulating, Vector3.zero, right);
+                    addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward * 0.5f, targetRotation, isSimulating, state.targetTransform.up, right);
+                }
+
+
+
+            // check if there is a angle to rotate
 
             RaycastHit hit;
             nextPosition = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.5f);
@@ -204,33 +296,41 @@ public class PlayerCubeGridMove : MonoBehaviour
             bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), out hit, 1, canWalkLayer);
             bool hitRoad1 = Physics.Raycast(nextPosition1 + targetRotation * Vector3.up * 0.5f, -(targetRotation * Vector3.up), 1, canWalkLayer);
             bool hitRoad2 = Physics.Raycast(nextPosition2 + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), 1, canWalkLayer);
+
+            //or check if hit on ladder
+
             if (hitRoad && hitRoad1 && hitRoad2)
             {
-                if (!isSimulating)
-                {
-                    nextPositions.Add(nextPosition);
-                }
+                addMovePosition(ref state, ref visuallyNextPositions, nextPosition, targetRotation, isSimulating, state.targetTransform.up+state.targetTransform.forward, right);
+                //if (!isSimulating)
+                //{
+                //    nextPositions.Add(nextPosition);
+                //}
 
-                state.targetTransform.position = nextPosition;
-                visuallyNextPositions.Add(nextPosition + state.targetTransform.up * 0.1f + state.targetTransform.forward * 0.1f);
+                //state.targetTransform.position = nextPosition;
+                //visuallyNextPositions.Add(new VisuallyPosition( nextPosition + state.targetTransform.up * 0.1f + state.targetTransform.forward * 0.1f, state.targetTransform.right));
 
-                if (!isSimulating)
-                {
-                    nextRotations.Add(targetRotation);
-                }
-                if (!isSimulating)
-                {
-                    nextPositions.Add(nnPosition);
-                }
+                //if (!isSimulating)
+                //{
+                //    nextRotations.Add(targetRotation);
+                //}
 
-                state.targetTransform.position = nnPosition;
-                visuallyNextPositions.Add(nnPosition + state.targetTransform.forward * 0.1f);
-                state.targetTransform.rotation *= Quaternion.Euler(Vector3.right * 90);
 
-                if (!isSimulating)
-                {
-                    nextRotations.Add(state.targetTransform.rotation);
-                }
+
+                addMovePosition(ref state, ref visuallyNextPositions, nnPosition, targetRotation, isSimulating, state.targetTransform.forward, right, Quaternion.Euler(Vector3.right * 90));
+                //if (!isSimulating)
+                //{
+                //    nextPositions.Add(nnPosition);
+                //}
+
+                //state.targetTransform.position = nnPosition;
+                //visuallyNextPositions.Add(new VisuallyPosition(nnPosition + state.targetTransform.forward * 0.1f, state.targetTransform.right));
+                //state.targetTransform.rotation *= Quaternion.Euler(Vector3.right * 90);
+
+                //if (!isSimulating)
+                //{
+                //    nextRotations.Add(state.targetTransform.rotation);
+                //}
                 swimInMove(hit, ref state, isSimulating);
                 return true;
             }
@@ -251,27 +351,34 @@ public class PlayerCubeGridMove : MonoBehaviour
     }
 
 
-    void moveBack(ref PlayerMoveState state, ref List<Vector3> visuallyNextPositions, bool isSimulating)
+    void moveBack(ref PlayerMoveState state, ref List<VisuallyPosition> visuallyNextPositions, bool isSimulating)
     {
         state.lastIsMoveBack = true;
         var targetTransform = state.targetTransform;
-        if (!isSimulating)
-        {
-            nextPositions.Add(targetTransform.position);
-        }
-        visuallyNextPositions.Add(targetTransform.position + targetTransform.up * 0.1f);
-        targetTransform.rotation *= Quaternion.Euler(Vector3.up * 90);
-        if (!isSimulating)
-        {
-            nextRotations.Add(targetTransform.rotation);
-            nextPositions.Add(targetTransform.position);
-        }
 
-        targetTransform.rotation *= Quaternion.Euler(Vector3.up * 90);
-        if (!isSimulating)
-        {
-            nextRotations.Add(targetTransform.rotation);
-        }
+
+        var fakeList = new List<VisuallyPosition>();
+        addMovePosition(ref state, ref fakeList, targetTransform.position, targetTransform.rotation, isSimulating, state.targetTransform.up, targetTransform.right, Quaternion.Euler(Vector3.up * 90));
+        
+        addMovePosition(ref state, ref visuallyNextPositions, targetTransform.position, targetTransform.rotation, isSimulating, state.targetTransform.up, targetTransform.right, Quaternion.Euler(Vector3.up * 90));
+
+        //if (!isSimulating)
+        //{
+        //    nextPositions.Add(targetTransform.position);
+        //}
+        //targetTransform.rotation *= Quaternion.Euler(Vector3.up * 90);
+        //visuallyNextPositions.Add(new VisuallyPosition(targetTransform.position + targetTransform.up * 0.1f, targetTransform.right));
+        //if (!isSimulating)
+        //{
+        //    nextRotations.Add(targetTransform.rotation);
+        //    nextPositions.Add(targetTransform.position);
+        //}
+
+        //targetTransform.rotation *= Quaternion.Euler(Vector3.up * 90);
+        //if (!isSimulating)
+        //{
+        //    nextRotations.Add(targetTransform.rotation);
+        //}
     }
 
     public void moveNextMove()
@@ -300,7 +407,7 @@ public class PlayerCubeGridMove : MonoBehaviour
 
 
 
-    static void simulate(ref List<Vector3> visuallyNextPositions, PlayerCubeGridMove playerMove, PlayerMoveState moveState, int simulateStepCount)
+    static void simulate(ref List<VisuallyPosition> visuallyNextPositions, PlayerCubeGridMove playerMove, PlayerMoveState moveState, int simulateStepCount)
     {
         if (playerMove.tempMoveState == null)
         {
@@ -314,7 +421,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         }
     }
 
-    static void calculateNextMove(PlayerCubeGridMove playerMove, ref PlayerMoveState moveState, ref List<Vector3> visuallyNextPositions, bool isInSimulating)
+    static void calculateNextMove(PlayerCubeGridMove playerMove, ref PlayerMoveState moveState, ref List<VisuallyPosition> visuallyNextPositions, bool isInSimulating)
     {
         var transform = moveState.targetTransform;
         var signLayer = playerMove.signLayer;
@@ -354,7 +461,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             else
             {
 
-                if (playerMove.canMove(ref moveState, Vector3.up * -90, ref playerMove.visuallyNextPositions, isInSimulating, isSwiming))
+                if (playerMove.canMove(ref moveState, Vector3.up * -90, ref  playerMove.visuallyNextPositions, isInSimulating, isSwiming))
                 {
                     if (!isInSimulating)
                     {
@@ -437,7 +544,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     public void decideNextMove()
     {
         visuallyNextPositions.Clear();
-        visuallyNextPositions.Add(moveState.targetTransform.position + moveState.targetTransform.up * 0.1f);
+        visuallyNextPositions.Add( new VisuallyPosition(moveState.targetTransform.position + moveState.targetTransform.up * 0.1f, moveState.targetTransform.right));
         //if has collectable, collect
         if (startedMoving)
         {
@@ -476,7 +583,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         int i = 0;
         for (; i < visuallyNextPositions.Count; i++)
         {
-            if ((visuallyNextPositions[i] - moveState.targetTransform.position).magnitude < 0.3f)
+            if ((visuallyNextPositions[i].position - moveState.targetTransform.position).magnitude < 0.3f)
             {
                 i++;
                 break;
@@ -627,12 +734,68 @@ public class PlayerCubeGridMove : MonoBehaviour
     {
         var res = new List<Vector3>();
         //res.Add(transform.position + transform.up * 0.1f);
-
-        foreach (var p in visuallyNextPositions)
+        bool hasTurnAround = false;
+        HashSet<Vector3> existedPositions = new HashSet<Vector3>();
+        for(int i = 0; i < visuallyNextPositions.Count; i++)
         {
-            //this need to add based on 
-            res.Add(p);
+            if (existedPositions.Contains(visuallyNextPositions[i].position))
+            {
+                hasTurnAround = true;
+                break;
+            }
+            existedPositions.Add(visuallyNextPositions[i].position);
         }
+        //bool onRight = false;
+        HashSet<Vector3> leftRightPositions = new HashSet<Vector3> ();
+        int lineIndex = 0;
+        for (int i = 0;i<visuallyNextPositions.Count;i++){
+            var p = visuallyNextPositions[i];
+        
+            if (hasTurnAround)
+            {
+
+                if (leftRightPositions.Contains(p.position))
+                {
+                    lineIndex = 1 - lineIndex;
+                    leftRightPositions.Clear();
+                }
+                leftRightPositions.Add(p.position);
+                var position = p.position;
+
+
+                //if (i == 0 && visuallyNextPositions.Count >= 1)
+                //{
+                //    var originDistance = (visuallyNextPositions[0].position - visuallyNextPositions[1].position).magnitude;
+                //    var moveProgress = (transform.position - visuallyNextPositions[1].position).magnitude / originDistance;
+                //    moveProgress = Mathf.Clamp(moveProgress, 0, 1);
+                //    position = visuallyNextPositions[1].position + (visuallyNextPositions[0].position - visuallyNextPositions[1].position) * moveProgress;
+
+                //}
+
+                var right = p.right;
+                if(i!=visuallyNextPositions.Count-1 && visuallyNextPositions[i + 1].right != right && visuallyNextPositions[i + 1].right != -right)
+                {
+                    right += visuallyNextPositions[i+1].right;
+                }
+                position -= right * 0.08f;
+                //if (lineIndex == 0)
+                //{
+                //    position -= right * 0.1f;
+                //}
+                //else
+                //{
+
+                //    position += right * 0.1f;
+                //}
+                res.Add(position);
+            }
+            else
+            {
+
+                res.Add(p.position);
+            } 
+        }
+
 
         return res;
     }

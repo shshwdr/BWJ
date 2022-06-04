@@ -92,6 +92,9 @@ MonoBehaviour:
   collectableLayer:
     serializedVersion: 2
     m_Bits: 2048
+  ladderLayer:
+    serializedVersion: 2
+    m_Bits: 262144
   endLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -104,9 +107,6 @@ MonoBehaviour:
   frontDetection: {fileID: 7852817379291807682}
   rotateCoolDown: 0.5
   stopDistance: 0.005
-  ignoreNextSign: 0
-  turnAroundNext: 0
-  swimNext: 0
 --- !u!1 &7852817379291807683
 GameObject:
   m_ObjectHideFlags: 0

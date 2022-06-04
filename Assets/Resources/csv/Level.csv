@@ -1,10 +1,11 @@
-﻿displayName,sceneName,itemToUnlock,itemCount
-1,tutorial,0,1
-2,practice turn back,0,3
-3,learn trigger,0,3
-4,practice trigger,0,3
-5,learn sign,0,3
-6,practice sign,0,3
-7,learn water,0,3
-8,practice water,0,3
-9,comb1,0,3
+﻿displayName,sceneName,itemToUnlock,itemCount,stage
+1,tutorial,0,1,0
+2,practice turn back,0,3,0
+3,learn trigger,0,3,0
+4,practice trigger,0,3,0
+5,learn sign,0,3,0
+6,practice sign,0,3,0
+7,learn water,0,3,0
+8,practice water,0,3,0
+9,comb1,0,3,0
+10,ladder,0,3,1
