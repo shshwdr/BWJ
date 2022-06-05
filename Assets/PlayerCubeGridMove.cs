@@ -50,6 +50,8 @@ public class PlayerCubeGridMove : MonoBehaviour
     public LayerMask walkableLayer;
     public LayerMask swimLayer;
     public LayerMask signLayer;
+    public LayerMask teleportLayer;
+    
     public LayerMask collectableLayer;
     public LayerMask ladderLayer;
     public LayerMask endLayer;
@@ -425,6 +427,7 @@ public class PlayerCubeGridMove : MonoBehaviour
     {
         var transform = moveState.targetTransform;
         var signLayer = playerMove.signLayer;
+        var teleportLayer = playerMove.teleportLayer;
         var leverLayer = playerMove.leverLayer;
         var ignoreNextSign = moveState.ignoreNextSign;
         var isSwiming = moveState.isSwiming;
@@ -445,6 +448,43 @@ public class PlayerCubeGridMove : MonoBehaviour
                 EventPool.Trigger<int>("turnedInstructionOff", 1);
             }
             return;
+        }
+
+        // if on a teleport, find teleport to mvoe
+        RaycastHit teleportItem;
+        bool hitTeleport = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, out teleportItem, 1, teleportLayer);
+        if (hitTeleport)
+        {
+            if (ignoreNextSign)
+            {
+                ignoreNextSign = false;
+
+                EventPool.Trigger<int>("turnedInstructionOff", 2);
+            }
+            else
+            {
+                //find another teleport on this face
+                playerMove. addMovePosition(ref moveState, ref visuallyNextPositions, teleportItem.collider.GetComponent<Teleport>().teleportTarget.position, moveState.targetTransform.rotation, isInSimulating, moveState.targetTransform.up, moveState.targetTransform.right);
+                //if (teleportItem.transform.parent.parent.GetComponentsInChildren<Teleport>().Length == 2)
+                //{
+                return;
+                //}
+                //else
+                //{
+                //    Debug.LogError("teleport should appear in pair");
+                //}
+
+
+                //if (playerMove.canMove(ref moveState, Vector3.up * -90, ref playerMove.visuallyNextPositions, isInSimulating, isSwiming))
+                //{
+                //    if (!isInSimulating)
+                //    {
+                //        FMODUnity.RuntimeManager.PlayOneShot("event:/sign");
+                //    }
+                //    return;
+                //}
+            }
+
         }
 
 

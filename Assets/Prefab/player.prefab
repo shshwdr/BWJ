@@ -89,6 +89,9 @@ MonoBehaviour:
   signLayer:
     serializedVersion: 2
     m_Bits: 512
+  teleportLayer:
+    serializedVersion: 2
+    m_Bits: 524288
   collectableLayer:
     serializedVersion: 2
     m_Bits: 2048
