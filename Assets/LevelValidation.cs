@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using Priority_Queue;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,13 +16,14 @@ public class LevelValidation : MonoBehaviour
     Dictionary<GameObject, int> collecItemToId;
     Dictionary<GameObject, int> leverItemToId;
 
-
-    struct ValidationStep : System.IEquatable<ValidationStep>
+    class ValidationStep : FastPriorityQueueNode,System.IEquatable<ValidationStep>
     {
         public Vector3 position;
         public Quaternion rotation;
         public List<int> leverState;
         public List<bool> collected;
+
+        public int collectedCount;
 
 
         public List<ValidationStep> previousSteps;
@@ -33,9 +35,9 @@ public class LevelValidation : MonoBehaviour
             this.rotation = rotation;
             this.leverState = new List<int>(triggerState);
             this.collected = new List<bool>(collected);
+            collectedCount = 0;
             previousSteps = new List<ValidationStep>();
             previousPositions = new List<VisuallyPosition>();
-
         }
 
         public ValidationStep(ValidationStep other)
@@ -45,6 +47,7 @@ public class LevelValidation : MonoBehaviour
             this.leverState = new List<int>(other.leverState);
 
             this.collected = new List<bool>(other.collected);
+            this.collectedCount = other.collectedCount;
             previousSteps = new List<ValidationStep>(other.previousSteps);
             previousPositions = new List<VisuallyPosition>(other.previousPositions);
         }
@@ -323,6 +326,14 @@ public class LevelValidation : MonoBehaviour
         newValidationStep.position = player.moveState.targetTransform.position;
         newValidationStep.rotation = player.moveState.targetTransform.rotation;
         newValidationStep.collected = new List<bool>(collectedItem);
+        newValidationStep.collectedCount = 0;
+        foreach (var c in collectedItem)
+        {
+            if (c)
+            {
+                newValidationStep.collectedCount++;
+            }
+        }
         newValidationStep.leverState = new List<int>(leveredTime);
         //newValidationStep.collected = StageLevelManager.Instance.currentCollected;
 
@@ -358,9 +369,9 @@ public class LevelValidation : MonoBehaviour
 
     IEnumerator bfs(PlayerCubeGridMove player, ValidationStep validationStep, int stepLeft, float time, KeyCode key = KeyCode.None)
     {
-
-        Queue<ValidationStep> steps = new Queue<ValidationStep>();
-        steps.Enqueue(validationStep);
+        FastPriorityQueue<ValidationStep> steps = new FastPriorityQueue<ValidationStep>(100000);
+        //Queue<ValidationStep> steps = new Queue<ValidationStep>();
+        steps.Enqueue(validationStep,0);
 
         while (steps.Count > 0 && stepLeft > 0)
         {
@@ -445,7 +456,7 @@ public class LevelValidation : MonoBehaviour
                     continue;
                 }
 
-                steps.Enqueue(newValidationStep);
+                steps.Enqueue(newValidationStep, 0);
             }
 
 
