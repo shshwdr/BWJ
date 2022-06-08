@@ -20,6 +20,11 @@ public class Lever : MonoBehaviour
         //rotateObject.transform.DO
         // targetRotation = rotateObject.transform.rotation * Quaternion.Euler(Vector3.up * 90);
     }
+
+    public void forceRotate()
+    {
+        rotateObject.transform.rotation *= Quaternion.Euler(Vector3.up * 90);
+    }
     // Start is called before the first frame update
     void Start()
     {

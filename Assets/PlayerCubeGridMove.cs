@@ -518,7 +518,10 @@ public class PlayerCubeGridMove : MonoBehaviour
         //todo improve this
         // pull a level if needed
         // if rotating, wont pull the level twice
-        if (!lastIsMoveBack)
+
+        if (!isInSimulating && playerMove.startedMoving)
+        {
+            if (!lastIsMoveBack)
         {
             //check if has lever
             RaycastHit levelHit;
@@ -534,8 +537,6 @@ public class PlayerCubeGridMove : MonoBehaviour
                 else
                 {
                     levelHit.collider.GetComponent<Lever>().rotate();
-                    if (!isInSimulating)
-                    {
                         FMODUnity.RuntimeManager.PlayOneShot("event:/lever");
                     }
                 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - human
   - target
+  - lever
   layers:
   - Default
   - TransparentFX
