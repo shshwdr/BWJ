@@ -26,6 +26,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
     public int currentCollected = 0;
 
     bool isFinished;
+    public bool isLevelFinishedValidation;
     public bool hasEverCollected = false;
     public int starCountInTotal;
 
@@ -161,20 +162,29 @@ public class StageLevelManager : Singleton<StageLevelManager>
     //    //}
     //    return co;
     //}
+
+    public void setCollectable(int value) {
+
+        currentCollected = value;
+    }
+
     public void addCollectable()
     {
         currentCollected++;
-        EventPool.Trigger("updateCollected");
-        //if (!hasEverCollected)
+        if (GameObject.FindObjectOfType<PlayerCubeGridMove>().startedMoving)
         {
-            hasEverCollected = true;
-            EventPool.Trigger("firstCollect");
-        }
+            EventPool.Trigger("updateCollected");
+            //if (!hasEverCollected)
+            {
+                hasEverCollected = true;
+                EventPool.Trigger("firstCollect");
+            }
 
-        if(currentCollected == currentLevel.collectedCount)
-        {
+            if (currentCollected == currentLevel.collectedCount)
+            {
 
-            FMODUnity.RuntimeManager.PlayOneShot("event:/collect all maybe");
+                FMODUnity.RuntimeManager.PlayOneShot("event:/collect all maybe");
+            }
         }
     }
 
@@ -230,6 +240,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
     }
     public void finishLevel()
     {
+        isLevelFinishedValidation = true;
         //first disable player move and create car
 
         //var player = GameObject.FindObjectOfType<PlayerController>();

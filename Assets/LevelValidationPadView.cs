@@ -37,20 +37,20 @@ public class LevelValidationPadView : MonoBehaviour
         foreach(var cell in cells)
         {
             cell.gameObject.SetActive(false);
-            cells[0].transform.parent.parent.GetComponentInParent<Image>().color = new Color(0, 0, 0, 0.5f);
         }
+        cells[0].transform.parent.parent.GetComponentInParent<Image>().color = new Color(0, 0, 0, 0.5f);
     }
-    public void setValidationInfo(int id, string data)
+    public void setValidationInfo()
     {
-        if(id == -1)
+        //if(canArrive)
         {
             cells[0].transform.parent.parent.GetComponentInParent<Image>().color = new Color(1, 1, 1, 0.5f);
         }
-        else
-        {
+        //else
+        //{
 
-            cells[id].gameObject.SetActive(true);
-        }
+        //    cells[id].gameObject.SetActive(true);
+        //}
     }
 }
 #endif

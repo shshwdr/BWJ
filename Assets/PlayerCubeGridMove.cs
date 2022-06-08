@@ -5,6 +5,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
+public struct VisuallyPosition
+{
+    public Vector3 position;
+    public Vector3 right;
+    public VisuallyPosition(Vector3 p, Vector3 u)
+    {
+        position = p;
+        right = u;
+    }
+}
 public class PlayerCubeGridMove : MonoBehaviour
 {
 
@@ -51,29 +61,20 @@ public class PlayerCubeGridMove : MonoBehaviour
     public LayerMask swimLayer;
     public LayerMask signLayer;
     public LayerMask teleportLayer;
-    
+
     public LayerMask collectableLayer;
     public LayerMask ladderLayer;
     public LayerMask endLayer;
     public LayerMask leverLayer;
     public LayerMask tutorialLayer;
-    bool startedMoving = false;
+    public LayerMask validationPadLayer;
+    public bool startedMoving = false;
     public Transform frontDetection;
     public float rotateCoolDown = 0.1f;
     float rotateCoolDownTimer = 100;
     List<Vector3> nextPositions = new List<Vector3>();
 
-    struct VisuallyPosition
-    {
-        public Vector3 position;
-        public Vector3 right;
-        public VisuallyPosition(Vector3 p,Vector3 u)
-        {
-            position = p;
-            right = u;
-        }
-    }
-    List<VisuallyPosition> visuallyNextPositions = new List<VisuallyPosition>();
+    public List<VisuallyPosition> visuallyNextPositions = new List<VisuallyPosition>();
     List<Vector3> visuallyNextUps = new List<Vector3>();
     List<Quaternion> nextRotations = new List<Quaternion>();
     public float stopDistance = 0.001f;
@@ -172,10 +173,10 @@ public class PlayerCubeGridMove : MonoBehaviour
     bool canMove(ref PlayerMoveState state, Vector3 dir, ref List<VisuallyPosition> visuallyNextPositions, bool isSimulating, bool forceSwim = false)
     {
         var visual = new List<VisuallyPosition>();
-        bool res = canMove_internal(ref state, dir, ref visual, isSimulating,forceSwim);
+        bool res = canMove_internal(ref state, dir, ref visual, isSimulating, forceSwim);
         if (res)
         {
-            foreach(var v in visual)
+            foreach (var v in visual)
             {
                 visuallyNextPositions.Add(v);
             }
@@ -208,16 +209,16 @@ public class PlayerCubeGridMove : MonoBehaviour
         //check if there is a wall in front
         //check if there is a ladder in front
 
-        bool hitInfront = Physics.Raycast(state.targetTransform.position+state.targetTransform.up*0.5f, state.targetTransform.forward, 1);
+        bool hitInfront = Physics.Raycast(state.targetTransform.position + state.targetTransform.up * 0.5f, state.targetTransform.forward, 1);
         RaycastHit hitTest;
         bool test = Physics.Raycast(state.targetTransform.position + state.targetTransform.up * 0.5f, state.targetTransform.forward, out hitTest, 1);
         if (hitInfront)
         {
 
-            bool hitLadderInfront = Physics.Raycast(state.targetTransform.position + state.targetTransform.up * 0.5f, state.targetTransform.forward, 1,ladderLayer);
+            bool hitLadderInfront = Physics.Raycast(state.targetTransform.position + state.targetTransform.up * 0.5f, state.targetTransform.forward, 1, ladderLayer);
             if (hitLadderInfront)
             {
-                addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward*0.5f , targetRotation, isSimulating, state.targetTransform.up, right);
+                addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward * 0.5f, targetRotation, isSimulating, state.targetTransform.up, right);
                 addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.up, targetRotation, isSimulating, Vector3.zero, right);
                 addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward * 0.5f, targetRotation, isSimulating, state.targetTransform.up, right);
 
@@ -241,7 +242,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         bool hitAny = Physics.Raycast(nextPosition + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1);
         if (hitAny)
         {
-           
+
             //if next is hitted, check if hit on road
             RaycastHit hit;
             bool hitRoad = Physics.Raycast(nextPosition + state.targetTransform.up * 0.5f, -state.targetTransform.up, out hit, 1, canWalkLayer);
@@ -278,12 +279,12 @@ public class PlayerCubeGridMove : MonoBehaviour
             //if not hit
             //check if there is a ladder to get down
             bool hitDownStair = Physics.Raycast(state.targetTransform.position + state.targetTransform.forward - state.targetTransform.up * 0.5f, -state.targetTransform.forward, 1, ladderLayer);
-                if (hitDownStair)
-                {
-                    addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward * 0.5f, targetRotation, isSimulating, state.targetTransform.up, right);
-                    addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position - state.targetTransform.up, targetRotation, isSimulating, Vector3.zero, right);
-                    addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward * 0.5f, targetRotation, isSimulating, state.targetTransform.up, right);
-                }
+            if (hitDownStair)
+            {
+                addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward * 0.5f, targetRotation, isSimulating, state.targetTransform.up, right);
+                addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position - state.targetTransform.up, targetRotation, isSimulating, Vector3.zero, right);
+                addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward * 0.5f, targetRotation, isSimulating, state.targetTransform.up, right);
+            }
 
 
 
@@ -303,7 +304,7 @@ public class PlayerCubeGridMove : MonoBehaviour
 
             if (hitRoad && hitRoad1 && hitRoad2)
             {
-                addMovePosition(ref state, ref visuallyNextPositions, nextPosition, targetRotation, isSimulating, state.targetTransform.up+state.targetTransform.forward, right);
+                addMovePosition(ref state, ref visuallyNextPositions, nextPosition, targetRotation, isSimulating, state.targetTransform.up + state.targetTransform.forward, right);
                 //if (!isSimulating)
                 //{
                 //    nextPositions.Add(nextPosition);
@@ -361,7 +362,7 @@ public class PlayerCubeGridMove : MonoBehaviour
 
         var fakeList = new List<VisuallyPosition>();
         addMovePosition(ref state, ref fakeList, targetTransform.position, targetTransform.rotation, isSimulating, state.targetTransform.up, targetTransform.right, Quaternion.Euler(Vector3.up * 90));
-        
+
         addMovePosition(ref state, ref visuallyNextPositions, targetTransform.position, targetTransform.rotation, isSimulating, state.targetTransform.up, targetTransform.right, Quaternion.Euler(Vector3.up * 90));
 
         //if (!isSimulating)
@@ -464,7 +465,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             else
             {
                 //find another teleport on this face
-                playerMove. addMovePosition(ref moveState, ref visuallyNextPositions, teleportItem.collider.GetComponent<Teleport>().teleportTarget.position, moveState.targetTransform.rotation, isInSimulating, moveState.targetTransform.up, moveState.targetTransform.right);
+                playerMove.addMovePosition(ref moveState, ref visuallyNextPositions, teleportItem.collider.GetComponent<Teleport>().teleportTarget.position, moveState.targetTransform.rotation, isInSimulating, moveState.targetTransform.up, moveState.targetTransform.right);
                 //if (teleportItem.transform.parent.parent.GetComponentsInChildren<Teleport>().Length == 2)
                 //{
                 return;
@@ -501,7 +502,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             else
             {
 
-                if (playerMove.canMove(ref moveState, Vector3.up * -90, ref  playerMove.visuallyNextPositions, isInSimulating, isSwiming))
+                if (playerMove.canMove(ref moveState, Vector3.up * -90, ref playerMove.visuallyNextPositions, isInSimulating, isSwiming))
                 {
                     if (!isInSimulating)
                     {
@@ -584,19 +585,20 @@ public class PlayerCubeGridMove : MonoBehaviour
     public void decideNextMove()
     {
         visuallyNextPositions.Clear();
-        visuallyNextPositions.Add( new VisuallyPosition(moveState.targetTransform.position + moveState.targetTransform.up * 0.1f, moveState.targetTransform.right));
+        visuallyNextPositions.Add(new VisuallyPosition(moveState.targetTransform.position + moveState.targetTransform.up * 0.1f, moveState.targetTransform.right));
         //if has collectable, collect
-        if (startedMoving)
-        {
-            RaycastHit hitedCollectable = new RaycastHit();
-            bool hitCollectable = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, out hitedCollectable, 1, collectableLayer);
 
-            if (hitCollectable)
+        RaycastHit hitedCollectable = new RaycastHit();
+        bool hitCollectable = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, out hitedCollectable, 1, collectableLayer);
+
+        if (hitCollectable)
+        {
+            if (startedMoving)
             {
                 Destroy(hitedCollectable.collider.gameObject);
-                StageLevelManager.Instance.addCollectable();
                 FMODUnity.RuntimeManager.PlayOneShot("event:/collect 2");
             }
+            StageLevelManager.Instance.addCollectable();
         }
 
         // if has tutorial, unlock tutorial
@@ -612,7 +614,16 @@ public class PlayerCubeGridMove : MonoBehaviour
         }
 
         calculateNextMove(this, ref moveState, ref visuallyNextPositions, false);
-        simulate(ref visuallyNextPositions, this, moveState, simulateCount);
+        if (startedMoving)
+        {
+
+            simulate(ref visuallyNextPositions, this, moveState, simulateCount);
+        }
+        else
+        {
+
+            simulate(ref visuallyNextPositions, this, moveState, 0);
+        }
 
 
     }
@@ -647,24 +658,25 @@ public class PlayerCubeGridMove : MonoBehaviour
             {
 
                 animator.SetTrigger("victory");
-            }
-            if (StageLevelManager.Instance.showDialogue)
-            {
-                if (StageLevelManager.Instance.collectedAllInLevel())
+                if (StageLevelManager.Instance.showDialogue)
                 {
+                    if (StageLevelManager.Instance.collectedAllInLevel())
+                    {
 
-                    DialogueManager.StartConversation($"{StageLevelManager.Instance.currentLevel.id}_end");
-                }
-                else
-                {
+                        DialogueManager.StartConversation($"{StageLevelManager.Instance.currentLevel.id}_end");
+                    }
+                    else
+                    {
 
-                    DialogueManager.StartConversation($"unfinished");
+                        DialogueManager.StartConversation($"unfinished");
+                    }
                 }
+                startedMoving = false;
+
+                StageLevelManager.Instance.finishLevel();
             }
 
-            startedMoving = false;
 
-            StageLevelManager.Instance.finishLevel();
             return true;
         }
         return false;
@@ -673,7 +685,18 @@ public class PlayerCubeGridMove : MonoBehaviour
 
     }
 
+    public LevelValidationPadView getPadStandingOn()
+    {
 
+        RaycastHit hitTest;
+        bool test = Physics.Raycast(moveState.targetTransform.position + moveState.targetTransform.up * 0.5f, -moveState.targetTransform.up, out hitTest, 1, validationPadLayer);
+        if (test)
+        {
+            return hitTest.collider.GetComponent<LevelValidationPadView>();
+        }
+        Debug.LogError("why no pad standing on?");
+        return null;
+    }
 
     public void turnAround()
     {
@@ -770,13 +793,14 @@ public class PlayerCubeGridMove : MonoBehaviour
     {
         //  moreNextPositions
     }
-    public List<Vector3> nextPoints()
+
+    public static List<Vector3> improveVisualPoints(List<VisuallyPosition> visuallyNextPositions)
     {
         var res = new List<Vector3>();
         //res.Add(transform.position + transform.up * 0.1f);
         bool hasTurnAround = false;
         HashSet<Vector3> existedPositions = new HashSet<Vector3>();
-        for(int i = 0; i < visuallyNextPositions.Count; i++)
+        for (int i = 0; i < visuallyNextPositions.Count; i++)
         {
             if (existedPositions.Contains(visuallyNextPositions[i].position))
             {
@@ -786,11 +810,12 @@ public class PlayerCubeGridMove : MonoBehaviour
             existedPositions.Add(visuallyNextPositions[i].position);
         }
         //bool onRight = false;
-        HashSet<Vector3> leftRightPositions = new HashSet<Vector3> ();
+        HashSet<Vector3> leftRightPositions = new HashSet<Vector3>();
         int lineIndex = 0;
-        for (int i = 0;i<visuallyNextPositions.Count;i++){
+        for (int i = 0; i < visuallyNextPositions.Count; i++)
+        {
             var p = visuallyNextPositions[i];
-        
+
             if (hasTurnAround)
             {
 
@@ -813,9 +838,9 @@ public class PlayerCubeGridMove : MonoBehaviour
                 //}
 
                 var right = p.right;
-                if(i!=visuallyNextPositions.Count-1 && visuallyNextPositions[i + 1].right != right && visuallyNextPositions[i + 1].right != -right)
+                if (i != visuallyNextPositions.Count - 1 && visuallyNextPositions[i + 1].right != right && visuallyNextPositions[i + 1].right != -right)
                 {
-                    right += visuallyNextPositions[i+1].right;
+                    right += visuallyNextPositions[i + 1].right;
                 }
                 position -= right * 0.08f;
                 //if (lineIndex == 0)
@@ -833,11 +858,16 @@ public class PlayerCubeGridMove : MonoBehaviour
             {
 
                 res.Add(p.position);
-            } 
+            }
         }
 
 
         return res;
+    }
+
+    public List<Vector3> nextPoints()
+    {
+        return improveVisualPoints(visuallyNextPositions);
     }
 }
 

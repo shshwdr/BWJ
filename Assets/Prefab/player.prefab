@@ -107,6 +107,9 @@ MonoBehaviour:
   tutorialLayer:
     serializedVersion: 2
     m_Bits: 131072
+  validationPadLayer:
+    serializedVersion: 2
+    m_Bits: 4096
   frontDetection: {fileID: 7852817379291807682}
   rotateCoolDown: 0.5
   stopDistance: 0.005
