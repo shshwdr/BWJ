@@ -11414,7 +11414,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: 'I don''t know. Let''s explore this... But take care. '
+        value: I don't know. Let's explore this... It seems there are new items show
+          up.
         type: 0
         typeString: CustomFieldType_Text
       - title: Parenthetical
