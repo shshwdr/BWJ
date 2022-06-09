@@ -209,13 +209,11 @@ public class PlayerCubeGridMove : MonoBehaviour
         //check if there is a wall in front
         //check if there is a ladder in front
 
-        bool hitInfront = Physics.Raycast(state.targetTransform.position + state.targetTransform.up * 0.5f, state.targetTransform.forward, 1);
-        RaycastHit hitTest;
-        bool test = Physics.Raycast(state.targetTransform.position + state.targetTransform.up * 0.5f, state.targetTransform.forward, out hitTest, 1);
+        bool hitInfront = Physics.Raycast(state.targetTransform.position + state.targetTransform.up * 0.5f, state.targetTransform.forward, 0.5f);
         if (hitInfront)
         {
 
-            bool hitLadderInfront = Physics.Raycast(state.targetTransform.position + state.targetTransform.up * 0.5f, state.targetTransform.forward, 1, ladderLayer);
+            bool hitLadderInfront = Physics.Raycast(state.targetTransform.position + state.targetTransform.up * 0.5f, state.targetTransform.forward, 0.5f, ladderLayer);
             if (hitLadderInfront)
             {
                 addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward * 0.5f, targetRotation, isSimulating, state.targetTransform.up, right);
@@ -278,7 +276,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         {
             //if not hit
             //check if there is a ladder to get down
-            bool hitDownStair = Physics.Raycast(state.targetTransform.position + state.targetTransform.forward - state.targetTransform.up * 0.5f, -state.targetTransform.forward, 1, ladderLayer);
+            bool hitDownStair = Physics.Raycast(state.targetTransform.position + state.targetTransform.forward - state.targetTransform.up * 0.5f, -state.targetTransform.forward, 0.5f, ladderLayer);
             if (hitDownStair)
             {
                 addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward * 0.5f, targetRotation, isSimulating, state.targetTransform.up, right);

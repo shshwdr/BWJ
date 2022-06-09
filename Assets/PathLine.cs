@@ -32,7 +32,7 @@ public class PathLine : MonoBehaviour
     {
 
         var pathLine = GetComponent<LineRenderer>();
-        pathLine.numPositions = points.Count;
+        pathLine.positionCount = points.Count;
         pathLine.SetPositions(points.ToArray());
         
     }

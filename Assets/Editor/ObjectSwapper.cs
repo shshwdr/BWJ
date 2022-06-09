@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using System.Collections.Generic;
 
 [ExecuteInEditMode]
 public class ObejctSwapper : MonoBehaviour
@@ -11,20 +12,48 @@ public class ObejctSwapper : MonoBehaviour
 
     public bool SwapNow;
 
-
-    static void duplicate()
+    static void move(Vector3 dir)
     {
+
         var selects = Selection.gameObjects;
+        List<GameObject> sele = new List<GameObject>();
         foreach (var select in selects)
         {
-            GameObject newObject = GameObject.Instantiate(select);
-            select.transform.position = select.transform.position + select.transform.up;
+            select.transform.position = select.transform.position + selects[0].transform.rotation * dir;
 
 
-            Selection.activeGameObject = newObject;
+            sele.Add(select);
+            //Selection.activeGameObject = select;
+            EditorUtility.SetDirty(select);
+
+        }
+        Selection.objects = sele.ToArray();
+    }
+
+    
+    static void duplicate(Vector3 dir)
+    {
+        var selects = Selection.gameObjects;
+        List<GameObject> sele = new List<GameObject>();
+        foreach (var select in selects)
+        {
+            GameObject newObject = GameObject.Instantiate(select, select.transform.parent);
+            newObject.transform.position = newObject.transform.position + selects[0].transform.rotation * dir;
+
+            if(dir == Vector3.up)
+            {
+                newObject.name = "UP " + newObject.name;
+            }
+            if (dir == Vector3.down)
+            {
+                newObject.name = "DOWN " + newObject.name;
+            }
+            sele.Add(newObject);
+            //Selection.activeGameObject = newObject;
             EditorUtility.SetDirty(newObject);
 
         }
+        Selection.objects = sele.ToArray();
     }
     static void Swap(string item)
     {
@@ -120,10 +149,66 @@ public class ObejctSwapper : MonoBehaviour
 
 
 
-    [MenuItem("LevelCreator/DuplicateUp &8")]
+    [MenuItem("LevelCreator/DuplicateUp &E")]
     static void DuplicateAndMoveUp()
     {
-        duplicate();
+        duplicate(Vector3.up);
+    }
+    [MenuItem("LevelCreator/DuplicateDown &Q")]
+    static void DuplicateAndMoveDown()
+    {
+        duplicate(Vector3.down);
+    }
+    [MenuItem("LevelCreator/DuplicateRight &D")]
+    static void DuplicateAndMoveRight()
+    {
+        duplicate(Vector3.right);
+    }
+    [MenuItem("LevelCreator/DuplicateLeft &A")]
+    static void DuplicateAndMoveLeft()
+    {
+        duplicate(Vector3.left);
+    }
+    [MenuItem("LevelCreator/DuplicateFront &W")]
+    static void DuplicateAndMoveFront()
+    {
+        duplicate(Vector3.forward);
+    }
+    [MenuItem("LevelCreator/DuplicateBack &S")]
+    static void DuplicateAndMoveBack()
+    {
+        duplicate(Vector3.back);
+    }
+
+    [MenuItem("LevelCreator/moveUp #E")]
+    static void MoveUp()
+    {
+        move(Vector3.up);
+    }
+    [MenuItem("LevelCreator/moveDown #Q")]
+    static void MoveDown()
+    {
+        move(Vector3.down);
+    }
+    [MenuItem("LevelCreator/moveRight #D")]
+    static void MoveRight()
+    {
+        move(Vector3.right);
+    }
+    [MenuItem("LevelCreator/moveLeft #A")]
+    static void MoveLeft()
+    {
+        move(Vector3.left);
+    }
+    [MenuItem("LevelCreator/moveFront #W")]
+    static void MoveFront()
+    {
+        move(Vector3.forward);
+    }
+    [MenuItem("LevelCreator/moveBack #S")]
+    static void MoveBack()
+    {
+        move(Vector3.back);
     }
 
     [MenuItem("LevelCreator/ForestGrass &9")]
@@ -189,7 +274,7 @@ public class ObejctSwapper : MonoBehaviour
     }
 
 
-    [MenuItem("LevelCreator/AddHuman &L")]
+    [MenuItem("LevelCreator/AddHuman &C")]
     static void AddHuman()
     {
         Add("Human");
@@ -201,13 +286,13 @@ public class ObejctSwapper : MonoBehaviour
     {
         Add("TutorialGiver");
     }
-    [MenuItem("LevelCreator/AddLever")]
+    [MenuItem("LevelCreator/AddLever &L")]
     static void AddLever()
     {
         Add("Lever");
     }
 
-    [MenuItem("LevelCreator/AddTarget &K")]
+    [MenuItem("LevelCreator/AddTarget &T")]
     static void AddTarget()
     {
         Add("Target");
