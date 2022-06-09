@@ -291,6 +291,11 @@ public class ObejctSwapper : MonoBehaviour
     {
         Add("Lever");
     }
+    [MenuItem("LevelCreator/AddLadder &#L")]
+    static void AddLadder()
+    {
+        Add("Ladder");
+    }
 
     [MenuItem("LevelCreator/AddTarget &T")]
     static void AddTarget()

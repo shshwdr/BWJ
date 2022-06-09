@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ladder.unity
     guid: 927234917d8a5244d9907e7dc6c0fe74
+  - enabled: 1
+    path: Assets/Scenes/ladder2.unity
+    guid: aa2b18ac69dfc6f4a8f1f54122cb8115
   m_configObjects: {}
