@@ -207,14 +207,22 @@ public class PlayerCubeGridMove : MonoBehaviour
         Quaternion targetRotation = state.targetTransform.rotation;
 
         //check if there is a wall in front
-        //check if there is a ladder in front
 
+        var nextPosition1 = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.33f);
+        bool hitRoad1 = Physics.Raycast(nextPosition1 + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1, canWalkLayer);
+
+
+        //check if there is a ladder in front
         bool hitInfront = Physics.Raycast(state.targetTransform.position + state.targetTransform.up * 0.5f, state.targetTransform.forward, 0.5f);
         if (hitInfront)
         {
 
             bool hitLadderInfront = Physics.Raycast(state.targetTransform.position + state.targetTransform.up * 0.5f, state.targetTransform.forward, 0.5f, ladderLayer);
-            if (hitLadderInfront)
+            var positionAfterLadder = Utils.snapToGrid(state.targetTransform.position + state.targetTransform.forward + state.targetTransform.up);
+            var roadPositionJustBeforeLadder = Utils.snapToGrid(positionAfterLadder - state.targetTransform.forward * 0.33f);
+            bool hasRoadAfterLadder = Physics.Raycast(positionAfterLadder + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1, canWalkLayer);
+            bool hasRoadAfterLadder2 = Physics.Raycast(roadPositionJustBeforeLadder + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1, canWalkLayer);
+            if (hitLadderInfront && hasRoadAfterLadder && hasRoadAfterLadder2 && hitRoad1)
             {
                 addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward * 0.5f, targetRotation, isSimulating, state.targetTransform.up, right);
                 addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.up, targetRotation, isSimulating, state.targetTransform.up, right);
@@ -235,7 +243,6 @@ public class PlayerCubeGridMove : MonoBehaviour
 
         //check if next grid is moveable
         var nextPosition = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize);
-        var nextPosition1 = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.33f);
         var nextPosition2 = Utils.snapToGrid(state.targetTransform.position + targetRotation * Vector3.forward * gridSize * 0.66f);
         bool hitAny = Physics.Raycast(nextPosition + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1);
         if (hitAny)
@@ -244,7 +251,6 @@ public class PlayerCubeGridMove : MonoBehaviour
             //if next is hitted, check if hit on road
             RaycastHit hit;
             bool hitRoad = Physics.Raycast(nextPosition + state.targetTransform.up * 0.5f, -state.targetTransform.up, out hit, 1, canWalkLayer);
-            bool hitRoad1 = Physics.Raycast(nextPosition1 + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1, canWalkLayer);
             bool hitRoad2 = Physics.Raycast(nextPosition2 + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1, canWalkLayer);
             if (hitRoad && hitRoad1 && hitRoad2)
             {
@@ -277,7 +283,15 @@ public class PlayerCubeGridMove : MonoBehaviour
             //if not hit
             //check if there is a ladder to get down
             bool hitDownStair = Physics.Raycast(state.targetTransform.position + state.targetTransform.forward - state.targetTransform.up * 0.5f, -state.targetTransform.forward, 0.5f, ladderLayer);
-            if (hitDownStair)
+
+
+            bool hitLadderInfront = Physics.Raycast(state.targetTransform.position + state.targetTransform.up * 0.5f, state.targetTransform.forward, 0.5f, ladderLayer);
+            var positionAfterLadder = Utils.snapToGrid(state.targetTransform.position + state.targetTransform.forward - state.targetTransform.up);
+            var roadPositionJustBeforeLadder = Utils.snapToGrid(positionAfterLadder - state.targetTransform.forward * 0.33f);
+            bool hasRoadAfterLadder = Physics.Raycast(positionAfterLadder + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1, canWalkLayer);
+            bool hasRoadAfterLadder2 = Physics.Raycast(roadPositionJustBeforeLadder + state.targetTransform.up * 0.5f, -state.targetTransform.up, 1, canWalkLayer);
+
+            if (hitDownStair && hasRoadAfterLadder && hasRoadAfterLadder2 && hitRoad1)
             {
                 addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position + state.targetTransform.forward * 0.5f, targetRotation, isSimulating, state.targetTransform.up, right);
                 addMovePosition(ref state, ref visuallyNextPositions, state.targetTransform.position - state.targetTransform.up, targetRotation, isSimulating, state.targetTransform.up, right);
@@ -296,7 +310,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             nextPosition2 = Utils.snapToGrid(nnPosition + state.targetTransform.up * gridSize * 0.33f);
             //if next is hitted, check if hit on ground
             bool hitRoad = Physics.Raycast(nnPosition + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), out hit, 1, canWalkLayer);
-            bool hitRoad1 = Physics.Raycast(nextPosition1 + targetRotation * Vector3.up * 0.5f, -(targetRotation * Vector3.up), 1, canWalkLayer);
+            //bool hitRoad1 = Physics.Raycast(nextPosition1 + targetRotation * Vector3.up * 0.5f, -(targetRotation * Vector3.up), 1, canWalkLayer);
             bool hitRoad2 = Physics.Raycast(nextPosition2 + targetRotation * Vector3.forward * 0.5f, -(targetRotation * Vector3.forward), 1, canWalkLayer);
 
             //or check if hit on ladder
