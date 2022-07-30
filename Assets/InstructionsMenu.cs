@@ -14,6 +14,16 @@ public class InstructionsMenu : MonoBehaviour
     public int inst2RequireCount = 3;
     public int inst3RequireCount = 6;
 
+
+    public void showInstructions()
+    {
+        gameObject.SetActive(true);
+    }
+    public void hideInstructions()
+    {
+        gameObject.SetActive(false);
+    }
+
     // Start is called before the first frame update
     void Start()
     {

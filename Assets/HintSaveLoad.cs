@@ -20,8 +20,18 @@ public class HintSaveLoad
         SaveLoadUtil.Save(hint, Application.dataPath + "/Resources/hint" + $"/hint_{level}.save");
     }
 
-    public void Lode()
+    static public SerializedHint Load(int level)
     {
 
+        var save = SaveLoadUtil.Load(Application.dataPath + "/Resources/hint" + $"/hint_{level}.save");
+        if (save != null)
+        {
+            if (((SerializedHint)save).actionList.Count == 0)
+            {
+                Debug.Log("action list is 0");
+            }
+            return (SerializedHint)save;
+        }
+        return null;
     }
 }

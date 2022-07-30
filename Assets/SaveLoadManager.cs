@@ -21,6 +21,7 @@ public class SerializedGame : CSSerializedObject
     //public bool isGameFinished;
     public List<string> maxTutorial;
     public List<int> levelStars;
+    public List<bool> unlockedHint;
     public int maxUnlockedLevel;
     public int totalCollected;
     public bool hasEverCollected;

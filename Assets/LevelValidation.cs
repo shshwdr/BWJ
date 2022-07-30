@@ -387,7 +387,7 @@ public class LevelValidation : MonoBehaviour
         }
     }
 
-    public void playerMoveBasedOnHint(PlayerCubeGridMove player, int i)
+    static public void playerMoveBasedOnHint(PlayerCubeGridMove player, int i)
     {
 
         if ((i & 1) == 1)

@@ -45,8 +45,8 @@ public class SaveLoadUtil
             try
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
-                SerializedGame save = (SerializedGame)bf.Deserialize(file);
+                file = File.Open(path, FileMode.Open);
+                CSSerializedObject save = (CSSerializedObject)bf.Deserialize(file);
                 Debug.Log("Game Loaded");
                 return save;
             }

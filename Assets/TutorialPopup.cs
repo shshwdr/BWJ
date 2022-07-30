@@ -5,21 +5,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class TutorialPopup : MonoBehaviour
+public class TutorialPopup : BaseView
 {
     UIView view;
     [SerializeField]
     Text label;
     VideoPlayer videoPlayer;
+    GameObject video;
 
-
-    public void show(string text, string videoName)
+    // todo: how to improve this..
+    public void show(bool hasVideo, string videoName)
     {
         view = GetComponent<UIView>();
-        videoPlayer = GameObject.FindObjectOfType<VideoPlayer>();
         view.Show();
-        label.text = text;
-        videoPlayer.clip = Resources.Load<VideoClip>("video/" + videoName);
+        label.text = TextUtils.getText(videoName);
+        video.SetActive(hasVideo);
+        if (hasVideo)
+        {
+            videoPlayer = GameObject.FindObjectOfType<VideoPlayer>();
+            videoPlayer.clip = Resources.Load<VideoClip>("video/" + videoName);
+
+        }
         Time.timeScale = 0;
     }
     public void hide()
@@ -27,10 +33,18 @@ public class TutorialPopup : MonoBehaviour
         view.Hide();
         GameObject.FindObjectOfType<AlwaysHud>().resumeSpeed();
     }
-    // Start is called before the first frame update
-    void Start()
+
+    public override void showView()
     {
+        base.showView();
+
     }
+
+    public override void hideView()
+    {
+        base.hideView();
+    }
+
 
     // Update is called once per frame
     void Update()

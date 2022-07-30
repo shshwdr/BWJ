@@ -21,15 +21,16 @@ public class LevelSelectionView : BaseView
         GetComponent<UIView>().Show();
         var levelButtons = GetComponentsInChildren<LevelSelectionCell>(); 
         int i = 0;
-        for (; i < levelButtons.Length; i++)
+        for (; i < StageLevelManager.Instance.maxUnlockedLevel+1; i++)
         {
             levelButtons[i].gameObject.SetActive(true);
+            
             levelButtons[i].init(StageLevelManager.Instance.levelInfoList[i]);
         }
-        //for(;i< levelButtons.Length; i++)
-        //{
-        //    levelButtons[i].gameObject.SetActive(false);
-        //}
+        for (; i < levelButtons.Length; i++)
+        {
+            levelButtons[i].gameObject.SetActive(false);
+        }
     }
     public override void hideView()
     {

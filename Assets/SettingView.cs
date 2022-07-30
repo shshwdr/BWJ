@@ -17,7 +17,7 @@ public class SettingView : BaseView
     public override void showView()
     {
         base.showView();
-        Time.timeScale = 0;
+       // Time.timeScale = 0;
         GetComponent<UIView>().Show();
         panel.SetActive(true);
         //StageLevelManager.Instance.addLevel();
@@ -30,7 +30,7 @@ public class SettingView : BaseView
     public override void hideView()
     {
         base.hideView();
-        Time.timeScale = 1;
+       //Time.timeScale = 1;
 
         GetComponent<UIView>().Hide();
         //panel.SetActive(false);

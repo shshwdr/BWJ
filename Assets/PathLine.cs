@@ -6,7 +6,7 @@ using UnityEngine;
 public class PathLine : MonoBehaviour
 {
 
-    BGCurve pathLine;
+    //BGCurve pathLine;
     PlayerCubeGridMove playerMove;
     void updatePathLine()
     {
@@ -15,9 +15,12 @@ public class PathLine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pathLine = GetComponent<BGCurve>();
+        var pathLine = GetComponent<LineRenderer>();
+        pathLine.positionCount = 0;
+        pathLine.SetPositions(new List<Vector3>().ToArray());
+        //pathLine = GetComponent<BGCurve>();
         playerMove = GameObject.FindObjectOfType <PlayerCubeGridMove>();
-        pathLine.Clear();
+        //pathLine.Clear();
         //pathLine.Clear();
         updatePathLine();
     }

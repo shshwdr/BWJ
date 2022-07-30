@@ -17,8 +17,9 @@ public struct VisuallyPosition
 }
 public class PlayerCubeGridMove : MonoBehaviour
 {
-
-
+    public bool isAuto = false;
+    int autoStep = 0;
+    SerializedHint currentHint;
     public class PlayerMoveState
     {
         //public Transform transform = new GameObject().transform;
@@ -89,7 +90,19 @@ public class PlayerCubeGridMove : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         // Time.timeScale = 2;
+        if (StageLevelManager.Instance.playHintNext)
+        {
+            isAuto = true;
+            autoStep = 0;
+        }
     }
+
+    public void stopAuto(){
+        isAuto = false;
+        
+        }
+
+
     public void startPosition(Vector3 position, Quaternion rotation)
     {
         Utils.gridSize = gridSize / 4f;
@@ -105,6 +118,8 @@ public class PlayerCubeGridMove : MonoBehaviour
     void Start()
     {
         EventPool.OptIn("StartGame", startMove);
+        currentHint = HintSaveLoad.Load(StageLevelManager.Instance.currentLevelId);
+
     }
 
     void swimInMove(RaycastHit hit, ref PlayerMoveState state, bool isSimulating)
@@ -425,6 +440,8 @@ public class PlayerCubeGridMove : MonoBehaviour
         nextPositions.Clear();
         visuallyNextPositions.Clear();
         nextRotations.Clear();
+
+
         decideNextMove();
         Assert.AreEqual(nextPositions.Count, nextRotations.Count);
         for (int i = 0; i < nextPositions.Count; i++)
@@ -624,6 +641,19 @@ public class PlayerCubeGridMove : MonoBehaviour
         visuallyNextPositions.Clear();
         visuallyNextPositions.Add(new VisuallyPosition(moveState.targetTransform.position + moveState.targetTransform.up * 0.1f, moveState.targetTransform.right));
         //if has collectable, collect
+
+
+        if (isAuto)
+        {
+            if (currentHint != null && autoStep < currentHint.actionList.Count)
+            {
+                var nextAction = currentHint.actionList[autoStep];
+                LevelValidation.playerMoveBasedOnHint(this, nextAction);
+                autoStep++;
+            }
+
+        }
+
 
         RaycastHit hitedCollectable = new RaycastHit();
         bool hitCollectable = Physics.Raycast(transform.position + transform.up * 0.5f, -transform.up, out hitedCollectable, 1, collectableLayer);

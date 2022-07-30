@@ -65,7 +65,7 @@ public class Popup : BaseView
         }
 
         yesButton.GetComponentInChildren<Text>().text = yesString;
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 
     // Update is called once per frame

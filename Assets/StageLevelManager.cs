@@ -15,11 +15,13 @@ public class LevelInfo
     public int itemCount;
     public int itemToUnlock;
     public int collectedCount = 0;
+    public bool unlockedHint = false;
     public bool hasBeenFinished = false;
 }
 public class StageLevelManager : Singleton<StageLevelManager>
 {
 
+    public bool playHintNext = false;
     public bool showDialogue = true;
     public int currentLevelId;
     public int maxUnlockedLevel = 0;
@@ -46,6 +48,13 @@ public class StageLevelManager : Singleton<StageLevelManager>
             levelStar.Add(levelInfoList[i].collectedCount);
         }
         save.levelStars = levelStar;
+
+        List<bool> unlockedHint = new List<bool>(); 
+        for (int i = 0; i < levelInfoList.Count; i++)
+        {
+            unlockedHint.Add(levelInfoList[i].unlockedHint);
+        }
+        save.unlockedHint = unlockedHint;
         //base.Save(save);
         //save.progress = progress;
         //save.plantUnlocked = plantUnlocked;
@@ -68,6 +77,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
         for (int i = 0; i < save.levelStars.Count; i++)
         {
             levelInfoList[i].collectedCount =save.levelStars[i];
+            levelInfoList[i].unlockedHint = save.unlockedHint[i];
         }
         hasEverCollected = save.hasEverCollected;
         maxUnlockedLevel = Mathf.Min(levelInfoList.Count -1, save.maxUnlockedLevel);
@@ -379,6 +389,8 @@ public class StageLevelManager : Singleton<StageLevelManager>
         {
             SceneManager.LoadScene(currentLevel.sceneName);
         }
+
+
     }
 
     // Start is called before the first frame update
@@ -397,6 +409,29 @@ public class StageLevelManager : Singleton<StageLevelManager>
         }
         //startNextLevel();
 
+    }
+
+    public void unlockHint()
+    {
+        
+        levelInfoList[currentLevelId].unlockedHint = true;
+        playHint();
+    }
+
+    public void playHint()
+    {
+
+        //if already started
+        if (GameObject.FindObjectOfType<PlayerCubeGridMove>().startedMoving)
+        {
+            playHintNext = true;
+            restart();
+        }
+        else
+        {
+
+            GameObject.FindObjectOfType<PlayerCubeGridMove>().isAuto = true;
+        }
     }
 
     // Update is called once per frame

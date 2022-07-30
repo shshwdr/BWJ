@@ -21,11 +21,9 @@ public class TutorialManager : Singleton<TutorialManager>
                 FMODUnity.RuntimeManager.PlayOneShot("event:/collect");
             }
             unlockedTutorialList.Add(str);
-            string videoString = TextUtils.getVideo(str);
-            if (videoString.Length>0)
-            {
-                GameObject.FindObjectOfType<TutorialPopup>(true).show(videoString, str);
-            }
+            bool hasVideo = TextUtils.videoSet.Contains(str);
+            //string videoString = TextUtils.getVideo(str);
+            GameObject.FindObjectOfType<TutorialPopup>(true).show(hasVideo,str);
             Pool.EventPool.Trigger("updateTutorial");
         }
     }
