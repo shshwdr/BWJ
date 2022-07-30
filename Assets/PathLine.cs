@@ -39,29 +39,29 @@ public class PathLine : MonoBehaviour
         pathLine.SetPositions(points.ToArray());
         
     }
-    public void showLine2(List<Vector3> points)
-    {
+    //public void showLine2(List<Vector3> points)
+    //{
 
-        pathLine = GetComponent<BGCurve>();
-        int i = 0;
-        foreach (var p in points)
-        {
+    //    pathLine = GetComponent<BGCurve>();
+    //    int i = 0;
+    //    foreach (var p in points)
+    //    {
 
-            BGCurvePoint BGp = new BGCurvePoint(pathLine, p, true);
-            if (i < pathLine.Points.Length)
-            {
+    //        BGCurvePoint BGp = new BGCurvePoint(pathLine, p, true);
+    //        if (i < pathLine.Points.Length)
+    //        {
 
-                pathLine.Points[i] = (BGp);
-            }
-            else
-            {
-                pathLine.AddPoint(BGp);
-            }
-            i++;
-        }
-        while (pathLine.Points.Length > i)
-        {
-            pathLine.Delete(i);
-        }
-    }
+    //            pathLine.Points[i] = (BGp);
+    //        }
+    //        else
+    //        {
+    //            pathLine.AddPoint(BGp);
+    //        }
+    //        i++;
+    //    }
+    //    while (pathLine.Points.Length > i)
+    //    {
+    //        pathLine.Delete(i);
+    //    }
+    //}
 }

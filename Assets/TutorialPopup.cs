@@ -11,7 +11,7 @@ public class TutorialPopup : BaseView
     [SerializeField]
     Text label;
     VideoPlayer videoPlayer;
-    GameObject video;
+    public GameObject video;
 
     // todo: how to improve this..
     public void show(bool hasVideo, string videoName)
