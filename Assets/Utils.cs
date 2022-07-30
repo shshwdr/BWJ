@@ -17,7 +17,7 @@ public class Utils : MonoBehaviour
         }
         for (int i = 0; i < a.Count; i++)
         {
-            if (!a[i].Equals( a[i]))
+            if (!a[i].Equals( b[i]))
                 return false;
         }
         return true;

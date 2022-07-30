@@ -7,6 +7,7 @@ TagManager:
   - human
   - target
   - lever
+  - ladder
   layers:
   - Default
   - TransparentFX

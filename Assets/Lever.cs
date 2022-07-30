@@ -55,6 +55,10 @@ public class Lever : MonoBehaviour
         // find out start and end point
         var startPosition = transform.parent.position;
         var endPosition = rotateObject.transform.position;
+        //if(rotateObject.tag == "ladder")
+        //{
+        //    endPosition = rotateObject.transform.parent.position;
+        //}
         var up = transform.parent.up;
         var lineUp = up * 0.1f;
 
@@ -63,19 +67,59 @@ public class Lever : MonoBehaviour
         //only two direction is available.
         var dir =  endPosition - startPosition;
         List<Vector3> dirs  = new List<Vector3>();
+
+        Vector3 notDirAndNotUp = Vector3.zero;
+        var dirx = new Vector3(Mathf.Sign(dir.x), 0, 0);
+        var diry = new Vector3(0, Mathf.Sign(dir.y), 0);
+        var dirz = new Vector3(0, 0, Mathf.Sign(dir.z));
         if (Mathf.Abs(dir.x) > 0.2f)
         {
-            dirs.Add(new Vector3(Mathf.Sign(dir.x), 0, 0) * 0.5f);
+            dirs.Add(dirx * 0.5f);
+        }
+        else
+        {
+            if(dirx != up && dirx  != -up)
+            {
+                notDirAndNotUp = dirx * 0.5f;
+            }
         }
         if (Mathf.Abs(dir.y) > 0.2f)
         {
             dirs.Add(new Vector3( 0, Mathf.Sign(dir.y), 0) * 0.5f);
         }
+        else
+        {
+            if (diry != up && diry != -up)
+            {
+                notDirAndNotUp = diry * 0.5f;
+            }
+        }
         if (Mathf.Abs(dir.z) > 0.2f)
         {
             dirs.Add(new Vector3(0, 0, Mathf.Sign(dir.z)) * 0.5f);
         }
+        else
+        {
+            if (dirz != up && dirz != -up)
+            {
+                notDirAndNotUp = dirz * 0.5f;
+            }
+        }
+        if (dirs.Count == 1)
+        {
+            bool hitRoad = Physics.Raycast(startPosition + notDirAndNotUp*2, -up, 1);
+            if (hitRoad)
+            {
+                dirs.Add(notDirAndNotUp);
+            }
+            else
+            {
 
+                hitRoad = Physics.Raycast(startPosition - notDirAndNotUp * 2, -up, 1);
+                dirs.Add(-notDirAndNotUp);
+            }
+
+        }
         if(dirs.Count != 2)
         {
             Debug.LogError("dirs is wrong for lever");

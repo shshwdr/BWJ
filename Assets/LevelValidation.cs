@@ -11,7 +11,8 @@ public class LevelValidation : MonoBehaviour
 {
 
     Dictionary<ValidationStep, bool> visitedValidationSteps;
-    List<bool> collectedItem;
+    //List<bool> collectedItem;
+    int collectAmount;
     List<int> leveredTime;
     Dictionary<GameObject, int> collecItemToId;
     Dictionary<GameObject, int> leverItemToId;
@@ -28,16 +29,22 @@ public class LevelValidation : MonoBehaviour
 
         public List<ValidationStep> previousSteps;
         public List<VisuallyPosition> previousPositions;
+        public List<int> actionList;
 
-        public ValidationStep(Vector3 position, Quaternion rotation, List<int> triggerState, List<bool> collected)
+        public ValidationStep(Vector3 position, Quaternion rotation, List<int> triggerState,int collectAmount)
         {
             this.position = position;
             this.rotation = rotation;
             this.leverState = new List<int>(triggerState);
-            this.collected = new List<bool>(collected);
+            this.collected = new List<bool>();
+            for(int i = 0;i< collectAmount; i++)
+            {
+                this.collected.Add(false);
+            }
             collectedCount = 0;
             previousSteps = new List<ValidationStep>();
             previousPositions = new List<VisuallyPosition>();
+            actionList = new List<int>();
         }
 
         public ValidationStep(ValidationStep other)
@@ -50,27 +57,35 @@ public class LevelValidation : MonoBehaviour
             this.collectedCount = other.collectedCount;
             previousSteps = new List<ValidationStep>(other.previousSteps);
             previousPositions = new List<VisuallyPosition>(other.previousPositions);
+            actionList = new List<int>(other.actionList);
         }
+
+        
 
 
         public bool Equals(ValidationStep other)
         {
-            return position == other.position
+
+            var code1 = GetHashCode();
+            var code2 = other.GetHashCode();
+            bool isEqual =  position == other.position
                 && (rotation.eulerAngles == other.rotation.eulerAngles || rotation.Equals(other.rotation))
                &&
                Utils.ListEqual(leverState, other.leverState)
                && Utils.ListEqual(collected, other.collected);
+            return isEqual;
         }
         public override int GetHashCode()
         {
-            var hash = position.GetHashCode();
+
+            int hash = position.GetHashCode();
             hash = hash * 31 + rotation.eulerAngles.GetHashCode();
 
             hash = hash * 31;
             foreach (var c in collected)
             {
                 hash = hash + (c ? 1 : 0);
-                hash = hash * 2;
+                hash = hash * 1;
             }
             foreach (var c in leverState)
             {
@@ -115,12 +130,12 @@ public class LevelValidation : MonoBehaviour
         {
             validation.collecItemToId[allItems[i]] = i;
         }
-        var collectableCount = allItems.Length;
-        validation.collectedItem = new List<bool>();
-        for (int i = 0; i < collectableCount; i++)
-        {
-            validation.collectedItem.Add(false);
-        }
+        validation. collectAmount = allItems.Length;
+        //validation.collectedItem = new List<bool>();
+        //for (int i = 0; i < collectableCount; i++)
+        //{
+        //    validation.collectedItem.Add(false);
+        //}
 
         // prepare lever 
         validation.leverItemToId = new Dictionary<GameObject, int>();
@@ -137,9 +152,9 @@ public class LevelValidation : MonoBehaviour
         }
 
     }
-    bool collectedAll()
+    bool collectedAll(ValidationStep currentStep)
     {
-        foreach (var v in collectedItem)
+        foreach (var v in currentStep.collected)
         {
             if (!v)
             {
@@ -157,7 +172,7 @@ public class LevelValidation : MonoBehaviour
     static void testLevel()
     {
         PlayerCubeGridMove player = GameObject.FindObjectOfType<PlayerCubeGridMove>();
-        createInstance(player, 3f);
+        createInstance(player,0.5f);
 
 
     }
@@ -188,6 +203,10 @@ public class LevelValidation : MonoBehaviour
 
     void updateLeverData(PlayerCubeGridMove player)
     {
+        if (player.moveState.lastIsMoveBack)
+        {
+            return;
+        }
         RaycastHit hitedCollectable = new RaycastHit();
         bool hitCollectable = Physics.Raycast(player.transform.position + player.transform.up * 0.5f, -player.transform.up, out hitedCollectable, 1, player.leverLayer);
         if (hitCollectable)
@@ -207,7 +226,7 @@ public class LevelValidation : MonoBehaviour
             }
         }
     }
-    void updateCollectedData(PlayerCubeGridMove player)
+    void updateCollectedData(PlayerCubeGridMove player,ref ValidationStep newValidationStep)
     {
         RaycastHit hitedCollectable = new RaycastHit();
         bool hitCollectable = Physics.Raycast(player.transform.position + player.transform.up * 0.5f, -player.transform.up, out hitedCollectable, 1, player.collectableLayer);
@@ -215,7 +234,7 @@ public class LevelValidation : MonoBehaviour
         {
             if (collecItemToId.ContainsKey(hitedCollectable.collider.gameObject))
             {
-                collectedItem[collecItemToId[hitedCollectable.collider.gameObject]] = true;
+                newValidationStep.collected[collecItemToId[hitedCollectable.collider.gameObject]] = true;
             }
             else
             {
@@ -256,7 +275,7 @@ public class LevelValidation : MonoBehaviour
     {
 
         int x = 0;
-        yield return EditorCoroutineUtility.StartCoroutine(bfs(player, new ValidationStep(player.transform.position, player.transform.rotation, leveredTime, collectedItem), 20000, time, key), this);
+        yield return EditorCoroutineUtility.StartCoroutine(bfs(player, new ValidationStep(player.transform.position, player.transform.rotation, leveredTime,collectAmount), 1000, time, key), this);
         clear();
         // yield return EditorCoroutineUtility.StartCoroutine(dfs(player, new ValidationStep(player.transform.position, player.transform.rotation, new List<int>(), 0), 3, time), this);
     }
@@ -310,7 +329,7 @@ public class LevelValidation : MonoBehaviour
         player.transform.position = currentStep.position;
         player.transform.rotation = currentStep.rotation;
         player.updateOtherData();
-        collectedItem = new List<bool>(currentStep.collected);
+        //collectedItem = new List<bool>(currentStep.collected);
 
         updateLevers(currentStep.leverState);
 
@@ -321,19 +340,19 @@ public class LevelValidation : MonoBehaviour
 
     void updatePlayerToStep(PlayerCubeGridMove player, ref ValidationStep newValidationStep)
     {
-        updateCollectedData(player);
+        updateCollectedData(player, ref newValidationStep);
         updateLeverData(player);
         newValidationStep.position = player.moveState.targetTransform.position;
         newValidationStep.rotation = player.moveState.targetTransform.rotation;
-        newValidationStep.collected = new List<bool>(collectedItem);
-        newValidationStep.collectedCount = 0;
-        foreach (var c in collectedItem)
-        {
-            if (c)
-            {
-                newValidationStep.collectedCount++;
-            }
-        }
+        //newValidationStep.collected = new List<bool>(collectedItem);
+        //newValidationStep.collectedCount = 0;
+        //foreach (var c in collectedItem)
+        //{
+        //    if (c)
+        //    {
+        //        newValidationStep.collectedCount++;
+        //    }
+        //}
         newValidationStep.leverState = new List<int>(leveredTime);
         //newValidationStep.collected = StageLevelManager.Instance.currentCollected;
 
@@ -346,7 +365,7 @@ public class LevelValidation : MonoBehaviour
             return true;
         }
 
-
+        setValue(currentStep);
         return false;
     } 
 
@@ -360,11 +379,29 @@ public class LevelValidation : MonoBehaviour
             {
                 if (currentStep.collected[i])
                 {
-                    currentStep.collected[i] = false;
-                    visitedValidationSteps[currentStep] = true;
+                    var newCurrentStep = new ValidationStep(currentStep);
+                    newCurrentStep.collected[i] = false;
+                    visitedValidationSteps[newCurrentStep] = true;
                 }
             }
         }
+    }
+
+    public void playerMoveBasedOnHint(PlayerCubeGridMove player, int i)
+    {
+
+        if ((i & 1) == 1)
+        {
+            player.turnAround();
+        }
+        if (((i >> 1) & 1) == 1)
+        {
+            player.swim();
+        }
+        //if (((i >> 2) & 1) == 1)
+        //{
+        //    player.ignoreSign();
+        //}
     }
 
     IEnumerator bfs(PlayerCubeGridMove player, ValidationStep validationStep, int stepLeft, float time, KeyCode key = KeyCode.None)
@@ -377,13 +414,13 @@ public class LevelValidation : MonoBehaviour
         {
             var currentStep = steps.Dequeue();
 
-            if (canDiscardStep( currentStep))
-            {
-                continue;
-            }
+            //if (canDiscardStep( currentStep))
+            //{
+            //    continue;
+            //}
 
 
-            setValue(new ValidationStep( currentStep));
+            //setValue(new ValidationStep( currentStep));
             //visitedValidationSteps[currentStep] = true;
             //Debug.Log("log current step " + currentStep);
 
@@ -404,7 +441,7 @@ public class LevelValidation : MonoBehaviour
                 }
                 Debug.Log("arrive end with collected " + collectString + "  left step " + stepLeft);
                 //if collected enough
-                if (collectedAll())
+                if (collectedAll(currentStep))
                 {
                     //show path..?
                     Debug.Log("finished path");
@@ -416,6 +453,12 @@ public class LevelValidation : MonoBehaviour
                     //}
                     res = PlayerCubeGridMove.improveVisualPoints(currentStep.previousPositions);
                     GameObject.FindObjectOfType<PathLine>().showLine(res);
+
+
+                    //store result to file
+                    HintSaveLoad.Save(currentStep.actionList, StageLevelManager.Instance.currentLevelId);
+
+
                     yield break;
                 }
             }
@@ -429,15 +472,7 @@ public class LevelValidation : MonoBehaviour
             stepLeft--;
             for (int i = 0; i < 4; i++)
             {
-                if ((i & 1) == 1)
-                {
-                    player.turnAround();
-                }
-                if ((i >> 1) == 1)
-                {
-                    player.swim();
-                }
-
+                playerMoveBasedOnHint(player, i);
                 updatePlayerFromStep(player, currentStep);
 
                 player.moveNextMove();
@@ -445,18 +480,19 @@ public class LevelValidation : MonoBehaviour
                 var newValidationStep = new ValidationStep(currentStep);
                 updatePlayerToStep(player, ref newValidationStep);
                 newValidationStep.previousSteps.Add(currentStep);
+                newValidationStep.actionList.Add(i);
                 foreach (var v in player.visuallyNextPositions)
                 {
 
                     newValidationStep.previousPositions.Add(v);
                 }
 
-                if (visitedValidationSteps.ContainsKey(newValidationStep))
+                if (canDiscardStep(newValidationStep))
                 {
                     continue;
                 }
 
-                steps.Enqueue(newValidationStep, 0);
+                steps.Enqueue(newValidationStep, -newValidationStep.collectedCount);
             }
 
 
