@@ -24,6 +24,7 @@ public class SerializedGame : CSSerializedObject
     public List<bool> unlockedHint;
     public int maxUnlockedLevel;
     public int totalCollected;
+    public int languageIndex;
     public bool hasEverCollected;
 }
 public class SaveLoadManager : Singleton<SaveLoadManager>

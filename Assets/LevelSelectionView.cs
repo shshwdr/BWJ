@@ -17,7 +17,9 @@ public class LevelSelectionView : BaseView
         base.showView();
         //panel.SetActive(true);
 
-        collectedTotalText.text = $"Collected In Total: {StageLevelManager.Instance.totalCollected}/{StageLevelManager.Instance.totalCanCollect}";
+        Translator translator = Translator.Instance;
+        int displayLanguage = translator.GetUserDisplayLanguageIndex();
+        collectedTotalText.text =  $"{translator.Translate( "Collected In Total",displayLanguage)}: {StageLevelManager.Instance.totalCollected}/{StageLevelManager.Instance.totalCanCollect}";
         GetComponent<UIView>().Show();
         var levelButtons = GetComponentsInChildren<LevelSelectionCell>(); 
         int i = 0;

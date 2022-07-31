@@ -27,6 +27,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
     public int maxUnlockedLevel = 0;
     public int currentCollected = 0;
 
+
     bool isFinished;
     public bool isLevelFinishedValidation;
     public bool hasEverCollected = false;
@@ -55,6 +56,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
             unlockedHint.Add(levelInfoList[i].unlockedHint);
         }
         save.unlockedHint = unlockedHint;
+        save.languageIndex = Translator.Instance.GetUserDisplayLanguageIndex();
         //base.Save(save);
         //save.progress = progress;
         //save.plantUnlocked = plantUnlocked;
@@ -83,6 +85,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
         maxUnlockedLevel = Mathf.Min(levelInfoList.Count -1, save.maxUnlockedLevel);
 
         totalCollected = save.totalCollected;
+        Translator.Instance.SetDisplayLanguage(save.languageIndex);
         //base.Load(save);
         //progress = save.progress;
 
@@ -90,6 +93,7 @@ public class StageLevelManager : Singleton<StageLevelManager>
         //plantUnlocked = save.plantUnlocked;
         //plantHinted = save.plantHinted;
     }
+
 
     // bool isHome;
 

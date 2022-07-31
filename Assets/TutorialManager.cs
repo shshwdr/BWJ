@@ -8,7 +8,6 @@ public class TutorialManager : Singleton<TutorialManager>
     // Start is called before the first frame update
     void Start()
     {
-        unlockTutorial("dragZoom",false);
 
     }
     public void unlockTutorial(string str, bool sound = true)

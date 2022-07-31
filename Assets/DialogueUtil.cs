@@ -13,6 +13,7 @@ public class DialogueUtil : MonoBehaviour
         GameObject.FindObjectOfType<LevelStart>(true).gameObject.SetActive(true);
         DialogueManager.PlaySequence("Glitch(0,0)");
         DialogueManager.PlaySequence("FMODEvent(event:/glitch 2,false)"); 
+        TutorialManager.Instance. unlockTutorial("dragZoom", true);
         //GameObject.Find("MC").GetComponent<Animator>().SetTrigger("getBack");
     }
     public void startConversation()

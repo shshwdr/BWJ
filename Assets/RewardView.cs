@@ -21,36 +21,16 @@ public class RewardView : BaseView
     public Text description;
     public Text title;
 
+
+
     public override void showView()
     {
         base.showView();
         GetComponent<UIView>().Show();
         panel.SetActive(true);
-        levelText.text = $"Level {StageLevelManager.Instance.currentLevel.displayName}";
-        collectedTotalText.text = $"Collected In Total: {StageLevelManager.Instance.totalCollected}/{StageLevelManager.Instance.totalCanCollect}";
-        collectedLevelText.text = $"Collected In Level: {StageLevelManager.Instance.currentLevel.collectedCount}/{StageLevelManager.Instance.currentLevel.itemCount}";
-        //GameManager.Instance.saveAnimalInLevel();
 
-        //if (StageLevelManager.Instance.getTargetFinish())
-        //{
-
-        //    title.text = "Exellent Work";
-        //    description.text = "Every life got saved!";
-        //}
-        //else if (StageLevelManager.Instance.getMainTargetFinish())
-        //{
-        //    title.text = "Great Work";
-        //    description.text = "You saved some lifes but missed some. Try to save them next time!";
-
-        //}
-        //else
-        //{
-        //    title.text = "Try Again";
-        //    description.text = "Lifes are waiting for you to be saved!";
-        //}
-
-
-        //StageLevelManager.Instance.addLevel();
+        UpdateTextDisplay();
+        
         var hasNextLevel = StageLevelManager.Instance.hasNextLevel();
         nextLevelButton.onClick.RemoveAllListeners();
         if (hasNextLevel)
@@ -130,11 +110,19 @@ public class RewardView : BaseView
         });
         //returnButton.onClick.AddListener(delegate { StageLevelManager.Instance.returnHome(); });
         levelSelectionButton.onClick.AddListener(delegate { StageLevelManager.Instance.selectLevel(); });
+        Translator.Instance.DisplayLanguageChanged += UpdateTextDisplay;
     }
 
-    // Update is called once per frame
-    void Update()
+    void UpdateTextDisplay()
     {
+        Translator translator = Translator.Instance;
+        int displayLanguage = translator.GetUserDisplayLanguageIndex();
 
+
+
+        levelText.text = $"{translator.Translate("Level", displayLanguage)}: {StageLevelManager.Instance.currentLevel.displayName}";
+        collectedTotalText.text = $"{translator.Translate("Collected In Total", displayLanguage)}: {StageLevelManager.Instance.totalCollected}/{StageLevelManager.Instance.totalCanCollect}";
+        collectedLevelText.text = $"{translator.Translate("Collected In Level", displayLanguage)}: {StageLevelManager.Instance.currentLevel.collectedCount}/{StageLevelManager.Instance.currentLevel.itemCount}";
     }
+
 }

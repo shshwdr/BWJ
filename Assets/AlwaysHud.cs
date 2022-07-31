@@ -22,6 +22,7 @@ public class AlwaysHud : MonoBehaviour
 
         pauseButton.onClick.AddListener(delegate
         {
+            GameObject.FindObjectOfType<SettingView>(true).init(true);
             GameObject.FindObjectOfType<SettingView>(true).showView();
         });
         EventPool.OptIn("updateCollected", updateCollectedText);

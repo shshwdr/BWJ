@@ -11,6 +11,9 @@ public class StartMenu : Singleton<StartMenu>
     public Button newGameButton;
     public Button continueButton;
     public Button levelButton;
+    public Button settingsButtons;
+    public Button creditsButtons;
+    public Button supportUsButtons;
     public GameObject camera;
     public UIView canvas;
 
@@ -58,6 +61,27 @@ public class StartMenu : Singleton<StartMenu>
         {
             StageLevelManager.Instance.setToLatestLevel();
             moveToMainLevel();
+        });
+
+        settingsButtons.onClick.AddListener(delegate
+        {
+            GameObject.FindObjectOfType<SettingView>(true).init(false);
+            GameObject.FindObjectOfType<SettingView>(true).showView();
+        }); 
+        creditsButtons.onClick.AddListener(delegate
+        {
+            GameObject.FindObjectOfType<Popup>(true).Init("Flavedo - programmer/designer\nsourlyx - sound designer/composer\nChapstic593 - 3d artist/ modeler\nToucan - narrative",null,"Got It");
+
+            GameObject.FindObjectOfType<Popup>(true).showView();
+        }); 
+        supportUsButtons.onClick.AddListener(delegate
+        {
+
+            GameObject.FindObjectOfType<Popup>(true).Init("Do you want to watch ads to support us?", ()=>{
+                //play ads
+        });
+
+            GameObject.FindObjectOfType<Popup>(true).showView();
         });
 
         levelButton.onClick.AddListener(delegate

@@ -33,7 +33,7 @@ public class Popup : BaseView
 
         noButton.onClick.RemoveAllListeners();
     }
-    public void Init(string t, Action y, string yesString = "Yes")
+    public void Init(string t, Action y = null, string yesString = "Yes")
     {
         // group.alpha = 1;
         //// group.interactable = true;
@@ -53,6 +53,7 @@ public class Popup : BaseView
         else
         {
 
+            noButton.gameObject.SetActive(true);
 
             yesButton.onClick.AddListener(delegate
             {

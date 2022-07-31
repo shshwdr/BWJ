@@ -41,14 +41,10 @@ namespace PixelCrushers.DialogueSystem.DialogueEditor
         private bool exportLocalizationKeyField = false;
 
         [SerializeField]
-        private bool exportAssignFieldValues = false;
-
-        [SerializeField]
         private string localizationKeyField = "Articy Id";
 
         private GUIContent exportLocalizationConversationTitleLabel = new GUIContent("Export Conversation Title Instead Of ID", "Export conversation title instead of ID. Titles should be unique.");
-        private GUIContent exportLocalizationKeyFieldLabel = new GUIContent("Use Key Field", "Tie each dialogue entry row to a key field (e.g., 'Articy Id' or 'Celtx ID') instead of conversation & entry IDs.");
-        private GUIContent exportAssignFieldValuesLabel = new GUIContent("Assign Values", "If key field is blank for dialogue entry, assign a unique value to it.");
+        private GUIContent exportLocalizationKeyFieldLabel = new GUIContent("Use Key Field (articy)", "Tie each dialogue entry row to a key field instead of conversation & entry IDs.");
 
         #endregion
 
@@ -69,11 +65,10 @@ namespace PixelCrushers.DialogueSystem.DialogueEditor
 
             exportLocalizationConversationTitle = EditorGUILayout.ToggleLeft(exportLocalizationConversationTitleLabel, exportLocalizationConversationTitle);
             EditorGUILayout.BeginHorizontal();
-            exportLocalizationKeyField = EditorGUILayout.ToggleLeft(exportLocalizationKeyFieldLabel, exportLocalizationKeyField, GUILayout.Width(160));
+            exportLocalizationKeyField = EditorGUILayout.ToggleLeft(exportLocalizationKeyFieldLabel, exportLocalizationKeyField, GUILayout.Width(200));
             if (exportLocalizationKeyField)
             {
-                localizationKeyField = EditorGUILayout.TextField(GUIContent.none, localizationKeyField, GUILayout.Width(160));
-                exportAssignFieldValues = EditorGUILayout.ToggleLeft(exportAssignFieldValuesLabel, exportAssignFieldValues, GUILayout.Width(160));
+                localizationKeyField = EditorGUILayout.TextField(GUIContent.none, localizationKeyField, GUILayout.Width(200));
             }
             EditorGUILayout.EndHorizontal();
 
@@ -212,7 +207,7 @@ namespace PixelCrushers.DialogueSystem.DialogueEditor
                         file.WriteLine(language);
                         var orderedFields = new string[] { "Dialogue Text", language, "Menu Text", "Menu Text " + language, "Description" };
                         var line = string.Format
-                        ("{0},{1},{2},{3},{4},{5},{6},{7}",
+                        ("{0},{1},{2},{3},{4}",
                             (exportLocalizationConversationTitle ? "Conversation" : "Conversation ID"),
                             "Entry ID",
                             "Actor",
@@ -240,21 +235,11 @@ namespace PixelCrushers.DialogueSystem.DialogueEditor
                                 var sb = new StringBuilder();
                                 if (exportLocalizationKeyField)
                                 {
-                                    var field = Field.Lookup(de.fields, localizationKeyField);
-                                    if (field == null)
-                                    {
-                                        field = new Field(localizationKeyField, GetNewKeyFieldValue(), FieldType.Text);
-                                        de.fields.Add(field);
-                                    }
-                                    else if (string.IsNullOrEmpty(field.value))
-                                    {
-                                        field.value = GetNewKeyFieldValue();
-                                    }
-                                    sb.AppendFormat("{0},", WrapCSVValue(field.value));
+                                    sb.AppendFormat("{0},", WrapCSVValue(Field.LookupValue(de.fields, localizationKeyField)));
                                 }
-                                sb.AppendFormat("{0},{1},{2}", 
-                                    (exportLocalizationConversationTitle ? WrapCSVValue(conversationTitle) : c.id.ToString()), 
-                                    de.id, 
+                                sb.AppendFormat("{0},{1},{2}",
+                                    (exportLocalizationConversationTitle ? WrapCSVValue(conversationTitle) : c.id.ToString()),
+                                    de.id,
                                     WrapCSVValue(LookupActorName(de.ActorID)));
                                 foreach (string value in fields)
                                     sb.AppendFormat(",{0}", WrapCSVValue(value));
@@ -337,6 +322,84 @@ namespace PixelCrushers.DialogueSystem.DialogueEditor
                             file.Close();
                         }
                     }
+
+
+                    // Write Items_LN.csv file:
+                    int numItems = 0;
+                    foreach (var item in database.items)
+                    {
+                        if (item.IsItem)
+                        {
+                            numItems++;
+                        }
+                    }
+                    if (numItems > 0)
+                    {
+                        filename = localizationLanguages.outputFolder + "/Items_" + language + ".csv";
+                        using (var file = new StreamWriter(filename, false, new UTF8Encoding(true)))
+                        {
+                            file.WriteLine(language);
+                            var sb = new StringBuilder();
+                            sb.AppendFormat("{0},{1},{2},{3},{4}",
+                                "Name",
+                                "Display Name",
+                                "Translated Display Name [" + language + "]",
+                                "Description",
+                                "Translated Description [" + language + "]");
+                            file.WriteLine(sb.ToString());
+                            foreach (var item in database.items)
+                            {
+                                if (!item.IsItem) continue;
+                                var quest = item;
+                                sb = new StringBuilder();
+                                sb.AppendFormat("{0},{1},{2},{3},{4}",
+                                    WrapCSVValue(quest.Name),
+                                    WrapCSVValue(quest.LookupValue("Display Name")),
+                                    WrapCSVValue(quest.LookupValue("Display Name " + language)),
+                                    WrapCSVValue(quest.LookupValue("Description")),
+                                    WrapCSVValue(quest.LookupValue("Description " + language)));
+
+                                file.WriteLine(sb.ToString());
+                            }
+                            file.Close();
+                        }
+                    }
+
+                    // Write Actors_LN.csv file:
+                    int numNPCs = 0;
+                    foreach (var item in database.actors)
+                    {
+                        //if (item.IsItem)
+                        {
+                            numNPCs++;
+                        }
+                    }
+                    if (numNPCs > 0)
+                    {
+                        filename = localizationLanguages.outputFolder + "/Actors_" + language + ".csv";
+                        using (var file = new StreamWriter(filename, false, new UTF8Encoding(true)))
+                        {
+                            file.WriteLine(language);
+                            var sb = new StringBuilder();
+                            sb.AppendFormat("{0},{1},{2}",
+                                "Name",
+                                "Display Name",
+                                "Translated Display Name [" + language + "]");
+                            file.WriteLine(sb.ToString());
+                            foreach (var item in database.actors)
+                            {
+                                var quest = item;
+                                sb = new StringBuilder();
+                                sb.AppendFormat("{0},{1},{2}",
+                                    WrapCSVValue(quest.Name),
+                                    WrapCSVValue(quest.LookupValue("Display Name")),
+                                    WrapCSVValue(quest.LookupValue("Display Name " + language)));
+
+                                file.WriteLine(sb.ToString());
+                            }
+                            file.Close();
+                        }
+                    }
                 }
             }
             finally
@@ -346,14 +409,7 @@ namespace PixelCrushers.DialogueSystem.DialogueEditor
             EditorUtility.DisplayDialog("Exported Localization CSV", "Localization files are in " + localizationLanguages.outputFolder + ". Open these files in a spreadsheet application and add translations. Then import them by using the Import... button.", "OK");
         }
 
-        private string GetNewKeyFieldValue()
-        {
-            var s = Guid.NewGuid().ToString();
-            var pos = s.IndexOf('-');
-            return (pos == -1) ? s : s.Substring(0, pos);
-        }
-
-        private string WrapCSVValue(string s)
+        string WrapCSVValue(string s)
         {
             if (string.IsNullOrEmpty(s)) return string.Empty;
             string s2 = s.Contains("\n") ? s.Replace("\n", "\\n") : s;
@@ -416,7 +472,7 @@ namespace PixelCrushers.DialogueSystem.DialogueEditor
                     for (int j = 2; j < lines.Count; j++)
                     {
                         var columns = GetCSVColumnsFromLine(lines[j]);
-                        if (columns.Count < 7)
+                        if (columns.Count < 4)
                         {
                             Debug.LogError(filename + ":" + (j + 1) + " Invalid line: " + lines[j]);
                         }
@@ -478,13 +534,14 @@ namespace PixelCrushers.DialogueSystem.DialogueEditor
                             if (entry != null)
                             {
                                 Field.SetValue(entry.fields, language, columns[4], FieldType.Localization);
-                                Field.SetValue(entry.fields, "Menu Text " + language, columns[6], FieldType.Localization);
+                                //Field.SetValue(entry.fields, "Dialogue Text", columns[3], FieldType.Text);
+                                //Field.SetValue(entry.fields, "Text " + language, columns[6], FieldType.Localization);
 
                                 // Check if we also need to import updated main text.
                                 if (alsoImportMainText)
                                 {
                                     entry.DialogueText = columns[3];
-                                    entry.MenuText = columns[5];
+                                    //entry.MenuText = columns[5];
                                 }
                             }
                         }
@@ -544,6 +601,75 @@ namespace PixelCrushers.DialogueSystem.DialogueEditor
                                         {
                                             Field.SetValue(quest.fields, "Entry " + (k + 1), columns[11 + 2 * k], FieldType.Text);
                                         }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Read items CSV file:
+                    filename = localizationLanguages.outputFolder + "/Items_" + language + ".csv";
+                    if (File.Exists(filename))
+                    {
+                        lines = ReadCSV(filename);
+                        CombineMultilineCSVSourceLines(lines);
+                        for (int j = 2; j < lines.Count; j++)
+                        {
+                            var columns = GetCSVColumnsFromLine(lines[j]);
+                            if (columns.Count < 5)
+                            {
+                                Debug.LogError(filename + ":" + (j + 1) + " Invalid line: " + lines[j]);
+                            }
+                            else
+                            {
+                                var quest = database.GetItem(columns[0]);
+                                if (quest == null)
+                                {
+                                    // Skip if quest is not present.
+                                }
+                                else
+                                {
+                                    var displayName = columns[1];
+                                    var translatedDisplayName = columns[2];
+                                    if (!string.IsNullOrEmpty(translatedDisplayName))
+                                    {
+                                        if (!quest.FieldExists("Display Name")) Field.SetValue(quest.fields, "Display Name", displayName);
+                                        Field.SetValue(quest.fields, "Display Name " + language, translatedDisplayName, FieldType.Localization);
+                                    }
+                                    Field.SetValue(quest.fields, "Description " + language, columns[4], FieldType.Localization);
+                                }
+                            }
+                        }
+                    }
+
+                    //Read actors CSV file:
+                    filename = localizationLanguages.outputFolder + "/Actors_" + language + ".csv";
+                    if (File.Exists(filename))
+                    {
+                        lines = ReadCSV(filename);
+                        CombineMultilineCSVSourceLines(lines);
+                        for (int j = 2; j < lines.Count; j++)
+                        {
+                            var columns = GetCSVColumnsFromLine(lines[j]);
+                            if (columns.Count < 3)
+                            {
+                                Debug.LogError(filename + ":" + (j + 1) + " Invalid line: " + lines[j]);
+                            }
+                            else
+                            {
+                                var quest = database.GetActor(columns[0]);
+                                if (quest == null)
+                                {
+                                    // Skip if quest is not present.
+                                }
+                                else
+                                {
+                                    var displayName = columns[1];
+                                    var translatedDisplayName = columns[2];
+                                    if (!string.IsNullOrEmpty(translatedDisplayName))
+                                    {
+                                        if (!quest.FieldExists("Display Name")) Field.SetValue(quest.fields, "Display Name", displayName);
+                                        Field.SetValue(quest.fields, "Display Name " + language, translatedDisplayName, FieldType.Localization);
                                     }
                                 }
                             }

@@ -1,0 +1,89 @@
+﻿English,中文
+en,zh
+Continue,继续
+New Game,新游戏
+Support Us,支持我们
+Settings,设置
+Credits,制作人员
+The seed has been pierced by a chestnut.,种子被毛栗穿透了。
+The seed has been eaten by an insect.,种子被昆虫吃掉了。
+The seed has drowned in the water.,种子在水里淹死了。
+The seed has been cut by a hoe.,种子被斧头砍成两半了。
+The seed has been eaten by a bird.,种子被小鸟吃掉了。
+The seed found a place next to the large tree. \nSoon the sprout will grow up and produce more and more seeds.,种子在一颗大树旁发现了一片土地，\n很快它就会长大生出更多种子。
+"\nIts death is not in vain, as it will grow into grass. Take advantage of that to make a journey throughout this world",\n但这次死亡并不是毫无意义，它长出了叶子，可以利用它继续探索世界。
+\nMore energy bursts from the seed. This time it's more than just grass.,\n种子中迸发了能量，这次长出的不只是叶子。
+\nThe golden flower will shine into every dark corner of the world.,\n金黄的花朵会在整个世界绽放。
+The seed has fertilized the ground. You can now explore underground.,种子会使土地肥沃，你可以探索地下世界了。
+"\nWith the limited amount of oxygen in this cave, the seed has grown into a fern.",\n因为山洞中的氧气有限，种子长成了一株蕨类植物。
+"\nIts death is not in vain. The bird takes it to the cliff and drops it there, the seed starts growing into a vine on cliff.",\n它的死亡不是毫无意义。
+"\nIts death is not in vain, as it has grown into various lotus leaves.",\n它的死亡不是毫无意义，它长出了一些莲叶。
+"\nIts death is not in vain, as it has grown into wheat and is now being farmed by humans.",\n它的死亡不是毫无意义，它长出了一些小麦。
+\nThe progress of spreading throughout the world has increased.,\n种子散播到全世界的进程增加了！
+\nTap to respawn.,\n点击重生。
+\nThanks for playing. You may keep exploring the game.,\n感谢玩我们的游戏，你可以继续探索这个世界。
+Move Down\n\nEnter The Tunnel,向下移动\n\n进入隧道
+Move Up\n\nEnter The Tunnel,向上移动\n\n进入隧道
+Left or Right to select spawn point.\nSpace to respawn,
+The ground here looks barren…,这里的土地看起来有些贫瘠……
+The seed can not sprout because it is too deep.,这里太深了，种子没办法在这里发芽。
+The soil is fertilized and a root can now grow better... There might be more space to explore,土地被滋养了，可能产生了更多可以探索的空间。
+"The seed has now completed its journey, as it has spread throughout the world. Thanks for helping it!",种子完成了它的旅程，散播到了世界各地。谢谢你帮助它！
+Do you want to watch ads to get a hint?,想要看广告得到提示么？
+Thanks For supporting us!,谢谢支持！
+Do you want to watch ads to support us?,可以看一个广告来支持我们么？（第一次加载可能比较慢）
+Programmer: Flavedo\nArtist: Sealcat\nComposer and Sound Designer: Dieck\nAudio Engine: FMOD Studio by Firelight Technologies Pty Ltd,程序: Flavedo\n美术: Sealcat\n音乐音效: Dieck\n声音引擎: FMOD Studio by Firelight Technologies Pty Ltd
+Find me in the river,在河里找到我
+Get Hint,提示
+Find me underground,在地下死亡过以后右转找到我
+Find me on the left of the river,在河的左边找到我
+Find me at the beginning,在游戏开始找到我
+Find me jumping from the highest of the tree,在树的最高点跳下来找到我
+Find me on the farm,在田地找到我
+Resume,返回
+Menu,返回标题
+Music,音乐音量
+Sfx,音效音量
+sfx,音效音量
+BACK,返回
+YES,是
+NO,否
+Progress,进度
+Drag To Move,拖拽移动
+Tap To Jump,点击跳跃
+The seed wants to spread throughout the world. Help it reach its goal.,这颗种子想要散播到世界各地，帮帮它吧！
+The ground here looks barren...,这里的土地看起来有点贫瘠……
+Respawn,重生
+Can we fall gently?,如何轻轻的落下呢。。
+This is the end of the road,这是路的终点了
+Hide UI,隐藏UI
+Language,语言
+Cube Arc,方星
+"It is the year 207X. Strange cubes have been discovered around Saturn. They are smooth and reflective, and bigger than anything around earth.\nProbes and rovers were sent but destroyed before they got to the surface by the interference around the cubes. An expedition crew was sent and disappeared too.\nEverybody on earth is following the mystery. What is it? How is it here?\nWho put it here?",时值207X年，神秘的方块被发现在土星附近。他们光滑而坚固，巨大而坚不可摧。\n运送上去的探测器和漫游者都消失不见了，一队人类探险队也遭受了同样的命运。\n所有人类都对这个神秘的方星充满好奇。\n它是什么？怎么来的？是谁把它放在了那里？
+Reset Camera,重置相机
+Start,开始
+AUTO,自动
+Collected:,已收集：
+Got It,收到
+Flavedo - programmer/designer\nsourlyx - sound designer/composer\nChapstic593 - 3d artist/ modeler\nToucan - narrative,Flavedo - 程序/设计\nsourlyx - 音乐/音效\nChapstic593 - 美术/建模\nToucan - 剧情
+Pan to look around\nPinch to zoom\nPress Start to move,平移可以旋转视角，捏合可以放大缩小。点击开始移动。
+Click U turn to turn back.,点击掉头图标回头。
+You can press Reset Camera to follow player.,你可以点击重置相机来跟随机器人。
+"Move priority at intersection: Forward, Right, Left, Turn Back. If one direction is blocked, you will try the next in order.",交叉路口移动优先级：向前，向右，向左，回头。如果一个方向不能行进，会选择下一个方向。
+You will pull levers to rotate the road when you walk by.,你走过拉杆时会拉动拉杆，旋转路面。
+Signs will force turning in that direction... If you can,方向标志会强制你左转，如果你能够左转。
+Turning Left is based on robot orientation,左转时基于机器人面向的方向。
+Click Swim button to.. Swim,点击游泳按钮来……游泳。
+Sometimes you might want to turn off swimming,有时候你可能需要关掉游泳状态。
+Do you want to clear your previous data and restart the game?,你想要清除之前的数据并重新开始游戏么？\n（之前的广告信息也会被清除）
+Do you want to watch an ad and get hint? ,你想要看广告得到提示么？
+Do you want to play hint? ,你想要播放提示么？
+Do you want to stop playing hint?,你想要停止播放提示么？
+The level will restart and play automatically for you.,关卡会重启，并自动播放提示。
+Collected In Total,总共收集
+Return,返回
+Level Selection,选择关卡
+Restart,重新开始
+Levels,关卡
+Yes,是
+No,否
