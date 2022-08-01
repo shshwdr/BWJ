@@ -9,7 +9,7 @@ public class TextUtils : MonoBehaviour
 
 
 
-        { "dragZoom","Drag to look around\nScroll to zoom\nPress Start to move" },
+        { "dragZoom","Pan to look around\nPinch to zoom\nPress Start to move" },
         { "useFirstSkill","Click U turn to turn back." },
         //{ "useFirstSkill_video","Click 'Turn Back' to use the skill and turn back." },
 

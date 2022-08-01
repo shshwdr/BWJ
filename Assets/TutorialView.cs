@@ -47,7 +47,7 @@ public class TutorialView : MonoBehaviour
             Debug.LogError("current id larger than max");
             currentId = TutorialManager.Instance.unlockedTutorialList.Count-1;
         }
-        tutorialText.text = TextUtils.getText(TutorialManager.Instance.unlockedTutorialList[currentId]);
+        tutorialText.text = Translator.Instance.Translate(TextUtils.getText(TutorialManager.Instance.unlockedTutorialList[currentId]));
         if (currentId == TutorialManager.Instance.unlockedTutorialList.Count - 1)
         {
             nextButton.gameObject.SetActive(false);

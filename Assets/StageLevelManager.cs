@@ -89,7 +89,6 @@ public class StageLevelManager : Singleton<StageLevelManager>
         //base.Load(save);
         //progress = save.progress;
 
-        //progressText.text = progress + " %";
         //plantUnlocked = save.plantUnlocked;
         //plantHinted = save.plantHinted;
     }

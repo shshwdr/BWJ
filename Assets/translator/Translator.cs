@@ -162,7 +162,7 @@ public class Translator : Singleton<Translator>
         }
     }
 
-    internal string Translate(string englishText)
+    public string Translate(string englishText)
     {
         return Translate(englishText, currentLanguageIndex);
     }

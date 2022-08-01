@@ -2,9 +2,10 @@ using Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.UI;
 
-public class AlwaysHud : MonoBehaviour
+public class AlwaysHud : MonoBehaviour, IUnityAdsShowListener
 {
     public Text collectedText;
     public Button pauseButton;
@@ -90,12 +91,7 @@ public class AlwaysHud : MonoBehaviour
 
             GameObject.FindObjectOfType<Popup>(true).Init(text, () =>
         {
-            //after ads play
-            StageLevelManager.Instance.unlockHint();
-            SaveLoadManager.saveGame();
-            isAutoOn = true;
-            updateAutoState(true, isAutoOn);
-            GameObject.FindObjectOfType<InstructionsMenu>().hideInstructions();
+            AdsManager.Instance.ShowAd(gameObject);
         });
 
         GameObject.FindObjectOfType<Popup>(true).showView();
@@ -151,5 +147,40 @@ public class AlwaysHud : MonoBehaviour
             autoButtonOn.SetActive(isAutoOn);
             this.isAutoOn = isAutoOn;
         }
+    }
+
+    public void OnUnityAdsShowClick(string placementId)
+    {
+        Debug.Log("Unity Ads  show click.");
+    }
+    bool isActive = false;//a bad bad bad idea but I don't know how to fix this
+    public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
+    {
+        if (isActive && placementId.Equals(AdsManager.Instance._unitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
+        {
+            Debug.Log("Unity Ads Rewarded Ad Completed");
+            // Grant a reward.
+            StageLevelManager.Instance.unlockHint();
+            SaveLoadManager.saveGame();
+            isAutoOn = true;
+            updateAutoState(true, isAutoOn);
+            GameObject.FindObjectOfType<InstructionsMenu>().hideInstructions();
+        }
+        else
+        {
+
+        }
+        isActive = false;
+    }
+
+    public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
+    {
+        isActive = false;
+        Debug.LogError($"Unity Ads Show Failed: {error.ToString()} - {message}");
+    }
+
+    public void OnUnityAdsShowStart(string placementId)
+    {
+        Debug.Log("Unity Ads Start show.");
     }
 }
