@@ -8,7 +8,20 @@ public class Utils : MonoBehaviour
     static public Vector2[] dir4V2 = { new Vector2(1, 0), new Vector2(-1, 0), new Vector2(0, -1), new Vector2(0, 1), };
     static public Vector2Int[] dir4V2Int = { new Vector2Int(1, 0), new Vector2Int(-1, 0), new Vector2Int(0, -1), new Vector2Int(0, 1), };
     static public Vector2[] dir5V2 = { new Vector2(1, 0), new Vector2(-1, 0), new Vector2(0, -1), new Vector2(0, 1), new Vector2(0, 0), };
-    
+
+    static public Vector3 GetClosestPointOnFiniteLine(Vector3 point, Vector3 line_start, Vector3 line_end)
+    {
+        Vector3 line_direction = line_end - line_start;
+        float line_length = line_direction.magnitude;
+        line_direction.Normalize();
+        float project_length = Mathf.Clamp(Vector3.Dot(point - line_start, line_direction), 0f, line_length);
+        return line_start + line_direction * project_length;
+    }
+    // For infinite lines:
+    Vector3 GetClosestPointOnInfiniteLine(Vector3 point, Vector3 line_start, Vector3 line_end)
+    {
+        return line_start + Vector3.Project(point - line_start, line_end - line_start);
+    }
     static public bool ListEqual<T>(List<T> a, List<T> b)
     {
         if (a.Count != b.Count)

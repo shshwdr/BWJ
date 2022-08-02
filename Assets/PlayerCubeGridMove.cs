@@ -808,11 +808,11 @@ public class PlayerCubeGridMove : MonoBehaviour
         yield return new WaitForSeconds(time);
         startedMoving = true;
     }
-
+    float firstScale;
     // Update is called once per frame
     void Update()
     {
-
+        firstScale = 1;
         if (Input.GetKeyDown(KeyCode.P))
         {
             Time.timeScale *= 2;
@@ -844,6 +844,12 @@ public class PlayerCubeGridMove : MonoBehaviour
             }
             if (nextPositions.Count > 0)
             {
+                if (nextPositions.Count > 1)
+                {
+
+
+                    firstScale = (nextPositions[0] - transform.position).magnitude / (nextPositions[1] - nextPositions[0]).magnitude;
+                }
                 //move
                 transform.Translate((nextPositions[0] - transform.position).normalized * moveSpeed * Time.deltaTime, Space.World);
                 float donePercentage = Mathf.Min(1F, Time.deltaTime / (moveSpeed));
@@ -879,12 +885,14 @@ public class PlayerCubeGridMove : MonoBehaviour
         //  moreNextPositions
     }
 
-    public static List<Vector3> improveVisualPoints(List<VisuallyPosition> visuallyNextPositions)
+    public static List<Vector3> improveVisualPoints(List<VisuallyPosition> visuallyNextPositions,PlayerCubeGridMove player = null)
     {
         var res = new List<Vector3>();
         //res.Add(transform.position + transform.up * 0.1f);
         bool hasTurnAround = false;
         HashSet<Vector3> existedPositions = new HashSet<Vector3>();
+
+
         for (int i = 0; i < visuallyNextPositions.Count; i++)
         {
             if (existedPositions.Contains(visuallyNextPositions[i].position))
@@ -946,13 +954,23 @@ public class PlayerCubeGridMove : MonoBehaviour
             }
         }
 
+        if(res.Count > 1)
+        {
+
+
+                if (player)
+                {
+
+                res[0] = Utils.GetClosestPointOnFiniteLine(player.transform.position, res[0], res[1]);
+                    }
+        }
 
         return res;
     }
 
-    public List<Vector3> nextPoints()
+    public List<Vector3> nextPoints(PlayerCubeGridMove player)
     {
-        return improveVisualPoints(visuallyNextPositions);
+        return improveVisualPoints(visuallyNextPositions, player);
     }
 }
 

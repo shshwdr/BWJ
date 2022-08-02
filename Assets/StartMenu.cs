@@ -41,6 +41,31 @@ public class StartMenu : Singleton<StartMenu>, IUnityAdsShowListener
             moveToMainLevel();
         }
     }
+
+    public void Continue(){
+        
+            StageLevelManager.Instance.setToLatestLevel();
+            moveToMainLevel();
+}
+    public void openSettings()
+    {
+
+        GameObject.FindObjectOfType<SettingView>(true).init(false);
+        GameObject.FindObjectOfType<SettingView>(true).showView();
+    }
+    public void openCredits()
+    {
+
+        GameObject.FindObjectOfType<Popup>(true).Init("Flavedo - programmer/designer\nsourlyx - sound designer/composer\nChapstic593 - 3d artist/ modeler\nToucan - narrative", null, "Got It");
+
+        GameObject.FindObjectOfType<Popup>(true).showView();
+    }
+
+    public void openLevels()
+    {
+
+        StageLevelManager.Instance.selectLevel();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -57,41 +82,7 @@ public class StartMenu : Singleton<StartMenu>, IUnityAdsShowListener
             continueButton.gameObject.SetActive(false);
             levelButton.gameObject.SetActive(false);
         }
-        newGameButton.onClick.AddListener(delegate
-        {
 
-
-        });
-
-        
-
-        continueButton.onClick.AddListener(delegate
-        {
-            StageLevelManager.Instance.setToLatestLevel();
-            moveToMainLevel();
-        });
-
-        settingsButtons.onClick.AddListener(delegate
-        {
-            GameObject.FindObjectOfType<SettingView>(true).init(false);
-            GameObject.FindObjectOfType<SettingView>(true).showView();
-        }); 
-        creditsButtons.onClick.AddListener(delegate
-        {
-            GameObject.FindObjectOfType<Popup>(true).Init("Flavedo - programmer/designer\nsourlyx - sound designer/composer\nChapstic593 - 3d artist/ modeler\nToucan - narrative",null,"Got It");
-
-            GameObject.FindObjectOfType<Popup>(true).showView();
-        }); 
-        supportUsButtons.onClick.AddListener(delegate
-        {
-
-        });
-
-        levelButton.onClick.AddListener(delegate
-        {
-            StageLevelManager.Instance.selectLevel();
-            //moveToMainLevel();
-        });
         Time.timeScale = 1;
 
         if (StageLevelManager.Instance.currentLevelId != 0)

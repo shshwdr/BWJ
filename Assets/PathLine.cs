@@ -10,7 +10,7 @@ public class PathLine : MonoBehaviour
     PlayerCubeGridMove playerMove;
     void updatePathLine()
     {
-        showLine(playerMove.nextPoints());
+        showLine(playerMove.nextPoints(playerMove));
     }
     // Start is called before the first frame update
     void Start()

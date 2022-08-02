@@ -16,10 +16,10 @@ public class LevelStart : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-        //else
-        //{
+        else
+       {
             StageLevelManager.Instance.startLevel();
-        //}
+        }
     }
 
     // Update is called once per frame
