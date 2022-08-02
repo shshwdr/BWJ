@@ -16,7 +16,14 @@ public class TranslateText : MonoBehaviour
     int lastLanguageUpdated = -1;
     Text txtDisplay;
     TMP_Text txtDisplay_TMP;
-
+    void Awake()
+    {
+        TranslateText other = gameObject.GetComponent<TranslateText>();
+        if (other != null &&  other !=this)
+        {
+            Destroy(other);
+        }
+    }
     void Start()
     {
         Init();

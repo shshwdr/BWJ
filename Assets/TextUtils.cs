@@ -25,6 +25,7 @@ public class TextUtils : MonoBehaviour
         {"startHint","Do you want to play hint? " },
         {"stopHint","Do you want to stop playing hint?" },
         {"warningToRestart","The level will restart and play automatically for you." },
+        {"thanks", "Thanks For supporting us!"},
 
     };
     public static HashSet<string> videoSet = new HashSet<string>

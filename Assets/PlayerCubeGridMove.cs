@@ -1,3 +1,5 @@
+
+
 using PixelCrushers.DialogueSystem;
 using Pool;
 using System.Collections;
@@ -636,6 +638,22 @@ public class PlayerCubeGridMove : MonoBehaviour
         }
     }
 
+    static public void playerMoveBasedOnHint(PlayerCubeGridMove player, int i)
+    {
+
+        if ((i & 1) == 1)
+        {
+            player.turnAround();
+        }
+        if (((i >> 1) & 1) == 1)
+        {
+            player.swim();
+        }
+        //if (((i >> 2) & 1) == 1)
+        //{
+        //    player.ignoreSign();
+        //}
+    }
     public void decideNextMove()
     {
         visuallyNextPositions.Clear();
@@ -648,7 +666,7 @@ public class PlayerCubeGridMove : MonoBehaviour
             if (currentHint != null && autoStep < currentHint.actionList.Count)
             {
                 var nextAction = currentHint.actionList[autoStep];
-                LevelValidation.playerMoveBasedOnHint(this, nextAction);
+                playerMoveBasedOnHint(this, nextAction);
                 autoStep++;
             }
 
@@ -751,7 +769,7 @@ public class PlayerCubeGridMove : MonoBehaviour
 
 
     }
-
+#if UNITY_EDITOR
     public LevelValidationPadView getPadStandingOn()
     {
 
@@ -764,7 +782,7 @@ public class PlayerCubeGridMove : MonoBehaviour
         Debug.LogError("why no pad standing on?");
         return null;
     }
-
+#endif
     public void turnAround()
     {
         moveState.turnAroundNext = !moveState.turnAroundNext;

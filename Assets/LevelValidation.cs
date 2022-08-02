@@ -387,22 +387,6 @@ public class LevelValidation : MonoBehaviour
         }
     }
 
-    static public void playerMoveBasedOnHint(PlayerCubeGridMove player, int i)
-    {
-
-        if ((i & 1) == 1)
-        {
-            player.turnAround();
-        }
-        if (((i >> 1) & 1) == 1)
-        {
-            player.swim();
-        }
-        //if (((i >> 2) & 1) == 1)
-        //{
-        //    player.ignoreSign();
-        //}
-    }
 
     IEnumerator bfs(PlayerCubeGridMove player, ValidationStep validationStep, int stepLeft, float time, KeyCode key = KeyCode.None)
     {
@@ -472,7 +456,7 @@ public class LevelValidation : MonoBehaviour
             stepLeft--;
             for (int i = 0; i < 4; i++)
             {
-                playerMoveBasedOnHint(player, i);
+                PlayerCubeGridMove. playerMoveBasedOnHint(player, i);
                 updatePlayerFromStep(player, currentStep);
 
                 player.moveNextMove();

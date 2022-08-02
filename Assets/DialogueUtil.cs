@@ -2,6 +2,7 @@ using PixelCrushers.DialogueSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DialogueUtil : MonoBehaviour
 {
@@ -14,6 +15,11 @@ public class DialogueUtil : MonoBehaviour
         DialogueManager.PlaySequence("Glitch(0,0)");
         DialogueManager.PlaySequence("FMODEvent(event:/glitch 2,false)"); 
         TutorialManager.Instance. unlockTutorial("dragZoom", true);
+
+
+
+        //StartMenu.Instance.hasStartedMainLevel = false;
+        //SceneManager.LoadScene(0);
         //GameObject.Find("MC").GetComponent<Animator>().SetTrigger("getBack");
     }
     public void startConversation()

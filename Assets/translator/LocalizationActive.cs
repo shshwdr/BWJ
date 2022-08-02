@@ -1,27 +1,19 @@
-using Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelStart : MonoBehaviour
+public class LocalizationActive : MonoBehaviour
 {
+    public bool showOnlyInChina = true;
     // Start is called before the first frame update
     void Start()
     {
-        EventPool.Trigger("startLevel");
-
-        //before, when restart level, it would not start level
-
-        if (!StartMenu.Instance.hasStartedMainLevel)
+        //Translator.Instance.DisplayLanguageChanged += UpdateTextDisplay;
+        if (!AdsManager.isChina)
         {
             gameObject.SetActive(false);
         }
-        //else
-        //{
-            StageLevelManager.Instance.startLevel();
-        //}
     }
-
     // Update is called once per frame
     void Update()
     {

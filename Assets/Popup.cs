@@ -38,17 +38,16 @@ public class Popup : BaseView
         // group.alpha = 1;
         //// group.interactable = true;
         // group.blocksRaycasts = true;
-        text.text = t;
+        text.text = Translator.Instance.Translate(t);
 
         clearButton();
 
         if (y == null)
         {
             noButton.gameObject.SetActive(false);
-            yesButton.onClick.AddListener(delegate
-            {
-                hideView();
-            });
+            yesButton.onClick.AddListener(
+                hideView
+            );
         }
         else
         {
@@ -65,7 +64,7 @@ public class Popup : BaseView
             });
         }
 
-        yesButton.GetComponentInChildren<Text>().text = yesString;
+        yesButton.GetComponentInChildren<Text>().text = Translator.Instance.Translate( yesString);
         //Time.timeScale = 0;
     }
 
