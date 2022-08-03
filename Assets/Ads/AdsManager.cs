@@ -22,7 +22,7 @@ public class AdsManager : Singleton<AdsManager>, IUnityAdsLoadListener,IUnityAds
 
     public bool testMode = true;
 
-    public static bool isChina = true;
+    public static bool isChina = false;
 
     public void OnUnityAdsAdLoaded(string placementId)
     {

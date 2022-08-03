@@ -60,7 +60,7 @@ public class GameMenu : MonoBehaviour
             else //to reset camera
             {
                 resetCamera.gameObject.SetActive(false);
-                text.text = Translator.Instance.Translate("Free Camera");
+                //text.text = Translator.Instance.Translate("Free Camera");
 
                 EventPool.Trigger("ResetCamera");
             }
@@ -72,8 +72,8 @@ public class GameMenu : MonoBehaviour
     }
     void setCamera()
     {
-        resetCamera.gameObject.SetActive(true);
-        text.text = Translator.Instance.Translate("Free Camera");
+        resetCamera.gameObject.SetActive(false);
+       // text.text = Translator.Instance.Translate("Free Camera");
         toResetCamera = true;
     }
     void showResetCameraButton()

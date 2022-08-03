@@ -18,7 +18,7 @@ public class TextUtils : MonoBehaviour
         {"leverFirst","You will pull levers to rotate the road when you walk by." },
         {"learnSign","Signs will force turning in that direction... If you can" },
         {"signLogic","Turning Left is based on robot orientation" },
-        {"swimTutorial","Click Swim button to.. swim" },
+        {"swimTutorial","Click Swim button to.. Swim" },
         {"swimTurnOn","Sometimes you might want to turn off swimming" },
         {"restart","Do you want to clear your previous data and restart the game?" },
         {"getHint","Do you want to watch an ad and get hint? " },

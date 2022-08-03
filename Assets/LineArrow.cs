@@ -16,7 +16,7 @@ public class LineArrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float vOffset = Time.time * scrollSpeed;
+        float vOffset = Time.deltaTime * scrollSpeed;
         _renderer.material.SetTextureOffset("_MainTex", new Vector2(vOffset, 0));
     }
 }

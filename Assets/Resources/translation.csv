@@ -76,7 +76,9 @@ Turning Left is based on robot orientation,左转时基于机器人面向的方�
 Click Swim button to.. Swim,点击游泳按钮来……游泳。
 Sometimes you might want to turn off swimming,有时候你可能需要关掉游泳状态。
 Do you want to clear your previous data and restart the game?,你想要清除之前的数据并重新开始游戏么？\n（之前的广告信息也会被清除）
+Do you want to watch an ad and get hint? The level will restart and play automatically for you.,你想要看广告得到提示么？关卡会重启，并自动播放提示。
 Do you want to watch an ad and get hint? ,你想要看广告得到提示么？
+Do you want to play hint? The level will restart and play automatically for you.,你想要播放提示么？关卡会重启，并自动播放提示。
 Do you want to play hint? ,你想要播放提示么？
 Do you want to stop playing hint?,你想要停止播放提示么？
 The level will restart and play automatically for you.,关卡会重启，并自动播放提示。
@@ -87,3 +89,7 @@ Restart,重新开始
 Levels,关卡
 Yes,是
 No,否
+Collected In Level,本关卡已收集
+Level,关卡
+Next,下一关
+End,结束

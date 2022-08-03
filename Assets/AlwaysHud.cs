@@ -90,8 +90,9 @@ public class AlwaysHud : MonoBehaviour, IUnityAdsShowListener
         }
 
             GameObject.FindObjectOfType<Popup>(true).Init(text, () =>
-        {
-            AdsManager.Instance.ShowAd(gameObject);
+            {
+                isActive = true;
+                AdsManager.Instance.ShowAd(gameObject);
         });
 
         GameObject.FindObjectOfType<Popup>(true).showView();
@@ -104,7 +105,6 @@ public class AlwaysHud : MonoBehaviour, IUnityAdsShowListener
             GameObject.FindObjectOfType<Popup>(true).Init(TextUtils.getText("stopHint"), () =>
             {
                 isAutoOn = !isAutoOn;
-                //StageLevelManager.Instance.playHint();
                 GameObject.FindObjectOfType<InstructionsMenu>().showInstructions();
                 updateAutoState(true, isAutoOn);
             });

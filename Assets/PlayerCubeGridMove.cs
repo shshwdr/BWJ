@@ -663,6 +663,7 @@ public class PlayerCubeGridMove : MonoBehaviour
 
         if (isAuto)
         {
+            Debug.Log("decide next move with auto "+ autoStep+" "+ currentHint.actionList.Count);
             if (currentHint != null && autoStep < currentHint.actionList.Count)
             {
                 var nextAction = currentHint.actionList[autoStep];

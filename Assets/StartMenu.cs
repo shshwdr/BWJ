@@ -97,6 +97,8 @@ public class StartMenu : Singleton<StartMenu>, IUnityAdsShowListener
 
         GameObject.FindObjectOfType<Popup>(true).Init("Do you want to watch ads to support us?", () => {
             //play ads
+            isActive = true;
+            AdsManager.Instance.ShowAd(gameObject);
         });
 
         GameObject.FindObjectOfType<Popup>(true).showView();
@@ -139,7 +141,7 @@ public class StartMenu : Singleton<StartMenu>, IUnityAdsShowListener
             Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
             // say thanks!
-            GameObject.FindObjectOfType<Popup>(true).Init(TextUtils.getText("thanks"),null,"return"
+            GameObject.FindObjectOfType<Popup>(true).Init(TextUtils.getText("thanks"),null, "Return"
                 );
 
             GameObject.FindObjectOfType<Popup>(true).showView();

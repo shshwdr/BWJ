@@ -43,11 +43,11 @@ public class RewardView : BaseView
                 StageLevelManager.Instance.startNextLevel();
 
             });
-            nextLevelButton.GetComponentInChildren<Text>().text = "Next";
+            nextLevelButton.GetComponentInChildren<Text>().text = Translator.Instance.Translate( "Next");
         }
         else
         {
-            nextLevelButton.GetComponentInChildren<Text>().text = "End";
+            nextLevelButton.GetComponentInChildren<Text>().text = Translator.Instance.Translate("End");
 
 
             nextLevelButton.onClick.AddListener(delegate
