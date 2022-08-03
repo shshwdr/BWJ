@@ -134,7 +134,7 @@ Material:
     - _HitEffectBlend: 1
     - _HitEffectGlow: 5
     - _HologramBlend: 1
-    - _HologramMaxAlpha: 0.75
+    - _HologramMaxAlpha: 1
     - _HologramMinAlpha: 0.1
     - _HologramStripesAmount: 0.359
     - _HologramStripesSpeed: 9.8
